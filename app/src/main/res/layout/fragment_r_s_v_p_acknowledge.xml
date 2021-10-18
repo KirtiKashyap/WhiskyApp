@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_events"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/loginbg"
+        android:fitsSystemWindows="true"
+        >
+
+        <include
+            android:id="@+id/mainheader"
+            layout="@layout/main_header_new"
+            app:layout_constraintTop_toBottomOf="@id/header_topguide"
+            app:layout_constraintBottom_toTopOf="@id/header_bottomguide"
+
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainheader"
+        app:layout_constraintBottom_toBottomOf="@id/scrollview_bottom_guide"
+        android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_top"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/profileclassified"
+            android:scaleType="fitXY"
+            android:tint="@color/white"
+           app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toStartOf="@+id/img_endguide"
+            app:layout_constraintStart_toStartOf="@+id/img_startguide"
+            app:layout_constrainedHeight="false"
+            />
+
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.30"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.70"/>
+
+        <TextView
+            android:id="@+id/tv_msg1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/msg1_startguide"
+            app:layout_constraintEnd_toStartOf="@id/msg1_endguide"
+            app:layout_constraintTop_toBottomOf="@id/img_top"
+            android:text="Thanks for your RSVP for the Event Victoria Whisky Festival."
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:gravity="start|center_vertical"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/_24sdp"
+            />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/msg1_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/msg1_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
+
+        <TextView
+            android:id="@+id/tv_msg2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/msg1_startguide"
+            app:layout_constraintEnd_toStartOf="@id/msg1_endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_msg1"
+            android:text="We have marked you down for attending the Victoria Whisky Festival."
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:gravity="start|center_vertical"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/_24sdp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/scrollview_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.88"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

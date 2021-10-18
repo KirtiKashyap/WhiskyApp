@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:id="@+id/event_attending_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/eventattendingunselected_bg"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/img_eventattending"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/event_top_image" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           >
+
+        <TextView
+            android:id="@+id/tv_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:gravity="top"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11sdp"
+            android:text="04/02/2021 10:40 AM"
+            android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/tv_event_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="top"
+                android:paddingLeft="5dp"
+                android:layout_marginEnd="15dp"
+                android:text="Upcoming"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+                android:id="@+id/tv_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:text="The Classified Whisky Club Members Night"
+                android:textStyle="bold"
+                android:layout_below="@+id/tv_event_status"/>
+
+            <TextView
+                android:id="@+id/tv_event_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:text="2345, McGranius Ferry Rd Alphanta GA 342008-1765"
+                android:layout_below="@+id/tv_event_title"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

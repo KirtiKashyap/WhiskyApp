@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/tv_offer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="@string/profile_offers"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/offer_notification_bottomguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_offer_notification__endguide"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/offer_notification_start_guide"
+            app:layout_constraintTop_toBottomOf="@id/offer_notification_topguide"
+            app:layout_constraintVertical_bias="0.482" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offer_notification_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.60"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offer_notification_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.83"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offer_notification_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.88"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_offer_notification__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/offernotification_switch"
+            android:layout_width="0dp"
+            app:showText="true"
+            android:textSize="@dimen/_20sdp"
+            android:fontFamily="@font/archivonarrow_regular"
+            app:track="@drawable/custom_track"
+            android:thumb="@drawable/custom_thumb"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/offer_notification_bottomguide"
+            app:layout_constraintEnd_toStartOf="@id/toggle_offer_notification__endguide"
+            app:layout_constraintStart_toEndOf="@id/tv_offer"
+            app:layout_constraintTop_toBottomOf="@id/offer_notification_topguide"
+           />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/toggle_offer_notification__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

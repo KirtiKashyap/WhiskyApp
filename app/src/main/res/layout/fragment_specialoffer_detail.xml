@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_specialoffer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/loginbg"
+        >
+        <include
+            android:id="@+id/mainheader"
+            layout="@layout/main_header_new"
+            app:layout_constraintTop_toBottomOf="@id/header_topguide"
+            app:layout_constraintBottom_toTopOf="@id/header_bottomguide"
+
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"/>
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/tv_header_startguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_header__endguide"
+            app:layout_constraintTop_toBottomOf="@+id/mainheader"
+            app:layout_constraintBottom_toBottomOf="@id/tv_header_bottom_guide"
+            android:text="@string/specialoffers"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_20sdp"
+            />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_header_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.16"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_header_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_header__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.80"/>
+
+        <ImageView
+            android:id="@+id/img_specialoffer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/newbottle"
+            app:layout_constraintTop_toTopOf="@id/img_topguide"
+            app:layout_constraintBottom_toBottomOf="@id/img_bottomguide"
+            app:layout_constraintEnd_toEndOf="@id/img_endguide"
+            app:layout_constraintStart_toStartOf="@id/img_startguide"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.16"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.80"/>
+
+        <TextView
+            android:id="@+id/tv_specialoffer_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/offername_startguide"
+            app:layout_constraintEnd_toStartOf="@id/offername_endguide"
+            app:layout_constraintTop_toBottomOf="@id/offername_topguide"
+            app:layout_constraintBottom_toBottomOf="@id/offername_bottomguide"
+            android:text="Samantha Curtis - Rock Oyster"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_18sdp"
+            android:singleLine="true"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offername_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.52"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offername_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.57"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offername_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offername_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90"/>
+
+        <TextView
+            android:id="@+id/tv_specialoffer_amt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/offeramt_startguide"
+            app:layout_constraintEnd_toStartOf="@id/offeramt_endguide"
+            app:layout_constraintTop_toTopOf="@id/offeramt_topguide"
+            app:layout_constraintBottom_toBottomOf="@id/offeramt_bottomguide"
+            android:text="$145"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_24sdp"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offeramt_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.59"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offeramt_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offeramt_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.16"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offeramt_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45"/>
+
+        <TextView
+            android:id="@+id/tv_specialoffer_code"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/offercode_startguide"
+            app:layout_constraintEnd_toStartOf="@id/offercode_endguide"
+            app:layout_constraintTop_toTopOf="@id/offeramt_topguide"
+            app:layout_constraintBottom_toBottomOf="@id/offeramt_bottomguide"
+            android:text="18YO"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_24sdp"
+            />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offercode_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.56"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offercode_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/offerdetail_topguide"
+            app:layout_constraintBottom_toBottomOf="@id/offerdetail_bottomguide">
+
+        <TextView
+            android:id="@+id/tv_specialoffer_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/specialofferdummy"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            />
+        </ScrollView>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offerdetail_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/offerdetail_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.88"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

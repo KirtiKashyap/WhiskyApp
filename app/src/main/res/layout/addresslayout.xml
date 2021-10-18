@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="@string/address"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_address_bottomguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_address__endguide"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/start_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_address_topguide"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_address_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.62"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_address_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.74"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_address__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18"/>
+
+
+        <TextView
+            android:id="@+id/tv_user_adress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/start_guide"
+            app:layout_constraintEnd_toStartOf="@id/tv_useraddress__endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_address"
+            app:layout_constraintBottom_toTopOf="@id/tv_useraddress_bottomguide"
+            android:layout_marginTop="10dp"
+            android:text="2345,McGriminism Ferry Rd Alphaness"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_14sdp"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_useraddress__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.40"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_useraddress_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.76"/>
+
+        <ImageView
+            android:id="@+id/img_eventattending_icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/event_attending_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_address_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_useraddress_bottomguide"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintStart_toStartOf="@id/eventattending_start_guide"/>
+
+        <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/eventattending_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

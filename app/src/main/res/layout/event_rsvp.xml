@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_rsvp_intersted"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/event_intersted"
+        app:layout_constraintBottom_toBottomOf="@+id/event_rsvp_bottomguide"
+        app:layout_constraintEnd_toStartOf="@+id/img_rsvp__endguide"
+        app:layout_constraintStart_toStartOf="@+id/img_rsvp_startguide"
+        app:layout_constraintTop_toTopOf="@+id/event_rsvp_topguide" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_rsvp_startguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.28"/>
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_rsvp__endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.38"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/event_rsvp_topguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.83" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/event_rsvp_bottomguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.87" />
+
+    <ImageView
+        android:id="@+id/img_rsvp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/event_rsvp"
+        app:layout_constraintBottom_toBottomOf="@+id/event_rsvp_bottomguide"
+        app:layout_constraintEnd_toStartOf="@+id/img_rsvpwritten__endguide"
+        app:layout_constraintStart_toEndOf="@+id/img_rsvp_intersted"
+        app:layout_constraintTop_toTopOf="@+id/event_rsvp_topguide" />
+
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_rsvpwritten__endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.63"/>
+
+    <ImageView
+        android:id="@+id/img_rsvp_notintersted"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/event_notintersted"
+        app:layout_constraintBottom_toBottomOf="@+id/event_rsvp_bottomguide"
+        app:layout_constraintEnd_toStartOf="@+id/img_rsvp__not_intersted_endguide"
+        app:layout_constraintStart_toEndOf="@+id/img_rsvp"
+        app:layout_constraintTop_toTopOf="@+id/event_rsvp_topguide" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_rsvp__not_intersted_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

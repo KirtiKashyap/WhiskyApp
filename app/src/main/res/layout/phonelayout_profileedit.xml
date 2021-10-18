@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="@string/phone"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_phone_bottomguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_phone__endguide"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/start_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_phone_topguide"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_phone_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.49"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_phone_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.52"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_phone__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18"/>
+
+
+        <EditText
+            android:id="@+id/tv_user_phone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/start_guide"
+            app:layout_constraintEnd_toStartOf="@id/tv_userphone__endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_userphone_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_userphone_bottomguide"
+            android:text="200-000-500"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:maxLength="11"
+            android:textSize="@dimen/_16sdp"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/curscor_color"
+            />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userphone__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.80"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userphone_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.52"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userphone_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.59"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

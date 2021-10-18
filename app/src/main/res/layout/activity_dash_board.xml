@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
+
+        <include
+            android:id="@+id/app_content_layout1"
+            layout="@layout/app_content"/>
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+           android:layout_marginTop="20dp"
+            android:background="@drawable/loginbg"
+            android:alpha="0.8"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <RelativeLayout
+                    android:id="@+id/menu_items"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="40dp"
+                   >
+
+                    <RelativeLayout
+                        android:id="@+id/rl_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_menu_icon"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/menu_icon"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:id="@+id/menu_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/menu"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_menu_icon"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_id"
+                        android:layout_below="@+id/rl_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_id_icon"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/id"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ID"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_id_icon"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_events"
+
+                        android:layout_below="@+id/rl_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_events_icon"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/eventsicon"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/events"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_events_icon"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_vip"
+                        android:layout_below="@+id/rl_events"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_vip_icon"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/vip_icon"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vip"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_vip_icon"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_where_is_dis_place"
+                        android:layout_below="@+id/rl_vip"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_whereistdisplace_icon"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/location"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/where_is_this_place"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_whereistdisplace_icon"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_purchase_history"
+                        android:layout_below="@+id/rl_where_is_dis_place"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_purchase_history_icon"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/location"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/purchase_history"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_purchase_history_icon"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/closeNavImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel"
+                    app:tint="@color/orangetextcolor" />
+            </RelativeLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

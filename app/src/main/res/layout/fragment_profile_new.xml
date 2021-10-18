@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".profile.ui.ProfileDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/loginbg">
+        <include
+            android:id="@+id/main_header"
+            layout="@layout/main_header_new"
+            app:layout_constraintTop_toBottomOf="@id/header_verticalguide1"
+            app:layout_constraintBottom_toTopOf="@id/header_verticalguide2"
+
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_verticalguide1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_verticalguide2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"/>
+
+        <ImageView
+            android:id="@+id/img_profiletop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/profile_top"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@id/main_header"
+            app:layout_constraintBottom_toBottomOf="@id/img_top_profile_bottomguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_top_profile_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.38"/>
+
+        <TextView
+            android:id="@+id/tv_agentid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/tv_agentid_startguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_agentid__endguide"
+            app:layout_constraintTop_toTopOf="@id/tv_agentid_top_guide"
+            app:layout_constraintBottom_toBottomOf="@id/tv_agentid_bottom_guide"
+            android:text="Special Agent 0013"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_18sdp"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_agentid_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.10"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_agentid_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_agentid_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_agentid__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.80"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/profile_badge"
+            app:layout_constraintStart_toStartOf="@id/img_classified_startguide"
+            app:layout_constraintEnd_toStartOf="@id/img_classified_endguide"
+            app:layout_constraintTop_toTopOf="@id/img_classified_topguide"
+            app:layout_constraintBottom_toBottomOf="@id/img_classified_bottomguide"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_classified_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.12"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_classified_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_classified_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_classified_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18"/>
+
+        <LinearLayout
+            android:id="@+id/tv_agentname"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_top_profile_bottomguide"
+            app:layout_constraintBottom_toBottomOf="@id/img_top_profile_bottomguide"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/mirza_regular"
+            android:text="@string/agent_status"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_status_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_status_bottomguide"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_status_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.43"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_status_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.48"/>
+
+        <TextView
+            android:id="@+id/tv_userstatus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/active"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="@id/tv_userstatus_endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_userstatus_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_userstatus_bottomguide"
+             />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userstatus_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.49"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userstatus_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.54"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userstatus_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50"/>
+
+        <TextView
+            android:id="@+id/tv_reservation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/mirza_regular"
+            android:text="@string/agentreservationstatus"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_reservation_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_reservation_bottomguide"
+          />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_reservation_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.55"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_reservation_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.60"/>
+
+        <TextView
+            android:id="@+id/tv_user_reservationstatus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/confirmed"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="@id/tv_reservationstatus_endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_userreservation_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_reservationstatus_bottomguide"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_userreservation_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.61"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_reservationstatus_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_reservationstatus_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.64"/>
+
+        <TextView
+            android:id="@+id/tv_favourite"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/mirza_regular"
+            android:text="@string/favorite_drink"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_favourite_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_favourite_bottomguide"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_favourite_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.67"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_favourite_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.72"/>
+
+        <TextView
+            android:id="@+id/tv_user_favourite"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/confirmed"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="@id/tv_user_favourite_endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_favourite_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_user_favourite_bottomguide"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_user_favourite_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.73"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_user_favourite_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.78"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_user_favourite_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.80"/>
+
+        <TextView
+            android:id="@+id/tv_lastseen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/mirza_regular"
+            android:text="@string/lastseen"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_lastseen_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_lastseen_bottomguide"
+           />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_lastseen_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.79"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_lastseen_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.84"/>
+
+        <TextView
+            android:id="@+id/tv_user_lastseen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/lastseenimg"
+            app:layout_constraintStart_toStartOf="@id/startguide"
+            app:layout_constraintEnd_toEndOf="@id/tv_user_lastseen_endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_last_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_user_last_bottomguide"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_user_last_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_user_last_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.90"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_user_lastseen_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.88"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

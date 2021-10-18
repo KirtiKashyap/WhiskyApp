@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="themecolor">#ab262c</color>
+    <color name="progressDialogueColor">#2b080a</color>
+    <color name="notiSuccessColor">#195846</color>
+    <color name="notiFailColor">#3e2c26</color>
+    <color name="greycolor">#f3f3f3</color>
+    <color name="darkbrown">#292121</color>
+    <color name="beercolor">#e07d0f</color>
+    <color name="purplecolor">#D35400</color>
+    <color name="darkblue">#003159</color>
+    <color name="transparent">#0000ffff</color>
+    <color name="bottombg">#9D0208</color>
+    <color name="mainheaderbg">#1d1f1f</color>
+    <color name="loginbtnbg">#084f3b</color>
+    <color name="fogotbtn_bg">#77130e</color>
+    <color name="orangetextcolor">#e46803</color>
+    <color name="off_track_color">#e2171a</color>
+    <color name="on_track_color">#48b45a</color>
+    <color name="blanktextviewcolor">#9d1b1f</color>
+</resources>

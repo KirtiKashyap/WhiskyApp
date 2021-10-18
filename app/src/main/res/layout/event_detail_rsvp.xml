@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/img_event_detail_rsvp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/event_detail_rsvp"
+        app:layout_constraintBottom_toBottomOf="@+id/event_detail_rsvp_bottomguide"
+        app:layout_constraintEnd_toStartOf="@+id/img_event_detail_rsvp__endguide"
+        app:layout_constraintStart_toStartOf="@+id/tv_eventdetail_rsvp_startguide"
+        app:layout_constraintTop_toTopOf="@+id/event_detail_rsvp_topguide" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_eventdetail_rsvp_startguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_event_detail_rsvp__endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/event_detail_rsvp_topguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.76" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/event_detail_rsvp_bottomguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+
+
+    <TextView
+        android:id="@+id/tv_event_detail_rsvp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/img_event_detail_rsvp__endguide"
+        app:layout_constraintEnd_toStartOf="@id/tv_event_detail_rsvp__endguide"
+        app:layout_constraintTop_toBottomOf="@id/rsvp_topguide"
+        app:layout_constraintBottom_toBottomOf="@id/event_detail_rsvp_bottomguide"
+        android:text="RSVP"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/white"
+        android:gravity="start|center_vertical"
+        android:textSize="@dimen/_14sdp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_event_detail_rsvp__endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rsvp_topguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.77" />
+
+    <ImageView
+        android:id="@+id/img_detailrsvp_intersted"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/event_intersted"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/rsvp_intersted_bottomguide"
+        app:layout_constraintEnd_toStartOf="@+id/img_rsvp_intersted__endguide"
+        app:layout_constraintStart_toStartOf="@+id/tv_event_detail_rsvp__endguide"
+        app:layout_constraintTop_toTopOf="@+id/rsvp_intersted_topguide" />
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_rsvp_intersted__endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.42"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rsvp_intersted_topguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.74" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rsvp_intersted_bottomguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.79" />
+
+    <TextView
+        android:id="@+id/tv_intersted"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/img_rsvp_intersted__endguide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_intersted_topguide"
+        app:layout_constraintBottom_toBottomOf="@id/rsvp_intersted_bottomguide"
+        android:text="Interested"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:layout_marginStart="2dp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/tv_intersted_topguide"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.75" />
+
+    <ImageView
+        android:id="@+id/img_detailrsvp_notintersted"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/event_notintersted"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/rsvp_notintersted_bottomguide"
+        app:layout_constraintEnd_toStartOf="@+id/img_rsvp_intersted__endguide"
+        app:layout_constraintStart_toStartOf="@+id/tv_event_detail_rsvp__endguide"
+        app:layout_constraintTop_toTopOf="@+id/rsvp_notintersted_topguide"
+        />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rsvp_notintersted_topguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.79" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rsvp_notintersted_bottomguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+    <TextView
+        android:id="@+id/tv_not_intersted"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/img_rsvp_intersted__endguide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_notintersted_topguide"
+        app:layout_constraintBottom_toBottomOf="@id/rsvp_notintersted_bottomguide"
+        android:text="Not Interested"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/white"
+        android:gravity="top"
+        android:textSize="@dimen/_14sdp"
+        android:layout_marginStart="2dp"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_notintersted_topguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.79" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

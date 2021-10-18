@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="SATURDAY"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_day_bottom_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_day_top_guide"
+            app:layout_constraintStart_toStartOf="@+id/tv_day_start_guide"
+            app:layout_constraintEnd_toStartOf="@+id/tv_month_end_guide"
+            android:gravity="center"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_day_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_day_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.79"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_day_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05"/>
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="APRIL"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/tv_month_bottom_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_month_top_guide"
+            app:layout_constraintStart_toStartOf="@id/tv_day_start_guide"
+            app:layout_constraintEnd_toStartOf="@+id/tv_month_end_guide"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_month_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.79" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_month_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.83"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_month_end_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.32"/>
+
+        <View
+            android:id="@+id/emptyview1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/orangetextcolor"
+            app:layout_constraintStart_toEndOf="@id/tv_day"
+            app:layout_constraintTop_toBottomOf="@id/tv_day_top_guide"
+            app:layout_constraintBottom_toBottomOf="@id/tv_month_bottom_guide"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="22ND"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_30sdp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/tv_month_bottom_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_day_top_guide"
+           app:layout_constraintStart_toEndOf="@+id/emptyview1"
+            app:layout_constraintEnd_toStartOf="@+id/tv_dateend_guide"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_dateend_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.70" />
+        <View
+            android:id="@+id/emptyview2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/orangetextcolor"
+            app:layout_constraintStart_toEndOf="@id/tv_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_day_top_guide"
+            app:layout_constraintBottom_toBottomOf="@id/tv_month_bottom_guide"/>
+
+        <TextView
+            android:id="@+id/tv_starttime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="11:30AM"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_day_bottom_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_day_top_guide"
+            app:layout_constraintStart_toEndOf="@id/emptyview2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="start"
+            android:layout_marginStart="5dp"
+            />
+        <TextView
+            android:id="@+id/tv_endtime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="05:30PM"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_month_bottom_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_starttime"
+            app:layout_constraintStart_toEndOf="@id/emptyview2"
+            app:layout_constraintEnd_toEndOf="@+id/tv_endtime_start_guide"
+            android:gravity="start"
+            android:layout_marginStart="5dp"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_endtime_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

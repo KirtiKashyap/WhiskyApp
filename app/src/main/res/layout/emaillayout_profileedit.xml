@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:text="@string/email"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_email_bottomguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_email__endguide"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/start_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_email_topguide"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_email_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.73"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_email_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.76"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_email__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18"/>
+
+
+        <EditText
+            android:id="@+id/tv_user_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/start_guide"
+            app:layout_constraintEnd_toStartOf="@id/tv_useremail__endguide"
+            app:layout_constraintTop_toBottomOf="@id/tv_useremail_topguide"
+            app:layout_constraintBottom_toTopOf="@id/tv_useremail_bottomguide"
+            android:text="dummy@gmail.com"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_14sdp"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/curscor_color"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_useremail__endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.80"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_useremail_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.76"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_useremail_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.83"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

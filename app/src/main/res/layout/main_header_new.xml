@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+
+        >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainheaderbg"
+        android:alpha="0.4"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/forgotheader_rel"
+        android:layout_width="match_parent"
+
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/img_drawer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_baseline_menu_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_drawer_endguide"
+            android:layout_marginStart="5dp"
+            android:tint="@color/orangetextcolor"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/multicolor_classified"
+            app:layout_constraintEnd_toEndOf="@id/img_classified_endguide"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/img_classified_startguide"
+            app:layout_constraintEnd_toStartOf="@id/img_classified_endguide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="5dp"
+            app:srcCompat="@drawable/red_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/img_logo_startguide"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_logo_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_drawer_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_classified_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.30"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_classified_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.70"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

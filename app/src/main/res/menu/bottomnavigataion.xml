@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+
+        android:id="@+id/navigation_menu"
+        android:title="@string/menu"
+        android:enabled="true"
+        android:icon="@drawable/menu_icon"
+        />
+
+    <item
+        android:id="@+id/navigation_ID"
+        android:title="@string/ID"
+        android:enabled="true"
+        android:icon="@drawable/id"
+        />
+
+    <item
+        android:id="@+id/navigation_Events"
+        android:title="@string/events"
+        android:enabled="true"
+        android:icon="@drawable/eventsicon"
+        />
+
+    <item
+        android:id="@+id/navigation_vip"
+        android:title="@string/vip"
+        android:enabled="true"
+        android:icon="@drawable/vip_icon"
+        />
+
+
+
+    <item
+        android:id="@+id/navigation_reserve"
+        android:title="@string/reserve"
+        android:enabled="true"
+        android:icon="@drawable/reserve_icon"
+        />
+
+</menu>

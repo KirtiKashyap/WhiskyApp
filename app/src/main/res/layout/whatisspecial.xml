@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="W"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_w_startguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_w_endguide"
+        android:gravity="center"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_w_startguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_w_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_when_top_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.49"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_when_bottom_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.53"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="h"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_w_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_h_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_h_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.17"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="a"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_h_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_a_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_a_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.22"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="t"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_a_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_t_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_t_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.28"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="i"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_t_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_i_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_i_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.34"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="s"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_i_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_s_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_s_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.40"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="S"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_s_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_S_endguide1"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <!--warning: ERROR: View field tvSEndguide collides with a variable or import file://app/src/main/res/layout/whatisspecial.xml Line:204
+    1 warning-->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_S_endguide1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.47"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="P"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_S_endguide1"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_P_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_P_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.53"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="e"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_P_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_ee_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_ee_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.59"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="c"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_ee_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_c_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_c_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="i"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_c_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_ii_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_ii_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.71"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="a"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_ii_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_aa_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_aa_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.77"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="l"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_aa_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_l_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_l_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.83"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="?"
+        android:fontFamily="@font/archivonarrow_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:background="@drawable/event_bg"
+        app:layout_constraintStart_toStartOf="@id/tv_l_endguide"
+        app:layout_constraintTop_toTopOf="@id/tv_when_top_guide"
+        app:layout_constraintBottom_toBottomOf="@id/tv_when_bottom_guide"
+        app:layout_constraintEnd_toEndOf="@+id/tv_last_endguide"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tv_last_endguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.89"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

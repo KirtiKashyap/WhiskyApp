@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "783173257905",
+    "project_id": "whiskyapp-b89c1",
+    "storage_bucket": "whiskyapp-b89c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783173257905:android:c89a14fd56c8f606d87090",
+        "android_client_info": {
+          "package_name": "com.aadya.whiskyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783173257905-th9p6kslhn61t0gi7m3h7r49sp26rrlq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aadya.whiskyapp",
+            "certificate_hash": "71c727305b339fb577ec26f603bd896a8e0ec6a4"
+          }
+        },
+        {
+          "client_id": "783173257905-h41e79fgd0h4n46j5tsjdedfrqas8prm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChqx7rfsBVJz0S2wPzO4QHivebJL-gJzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783173257905-h41e79fgd0h4n46j5tsjdedfrqas8prm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
