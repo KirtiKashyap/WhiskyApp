@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.aadya.whiskyapp.R
+import com.aadya.whiskyapp.clublocation.ui.LocationFragment
 import com.aadya.whiskyapp.databinding.ActivityDashBoardBinding
 import com.aadya.whiskyapp.databinding.AppContentBinding
 import com.aadya.whiskyapp.events.ui.EventsLaunchFragment
@@ -92,6 +93,11 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
             mBinding.drawerLayout.closeDrawers()
             callFragment(3)
         }
+
+        mBinding.rlWhereIsDisPlace.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(4)
+        }
     }
 
 
@@ -163,6 +169,12 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
                     "SpecialOfferViewPagerFragment"
                 )
             }
+            4 -> {
+            launchFragment(
+                LocationFragment.newInstance(),
+                "LocationFragment"
+            )
+        }
         }
 
     }
@@ -182,7 +194,7 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
     override fun onBackPressed() {
         val mFragmentChange = supportFragmentManager.findFragmentById(R.id.app_container)
 
-        if (mFragmentChange is SecretCodeFragment || mFragmentChange is EventsLaunchFragment || mFragmentChange is SpecialOfferViewPagerFragment || mFragmentChange is ReserveFragment || mFragmentChange is MenuFragment) {
+        if (mFragmentChange is SecretCodeFragment || mFragmentChange is EventsLaunchFragment || mFragmentChange is SpecialOfferViewPagerFragment || mFragmentChange is ReserveFragment || mFragmentChange is MenuFragment ) {
             finish()
         } else
             super.onBackPressed()
