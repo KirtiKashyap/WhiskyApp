@@ -20,10 +20,12 @@ import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
+import com.bumptech.glide.Glide
 
 
 private const val ARG_EVENTMODEL = "eventModel"
 private const val ARG_POSITION = "position"
+private const val IMAGE_URL="http://92.204.128.4:5300/UploadFiles/EventImage/"
 
 class EventsFragment() : Fragment() {
 
@@ -98,7 +100,14 @@ class EventsFragment() : Fragment() {
                 mBinding.tvEventname1.text = list[0]
             }
 
+            if(eventModel.imageName?.isNullOrEmpty()==false){
+                context?.let {
+                    Glide.with(it)
+                        .load(IMAGE_URL+eventModel.imageName)
+                        .into(mBinding.imgEventtop)
+                }
 
+            }
             mDateTimeIncludedLayout.tvDay.text = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
             mDateTimeIncludedLayout.tvMonth.text = mCommonUtils.getMonth_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
 
