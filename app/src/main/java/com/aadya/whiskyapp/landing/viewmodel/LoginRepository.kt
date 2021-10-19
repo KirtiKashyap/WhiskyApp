@@ -3,9 +3,9 @@ package com.aadya.whiskyapp.landing.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import com.aadya.gist.login.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.R
+import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
 import com.aadya.whiskyapp.utils.AlertModel

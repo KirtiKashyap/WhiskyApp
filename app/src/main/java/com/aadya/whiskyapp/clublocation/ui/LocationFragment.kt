@@ -1,12 +1,14 @@
 package com.aadya.whiskyapp.clublocation.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentLocationBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
@@ -16,7 +18,11 @@ import com.aadya.whiskyapp.utils.SessionManager
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.aadya.whiskyapp.R
+
+
+//https://console.cloud.google.com/freetrial/signup/billing/IN?redirectPath=%2Fbilling&project=438854502250
+//Draw path between 2 point is not free need billing account
+//https://c1ctech.com/android-googlemap-example-to-draw-route-between-two-locations/
 
 
 class LocationFragment : Fragment() ,OnMapReadyCallback {
@@ -25,7 +31,7 @@ class LocationFragment : Fragment() ,OnMapReadyCallback {
     private lateinit var mSessionManager: SessionManager
     private lateinit var mCommonUtils : CommonUtils
     private var mDrawerInterface: DrawerInterface? = null
-
+    private var mMap: GoogleMap? = null
    /* Map declaration */
    private var googleMap:GoogleMap?=null
 
@@ -56,9 +62,8 @@ class LocationFragment : Fragment() ,OnMapReadyCallback {
         val mapFragment : SupportMapFragment = childFragmentManager?.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
-    override fun onMapReady(p0: GoogleMap?) {
-        googleMap=p0
-
+    override fun onMapReady(googleMap: GoogleMap?) {
+        mMap = googleMap
         //Adding markers to map
 
         val latLng=LatLng(28.6139, 77.2090)
@@ -73,7 +78,10 @@ class LocationFragment : Fragment() ,OnMapReadyCallback {
             it!!.addMarker(markerOptions)
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel))
         }
+
     }
+
+
 
 
 

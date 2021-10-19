@@ -13,7 +13,4 @@ class FcmInstanceIdService : FirebaseMessagingService() {
         Log.d(TAG, "Refreshed token: $token")
     }
 
-
-
-
 }

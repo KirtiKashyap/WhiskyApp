@@ -1,10 +1,10 @@
 package com.aadya.whiskyapp.retrofit
 
-import com.aadya.gist.login.model.LoginRequestModel
 import com.aadya.gist.login.model.ReserveRequestModel
 import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
+import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileEditResponseModel

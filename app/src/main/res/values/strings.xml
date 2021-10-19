@@ -131,4 +131,6 @@
     <string name="please_select_time">Please select time</string>
     <string name="please_select_no_of_people">Please select number of people</string>
     <string name="Error_from_Server">Error from Server.</string>
+    <string name="google_maps_key">AIzaSyBdFXRdQC6HeTXecu7ek22YuvWajVuJ9kM</string>
+
 </resources>

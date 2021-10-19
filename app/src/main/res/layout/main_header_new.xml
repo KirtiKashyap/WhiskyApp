@@ -30,8 +30,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/img_drawer_endguide"
             android:layout_marginStart="5dp"
-            android:tint="@color/orangetextcolor"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/orangetextcolor" />
 
 
 
