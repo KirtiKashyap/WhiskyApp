@@ -46,13 +46,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".fcm.FcmInstanceIdService">
+       <!-- <service android:name=".fcm.FcmInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
 
             </intent-filter>
-        </service>
+        </service>-->
     </application>
 
 </manifest>

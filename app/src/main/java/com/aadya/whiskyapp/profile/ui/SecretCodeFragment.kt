@@ -21,6 +21,8 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.secretcode_new_layout.*
 
 
 class SecretCodeFragment : Fragment() {
@@ -67,7 +69,17 @@ class SecretCodeFragment : Fragment() {
         mProfileViewModel.getProfileObserver().observe(this, Observer {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
+            lastseen.text=it.userLoginTime
+            val qrCode = it.qrCode
+            context?.let {
+                Glide.with(it)
+                    .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
+                    .into(img_secretcode)
+            }
+
         })
+
+
 
         mProfileViewModel.getprofileUnAuthorized().observe(this, Observer {
             val alertModel = AlertModel(

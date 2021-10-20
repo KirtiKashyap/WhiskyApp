@@ -2,7 +2,6 @@ package com.aadya.whiskyapp.events.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,12 +19,13 @@ import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
+import com.aadya.whiskyapp.utils.CommonUtils.APIURL.Companion.Event_IMAGE_URL
 import com.bumptech.glide.Glide
 
 
 private const val ARG_EVENTMODEL = "eventModel"
 private const val ARG_POSITION = "position"
-private const val IMAGE_URL="http://92.204.128.4:5300/UploadFiles/EventImage/"
+
 
 class EventsFragment() : Fragment() {
 
@@ -103,7 +103,7 @@ class EventsFragment() : Fragment() {
             if(eventModel.imageName?.isNullOrEmpty()==false){
                 context?.let {
                     Glide.with(it)
-                        .load(IMAGE_URL+eventModel.imageName)
+                        .load(Event_IMAGE_URL+eventModel.imageName)
                         .into(mBinding.imgEventtop)
                 }
 
