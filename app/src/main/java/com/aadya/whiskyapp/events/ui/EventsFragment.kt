@@ -118,7 +118,6 @@ class EventsFragment() : Fragment() {
             mDateTimeIncludedLayout.tvDate.text = mCommonUtils.getDay_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
 
 
-
         }
     }
 

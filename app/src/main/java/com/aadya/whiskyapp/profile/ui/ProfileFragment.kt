@@ -2,6 +2,7 @@ package com.aadya.whiskyapp.profile.ui
 
 import android.content.Context
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -10,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +23,10 @@ import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.aadya.whiskyapp.utils.onPageSwipeUpListner
+import kotlinx.android.synthetic.main.fragment_profile_new.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ProfileFragment : Fragment() {
 
@@ -33,11 +38,34 @@ class ProfileFragment : Fragment() {
     var onPageSwipeUpListener: onPageSwipeUpListner? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
         exitTransition = inflater.inflateTransition(R.transition.fade)
+
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setProfileData() {
+        if(mSessionManager.getProfileModel()?.agentStatus==true){
+            mBinding.tvUserstatus.text="Active"
+        }else{
+            mBinding.tvUserstatus.text="Not Active"
+        }
+
+        mBinding.tvUserLastseen.text=mSessionManager.getProfileModel()?.lastSeen
+        mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
+
+        if(mSessionManager.getProfileModel()?.bookingStatus==true){
+            mBinding.tvUserReservationstatus.text="Confirm"
+        }else{
+            mBinding.tvUserReservationstatus.text="Not Confirm"
+        }
+
+
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -73,6 +101,7 @@ class ProfileFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
 
 
@@ -88,14 +117,14 @@ class ProfileFragment : Fragment() {
         mSessionManager = SessionManager.getInstance(requireContext())!!
 
         setAgentName()
-
+        setProfileData()
 
 
     }
 
     private fun setAgentName() {
 
-        var agent_name1 = "STEVEN"
+        val agent_name1 = mSessionManager.getProfileModel()!!.firstName
        createDynamicallyTextView(agent_name1)
         val rowTextView = TextView(requireContext())
         // set some properties of rowTextView or something
@@ -103,14 +132,17 @@ class ProfileFragment : Fragment() {
         mBinding.tvAgentname.addView(rowTextView)
         rowTextView.background = resources.getDrawable(R.drawable.profiletextview_bg, null)
         rowTextView.setTextColor(resources.getColor(R.color.blanktextviewcolor))
-        val lparams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT) // Width , height
+        val lparams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ) // Width , height
         rowTextView.gravity = Gravity.CENTER
         rowTextView.layoutParams = lparams
         rowTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
         rowTextView.setPadding(10, 10, 10, 10)
         rowTextView.setTypeface(rowTextView.typeface, Typeface.BOLD_ITALIC)
 
-        var agent_name2 = "BROWN"
+        var agent_name2 = mSessionManager.getProfileModel()!!.lastName
         createDynamicallyTextView(agent_name2)
 
     }
@@ -129,7 +161,10 @@ class ProfileFragment : Fragment() {
             mBinding.tvAgentname.addView(rowTextView)
             rowTextView.background = resources.getDrawable(R.drawable.agentname_bg, null)
             rowTextView.setTextColor(resources.getColor(R.color.black))
-            val lparams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT) // Width , height
+            val lparams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ) // Width , height
             rowTextView.gravity = Gravity.CENTER;
             rowTextView.layoutParams = lparams
             rowTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
