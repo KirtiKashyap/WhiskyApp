@@ -69,7 +69,7 @@ class SecretCodeFragment : Fragment() {
         mProfileViewModel.getProfileObserver().observe(this, Observer {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
-            lastseen.text=it.userLoginTime
+            lastseen.text=it.lastSeen
             val qrCode = it.qrCode
             context?.let {
                 Glide.with(it)

@@ -136,14 +136,9 @@ class EventsFragment() : Fragment() {
         mCommonUtils = CommonUtils
         mSessionManager = SessionManager.getInstance(context)!!
 
-
         setIncludedLayout()
 
         handleclickListner()
-
-
-
-
 
     }
 
@@ -188,8 +183,6 @@ class EventsFragment() : Fragment() {
                     "RSVPAcknowledgeFragment"
                 )
             }
-
-
 
         })
 
