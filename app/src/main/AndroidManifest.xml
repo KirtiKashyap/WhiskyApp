@@ -36,7 +36,7 @@
             android:value="@string/google_maps_key" />-->
 
         <activity android:name=".landing.ui.ForgotPasswordActivity"/>
-        <activity android:name=".payment.ui.Payment_Activity" />
+        <activity android:name=".payment.ui.CheckoutActivityJava" />
         <activity android:name=".dashboard.ui.DashBoardActivity" />
         <activity android:name=".landing.ui.LandingActivity" />
         <activity android:name=".splash.ui.SplashActivity">

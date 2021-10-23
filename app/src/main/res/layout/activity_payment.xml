@@ -46,7 +46,7 @@
            android:layout_margin="10dp"
             android:padding="10dp"
             android:hint="@string/cardholdername"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/black"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
             android:fontFamily="@font/archivonarrow_regular"
             app:layout_constraintTop_toBottomOf="@id/radiobtn_linear" />
 
-        <com.stripe.android.view.CardMultilineWidget
+        <com.stripe.android.view.CardInputWidget
             android:id="@+id/cardMultiLineInputWidget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -49,20 +49,19 @@ class ProfileFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setProfileData() {
         if(mSessionManager.getProfileModel()?.agentStatus==true){
-            mBinding.tvUserstatus.text="Active"
+            mBinding.tvUserstatus.background = resources.getDrawable(R.drawable.active, null)
         }else{
-            mBinding.tvUserstatus.text="Not Active"
+            mBinding.tvUserstatus.background = resources.getDrawable(R.drawable.inactive, null)
         }
 
         mBinding.tvUserLastseen.text=mSessionManager.getProfileModel()?.lastSeen
         mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
 
         if(mSessionManager.getProfileModel()?.bookingStatus==true){
-            mBinding.tvUserReservationstatus.text="Confirm"
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(R.drawable.confirmed, null)
         }else{
-            mBinding.tvUserReservationstatus.text="Not Confirm"
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(R.drawable.pending, null)
         }
-
 
     }
 
@@ -72,6 +71,7 @@ class ProfileFragment : Fragment() {
         mDrawerInterface = context as DrawerInterface
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

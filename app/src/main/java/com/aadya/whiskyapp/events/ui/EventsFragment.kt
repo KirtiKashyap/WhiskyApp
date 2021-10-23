@@ -2,7 +2,10 @@ package com.aadya.whiskyapp.events.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -226,22 +229,37 @@ class EventsFragment() : Fragment() {
             launchFragment(ProfileFragment.newInstance(), "ProfileFragment")
         }
         mIncludedRSVPBinding = mBinding.eventRsvp
-        mIncludedRSVPBinding.imgRsvpIntersted.setOnClickListener{
 
-            var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
-            mRSVPRequestModel.EventID = eventModel.eventID
-            mRSVPRequestModel.EventFeedbackID = 1
-            mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
+
+        mIncludedRSVPBinding.imgRsvpIntersted.setOnClickListener{
+            mIncludedRSVPBinding.imgRsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mIncludedRSVPBinding.imgRsvpIntersted.isClickable=false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
+                mRSVPRequestModel.EventID = eventModel.eventID
+                mRSVPRequestModel.EventFeedbackID = 1
+                mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
+                mIncludedRSVPBinding.imgRsvpIntersted.isClickable=true
+                mIncludedRSVPBinding.imgRsvpIntersted.clearAnimation()
+
+            }, 2000)
 
 
 
         }
 
         mIncludedRSVPBinding.imgRsvpNotintersted.setOnClickListener{
+            mIncludedRSVPBinding.imgRsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mIncludedRSVPBinding.imgRsvpNotintersted.isClickable=false
+            Handler(Looper.getMainLooper()).postDelayed({
             var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
             mRSVPRequestModel.EventID = eventModel.eventID
             mRSVPRequestModel.EventFeedbackID = 2
             mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
+                mIncludedRSVPBinding.imgRsvpNotintersted.isClickable=true
+                mIncludedRSVPBinding.imgRsvpNotintersted.clearAnimation()
+            }, 2000)
         }
 
         mDateTimeIncludedLayout = mBinding.eventDateTime
@@ -272,9 +290,6 @@ class EventsFragment() : Fragment() {
         }
 
     }
-
-
-
 
 
 }

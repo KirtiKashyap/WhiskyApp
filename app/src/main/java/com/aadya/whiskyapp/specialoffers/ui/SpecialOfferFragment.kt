@@ -17,6 +17,7 @@ import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentSpecialofferBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
 import com.aadya.whiskyapp.landing.ui.LandingActivity
+import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
 import com.aadya.whiskyapp.payment.ui.Payment_Activity
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
@@ -64,7 +65,7 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
         super.onViewCreated(view, savedInstanceState)
         buy_button.setOnClickListener {
             activity?.let{
-                val intent = Intent (it, Payment_Activity::class.java)
+                val intent = Intent (it, CheckoutActivityJava::class.java)
                 it.startActivity(intent)
             }
         }
