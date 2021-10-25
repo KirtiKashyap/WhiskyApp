@@ -3,12 +3,15 @@ package com.aadya.whiskyapp.events.ui
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.TypedValue
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
@@ -18,6 +21,7 @@ import androidx.transition.TransitionInflater
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.events.model.EventsResponseModel
+import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
@@ -131,11 +135,21 @@ class EventDetailFragment : Fragment() {
         }
         mIncludedRSVPDetailBinding = mBinding.eventDetailRsvp
         mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.setOnClickListener{
+            mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.isClickable=false
             var msg1 ="Thanks for your RSVP for the Event<b> Victoria Whisky Festival </b>."
             var msg2 = "\n" +
                     " \n" +
                     "  We have marked you up for attending the <b> Victoria Whisky Festival</b>."
-            launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.isClickable=true
+                mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.clearAnimation()
+                launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
+
+            }, 2000)
+
 
             /* var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
              mRSVPRequestModel.userid = mSessionManager.getUserDetailLoginModel()?.userID.toString()
@@ -144,11 +158,22 @@ class EventDetailFragment : Fragment() {
         }
 
         mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.setOnClickListener{
+
+            mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.isClickable=false
+
             var msg1 ="Thanks for your RSVP for the Event<b> Victoria Whisky Festival </b>."
             var msg2 = "\n" +
                     " \n" +
                     "  We have marked you down for attending the <b> Victoria Whisky Festival</b>."
-            launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.isClickable=true
+                mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.clearAnimation()
+                launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
+
+            }, 2000)
+
         }
     }
 
