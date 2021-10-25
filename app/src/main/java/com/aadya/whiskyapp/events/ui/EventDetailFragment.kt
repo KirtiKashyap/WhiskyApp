@@ -47,7 +47,6 @@ class EventDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
         enterTransition = inflater.inflateTransition(R.transition.fade)
-
         arguments?.let {
             eventModel = it.getParcelable(ARG_EVENT)
         }
@@ -216,4 +215,5 @@ class EventDetailFragment : Fragment() {
             }
         }
     }
+   
 }

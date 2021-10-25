@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -18,6 +17,7 @@ import com.aadya.whiskyapp.databinding.ActivityDashBoardBinding
 import com.aadya.whiskyapp.databinding.AppContentBinding
 import com.aadya.whiskyapp.events.ui.EventsLaunchFragment
 import com.aadya.whiskyapp.menu.MenuFragment
+import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
 import com.aadya.whiskyapp.profile.ui.SecretCodeFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
@@ -26,8 +26,6 @@ import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.stripe.android.model.CardParams
 import com.stripe.android.view.CardMultilineWidget
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.view.*
 
@@ -170,11 +168,11 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
                 )
             }
             4 -> {
-            launchFragment(
-                LocationFragment.newInstance(),
-                "LocationFragment"
-            )
-        }
+                launchFragment(
+                    LocationFragment.newInstance(),
+                    "LocationFragment"
+                )
+            }
         }
 
     }
@@ -196,8 +194,11 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
 
         if (mFragmentChange is SecretCodeFragment || mFragmentChange is EventsLaunchFragment || mFragmentChange is SpecialOfferViewPagerFragment || mFragmentChange is ReserveFragment || mFragmentChange is MenuFragment ) {
             finish()
-        } else
+        } else if(supportFragmentManager.findFragmentByTag("ProfileDetailFragment") is ProfileDetailFragment){
+            supportFragmentManager.popBackStack()
+        }else{
             super.onBackPressed()
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

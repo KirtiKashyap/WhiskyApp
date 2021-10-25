@@ -24,8 +24,6 @@ import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.aadya.whiskyapp.utils.onPageSwipeUpListner
 import kotlinx.android.synthetic.main.fragment_profile_new.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ProfileFragment : Fragment() {
@@ -58,9 +56,15 @@ class ProfileFragment : Fragment() {
         mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
 
         if(mSessionManager.getProfileModel()?.bookingStatus==true){
-            mBinding.tvUserReservationstatus.background = resources.getDrawable(R.drawable.confirmed, null)
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(
+                R.drawable.confirmed,
+                null
+            )
         }else{
-            mBinding.tvUserReservationstatus.background = resources.getDrawable(R.drawable.pending, null)
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(
+                R.drawable.pending,
+                null
+            )
         }
 
     }
@@ -79,8 +83,13 @@ class ProfileFragment : Fragment() {
         intializeMembers(inflater, container)
         handleClickListner()
         onPageSwipeUpListener?.getSwipeUpViewState()?.observe(viewLifecycleOwner, Observer {
-
             val ft = activity?.supportFragmentManager?.beginTransaction()
+            ft?.setCustomAnimations(
+                R.anim.slide_in_bottom,
+                R.anim.slide_out_top,
+                R.anim.slide_in_top,
+                R.anim.slide_out_bottom
+            )
             ft?.replace(
                 R.id.app_container,
                 ProfileDetailFragment.newInstance(),
