@@ -29,7 +29,7 @@
                 android:id="@+id/card_radiobtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/white"
+                android:buttonTint="@color/themecolor"
                 android:checked="true"
                 android:enabled="true"
                 android:text="@string/cardstr"

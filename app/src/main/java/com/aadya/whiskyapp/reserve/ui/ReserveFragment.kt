@@ -276,6 +276,12 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         noOfPeopleList.add("2")
         noOfPeopleList.add("3")
         noOfPeopleList.add("4")
+        noOfPeopleList.add("5")
+        noOfPeopleList.add("6")
+        noOfPeopleList.add("7")
+        noOfPeopleList.add("8")
+        noOfPeopleList.add("9")
+        noOfPeopleList.add("10")
 
         noofpeopleAdapter = ArrayAdapter<String>(
             requireContext(),
