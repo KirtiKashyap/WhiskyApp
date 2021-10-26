@@ -12,6 +12,7 @@ import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.events.ui.EventAttendingFragment
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
+import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
@@ -67,6 +68,10 @@ class ProfileDetailFragment : Fragment() {
         }
         mAddressLayoutBinding.imgEventattendingIcon.setOnClickListener {
             launchFragment(EventAttendingFragment.newInstance(), "EventAttendingFragment")
+        }
+
+        mPhoneLayoutBinding.imgPurchasehistoryIcon.setOnClickListener {
+            launchFragment(PurchaseHistoryFragment.newInstance(), "PurchaseHistoryFragment")
         }
     }
 
