@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,7 @@ import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentSpecialofferBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
-import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
-import com.aadya.whiskyapp.payment.ui.Payment_Activity
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
 import kotlinx.android.synthetic.main.fragment_specialoffer.*
@@ -66,6 +63,7 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
         buy_button.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, CheckoutActivityJava::class.java)
+                intent.putExtra("amount",mBinding.tvSpecialofferAmt.text )
                 it.startActivity(intent)
             }
         }

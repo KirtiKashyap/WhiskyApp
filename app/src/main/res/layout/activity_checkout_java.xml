@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:stripe="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
-        >
+        android:background="@drawable/loginbg">
 
         <include
             android:id="@+id/signupheader_layout"
@@ -14,7 +16,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupheader_layout"
+            android:layout_width="@dimen/_120sdp"
+            android:src="@drawable/buy"
+            android:id="@+id/butImage"
+            android:layout_height="@dimen/_120sdp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,10 +31,11 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupheader_layout"
+        app:layout_constraintTop_toBottomOf="@id/butImage"
         android:layout_margin="10dp"
         android:alpha="0.8">
         <EditText
+            android:background="@drawable/loginedittext_bg"
             android:id="@+id/tv_cardholdername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,8 +43,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="@string/cardholdername"
-            android:textColorHint="@color/black"
-            android:textColor="@color/white"
+            android:textColorHint="@color/orangetextcolor"
+            android:textColor="@color/orangetextcolor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,28 +58,52 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            stripe:cardTint="@color/white"
+            stripe:cardTextErrorColor="@android:color/holo_orange_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shouldShowPostalCode="false"
             />
-
-        <Button
-            android:layout_marginLeft="20dp"
-            android:id="@+id/payButton"
-            android:layout_width="134dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Pay" />
-
         <TextView
+
+
+            android:alpha=".8"
+            android:background="@drawable/loginedittext_bg"
+            android:hint="@string/hint_password"
+            android:gravity="center"
+            android:textSize="@dimen/_14sdp"
             android:id="@+id/amountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:padding="5dp"
-            android:textColor="@color/colorAccent"
-            android:text="20"/>
+            android:textColor="@color/white"
+            android:fontFamily="@font/archivonarrow_regular" />
+        <Button
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:backgroundTint="@color/orangetextcolor"
+            android:id="@+id/payButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="true"
+            android:text="Confirm Order" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:background="@drawable/loginedittext_bg"
+            android:text="Cancel" />
+
 
     </LinearLayout>
 

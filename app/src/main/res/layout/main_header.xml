@@ -17,8 +17,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:adjustViewBounds="true"
-            android:tint="#e46803"
-            android:src="@drawable/ic_baseline_menu_24" />
+            android:src="@drawable/ic_baseline_menu_24"
+            app:tint="#e46803" />
 
 
         <ImageView
