@@ -25,10 +25,12 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".payment.ui.PaymentSuccessActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBdFXRdQC6HeTXecu7ek22YuvWajVuJ9kM" />
+
         <activity android:name=".landing.ui.ForgotPasswordActivity" />
         <activity android:name=".payment.ui.CheckoutActivityJava" />
         <activity android:name=".dashboard.ui.DashBoardActivity" />
