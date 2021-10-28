@@ -48,11 +48,13 @@ public class CheckoutActivityJava extends AppCompatActivity {
     private Stripe stripe;
     String amount;
     private TextView amountTextView;
+    Button payButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_java);
+        payButton = findViewById(R.id.payButton);
         ImageView imgDrawer= findViewById(R.id.img_drawer);
         ImageView profileIcon= findViewById(R.id.img_logo);
         profileIcon.setVisibility(View.GONE);
@@ -92,10 +94,10 @@ public class CheckoutActivityJava extends AppCompatActivity {
         httpClient.newCall(request)
                 .enqueue(new PayCallback(this));
         // Hook up the pay button to the card widget and stripe instance
-        Button payButton = findViewById(R.id.payButton);
-        payButton.setOnClickListener((View view) -> {
-            CardMultilineWidget cardInputWidget = findViewById(R.id.cardInputWidget);
 
+        payButton.setOnClickListener((View view) -> {
+            payButton.setClickable(false);
+            CardMultilineWidget cardInputWidget = findViewById(R.id.cardInputWidget);
             PaymentMethodCreateParams params =
                     cardInputWidget.getPaymentMethodCreateParams();
 
@@ -170,6 +172,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
         @NonNull private final WeakReference<CheckoutActivityJava> activityRef;
         PaymentResultCallback(@NonNull CheckoutActivityJava activity) {
             activityRef = new WeakReference<>(activity);
+            payButton.setClickable(true);
         }
         @Override
         public void onSuccess(@NonNull PaymentIntentResult result) {

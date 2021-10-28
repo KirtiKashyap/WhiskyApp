@@ -14,12 +14,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="@dimen/_100sdp"
+            android:layout_width="@dimen/_150sdp"
             android:src="@drawable/confirmpay"
             android:id="@+id/butImage"
-            android:layout_height="@dimen/_100sdp" />
+            android:layout_height="@dimen/_150sdp" />
         <TextView
-            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/butImage"
