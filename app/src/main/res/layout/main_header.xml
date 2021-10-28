@@ -38,8 +38,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             app:srcCompat="@drawable/red_logo"
-            android:tint="#e46803"
-             />
+            app:tint="#e46803" />
 
     </RelativeLayout>
 </layout>

@@ -1,11 +1,10 @@
 package com.aadya.whiskyapp.payment.ui;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -18,23 +17,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.android.ApiResultCallback;
-import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.Stripe;
 import com.stripe.android.model.ConfirmPaymentIntentParams;
 import com.stripe.android.model.PaymentIntent;
-import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.model.PaymentMethodCreateParams;
-import com.stripe.android.view.CardInputWidget;
 import com.stripe.android.view.CardMultilineWidget;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import okhttp3.Call;
@@ -44,7 +37,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class CheckoutActivityJava extends AppCompatActivity {
 
@@ -61,6 +53,10 @@ public class CheckoutActivityJava extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_java);
+        ImageView imgDrawer= findViewById(R.id.img_drawer);
+        ImageView profileIcon= findViewById(R.id.img_logo);
+        profileIcon.setVisibility(View.GONE);
+        imgDrawer.setVisibility(View.GONE);
         amountTextView = findViewById(R.id.amountTextView);
         Intent intent = getIntent();
         amount = intent.getStringExtra("amount");

@@ -16,18 +16,39 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.CardTheme">
+   <!-- <style name="AppTheme.CardTheme">
         <item name="colorPrimary">@color/themecolor</item>
         <item name="colorPrimaryDark">@color/themecolor</item>
         <item name="android:textColorHint">@color/themecolor</item>
-        <item name="colorAccent">@color/themecolor</item> <!-- line color in textinput layout -->
+        <item name="colorAccent">@color/themecolor</item> &lt;!&ndash; line color in textinput layout &ndash;&gt;
         <item name="colorControlNormal">@color/themecolor</item>
         <item name="colorControlActivated">@color/themecolor</item>
         <item name="android:textColor">@color/themecolor</item>
         <item name="android:editTextColor">@color/themecolor</item>
-      <item name="fontFamily">@font/archivonarrow_regular</item>
+      <item name="fontFamily">@font/archivonarrow_regular</item> </style>-->
 
+        <style name="AppTheme.CardTheme">
+            <item name="colorPrimary">@color/white</item>
+            <item name="colorPrimaryDark">@color/white</item>
+            <item name="android:textColorHint">@color/white</item>
+            <item name="colorAccent">@color/white</item>
+            <item name="colorControlNormal">@color/white</item>
+            <item name="colorControlActivated">@color/white</item>
+            <item name="android:textColor">@color/white</item>
 
+    </style>
+    <style name="CardWidgetStyle" parent="@android:style/Theme.DeviceDefault">
+        <item name="editTextStyle">@style/EditTextOverride</item>
+        <item name="android:editTextStyle">@style/EditTextOverride</item>
+
+    </style>
+
+    <style name="EditTextOverride" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/orangetextcolor</item>
+        <item name="android:textColorHint">@color/orangetextcolor</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:focusable">true</item>
+        <item name="fontFamily">@font/archivonarrow_regular</item>
     </style>
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">

@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:orientation="vertical"
         android:background="@drawable/loginbg">
 
         <include
@@ -20,20 +19,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signupheader_layout"
-            android:layout_width="@dimen/_120sdp"
+            android:layout_width="@dimen/_100sdp"
             android:src="@drawable/buy"
             android:id="@+id/butImage"
-            android:layout_height="@dimen/_120sdp" />
+            android:layout_height="@dimen/_100sdp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/butImage"
-        android:layout_margin="10dp"
-        android:alpha="0.8">
+        android:layout_margin="10dp">
         <EditText
             android:background="@drawable/loginedittext_bg"
             android:id="@+id/tv_cardholdername"
@@ -50,7 +49,14 @@
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/archivonarrow_regular"
             app:layout_constraintTop_toBottomOf="@id/radiobtn_linear" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Card Detail"
+            android:layout_marginLeft="20dp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"/>
 
         <com.stripe.android.view.CardMultilineWidget
             android:id="@+id/cardInputWidget"
@@ -58,37 +64,31 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            stripe:cardTint="@color/white"
-            stripe:cardTextErrorColor="@android:color/holo_orange_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/loginedittext_bg"
+            android:theme="@style/CardWidgetStyle"
             app:shouldShowPostalCode="false"
             />
         <TextView
-
-
             android:alpha=".8"
-            android:background="@drawable/loginedittext_bg"
-            android:hint="@string/hint_password"
+            android:background="@color/on_track_color"
             android:gravity="center"
+            android:layout_marginTop="20dp"
             android:textSize="@dimen/_14sdp"
             android:id="@+id/amountTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:text="Amount"
             android:padding="5dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/archivonarrow_regular" />
+            android:textColor="@color/white" />
         <Button
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:backgroundTint="@color/orangetextcolor"
             android:id="@+id/payButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:textAllCaps="true"
             android:text="Confirm Order" />
@@ -97,7 +97,7 @@
             android:layout_marginRight="20dp"
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:textAllCaps="true"
             android:textColor="@color/white"
