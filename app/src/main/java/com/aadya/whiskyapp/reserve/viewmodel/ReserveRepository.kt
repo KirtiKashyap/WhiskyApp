@@ -47,10 +47,9 @@ class ReserveRepository(application: Application) {
     )
     {
 
-        if (what_u_want_to_eat.equals(
+        if ((what_u_want_to_eat==null)||what_u_want_to_eat.trim().equals(
                 "",
-                ignoreCase = true
-            )
+                ignoreCase = true)
         ) setAlert(
             mContext.getString(R.string.reserve_Error),
             mContext.getString(R.string.please_enter_what_u_want_to_eat),

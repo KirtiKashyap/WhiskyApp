@@ -194,8 +194,6 @@ public class CheckoutActivityJava extends AppCompatActivity {
                         "Payment Successfully Done."
                 );*/
 
-
-
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(
