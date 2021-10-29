@@ -23,15 +23,109 @@
             android:src="@drawable/buy"
             android:id="@+id/butImage"
             android:layout_height="@dimen/_100sdp" />
+        <Button
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            app:backgroundTint="@color/orangetextcolor"
+            android:id="@+id/nexButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:text="Next"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <Button
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:backgroundTint="@color/orangetextcolor"
+            android:id="@+id/prevButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:text="Prev"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <LinearLayout
+            android:id="@+id/address_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/butImage"
+            app:layout_constraintBottom_toTopOf="@+id/nexButton"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <EditText
+                android:background="@drawable/loginedittext_bg"
+                android:id="@+id/tv_address_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="@string/address_line"
+                android:textColorHint="@color/orangetextcolor"
+                android:textColor="@color/orangetextcolor"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/archivonarrow_regular"
+                app:layout_constraintTop_toBottomOf="@id/radiobtn_linear" />
+            <Spinner
+                android:spinnerMode="dialog"
+                android:background="@drawable/spinnerbackground"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/country_spinner"
+                android:layout_marginTop="20dp"/>
+            <Spinner
+                android:spinnerMode="dialog"
+                android:background="@drawable/spinnerbackground"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/state_spinner"
+                android:layout_marginTop="20dp"/>
+            <Spinner
+                android:spinnerMode="dialog"
+                android:background="@drawable/spinnerbackground"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/city_spinner"
+                android:layout_marginTop="20dp"/>
+            <Spinner
+                android:spinnerMode="dialog"
+                android:background="@drawable/spinnerbackground"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/postcode_spinner"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_vertical"
+        android:visibility="visible"
+        android:id="@+id/payment_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/butImage"
+        app:layout_constraintBottom_toTopOf="@+id/prevButton"
         android:layout_margin="10dp">
         <EditText
             android:background="@drawable/loginedittext_bg"

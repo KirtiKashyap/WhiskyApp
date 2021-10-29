@@ -28,6 +28,7 @@
     <string name="pleasewait">Please Wait...</string>
     <string name="strcontinue">Continue</string>
     <string name="cardholdername">Card Holder\'s Name</string>
+    <string name="address_line">Address Line</string>
     <string name="menu">Menu</string>
     <string name="profile">My Profile</string>
     <string name="reservation">Reservation</string>
