@@ -26,6 +26,7 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
+import com.google.gson.annotations.SerializedName
 
 
 class ProfileEditFragment : Fragment() {
@@ -134,10 +135,10 @@ class ProfileEditFragment : Fragment() {
         mProfileEditViewModel.getEditProfileObserver().observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
 
-            Log.d("TAG", "UserId:" + it.UserId)
+            Log.d("TAG", "UserId:" + it.MemberID)
             mProfileViewModel.getProfile(
                 mSessionManager.getAuthorization(),
-                it.UserId
+                it.MemberID
             )
 
 
@@ -247,14 +248,23 @@ class ProfileEditFragment : Fragment() {
                 )
             }
             else {
+
                 var mProfileRequestModel: ProfileEditRequestModel? = ProfileEditRequestModel(
-                    mSessionManager.getUserDetailLoginModel()?.memberID,
-                    mPhoneLayoutBinding.tvUserPhone.text.toString(),
-                    mEmailLayoutBinding.tvUserEmail.text.toString(),
-                    mCommonUtils.date_dd_MM_yyyy(
+                    MemberID=mSessionManager.getUserDetailLoginModel()?.memberID,
+                    firstName="",
+                    lastName="",
+                    middleName="",
+                    phoneNo = mPhoneLayoutBinding.tvUserPhone.text.toString(),
+                    email = mEmailLayoutBinding.tvUserEmail.text.toString(),
+                    dateOfBirth = mCommonUtils.date_dd_MM_yyyy(
                         mDOBLayoutBinding.tvUserDob.text.toString()
                     ),
-                    mAddressLayoutBinding.tvUserAdress.text.toString(),
+                    address = mAddressLayoutBinding.tvUserAdress.text.toString(),
+                    Occupation="",
+                    SpouseName="",
+                    TypeofMembership="",
+                    AliasID="",
+                    FavoriteCocktail=""
                 )
                 mProfileEditViewModel.editProfile(
                     mSessionManager.getAuthorization(),

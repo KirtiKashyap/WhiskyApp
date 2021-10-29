@@ -1,14 +1,23 @@
 package com.aadya.whiskyapp.profile.model
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ProfileEditRequestModel (
 
-    @SerializedName("userID") var userID : Int?,
-    @SerializedName("phoneNo") var phoneNo : String,
+
+    @SerializedName("MemberID") var MemberID : Int?,
+    @SerializedName("FirstName") var firstName : String,
+    @SerializedName("LastName") var lastName : String,
+    @SerializedName("MiddleName") var middleName : String,
+    @SerializedName("DateOfBirth") var dateOfBirth : String,
+    @SerializedName("PhoneNumber") var phoneNo : String,
+    @SerializedName("Address") var address : String,
     @SerializedName("email") var email : String,
-    @SerializedName("dateOfBirth") var dateOfBirth : String,
-    @SerializedName("address") var address : String
+    @SerializedName("Occupation") var Occupation : String,
+    @SerializedName("SpouseName") var SpouseName : String,
+    @SerializedName("TypeofMembership") var TypeofMembership : String,
+    @SerializedName("AliasID") var AliasID : String,
+    @SerializedName("FavoriteCocktail") var FavoriteCocktail : String,
+
 
 )

@@ -124,8 +124,6 @@ class EventsFragment() : Fragment() {
     }
 
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
-
-
         mBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_event_new,
@@ -266,7 +264,6 @@ class EventsFragment() : Fragment() {
         @JvmStatic
         fun newInstance(
             eventsModel: EventsResponseModel,
-
             position: Int,
             deletePageViewPager: deletePageViewPager?
         ) =
@@ -278,8 +275,5 @@ class EventsFragment() : Fragment() {
             }
             this.mdeletePageViewPager = deletePageViewPager
         }
-
     }
-
-
 }
