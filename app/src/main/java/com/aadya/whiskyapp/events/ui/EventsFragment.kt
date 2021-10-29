@@ -120,10 +120,8 @@ class EventsFragment() : Fragment() {
             mDateTimeIncludedLayout.tvEndtime.text = eventModel.eventEndTime
             mDateTimeIncludedLayout.tvDate.text = mCommonUtils.getDay_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
 
-
         }
     }
-
 
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
 
@@ -139,12 +137,9 @@ class EventsFragment() : Fragment() {
         mSessionManager = SessionManager.getInstance(context)!!
 
         setIncludedLayout()
-
         handleclickListner()
 
     }
-
-
 
     private fun handleclickListner() {
 
@@ -152,9 +147,7 @@ class EventsFragment() : Fragment() {
             requireContext(),
             mBinding.constraintEvents
         )
-
     }
-
 
     private fun handleObserver() {
         mRSVPViewModel = ViewModelProvider(this, RSVPFactory(activity?.application)).get(
@@ -244,9 +237,6 @@ class EventsFragment() : Fragment() {
                 mIncludedRSVPBinding.imgRsvpIntersted.clearAnimation()
 
             }, 2000)
-
-
-
         }
 
         mIncludedRSVPBinding.imgRsvpNotintersted.setOnClickListener{

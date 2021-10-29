@@ -53,6 +53,7 @@
             android:id="@+id/tv_user_dob"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:singleLine="true"
             app:layout_constraintStart_toEndOf="@id/start_guide"
             app:layout_constraintEnd_toStartOf="@id/tv_userdob__endguide"
             app:layout_constraintTop_toBottomOf="@id/tv_userdob_topguide"
@@ -85,9 +86,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.47"/>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

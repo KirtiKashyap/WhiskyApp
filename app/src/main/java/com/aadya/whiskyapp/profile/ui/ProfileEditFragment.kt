@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -123,7 +124,7 @@ class ProfileEditFragment : Fragment() {
 
             )
 
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(requireActivity(), LandingActivity::class.java)
                 startActivity(intent)}, 2000)
 

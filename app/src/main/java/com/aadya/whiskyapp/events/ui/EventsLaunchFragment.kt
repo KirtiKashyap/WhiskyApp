@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -78,7 +79,7 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
 
                     )
 
-                    Handler().postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
                         mBottomNavigationInterface?.setOnBottomNavigationResult()
                         launchFragment(MenuFragment.newInstance(), "MenuFragment")}, 1500)
 

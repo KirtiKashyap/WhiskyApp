@@ -58,6 +58,8 @@
             app:layout_constraintTop_toBottomOf="@id/tv_useremail_topguide"
             app:layout_constraintBottom_toTopOf="@id/tv_useremail_bottomguide"
             android:text="dummy@gmail.com"
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
             android:fontFamily="@font/archivonarrow_regular"
             android:textColor="@color/orangetextcolor"
             android:textSize="@dimen/_14sdp"

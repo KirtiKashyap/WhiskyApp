@@ -222,12 +222,12 @@ public class CheckoutActivityJava extends AppCompatActivity {
                 //gson.toJson(paymentIntent)
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-                finish();
-               /* activity.displayAlert(
+//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+//                finish();
+                activity.displayAlert(
                         "Payment completed",
                         "Payment Successfully Done."
-                );*/
+                );
 
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
