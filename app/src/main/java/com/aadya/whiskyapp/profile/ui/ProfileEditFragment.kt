@@ -134,14 +134,13 @@ class ProfileEditFragment : Fragment() {
 
         mProfileEditViewModel.getEditProfileObserver().observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-
-            Log.d("TAG", "UserId:" + it.MemberID)
+            mSessionManager.setProfileModel(it)
+            mProfileModel = mSessionManager.getProfileModel()
+            Log.d("TAG", "UserId:" + it)
             mProfileViewModel.getProfile(
                 mSessionManager.getAuthorization(),
-                it.MemberID
+                it?.memberID
             )
-
-
         })
 
         mProfileViewModel.getProfileObserver().observe(viewLifecycleOwner, Observer {
@@ -160,7 +159,6 @@ class ProfileEditFragment : Fragment() {
                 alertModel.drawable,
                 alertModel.color,
                 requireActivity()
-
             )
 
             setUIValues()
@@ -249,7 +247,7 @@ class ProfileEditFragment : Fragment() {
             }
             else {
 
-                var mProfileRequestModel: ProfileEditRequestModel? = ProfileEditRequestModel(
+                var mProfileRequestModel = ProfileEditRequestModel(
                     MemberID=mSessionManager.getUserDetailLoginModel()?.memberID,
                     firstName="",
                     lastName="",
@@ -266,10 +264,12 @@ class ProfileEditFragment : Fragment() {
                     AliasID="",
                     FavoriteCocktail=""
                 )
-                mProfileEditViewModel.editProfile(
-                    mSessionManager.getAuthorization(),
-                    mProfileRequestModel
-                )
+                mSessionManager.getAuthorization()?.let { it1 ->
+                    mProfileEditViewModel.editProfile(
+                        it1,
+                        mProfileRequestModel
+                    )
+                }
             }
         }
     }

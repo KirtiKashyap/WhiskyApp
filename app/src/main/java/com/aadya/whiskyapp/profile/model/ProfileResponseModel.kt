@@ -7,6 +7,7 @@ data class ProfileResponseModel (
 
     @SerializedName("memberID") var memberID : Int,
     @SerializedName("memberTypeName") var memberTypeName : String,
+    @SerializedName("memberName") var memberName : String,
     @SerializedName("firstName") var firstName : String,
     @SerializedName("userName") var userName : String,
     @SerializedName("middleName") var middleName : String,

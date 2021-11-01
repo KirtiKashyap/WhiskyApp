@@ -41,7 +41,7 @@ class ProfileRepository(application: Application) {
 
         if (Connection.instance?.isNetworkAvailable(application) == true) {
             progressLiveData.value = CommonUtils.ProgressDialog.showDialog
-            val mProfileRequestModel : ProfileRequestModel = ProfileRequestModel(userId)
+            val mProfileRequestModel = ProfileRequestModel(userId)
             RetrofitService().getProfile(authorization,mProfileRequestModel,
                 object : APIResponseListener {
                     override fun onSuccess(response: Response<Any>) {
@@ -51,9 +51,6 @@ class ProfileRepository(application: Application) {
 
                         val model: ProfileResponseModel? = response.body() as ProfileResponseModel?
                         try {
-
-
-
                             if(response.code() == 401)
                                 profileUnAuthorizedLiveData.value = true
 

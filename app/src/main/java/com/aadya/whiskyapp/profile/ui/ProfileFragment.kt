@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.profile.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
@@ -44,6 +45,7 @@ class ProfileFragment : Fragment() {
 
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setProfileData() {
         if(mSessionManager.getProfileModel()?.agentStatus==true){

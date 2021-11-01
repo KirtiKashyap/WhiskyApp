@@ -58,11 +58,11 @@ class SessionManager {
     }
 
     fun getAuthorization(): String? {
-        val edit: SharedPreferences.Editor? = sharedPreferences?.edit()
-        return sharedPreferences?.getString(AUTHORIZATION, "")
+        val edit: SharedPreferences.Editor = sharedPreferences!!.edit()
+        return sharedPreferences!!.getString(AUTHORIZATION, "")
     }
 
-    fun setAuthorization(authorization: String?) {
+    fun setAuthorization(authorization: String) {
         val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
         editor?.putString(AUTHORIZATION, authorization)
         editor?.apply()

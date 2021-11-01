@@ -18,6 +18,7 @@ import com.aadya.whiskyapp.databinding.AppContentBinding
 import com.aadya.whiskyapp.events.ui.EventsLaunchFragment
 import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
+import com.aadya.whiskyapp.profile.ui.ProfileEditFragment
 import com.aadya.whiskyapp.profile.ui.SecretCodeFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
@@ -196,6 +197,22 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
             finish()
         } else if(supportFragmentManager.findFragmentByTag("ProfileDetailFragment") is ProfileDetailFragment){
             supportFragmentManager.popBackStack()
+        }else if(supportFragmentManager.findFragmentByTag("ProfileEditFragment") is ProfileEditFragment){
+            supportFragmentManager.popBackStack()
+            val ft = supportFragmentManager?.beginTransaction()
+            ft?.setCustomAnimations(
+                R.anim.slide_in_bottom,
+                R.anim.slide_out_top,
+                R.anim.slide_in_top,
+                R.anim.slide_out_bottom
+            )
+            ft?.replace(
+                R.id.app_container,
+                ProfileDetailFragment.newInstance(),
+                "ProfileDetailFragment"
+            )
+            ft?.addToBackStack(null)
+            ft?.commit()
         }else{
             super.onBackPressed()
         }

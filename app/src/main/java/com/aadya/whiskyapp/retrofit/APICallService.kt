@@ -7,7 +7,6 @@ import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
-import com.aadya.whiskyapp.profile.model.ProfileEditResponseModel
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
@@ -57,7 +56,7 @@ interface APICallService {
 
     @POST(CommonUtils.APIURL.ProfileEdit)
     fun ProfileEdit(
-        @Header("Authorization") authHeader: String?,
-        @Body mProfileRequestModel: ProfileEditRequestModel?
-    ): Call<ProfileEditResponseModel?>?
+        @Header("Authorization") authHeader: String,
+        @Body mProfileRequestModel: ProfileEditRequestModel
+    ): Call<ProfileResponseModel>
 }

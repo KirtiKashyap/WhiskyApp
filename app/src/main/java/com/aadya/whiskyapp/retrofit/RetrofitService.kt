@@ -7,7 +7,6 @@ import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
-import com.aadya.whiskyapp.profile.model.ProfileEditResponseModel
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
@@ -19,21 +18,21 @@ import retrofit2.Response
 class RetrofitService {
 
     fun getProfileEdit(
-        authorization: String?,
-        profilerequestModel: ProfileEditRequestModel?,
+        authorization: String,
+        profilerequestModel: ProfileEditRequestModel,
         apiResponseListener: APIResponseListener
     ) {
         val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
-        val call: Call<ProfileEditResponseModel?>? = service.ProfileEdit(authorization,profilerequestModel)
-        call?.enqueue(object : Callback<ProfileEditResponseModel?> {
+        val call: Call<ProfileResponseModel> = service.ProfileEdit(authorization,profilerequestModel)
+        call?.enqueue(object : Callback<ProfileResponseModel> {
             override fun onResponse(
-                call: Call<ProfileEditResponseModel?>,
-                response: Response<ProfileEditResponseModel?>
+                call: Call<ProfileResponseModel>,
+                response: Response<ProfileResponseModel?>
             ) {
                 apiResponseListener.onSuccess(response)
             }
 
-            override fun onFailure(call: Call<ProfileEditResponseModel?>, t: Throwable) {
+            override fun onFailure(call: Call<ProfileResponseModel>, t: Throwable) {
 
                 apiResponseListener.onFailure()
             }
