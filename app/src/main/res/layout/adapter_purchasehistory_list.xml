@@ -18,7 +18,8 @@
             android:layout_marginBottom="2dp"
             android:layout_marginTop="4dp"
             android:src="@drawable/specialofferbottle_mdpi" />
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
            >
@@ -83,6 +84,6 @@
 
 
 
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </layout>

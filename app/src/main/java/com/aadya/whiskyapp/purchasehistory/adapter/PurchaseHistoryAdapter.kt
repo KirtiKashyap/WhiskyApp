@@ -39,34 +39,12 @@ class PurchaseHistoryAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
-        val mSpecailOfferResponseModel: PurchaseHistory = purchaseHistoryList[i]
+        val purchaseHistory: PurchaseHistory = purchaseHistoryList[i]
         with(viewHolder) {
-
-            /* val eventdate_time =
-                mCommonUtils.convertString_To_Date_ddMMMyyyyformat(mEventAttendingModel?.eventDate.toString())
-            if (mEventAttendingModel.eventStartTime != null) {
-                eventdate_time.plus("  $mEventAttendingModel.eventStartTime")
-                binding.tvDateTime.text = eventdate_time
-            } else
-                binding.tvDateTime.text = eventdate_time
-
-            if (mEventAttendingModel.isActive) {
-                binding.tvEventStatus.text = "Completed"
-                binding.eventAttendingMainLayout.setBackgroundResource(R.drawable.eventattendingunselected_bg )
-            }
-            else {
-                binding.tvEventStatus.text = "UpComing Event"
-                binding.eventAttendingMainLayout.setBackgroundResource(R.drawable.eventattendingselected_bg )
-            }
-
-            binding.tvEventTitle.text = mEventAttendingModel.eventTitle
-            binding.tvEventAddress.text = mEventAttendingModel.eventLocation
-
-            binding.eventAttendingMainLayout.setOnClickListener {
-               *//*  selectedPosition=i
-                notifyDataSetChanged()*//*
-                eventAttendingItemClick.onItemClick(eventAttendingList.get(i))
-            }*/
+                binding.tvPurchaseTitle.text="Status: "+purchaseHistory.paymentStatus
+            binding.tvAmt.text="Amount: "+purchaseHistory.amount
+            binding.tvDate.text="Date: "+purchaseHistory.paymentDate
+            binding.tvOrderid.text="Ticket Id: "+purchaseHistory.ticketID.toString()
             
         }
 
