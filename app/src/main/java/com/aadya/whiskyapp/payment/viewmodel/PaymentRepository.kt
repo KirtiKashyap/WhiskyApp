@@ -1,14 +1,10 @@
 package com.aadya.whiskyapp.payment.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
-import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
-import com.aadya.whiskyapp.profile.model.ProfileResponseModel
-import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
 import com.aadya.whiskyapp.utils.AlertModel
@@ -82,39 +78,6 @@ class PaymentRepository (application: Application){
 
     }
 
-    /*fun paymentUpdate(authorization: String,paymentUpdateRequest: PaymentUpdate) {
-
-        if (Connection.instance?.isNetworkAvailable(application) == true) {
-            progressLiveData.value = CommonUtils.ProgressDialog.showDialog
-            RetrofitService().paymentUpdate(authorization,
-                paymentUpdateRequest,
-                object : APIResponseListener {
-                    override fun onSuccess(response: Response<Any>) {
-                       progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
-                        val memberId: PaymentResponse = response.body() as PaymentResponse
-                        try {
-                            if(response.code() == 401)
-                                paymentUnAuthorizedLiveData.value = true
-                            else if(response.code() == 200)
-                                paymentLiveData.value = memberId
-                            else if(response.code()==404)
-                                Log.d("404 Not found Error","")
-
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                    override fun onFailure() {
-                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
-                    }
-                })
-        } else setAlert(
-            application.getString(R.string.no_internet_connection),
-            application.getString(R.string.not_connected_to_internet),
-            false
-        )
-    }*/
     private fun setAlert(title: String, message: String, isSuccess: Boolean) {
         val drawable: Int = if (isSuccess) R.drawable.correct_icon else R.drawable.wrong_icon
         val color: Int = if (isSuccess) R.color.notiSuccessColor else R.color.notiFailColor

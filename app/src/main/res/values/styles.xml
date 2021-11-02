@@ -46,7 +46,7 @@
     <style name="EditTextOverride" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/orangetextcolor</item>
         <item name="android:textColorHint">@color/orangetextcolor</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:focusable">true</item>
         <item name="fontFamily">@font/archivonarrow_regular</item>
     </style>
