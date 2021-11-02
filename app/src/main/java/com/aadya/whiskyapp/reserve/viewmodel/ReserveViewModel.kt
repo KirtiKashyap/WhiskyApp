@@ -6,6 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.utils.AlertModel
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ReserveViewModel(reserveRepository: ReserveRepository) : ViewModel() {
@@ -37,8 +41,5 @@ class ReserveViewModel(reserveRepository: ReserveRepository) : ViewModel() {
     ) {
         reserveRepository.checkReserveValidation(mcontext, what_u_want_to_eat, date,time,no_of_people,userID,authorization)
     }
-
-
-
 
 }

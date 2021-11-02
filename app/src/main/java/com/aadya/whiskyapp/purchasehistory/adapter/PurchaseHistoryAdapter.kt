@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.AdapterPurchasehistoryListBinding
+import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.SessionManager
@@ -17,14 +18,14 @@ class PurchaseHistoryAdapter(
     purchaseHistoryItemClick: PurchaseHistoryListItemClick
 ) : RecyclerView.Adapter<PurchaseHistoryAdapter.MyViewHolder>() {
 
-    private val purchaseHistoryList: ArrayList<SpecialOfferResponseModel> =
-        ArrayList<SpecialOfferResponseModel>()
+    private val purchaseHistoryList: ArrayList<PurchaseHistory> =
+        ArrayList()
     private val context: Context
     private val purchaseHistoryItemClick: PurchaseHistoryListItemClick
     private lateinit var mSessionManager: SessionManager
     private lateinit var mCommonUtils: CommonUtils
 
-    fun notifyData(purchaseHistoryList: List<SpecialOfferResponseModel>) {
+    fun notifyData(purchaseHistoryList: List<PurchaseHistory>) {
         this.purchaseHistoryList.clear()
         this.purchaseHistoryList.addAll(purchaseHistoryList)
         notifyDataSetChanged()
@@ -38,7 +39,7 @@ class PurchaseHistoryAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
-        val mSpecailOfferResponseModel: SpecialOfferResponseModel = purchaseHistoryList[i]
+        val mSpecailOfferResponseModel: PurchaseHistory = purchaseHistoryList[i]
         with(viewHolder) {
 
             /* val eventdate_time =

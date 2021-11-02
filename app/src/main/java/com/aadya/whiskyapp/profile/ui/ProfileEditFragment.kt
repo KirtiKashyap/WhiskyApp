@@ -137,10 +137,25 @@ class ProfileEditFragment : Fragment() {
             mSessionManager.setProfileModel(it)
             mProfileModel = mSessionManager.getProfileModel()
             Log.d("TAG", "UserId:" + it)
-            mProfileViewModel.getProfile(
+            val alertModel = AlertModel(
+                2000, resources.getString(R.string.profile_update), resources.getString(
+                    R.string.profile_update_successfully
+                ), R.drawable.correct_icon, R.color.notiSuccessColor
+            )
+            mCommonUtils.showAlert(
+                alertModel.duration,
+                alertModel.title,
+                alertModel.message,
+                alertModel.drawable,
+                alertModel.color,
+                requireActivity()
+            )
+
+            setUIValues()
+            /*mProfileViewModel.getProfile(
                 mSessionManager.getAuthorization(),
                 it?.memberID
-            )
+            )*/
         })
 
         mProfileViewModel.getProfileObserver().observe(viewLifecycleOwner, Observer {

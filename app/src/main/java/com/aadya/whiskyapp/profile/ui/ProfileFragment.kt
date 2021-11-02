@@ -126,11 +126,8 @@ class ProfileFragment : Fragment() {
         mCommonUtils = CommonUtils
         setIncludedLayout()
         mSessionManager = SessionManager.getInstance(requireContext())!!
-
         setAgentName()
         setProfileData()
-
-
     }
 
     private fun setAgentName() {

@@ -29,6 +29,7 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
+import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -181,7 +182,9 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 mBinding.edWhatUEat.text.toString(),
                 mBinding.edDate.text.toString(),
                 mBinding.edTime.text.toString(),
-                selected_no_of_people, mSessionManager.getUserDetailLoginModel()?.memberID,mSessionManager?.getAuthorization()
+                selected_no_of_people,
+                mSessionManager.getUserDetailLoginModel()?.memberID,
+                mSessionManager?.getAuthorization()
             )
 
         }
@@ -235,7 +238,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 val fmtOut = SimpleDateFormat("hh:mm aa")
                 val formattedTime = fmtOut.format(date)
-                mBinding.edTime.setText(formattedTime)
+                mBinding.edTime.setText(convert12hrformat_24hrformat(formattedTime))
             }, hour, minute, false
         )
         mTimePicker.setTitle("Select Time")
@@ -249,7 +252,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mTimePicker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(
             resources.getColor(
                 R.color.notiSuccessColor
-            ))
+            )
+        )
     }
 
 
@@ -259,6 +263,37 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val date = parseFormat.parse(inTime)
         println(parseFormat.format(date).toString() + " = " + displayFormat.format(date))
         return displayFormat.format(date)
+    }
+
+
+
+    private fun convert12hrformat_24hrformat1(inTime: String): String ?{
+//        val displayFormat = SimpleDateFormat("HH:mm")
+//        val parseFormat = SimpleDateFormat("hh:mm a")
+//        val date = parseFormat.parse(inTime)
+//        println(parseFormat.format(date).toString() + " = " + displayFormat.format(date))
+
+
+        val input = "23/12/2014 10:22:12 PM"
+        //Format of the date defined in the input String
+        //Format of the date defined in the input String
+        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa")
+        //Desired format: 24 hour format: Change the pattern as per the need
+        //Desired format: 24 hour format: Change the pattern as per the need
+        val outputformat: DateFormat = SimpleDateFormat("MM-dd-yyyy HH:mm:ss")
+        var date: Date? = null
+        var output: String? = null
+        try {
+            //Converting the input String to Date
+            date = df.parse(input)
+            //Changing the format of date and storing it in String
+            output = outputformat.format(date)
+            //Displaying the date
+            println(output)
+        } catch (pe: ParseException) {
+            pe.printStackTrace()
+        }
+        return output
     }
 
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {

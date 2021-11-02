@@ -9,6 +9,7 @@ import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
+import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -35,9 +36,8 @@ interface APICallService {
     @GET(CommonUtils.APIURL.EventAttending)
     fun getEventAttendingList(@Header("Authorization") authHeader: String?): Call<List<EventsResponseModel?>?>
 
-    @GET(CommonUtils.APIURL.EventAttending)
-    fun getPurchaseList(@Header("Authorization") authHeader: String?): Call<List<SpecialOfferResponseModel?>?>
-
+    @GET(CommonUtils.APIURL.PurchaseHistory)
+    fun getPurchaseList(@Header("Authorization") authHeader: String?): Call<List<PurchaseHistory?>?>
 
     @GET(CommonUtils.APIURL.SpecialOffer)
     fun getSpecialOfferList(@Header("Authorization") authHeader: String?): Call<List<SpecialOfferResponseModel?>?>

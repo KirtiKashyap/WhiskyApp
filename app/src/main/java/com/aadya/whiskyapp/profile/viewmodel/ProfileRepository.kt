@@ -64,12 +64,9 @@ class ProfileRepository(application: Application) {
                                     false
                                 )
 
-
-
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
-
 
                     }
 

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.events.model.EventsResponseModel
+import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
@@ -15,7 +16,7 @@ import retrofit2.Response
 class PurchaseHistoryRepository(application: Application) {
     private var application : Application = application
 
-    private val purchaseHistoryLiveData = MutableLiveData<List<SpecialOfferResponseModel>?>()
+    private val purchaseHistoryLiveData = MutableLiveData<List<PurchaseHistory>?>()
     private val alertLiveData: MutableLiveData<AlertModel> = MutableLiveData<AlertModel>()
     private val progressLiveData = MutableLiveData<Int>()
     private var purchaseHistoryUnAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -32,7 +33,7 @@ class PurchaseHistoryRepository(application: Application) {
         return alertLiveData
     }
 
-    fun getPurchaseHistoryList() : MutableLiveData<List<SpecialOfferResponseModel>?> {
+    fun getPurchaseHistoryList() : MutableLiveData<List<PurchaseHistory>?> {
         return  purchaseHistoryLiveData
     }
 
@@ -46,7 +47,7 @@ class PurchaseHistoryRepository(application: Application) {
 
                         progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
 
-                        val modelList: List<SpecialOfferResponseModel>? = response.body() as ArrayList<SpecialOfferResponseModel>?
+                        val modelList: List<PurchaseHistory>? = response.body() as ArrayList<PurchaseHistory>?
                         try {
 
 

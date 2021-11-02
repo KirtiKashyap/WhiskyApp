@@ -9,6 +9,7 @@ import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
+import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import retrofit2.Call
@@ -105,18 +106,18 @@ class RetrofitService {
 
     fun getPurchaseHistoryList(authorization: String?,apiResponseListener: APIResponseListener) {
         val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
-        val call: Call<List<SpecialOfferResponseModel?>?> = service.getPurchaseList(authorization)
-        call?.enqueue(object : Callback<List<SpecialOfferResponseModel?>?> {
+        val call: Call<List<PurchaseHistory?>?> = service.getPurchaseList(authorization)
+        call?.enqueue(object : Callback<List<PurchaseHistory?>?> {
 
 
             override fun onResponse(
-                call: Call<List<SpecialOfferResponseModel?>?>,
-                response: Response<List<SpecialOfferResponseModel?>?>
+                call: Call<List<PurchaseHistory?>?>,
+                response: Response<List<PurchaseHistory?>?>
             ) {
                 apiResponseListener.onSuccess(response)
             }
 
-            override fun onFailure(call: Call<List<SpecialOfferResponseModel?>?>, t: Throwable) {
+            override fun onFailure(call: Call<List<PurchaseHistory?>?>, t: Throwable) {
                 apiResponseListener.onFailure()
             }
         })

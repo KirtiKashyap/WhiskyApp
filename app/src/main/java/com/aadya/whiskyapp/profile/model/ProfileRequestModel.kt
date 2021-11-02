@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ProfileRequestModel(
 
-    @SerializedName("userID") var userID: Int?,
-
+    @SerializedName("MemberID") var MemberID: Int?,
 
     )

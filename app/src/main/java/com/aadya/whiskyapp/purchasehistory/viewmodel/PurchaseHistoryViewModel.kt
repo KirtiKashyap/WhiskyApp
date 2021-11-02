@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aadya.whiskyapp.events.model.EventsResponseModel
+import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.AlertModel
 
@@ -14,7 +15,7 @@ class PurchaseHistoryViewModel(purchaseHistoryRepository: PurchaseHistoryReposit
         purchaseHistoryRepository.getPurchaseHistoryList(authorization)
    }
 
-    fun getPurchaseHistoryListObserver() : MutableLiveData<List<SpecialOfferResponseModel>?> {
+    fun getPurchaseHistoryListObserver() : MutableLiveData<List<PurchaseHistory>?> {
         return  purchaseHistoryRepository.getPurchaseHistoryList()
     }
 
