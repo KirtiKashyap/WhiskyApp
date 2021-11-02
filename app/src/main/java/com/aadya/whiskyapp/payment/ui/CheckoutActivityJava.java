@@ -3,6 +3,7 @@ package com.aadya.whiskyapp.payment.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.aadya.whiskyapp.R;
+import com.aadya.whiskyapp.payment.model.PaymentResponse;
+import com.aadya.whiskyapp.payment.model.PaymentUpdate;
+import com.aadya.whiskyapp.payment.viewmodel.PaymentFactory;
+import com.aadya.whiskyapp.payment.viewmodel.PaymentUpdateViewModel;
+import com.aadya.whiskyapp.utils.AlertModel;
+import com.aadya.whiskyapp.utils.CommonUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +40,9 @@ import com.stripe.android.view.CardMultilineWidget;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -43,32 +54,55 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CheckoutActivityJava extends AppCompatActivity {
+import static com.google.gson.reflect.TypeToken.get;
 
-    // 10.0.2.2 is the Android emulator's alias to localhost
+public class CheckoutActivityJava extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
     private static final String BACKEND_URL = "http://92.204.128.4:5002/api/Payment/CreatePaymentIntent";
 
     private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
     private Stripe stripe;
-    String amount;
+    String amount,authorization,itemType;
+    int memberId,itemId;
     private TextView amountTextView;
     Button payButton;
-    private  ArrayAdapter<String> noofpeopleAdapter;
-    private ArrayList<String> noOfPeopleList;
     EditText addressET;
-    Spinner countrySp,stateSp,citySp,postSp;
+    Spinner stateSp;
+    EditText countryEditText,cityEditText,postEditText;
+    private PaymentUpdateViewModel paymentUpdateViewModel;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
+    private ArrayAdapter<String> stateAdapter;
+    private ArrayList<String> stateList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_java);
-        addressET=findViewById(R.id.tv_address_line);
-        countrySp=findViewById(R.id.country_spinner);
-        stateSp=findViewById(R.id.state_spinner);
-        citySp=findViewById(R.id.city_spinner);
-        postSp=findViewById(R.id.postcode_spinner);
 
+        addressET=findViewById(R.id.tv_address_line);
+        countryEditText=findViewById(R.id.country_spinner);
+        stateSp=findViewById(R.id.state_spinner);
+        cityEditText=findViewById(R.id.city_spinner);
+        postEditText=findViewById(R.id.postcode_spinner);
+
+        stateList = new ArrayList<String>();
+        stateList.add("Select State");
+        stateList.add("London");
+        stateList.add("Leeds");
+        stateList.add("Scotland");
+        stateList.add("Andover");
+        stateList.add("Manchester");
+
+        stateSp.setOnItemSelectedListener(this);
+        //Creating the ArrayAdapter instance having the country list
+        ArrayAdapter aa = new ArrayAdapter(this,R.layout.row_spinner,stateList);
+        aa.setDropDownViewResource(R.layout.row_spinner_dialog);
+        //Setting the ArrayAdapter data on the Spinner
+        stateSp.setAdapter(aa);
+        stateSp.setSelection(0);
         payButton = findViewById(R.id.payButton);
         ImageView imgDrawer= findViewById(R.id.img_drawer);
         ImageView profileIcon= findViewById(R.id.img_logo);
@@ -77,6 +111,10 @@ public class CheckoutActivityJava extends AppCompatActivity {
         amountTextView = findViewById(R.id.amountTextView);
         Intent intent = getIntent();
         amount = intent.getStringExtra("amount");
+        authorization = intent.getStringExtra("authorization");
+        itemType = intent.getStringExtra("itemType");
+        itemId = intent.getIntExtra("itemId",0);
+        memberId = intent.getIntExtra("memberId",0);
         amountTextView = findViewById(R.id.amountTextView);
         amountTextView.setText("Total "+amount);
         amountTextView.setVisibility(View.GONE);
@@ -90,8 +128,11 @@ public class CheckoutActivityJava extends AppCompatActivity {
         );
         Button preButton=findViewById(R.id.prevButton);
         Button nextButton=findViewById(R.id.nexButton);
-        nextButton.setVisibility(View.GONE);
+        nextButton.setVisibility(View.VISIBLE);
         preButton.setVisibility(View.GONE);
+
+        handleObserver();
+
         preButton.setOnClickListener((View view) -> {
             nextButton.setVisibility(View.VISIBLE);
             preButton.setVisibility(View.GONE);
@@ -110,6 +151,58 @@ public class CheckoutActivityJava extends AppCompatActivity {
         });
         startCheckout();
     }
+
+    private void handleObserver() {
+        paymentUpdateViewModel = new ViewModelProvider(this, new PaymentFactory(getApplication())).get(
+                PaymentUpdateViewModel.class
+        );
+
+        paymentUpdateViewModel.getPaymentObserverState().observe(this, new Observer<PaymentResponse>() {
+            @Override
+            public void onChanged(PaymentResponse paymentResponse) {
+//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+//                finish();
+            }
+        });
+
+
+        paymentUpdateViewModel.getAlertViewState().observe(this, new Observer<AlertModel>() {
+                    @Override
+                    public void onChanged(AlertModel alertModel) {
+                        if (alertModel == null) return;
+                               /* mCommonUtils.showAlert(
+                                        alertModel.duration,
+                                        alertModel.title,
+                                        alertModel.message,
+                                        alertModel.drawable,
+                                        alertModel.color,
+                                        requireActivity()
+
+                                );*/
+                    }
+                });
+
+        paymentUpdateViewModel.getProgressState().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer progressState) {
+                if (progressState == null) return;
+               /* if (progressState == CommonUtils.ProgressDialog.showDialog)
+                    mCommonUtils.showProgress(
+                            resources.getString(R.string.pleasewait), requireContext()
+                    );
+                else if (progressState == CommonUtils.ProgressDialog.dismissDialog)
+                    mCommonUtils.dismissProgress();*/
+            }
+        });
+        paymentUpdateViewModel.getPaymentUnAuthorized().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+            }
+        });
+
+    }
+
     private void startCheckout() {
         // Create a PaymentIntent by calling the server's endpoint.
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
@@ -167,6 +260,18 @@ public class CheckoutActivityJava extends AppCompatActivity {
         paymentIntentClientSecret=String.valueOf(responseMap.get("clientSecret"));
 
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //Toast.makeText(getApplicationContext(),stateList[position] , Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     private static final class PayCallback implements Callback {
         @NonNull private final WeakReference<CheckoutActivityJava> activityRef;
         PayCallback(@NonNull CheckoutActivityJava activity) {
@@ -221,13 +326,14 @@ public class CheckoutActivityJava extends AppCompatActivity {
                 // Payment completed successfully
                 //gson.toJson(paymentIntent)
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                calendar = Calendar.getInstance();
+                dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                date = dateFormat.format(calendar.getTime());
 
-                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-                finish();
-                /*activity.displayAlert(
-                        "Payment completed",
-                        "Payment Successfully Done."
-                );*/
+                paymentUpdateViewModel.getPaymentUpdate(
+                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140")
+            );
+
 
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
@@ -247,4 +353,5 @@ public class CheckoutActivityJava extends AppCompatActivity {
             activity.displayAlert("Error", e.toString());
         }
     }
+
 }

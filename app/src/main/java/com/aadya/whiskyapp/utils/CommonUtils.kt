@@ -66,6 +66,9 @@ object CommonUtils {
             const val EventAttending :  String = "Mobile/GetEventListWithFeedbackForApp"
             const val PurchaseHistory :  String = "Payment/GetPaymentHistory"
             const val Reserve: String  = "Reservation/UpdateReservation"
+            const val UploadProfileImage: String="Mobile/UpdateAppMemberPhoto"
+            const val PaymentUpdate: String="Payment/UpdatePayment"
+
         }
     }
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:stripe="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,10 +28,11 @@
             app:backgroundTint="@color/orangetextcolor"
             android:id="@+id/nexButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:textAllCaps="true"
             android:text="Next"
-            android:visibility="gone"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -42,13 +42,14 @@
             app:backgroundTint="@color/orangetextcolor"
             android:id="@+id/prevButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:textAllCaps="true"
             android:text="Back"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="20dp"/>
         <LinearLayout
             android:id="@+id/address_layout"
             android:layout_width="match_parent"
@@ -59,7 +60,7 @@
             app:layout_constraintTop_toBottomOf="@id/butImage"
             app:layout_constraintBottom_toTopOf="@+id/nexButton"
             android:layout_margin="10dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <EditText
                 android:background="@drawable/loginedittext_bg"
@@ -77,14 +78,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:fontFamily="@font/archivonarrow_regular"
                 app:layout_constraintTop_toBottomOf="@id/radiobtn_linear" />
-            <Spinner
+            <EditText
+                android:padding="10dp"
+                android:textColorHint="@color/orangetextcolor"
+                android:textColor="@color/orangetextcolor"
                 android:spinnerMode="dialog"
-                android:background="@drawable/spinnerbackground"
+                android:background="@drawable/loginedittext_bg"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/country_spinner"
+                android:hint="United State"
+                android:text="United State"
                 android:layout_marginTop="20dp"/>
             <Spinner
                 android:spinnerMode="dialog"
@@ -95,18 +101,26 @@
                 android:layout_marginRight="20dp"
                 android:id="@+id/state_spinner"
                 android:layout_marginTop="20dp"/>
-            <Spinner
+            <EditText
+                android:padding="10dp"
+                android:textColorHint="@color/orangetextcolor"
+                android:textColor="@color/orangetextcolor"
                 android:spinnerMode="dialog"
-                android:background="@drawable/spinnerbackground"
+                android:background="@drawable/loginedittext_bg"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/city_spinner"
+                android:hint="City"
                 android:layout_marginTop="20dp"/>
-            <Spinner
+            <EditText
+                android:padding="10dp"
+                android:textColorHint="@color/orangetextcolor"
+                android:textColor="@color/orangetextcolor"
+                android:hint="Postal Code"
                 android:spinnerMode="dialog"
-                android:background="@drawable/spinnerbackground"
+                android:background="@drawable/loginedittext_bg"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
@@ -120,7 +134,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/payment_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -10,7 +10,6 @@ import com.google.gson.Gson
 
 class SessionManager {
 
-
     companion object {
         const val PREF_NAME = "whiskey"
         const val TAG_USERDETAILMODLE_PREF = "UserDetail"

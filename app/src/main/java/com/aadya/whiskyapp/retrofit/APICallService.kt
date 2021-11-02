@@ -6,6 +6,8 @@ import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
+import com.aadya.whiskyapp.payment.model.PaymentResponse
+import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
@@ -13,11 +15,10 @@ import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.CommonUtils
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface APICallService {
 
@@ -39,6 +40,10 @@ interface APICallService {
     @GET(CommonUtils.APIURL.PurchaseHistory)
     fun getPurchaseList(@Header("Authorization") authHeader: String?): Call<List<PurchaseHistory?>?>
 
+    @GET(CommonUtils.APIURL.PaymentUpdate)
+    fun paymentUpdate(@Header("Authorization") authHeader: String?, @Body mPaymentUpdateRequest: PaymentUpdate): Call<PaymentResponse?>
+
+
     @GET(CommonUtils.APIURL.SpecialOffer)
     fun getSpecialOfferList(@Header("Authorization") authHeader: String?): Call<List<SpecialOfferResponseModel?>?>
 
@@ -59,4 +64,9 @@ interface APICallService {
         @Header("Authorization") authHeader: String,
         @Body mProfileRequestModel: ProfileEditRequestModel
     ): Call<ProfileResponseModel>
+
+    @Multipart
+    @POST(CommonUtils.APIURL.UploadProfileImage)
+    fun uploadProfileImage(@Header("Authorization") authHeader: String,@Part("Photograph")photograph: MultipartBody.Part, @Part("full_name") imageName: RequestBody): Call<ProfileResponseModel>
+
 }

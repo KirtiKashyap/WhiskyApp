@@ -61,9 +61,15 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buy_button.setOnClickListener {
+
             activity?.let{
                 val intent = Intent (it, CheckoutActivityJava::class.java)
                 intent.putExtra("amount",mBinding.tvSpecialofferAmt.text )
+                intent.putExtra("itemType",param1?.title)
+                intent.putExtra("itemId",param1?.liquorID)
+                intent.putExtra("memberId",mSessionManager.getUserDetailLoginModel()?.memberID)
+                intent.putExtra("authorization",mSessionManager.getAuthorization())
+
                 it.startActivity(intent)
             }
         }
