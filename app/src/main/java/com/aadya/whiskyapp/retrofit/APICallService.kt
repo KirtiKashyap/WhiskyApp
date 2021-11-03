@@ -67,6 +67,6 @@ interface APICallService {
 
     @Multipart
     @POST(CommonUtils.APIURL.UploadProfileImage)
-    fun uploadProfileImage(@Header("Authorization") authHeader: String,@Part("Photograph")photograph: MultipartBody.Part, @Part("full_name") imageName: RequestBody): Call<ProfileResponseModel>
+    fun uploadProfileImage(@Header("Authorization") authHeader: String,@Part("File")file: MultipartBody.Part, @Part("MemberId") memberId: RequestBody ): Call<ProfileResponseModel>
 
 }

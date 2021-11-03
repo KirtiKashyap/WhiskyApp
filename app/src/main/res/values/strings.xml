@@ -133,5 +133,10 @@
     <string name="please_select_no_of_people">Please select number of people</string>
     <string name="Error_from_Server">Error from Server.</string>
     <string name="google_maps_key">AIzaSyBdFXRdQC6HeTXecu7ek22YuvWajVuJ9kM</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="take_picture_description">Camera picture for sample app</string>
+    <string name="ok_button_title">OK</string>
 
 </resources>

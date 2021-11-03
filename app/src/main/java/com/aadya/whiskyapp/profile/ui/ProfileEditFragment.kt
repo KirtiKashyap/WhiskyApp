@@ -2,6 +2,7 @@ package com.aadya.whiskyapp.profile.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -26,8 +27,18 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
-import com.google.gson.annotations.SerializedName
-
+import android.Manifest
+import android.app.Activity
+import android.content.ContentValues
+import android.content.pm.PackageManager
+import android.os.Build
+import android.provider.MediaStore
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.fragment_profile_edit.*
+//Camera permission and capture image
+//https://android--code.blogspot.com/2018/03/android-kotlin-request-permissions-at.html
 
 class ProfileEditFragment : Fragment() {
 
@@ -43,13 +54,17 @@ class ProfileEditFragment : Fragment() {
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var mProfileEditViewModel : ProfileEditViewModel
     private lateinit var mProfileViewModel : ProfileViewModel
+    private val IMAGE_CAPTURE_CODE = 1001
+    private var imageUri: Uri? = null
+    private val PermissionsRequestCode = 123
+    private lateinit var managePermissions: ManagePermissions
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         intializeMembers(inflater, container)
-
 
         return mBinding.root
     }
@@ -106,8 +121,89 @@ class ProfileEditFragment : Fragment() {
         )
         handleObserver()
 
+        // Initialize a list of required permissions to request runtime
+        val list = listOf<String>(
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        // Initialize a new instance of ManagePermissions class
+        managePermissions = ManagePermissions(requireActivity(),list,PermissionsRequestCode)
+
+        mBinding.imgTop.setOnClickListener {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+
+            // Request permission
+           // val permissionGranted = managePermissions.checkPermissions()
+            if (managePermissions.checkPermissions()) {
+                // Open the camera interface
+                openCameraInterface()
+            }
+        }
+
     }
 
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
+                                            grantResults: IntArray) {
+        when (requestCode) {
+            1 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION) ===
+                                PackageManager.PERMISSION_GRANTED)) {
+                        // Permission was granted
+                        openCameraInterface()
+                    }
+                } else {
+                    // Permission was denied
+                    showAlert("Camera permission was denied. Unable to take a picture.");
+                }
+                return
+            }
+        }
+    }
+
+    private fun openCameraInterface() {
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, R.string.take_picture)
+        values.put(MediaStore.Images.Media.DESCRIPTION, R.string.take_picture_description)
+        imageUri = activity?.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
+        // Create camera intent
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+
+        // Launch intent
+        startActivityForResult(intent, IMAGE_CAPTURE_CODE)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Callback from camera intent
+        if (resultCode == Activity.RESULT_OK){
+            // Set image captured to image view
+            mBinding.imgTop?.setImageURI(imageUri)
+        }
+        else {
+            // Failed to take picture
+            showAlert("Failed to take camera picture")
+        }
+    }
+
+
+    private fun showAlert(message: String) {
+        val builder = AlertDialog.Builder(activity as Context)
+        builder.setMessage(message)
+        builder.setPositiveButton(R.string.ok_button_title, null)
+
+        val dialog = builder.create()
+        dialog.show()
+    }
     private fun handleObserver() {
         mProfileEditViewModel.getprofileUnAuthorized().observe(viewLifecycleOwner, Observer {
             val alertModel = AlertModel(
@@ -306,5 +402,82 @@ class ProfileEditFragment : Fragment() {
             ProfileEditFragment().apply {
 
             }
+    }
+}
+
+
+class ManagePermissions(val activity: Activity,val list: List<String>,val code:Int) {
+    var isPermissionGrant=false
+    // Check permissions at runtime
+    fun checkPermissions() : Boolean{
+
+        if (isPermissionsGranted() != PackageManager.PERMISSION_GRANTED) {
+            showAlert()
+        } else {
+            //activity.toast("Permissions already granted.")
+            isPermissionGrant=true
+        }
+        return isPermissionGrant
+    }
+
+
+    // Check permissions status
+    private fun isPermissionsGranted(): Int {
+        // PERMISSION_GRANTED : Constant Value: 0
+        // PERMISSION_DENIED : Constant Value: -1
+        var counter = 0;
+        for (permission in list) {
+            counter += ContextCompat.checkSelfPermission(activity, permission)
+        }
+        return counter
+    }
+
+
+    // Find the first denied permission
+    private fun deniedPermission(): String {
+        for (permission in list) {
+            if (ContextCompat.checkSelfPermission(activity, permission)
+                == PackageManager.PERMISSION_DENIED) return permission
+        }
+        return ""
+    }
+
+
+    // Show alert dialog to request permissions
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(activity)
+        builder.setTitle("Need permission(s)")
+        builder.setMessage("Some permissions are required to do the task.")
+        builder.setPositiveButton("OK", { dialog, which -> requestPermissions() })
+        builder.setNeutralButton("Cancel", null)
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+
+    // Request the permissions at run time
+    private fun requestPermissions() {
+        val permission = deniedPermission()
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+            // Show an explanation asynchronously
+           // activity.toast("Should show an explanation.")
+        } else {
+            ActivityCompat.requestPermissions(activity, list.toTypedArray(), code)
+        }
+        isPermissionGrant=true
+    }
+
+
+    // Process permissions result
+    fun processPermissionsResult(requestCode: Int, permissions: Array<String>,
+                                 grantResults: IntArray): Boolean {
+        var result = 0
+        if (grantResults.isNotEmpty()) {
+            for (item in grantResults) {
+                result += item
+            }
+        }
+        if (result == PackageManager.PERMISSION_GRANTED) return true
+        return false
     }
 }

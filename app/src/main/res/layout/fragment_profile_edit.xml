@@ -172,7 +172,6 @@
             layout="@layout/emaillayout_profileedit"
             app:layout_constraintBottom_toTopOf="@id/emaillayout_bottom_guide"
             app:layout_constraintTop_toBottomOf="@id/emaillayout_top_guide"
-
             app:layout_constraintVertical_bias="0.896"
             tools:layout_editor_absoluteX="0dp" />
 
