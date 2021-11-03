@@ -16,16 +16,6 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-   <!-- <style name="AppTheme.CardTheme">
-        <item name="colorPrimary">@color/themecolor</item>
-        <item name="colorPrimaryDark">@color/themecolor</item>
-        <item name="android:textColorHint">@color/themecolor</item>
-        <item name="colorAccent">@color/themecolor</item> &lt;!&ndash; line color in textinput layout &ndash;&gt;
-        <item name="colorControlNormal">@color/themecolor</item>
-        <item name="colorControlActivated">@color/themecolor</item>
-        <item name="android:textColor">@color/themecolor</item>
-        <item name="android:editTextColor">@color/themecolor</item>
-      <item name="fontFamily">@font/archivonarrow_regular</item> </style>-->
 
         <style name="AppTheme.CardTheme">
             <item name="colorPrimary">@color/white</item>

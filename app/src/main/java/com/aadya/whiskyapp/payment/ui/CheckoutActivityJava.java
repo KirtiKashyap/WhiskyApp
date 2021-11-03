@@ -131,7 +131,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         nextButton.setVisibility(View.VISIBLE);
         preButton.setVisibility(View.GONE);
 
-       // handleObserver();
+        handleObserver();
 
         preButton.setOnClickListener((View view) -> {
             nextButton.setVisibility(View.VISIBLE);
@@ -160,8 +160,8 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         paymentUpdateViewModel.getPaymentObserverState().observe(this, new Observer<PaymentResponse>() {
             @Override
             public void onChanged(PaymentResponse paymentResponse) {
-//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-//                finish();
+                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+                finish();
             }
         });
 
@@ -330,11 +330,11 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 date = dateFormat.format(calendar.getTime());
 
-//                paymentUpdateViewModel.getPaymentUpdate(
-//                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
+                paymentUpdateViewModel.getPaymentUpdate(
+                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
 
-                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-                finish();
+//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+//                finish();
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(
