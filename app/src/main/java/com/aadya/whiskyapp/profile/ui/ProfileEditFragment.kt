@@ -31,6 +31,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.provider.MediaStore
 import androidx.appcompat.app.AlertDialog
@@ -39,6 +40,10 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 //Camera permission and capture image
 //https://android--code.blogspot.com/2018/03/android-kotlin-request-permissions-at.html
+//Multipart Image
+//https://adinugroho.medium.com/upload-image-from-android-app-using-retrofit-2-ae6f922b184c
+//Resize bitmap with same aspect ratio
+//https://handyopinion.com/resize-bitmap-by-keeping-the-same-aspect-ratio-in-kotlin-android/
 
 class ProfileEditFragment : Fragment() {
 
@@ -55,6 +60,7 @@ class ProfileEditFragment : Fragment() {
     private lateinit var mProfileEditViewModel : ProfileEditViewModel
     private lateinit var mProfileViewModel : ProfileViewModel
     private val IMAGE_CAPTURE_CODE = 1001
+    private val REQUEST_CODE=1002
     private var imageUri: Uri? = null
     private val PermissionsRequestCode = 123
     private lateinit var managePermissions: ManagePermissions
@@ -138,10 +144,29 @@ class ProfileEditFragment : Fragment() {
            // val permissionGranted = managePermissions.checkPermissions()
             if (managePermissions.checkPermissions()) {
                 // Open the camera interface
-                openCameraInterface()
+                showPictureDialog()
             }
         }
 
+    }
+    private fun showPictureDialog() {
+        val pictureDialog = AlertDialog.Builder(requireActivity())
+        pictureDialog.setTitle("Select Action")
+        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
+        pictureDialog.setItems(pictureDialogItems
+        ) { dialog, which ->
+            when (which) {
+                0 -> choosePhotoFromGallary()
+                1 -> openCameraInterface()
+            }
+        }
+        pictureDialog.show()
+    }
+
+    private fun choosePhotoFromGallary() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
 
@@ -186,8 +211,17 @@ class ProfileEditFragment : Fragment() {
 
         // Callback from camera intent
         if (resultCode == Activity.RESULT_OK){
-            // Set image captured to image view
-            mBinding.imgTop?.setImageURI(imageUri)
+
+            if(requestCode == REQUEST_CODE){
+                mBinding.imgTop?.setImageURI(data?.data)
+                // if want to bitmap
+                var bitmap = (mBinding.imgTop.drawable as BitmapDrawable).bitmap
+            }else{
+                // Set image captured to image view
+                mBinding.imgTop?.setImageURI(imageUri)
+
+            }
+
         }
         else {
             // Failed to take picture
@@ -465,6 +499,7 @@ class ManagePermissions(val activity: Activity,val list: List<String>,val code:I
             ActivityCompat.requestPermissions(activity, list.toTypedArray(), code)
         }
         isPermissionGrant=true
+
     }
 
 
