@@ -69,11 +69,11 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
     Button payButton;
     EditText addressET;
     Spinner stateSp;
-    EditText countryEditText,cityEditText,postEditText;
+    EditText countryEditText,cityEditText,postEditText,cardHolderNameEditText;
     private PaymentUpdateViewModel paymentUpdateViewModel;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
-    private String date;
+    private String date,state;
     private ArrayAdapter<String> stateAdapter;
     private ArrayList<String> stateList;
     @Override
@@ -81,7 +81,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_java);
-
+        cardHolderNameEditText=findViewById(R.id.name_edit_text);
         addressET=findViewById(R.id.tv_address_line);
         countryEditText=findViewById(R.id.country_spinner);
         stateSp=findViewById(R.id.state_spinner);
@@ -131,7 +131,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         nextButton.setVisibility(View.VISIBLE);
         preButton.setVisibility(View.GONE);
 
-        handleObserver();
+       // handleObserver();
 
         preButton.setOnClickListener((View view) -> {
             nextButton.setVisibility(View.VISIBLE);
@@ -140,16 +140,36 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             paymentLayout.setVisibility(View.GONE);
         });
         nextButton.setOnClickListener((View view) -> {
-            nextButton.setVisibility(View.GONE);
-            preButton.setVisibility(View.VISIBLE);
-            addressLayout.setVisibility(View.GONE);
-            paymentLayout.setVisibility(View.VISIBLE);
+            if((cardHolderNameEditText.getText().toString()==null)||cardHolderNameEditText.getText().toString().trim().equals("")){
+                Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
+            }
+            else if ((addressET.getText().toString()==null)||addressET.getText().toString().trim().equals("")){
+                Toast.makeText(getApplicationContext(), "Please Enter AddressLine", Toast.LENGTH_LONG).show();
+            }
+
+            else if((countryEditText.getText().toString()==null)||countryEditText.getText().toString().trim().equals("")){
+                Toast.makeText(getApplicationContext(), "Please Enter Country", Toast.LENGTH_LONG).show();
+            }else if((cityEditText.getText().toString()==null)||cityEditText.getText().toString().trim().equals("")){
+                Toast.makeText(getApplicationContext(), "Please Enter City", Toast.LENGTH_LONG).show();
+            }else if((postEditText.getText().toString()==null)||postEditText.getText().toString().trim().equals("")){
+                Toast.makeText(getApplicationContext(), "Please Enter Post code", Toast.LENGTH_LONG).show();
+            }else if(state.equalsIgnoreCase("Select State")){
+
+                Toast.makeText(getApplicationContext(), "Please select State", Toast.LENGTH_LONG).show();
+            }else {
+                startCheckout();
+                nextButton.setVisibility(View.GONE);
+                preButton.setVisibility(View.VISIBLE);
+                addressLayout.setVisibility(View.GONE);
+                paymentLayout.setVisibility(View.VISIBLE);
+            }
+
         });
         Button cancelButton=findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener((View view) -> {
             finish();
         });
-        startCheckout();
+//        startCheckout();
     }
 
     private void handleObserver() {
@@ -207,10 +227,17 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         // Create a PaymentIntent by calling the server's endpoint.
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         Map<String,Object> payMap=new HashMap<>();
+        payMap.put("CardHolderName",cardHolderNameEditText.getText().toString());
         payMap.put("Currency","USD");
         payMap.put("Amount",amount.replace("$",""));
         payMap.put("PaymentMethodType","card");
         payMap.put("Description","Test Payment Mobile");
+        payMap.put("Line",addressET.getText().toString());
+        payMap.put("City",cityEditText.getText().toString());
+        payMap.put("Country",countryEditText.getText().toString());
+        payMap.put("PostalCode",postEditText.getText().toString());
+        payMap.put("State",state);
+
 
         String json = new Gson().toJson(payMap);
 
@@ -263,7 +290,8 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //Toast.makeText(getApplicationContext(),stateList[position] , Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), stateList.get(position), Toast.LENGTH_LONG).show();
+        state=stateList.get(position);
 
     }
 
@@ -330,11 +358,11 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 date = dateFormat.format(calendar.getTime());
 
-                paymentUpdateViewModel.getPaymentUpdate(
-                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
+//                paymentUpdateViewModel.getPaymentUpdate(
+//                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
 
-//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-//                finish();
+                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+                finish();
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(

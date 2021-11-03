@@ -61,7 +61,24 @@
             app:layout_constraintBottom_toTopOf="@+id/nexButton"
             android:layout_margin="10dp"
             android:visibility="visible">
-
+            <EditText
+                android:background="@drawable/loginedittext_bg"
+                android:id="@+id/name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Name"
+                android:text="Simon"
+                android:singleLine="true"
+                android:textColorHint="@color/orangetextcolor"
+                android:textColor="@color/orangetextcolor"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/archivonarrow_regular"
+                app:layout_constraintTop_toBottomOf="@id/radiobtn_linear" />
             <EditText
                 android:background="@drawable/loginedittext_bg"
                 android:id="@+id/tv_address_line"
@@ -91,6 +108,7 @@
                 android:id="@+id/country_spinner"
                 android:hint="United State"
                 android:text="United State"
+                android:singleLine="true"
                 android:layout_marginTop="20dp"/>
             <Spinner
                 android:spinnerMode="dialog"
@@ -113,12 +131,14 @@
                 android:layout_marginRight="20dp"
                 android:id="@+id/city_spinner"
                 android:hint="City"
+                android:singleLine="true"
                 android:layout_marginTop="20dp"/>
             <EditText
                 android:padding="10dp"
                 android:textColorHint="@color/orangetextcolor"
                 android:textColor="@color/orangetextcolor"
                 android:hint="Postal Code"
+                android:singleLine="true"
                 android:spinnerMode="dialog"
                 android:background="@drawable/loginedittext_bg"
                 android:layout_width="match_parent"
@@ -147,6 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:singleLine="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="@string/cardholdername"
