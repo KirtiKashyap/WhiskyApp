@@ -238,7 +238,9 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 val fmtOut = SimpleDateFormat("hh:mm aa")
                 val formattedTime = fmtOut.format(date)
-                mBinding.edTime.setText(convert12hrformat_24hrformat(formattedTime))
+                val converted24Hrs = convert12hrformat_24hrformat(formattedTime)
+                val toTypedArray = converted24Hrs.split(":").toTypedArray()
+                mBinding.edTime.setText(toTypedArray[0]+toTypedArray[1])
             }, hour, minute, false
         )
         mTimePicker.setTitle("Select Time")

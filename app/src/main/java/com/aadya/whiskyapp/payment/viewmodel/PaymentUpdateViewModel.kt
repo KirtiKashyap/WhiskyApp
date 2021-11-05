@@ -19,11 +19,7 @@ class PaymentUpdateViewModel(paymentRepository: PaymentRepository): ViewModel() 
     }
 
     fun getPaymentUpdateObserver() : LiveData<PaymentResponse>{
-        return  paymentRepository.getProfileEditState()
-    }
-
-    fun getPaymentObserverState() : MutableLiveData<PaymentResponse?>{
-        return  paymentRepository.getPaymentState()
+        return  paymentRepository.getPaymentUpdateState()
     }
 
     fun getProgressState(): LiveData<Int?>? {

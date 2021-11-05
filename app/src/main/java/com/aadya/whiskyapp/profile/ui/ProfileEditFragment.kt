@@ -243,11 +243,11 @@ class ProfileEditFragment : Fragment() ,UploadRequestBody.UploadCallback {
                 mBinding.imgTop?.setImageURI(imageUri)
                 // if want to bitmap
                // var bitmap = (mBinding.imgTop.drawable as BitmapDrawable).bitmap
-                uploadImage(data?.data)
+                //uploadImage(data?.data)
             }else{
                 // Set image captured to image view
                 mBinding.imgTop?.setImageURI(imageUri)
-                uploadImage(imageUri)
+                //uploadImage(imageUri)
 
             }
 

@@ -40,7 +40,7 @@ interface APICallService {
     @GET(CommonUtils.APIURL.PurchaseHistory)
     fun getPurchaseList(@Header("Authorization") authHeader: String?): Call<List<PurchaseHistory?>?>
 
-    @GET(CommonUtils.APIURL.PaymentUpdate)
+    @POST(CommonUtils.APIURL.PaymentUpdate)
     fun paymentUpdate(@Header("Authorization") authHeader: String?, @Body mPaymentUpdateRequest: PaymentUpdate): Call<PaymentResponse?>
 
 

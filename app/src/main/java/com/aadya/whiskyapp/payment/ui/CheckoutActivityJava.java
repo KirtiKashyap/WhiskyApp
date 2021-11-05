@@ -100,13 +100,13 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         stateList.add("Manchester");
 
         stateSp.setOnItemSelectedListener(this);
-        stateSp.setSelection(1);
+
         //Creating the ArrayAdapter instance having the country list
         ArrayAdapter aa = new ArrayAdapter(this,R.layout.row_spinner,stateList);
         aa.setDropDownViewResource(R.layout.row_spinner_dialog);
         //Setting the ArrayAdapter data on the Spinner
         stateSp.setAdapter(aa);
-        stateSp.setSelection(0);
+        stateSp.setSelection(1);
         payButton = findViewById(R.id.payButton);
         ImageView imgDrawer= findViewById(R.id.img_drawer);
         ImageView profileIcon= findViewById(R.id.img_logo);
@@ -183,20 +183,14 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 finish();
             }
         });
-      /*  paymentUpdateViewModel.getPaymentObserverState().observe(this, new Observer<PaymentResponse>() {
-            @Override
-            public void onChanged(PaymentResponse paymentResponse) {
-                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-                finish();
-            }
-        });
+
 
 
        paymentUpdateViewModel.getAlertViewState().observe(this, new Observer<AlertModel>() {
                     @Override
                     public void onChanged(AlertModel alertModel) {
-                        if (alertModel == null) return;
-                               *//* mCommonUtils.showAlert(
+                       /* if (alertModel == null) return;
+                                mCommonUtils.showAlert(
                                         alertModel.duration,
                                         alertModel.title,
                                         alertModel.message,
@@ -204,20 +198,20 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                                         alertModel.color,
                                         requireActivity()
 
-                                );*//*
+                                );*/
                     }
                 });
 
         paymentUpdateViewModel.getProgressState().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer progressState) {
-                if (progressState == null) return;
-               *//* if (progressState == CommonUtils.ProgressDialog.showDialog)
+               /* if (progressState == null) return;
+                if (progressState == CommonUtils.ProgressDialog.showDialog)
                     mCommonUtils.showProgress(
                             resources.getString(R.string.pleasewait), requireContext()
                     );
                 else if (progressState == CommonUtils.ProgressDialog.dismissDialog)
-                    mCommonUtils.dismissProgress();*//*
+                    mCommonUtils.dismissProgress();*/
             }
         });
         paymentUpdateViewModel.getPaymentUnAuthorized().observe(this, new Observer<Boolean>() {
@@ -225,7 +219,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             public void onChanged(Boolean aBoolean) {
 
             }
-        });*/
+        });
 
     }
 

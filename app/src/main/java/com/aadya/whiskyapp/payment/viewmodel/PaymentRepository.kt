@@ -16,8 +16,7 @@ import retrofit2.Response
 class PaymentRepository (application: Application){
 
     private var application : Application = application
-    private val profileeditLiveData = MutableLiveData<PaymentResponse>()
-    private val paymentLiveData = MutableLiveData<PaymentResponse?>()
+    private val paymentUpdateLiveData = MutableLiveData<PaymentResponse>()
     private val alertLiveData: MutableLiveData<AlertModel> = MutableLiveData<AlertModel>()
     private val progressLiveData = MutableLiveData<Int>()
     private var paymentUnAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -34,12 +33,8 @@ class PaymentRepository (application: Application){
         return alertLiveData
     }
 
-    fun getPaymentState() : MutableLiveData<PaymentResponse?> {
-        return  paymentLiveData
-    }
-
-    fun getProfileEditState() : MutableLiveData<PaymentResponse> {
-        return  profileeditLiveData
+    fun getPaymentUpdateState() : MutableLiveData<PaymentResponse> {
+        return  paymentUpdateLiveData
     }
 
 
@@ -47,18 +42,18 @@ class PaymentRepository (application: Application){
     fun paymentUpdate(authorization: String,paymentUpdateRequest: PaymentUpdate) {
 
         if (Connection.instance?.isNetworkAvailable(application) == true) {
-            //progressLiveData.value = CommonUtils.ProgressDialog.showDialog
+            progressLiveData.value = CommonUtils.ProgressDialog.showDialog
             RetrofitService().paymentUpdate(authorization,paymentUpdateRequest,
                 object : APIResponseListener {
                     override fun onSuccess(response: Response<Any>) {
-                       // progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
                         val model: PaymentResponse = response.body() as PaymentResponse
                         try {
                             if(response.code() == 401)
                               //  paymentUnAuthorizedLiveData.value = true
 
                             else if(response.code() == 200)
-                                profileeditLiveData.value = model
+                                paymentUpdateLiveData.value = model
 
                             else if(response.code() == 500)
                                 setAlert(
@@ -71,7 +66,7 @@ class PaymentRepository (application: Application){
                         }
                     }
                     override fun onFailure() {
-                       // progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
                     }
                 })
         } else setAlert(

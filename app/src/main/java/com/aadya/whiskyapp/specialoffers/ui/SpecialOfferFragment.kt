@@ -25,7 +25,8 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
     private lateinit var mBinding: FragmentSpecialofferBinding
     private lateinit var mIncludedLayoutBinding: MainHeaderNewBinding
     private var mDrawerInterface: DrawerInterface? = null
-
+    private var itemId=0
+    private var itemType="S"
     private lateinit var mCommonUtils: CommonUtils
     private lateinit var mSessionManager: SessionManager
     var onButtonSwipeDownListener: onButtonSwipeDownListner? = null
@@ -65,11 +66,10 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
             activity?.let{
                 val intent = Intent (it, CheckoutActivityJava::class.java)
                 intent.putExtra("amount",mBinding.tvSpecialofferAmt.text )
-                intent.putExtra("itemType",param1?.title)
-                intent.putExtra("itemId",param1?.liquorID)
+                intent.putExtra("itemType",itemType)
+                intent.putExtra("itemId",param1?.specialOfferID!!)
                 intent.putExtra("memberId",mSessionManager.getUserDetailLoginModel()?.memberID)
                 intent.putExtra("authorization",mSessionManager.getAuthorization())
-
                 it.startActivity(intent)
             }
         }
@@ -101,8 +101,6 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
 
 
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
-
-
         mBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_specialoffer,
@@ -117,7 +115,8 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
 
         onEventsPageSwipeUpListner = onEventsPageSwipeUpListner(requireContext(), mBinding.constraintSpecialoffer)
         onEventsPageSwipeUpListner?.getLiveData()?.observe(viewLifecycleOwner, Observer {
-
+            itemId= param1?.specialOfferID!!
+            itemType="S"
             val ft = activity?.supportFragmentManager?.beginTransaction()
             ft?.replace(
                 R.id.app_container,
@@ -157,12 +156,7 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
                     putParcelable(ARG_PARAM1, specialOfferModel)
                 }
             }
-
-
     }
-
-
-
 
     override fun onAnimationStart(animation: Animator?) {
     }
