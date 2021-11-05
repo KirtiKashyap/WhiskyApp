@@ -41,10 +41,10 @@ class PurchaseHistoryAdapter(
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
         val purchaseHistory: PurchaseHistory = purchaseHistoryList[i]
         with(viewHolder) {
-                binding.tvPurchaseTitle.text="Status: "+purchaseHistory.paymentStatus
+            binding.tvPurchaseTitle.text="Status: "+purchaseHistory.paymentStatus
             binding.tvAmt.text="Amount: "+purchaseHistory.amount
             binding.tvDate.text="Date: "+purchaseHistory.paymentDate
-            binding.tvOrderid.text="Ticket Id: "+purchaseHistory.ticketID.toString()
+            binding.tvOrderid.text="Ticket Id: "+purchaseHistory.ticketID
             
         }
 

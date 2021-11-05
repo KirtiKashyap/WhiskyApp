@@ -268,36 +268,6 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
 
-
-    private fun convert12hrformat_24hrformat1(inTime: String): String ?{
-//        val displayFormat = SimpleDateFormat("HH:mm")
-//        val parseFormat = SimpleDateFormat("hh:mm a")
-//        val date = parseFormat.parse(inTime)
-//        println(parseFormat.format(date).toString() + " = " + displayFormat.format(date))
-
-
-        val input = "23/12/2014 10:22:12 PM"
-        //Format of the date defined in the input String
-        //Format of the date defined in the input String
-        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa")
-        //Desired format: 24 hour format: Change the pattern as per the need
-        //Desired format: 24 hour format: Change the pattern as per the need
-        val outputformat: DateFormat = SimpleDateFormat("MM-dd-yyyy HH:mm:ss")
-        var date: Date? = null
-        var output: String? = null
-        try {
-            //Converting the input String to Date
-            date = df.parse(input)
-            //Changing the format of date and storing it in String
-            output = outputformat.format(date)
-            //Displaying the date
-            println(output)
-        } catch (pe: ParseException) {
-            pe.printStackTrace()
-        }
-        return output
-    }
-
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
         mSessionManager = SessionManager.getInstance(context)!!
         mCommonUtils = CommonUtils

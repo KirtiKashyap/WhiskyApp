@@ -69,7 +69,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
     Button payButton;
     EditText addressET;
     Spinner stateSp;
-    EditText cityEditText,postEditText,cardHolderNameEditText;
+    EditText cityEditText,postEditText,cardHolderNameEditText,nameEditText;
     private PaymentUpdateViewModel paymentUpdateViewModel;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
@@ -81,12 +81,12 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_java);
-        cardHolderNameEditText=findViewById(R.id.name_edit_text);
+        nameEditText=findViewById(R.id.name_edit_text);
         addressET=findViewById(R.id.tv_address_line);
         stateSp=findViewById(R.id.state_spinner);
         cityEditText=findViewById(R.id.city_spinner);
         postEditText=findViewById(R.id.postcode_spinner);
-
+        cardHolderNameEditText=findViewById(R.id.tv_cardholdername);
         paymentUpdateViewModel = new ViewModelProvider(this, new PaymentFactory(getApplication())).get(
                 PaymentUpdateViewModel.class
         );
@@ -144,7 +144,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             paymentLayout.setVisibility(View.GONE);
         });
         nextButton.setOnClickListener((View view) -> {
-            if((cardHolderNameEditText.getText().toString()==null)||cardHolderNameEditText.getText().toString().trim().equals("")){
+            if((nameEditText.getText().toString()==null)||nameEditText.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
             }
             else if ((addressET.getText().toString()==null)||addressET.getText().toString().trim().equals("")){
@@ -227,7 +227,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         // Create a PaymentIntent by calling the server's endpoint.
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         Map<String,Object> payMap=new HashMap<>();
-        payMap.put("CardHolderName",cardHolderNameEditText.getText().toString());
+        payMap.put("CardHolderName",nameEditText.getText().toString());
         payMap.put("Currency","USD");
         payMap.put("Amount",amount.replace("$",""));
         payMap.put("PaymentMethodType","card");
@@ -251,15 +251,20 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         // Hook up the pay button to the card widget and stripe instance
 
         payButton.setOnClickListener((View view) -> {
-            payButton.setClickable(false);
-            CardMultilineWidget cardInputWidget = findViewById(R.id.cardInputWidget);
-            PaymentMethodCreateParams params =
-                    cardInputWidget.getPaymentMethodCreateParams();
 
-            if (params != null) {
-                ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
-                        .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
-                stripe.confirmPayment(this, confirmParams);
+            if(cardHolderNameEditText.getText().toString()==null || cardHolderNameEditText.getText().toString().isEmpty()){
+                Toast.makeText(CheckoutActivityJava.this,"Enter Card Holder Name",Toast.LENGTH_SHORT).show();
+            }else {
+                payButton.setClickable(false);
+                CardMultilineWidget cardInputWidget = findViewById(R.id.cardInputWidget);
+                PaymentMethodCreateParams params =
+                        cardInputWidget.getPaymentMethodCreateParams();
+
+                if (params != null) {
+                    ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
+                            .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
+                    stripe.confirmPayment(this, confirmParams);
+                }
             }
         });
     }

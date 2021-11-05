@@ -15,7 +15,6 @@ import retrofit2.Response
 
 class PurchaseHistoryRepository(application: Application) {
     private var application : Application = application
-
     private val purchaseHistoryLiveData = MutableLiveData<List<PurchaseHistory>?>()
     private val alertLiveData: MutableLiveData<AlertModel> = MutableLiveData<AlertModel>()
     private val progressLiveData = MutableLiveData<Int>()
@@ -61,11 +60,7 @@ class PurchaseHistoryRepository(application: Application) {
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
-
-
-
                     }
-
                     override fun onFailure() {
                         progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
                     }

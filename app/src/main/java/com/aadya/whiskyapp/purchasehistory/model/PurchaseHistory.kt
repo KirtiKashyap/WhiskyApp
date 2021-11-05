@@ -6,7 +6,7 @@ data class PurchaseHistory (
 
     @SerializedName("paymentID") var paymentID : Int?,
     @SerializedName("userid") var userid : Int,
-    @SerializedName("ticketID") var ticketID : Int,
+    @SerializedName("ticketID") var ticketID : String,
     @SerializedName("itemType") var itemType : String,
     @SerializedName("itemID") var itemID : Int,
     @SerializedName("memberID") var memberID : Int,
