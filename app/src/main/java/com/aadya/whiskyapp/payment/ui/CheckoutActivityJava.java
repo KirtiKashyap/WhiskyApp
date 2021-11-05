@@ -350,6 +350,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             }
             PaymentIntent paymentIntent = result.getIntent();
             PaymentIntent.Status status = paymentIntent.getStatus();
+            String paymentStatus = null;
             if (status == PaymentIntent.Status.Succeeded) {
                 // Payment completed successfully
                 //gson.toJson(paymentIntent)
@@ -357,19 +358,22 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 calendar = Calendar.getInstance();
                 dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 date = dateFormat.format(calendar.getTime());
-
-                paymentUpdateViewModel.getPaymentUpdate(
-                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
-
-//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-//                finish();
+                paymentStatus="Success";
+               
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
+                paymentStatus="Fail";
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(
                         "Payment failed",
                         Objects.requireNonNull(paymentIntent.getLastPaymentError()).getMessage()
                 );
+                
             }
+            paymentUpdateViewModel.getPaymentUpdate(
+                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$","")));
+
+
+
         }
         @Override
         public void onError(@NonNull Exception e) {

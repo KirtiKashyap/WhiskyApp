@@ -115,8 +115,6 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
 
         onEventsPageSwipeUpListner = onEventsPageSwipeUpListner(requireContext(), mBinding.constraintSpecialoffer)
         onEventsPageSwipeUpListner?.getLiveData()?.observe(viewLifecycleOwner, Observer {
-            itemId= param1?.specialOfferID!!
-            itemType="S"
             val ft = activity?.supportFragmentManager?.beginTransaction()
             ft?.replace(
                 R.id.app_container,

@@ -110,8 +110,6 @@ class RetrofitService {
         val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
         val call: Call<List<PurchaseHistory?>?> = service.getPurchaseList(authorization)
         call?.enqueue(object : Callback<List<PurchaseHistory?>?> {
-
-
             override fun onResponse(
                 call: Call<List<PurchaseHistory?>?>,
                 response: Response<List<PurchaseHistory?>?>
