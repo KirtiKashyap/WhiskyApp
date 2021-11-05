@@ -88,6 +88,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:hint="@string/address_line"
+                android:text="Address"
                 android:textColorHint="@color/orangetextcolor"
                 android:textColor="@color/orangetextcolor"
                 android:textSize="@dimen/_14sdp"
@@ -95,21 +96,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:fontFamily="@font/archivonarrow_regular"
                 app:layout_constraintTop_toBottomOf="@id/radiobtn_linear" />
-            <EditText
-                android:padding="10dp"
-                android:textColorHint="@color/orangetextcolor"
-                android:textColor="@color/orangetextcolor"
-                android:spinnerMode="dialog"
-                android:background="@drawable/loginedittext_bg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/country_spinner"
-                android:hint="United State"
-                android:text="United State"
-                android:singleLine="true"
-                android:layout_marginTop="20dp"/>
+
             <Spinner
                 android:spinnerMode="dialog"
                 android:background="@drawable/spinnerbackground"
@@ -131,6 +118,7 @@
                 android:layout_marginRight="20dp"
                 android:id="@+id/city_spinner"
                 android:hint="City"
+                android:text="City"
                 android:singleLine="true"
                 android:layout_marginTop="20dp"/>
             <EditText
@@ -138,6 +126,7 @@
                 android:textColorHint="@color/orangetextcolor"
                 android:textColor="@color/orangetextcolor"
                 android:hint="Postal Code"
+                android:text="SP104DA"
                 android:singleLine="true"
                 android:spinnerMode="dialog"
                 android:background="@drawable/loginedittext_bg"
@@ -232,7 +221,6 @@
             android:textColor="@color/white"
             android:background="@drawable/loginedittext_bg"
             android:text="Cancel" />
-
 
     </LinearLayout>
 

@@ -1,15 +1,24 @@
 package com.aadya.whiskyapp.profile.ui
 
+import android.Manifest
+import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,6 +28,7 @@ import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
+import com.aadya.whiskyapp.profile.upload.*
 import com.aadya.whiskyapp.profile.viewmodel.ProfileEditFactory
 import com.aadya.whiskyapp.profile.viewmodel.ProfileEditViewModel
 import com.aadya.whiskyapp.profile.viewmodel.ProfileFactory
@@ -27,25 +37,29 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
-import android.Manifest
-import android.app.Activity
-import android.content.ContentValues
-import android.content.pm.PackageManager
-import android.graphics.drawable.BitmapDrawable
-import android.os.Build
-import android.provider.MediaStore
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+
+
 //Camera permission and capture image
 //https://android--code.blogspot.com/2018/03/android-kotlin-request-permissions-at.html
 //Multipart Image
-//https://adinugroho.medium.com/upload-image-from-android-app-using-retrofit-2-ae6f922b184c
+//https://snowmaze.medium.com/new-way-to-upload-images-using-retrofit-in-android-64cf71d5e678
+//https://github.com/delaroy/UploadMedia
+//https://www.youtube.com/watch?v=ZVeMb9UnVb4
+//https://askandroidquestions.com/2021/02/09/how-to-replace-user-photo-profile-in-kotlin-with-retrofit-coroutines/
 //Resize bitmap with same aspect ratio
 //https://handyopinion.com/resize-bitmap-by-keeping-the-same-aspect-ratio-in-kotlin-android/
 
-class ProfileEditFragment : Fragment() {
+class ProfileEditFragment : Fragment() ,UploadRequestBody.UploadCallback {
 
     private lateinit var mBinding: FragmentProfileEditBinding
     private lateinit var mCommonUtils: CommonUtils
@@ -134,7 +148,7 @@ class ProfileEditFragment : Fragment() {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
         // Initialize a new instance of ManagePermissions class
-        managePermissions = ManagePermissions(requireActivity(),list,PermissionsRequestCode)
+        managePermissions = ManagePermissions(requireActivity(), list, PermissionsRequestCode)
 
         mBinding.imgTop.setOnClickListener {
 
@@ -153,7 +167,8 @@ class ProfileEditFragment : Fragment() {
         val pictureDialog = AlertDialog.Builder(requireActivity())
         pictureDialog.setTitle("Select Action")
         val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
-        pictureDialog.setItems(pictureDialogItems
+        pictureDialog.setItems(
+            pictureDialogItems
         ) { dialog, which ->
             when (which) {
                 0 -> choosePhotoFromGallary()
@@ -170,15 +185,21 @@ class ProfileEditFragment : Fragment() {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
-                                            grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         when (requestCode) {
             1 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED) {
-                    if ((ContextCompat.checkSelfPermission(requireActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION) ===
-                                PackageManager.PERMISSION_GRANTED)) {
+                    PackageManager.PERMISSION_GRANTED
+                ) {
+                    if ((ContextCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) ===
+                                PackageManager.PERMISSION_GRANTED)
+                    ) {
                         // Permission was granted
                         openCameraInterface()
                     }
@@ -195,7 +216,10 @@ class ProfileEditFragment : Fragment() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, R.string.take_picture)
         values.put(MediaStore.Images.Media.DESCRIPTION, R.string.take_picture_description)
-        imageUri = activity?.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        imageUri = activity?.contentResolver?.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            values
+        )
 
         // Create camera intent
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -206,6 +230,8 @@ class ProfileEditFragment : Fragment() {
 
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -213,12 +239,15 @@ class ProfileEditFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK){
 
             if(requestCode == REQUEST_CODE){
-                mBinding.imgTop?.setImageURI(data?.data)
+                imageUri = data?.data
+                mBinding.imgTop?.setImageURI(imageUri)
                 // if want to bitmap
-                var bitmap = (mBinding.imgTop.drawable as BitmapDrawable).bitmap
+               // var bitmap = (mBinding.imgTop.drawable as BitmapDrawable).bitmap
+                uploadImage(data?.data)
             }else{
                 // Set image captured to image view
                 mBinding.imgTop?.setImageURI(imageUri)
+                uploadImage(imageUri)
 
             }
 
@@ -229,6 +258,52 @@ class ProfileEditFragment : Fragment() {
         }
     }
 
+    private fun uploadImage(imageUri: Uri?) {
+        if (imageUri == null) {
+            layout_root.snackbar("Select an Image First")
+            return
+        }
+
+        val parcelFileDescriptor =
+            requireActivity().contentResolver.openFileDescriptor(imageUri!!, "r", null) ?: return
+
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val file = File(requireActivity().cacheDir, requireActivity().contentResolver.getFileName(imageUri!!))
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
+        progress_bar.progress = 0
+        val body = UploadRequestBody(file, "image", this)
+        MyAPI().uploadImage(mSessionManager.getAuthorization()!!,
+            MultipartBody.Part.createFormData(
+                "image",
+                file.name,
+                body
+            ),
+            //RequestBody.create(MediaType.parse("multipart/form-data"), "json")
+            "json".toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        ).enqueue(object : Callback<UploadResponse> {
+            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                layout_root.snackbar(t.message!!)
+                progress_bar.progress = 0
+            }
+
+            override fun onResponse(
+                call: Call<UploadResponse>,
+                response: Response<UploadResponse>
+            ) {
+                response.body()?.let {
+                    layout_root.snackbar(it.MemberID)
+                    progress_bar.progress = 100
+                }
+            }
+        })
+
+    }
+
+    override fun onProgressUpdate(percentage: Int) {
+        progress_bar.progress = percentage
+    }
 
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(activity as Context)
@@ -241,9 +316,11 @@ class ProfileEditFragment : Fragment() {
     private fun handleObserver() {
         mProfileEditViewModel.getprofileUnAuthorized().observe(viewLifecycleOwner, Observer {
             val alertModel = AlertModel(
-                2000, resources.getString(R.string.login_error),
-                resources.getString(R.string.please_login)
-                , R.drawable.wrong_icon, R.color.notiFailColor
+                2000,
+                resources.getString(R.string.login_error),
+                resources.getString(R.string.please_login),
+                R.drawable.wrong_icon,
+                R.color.notiFailColor
             )
             mCommonUtils.showAlert(
                 alertModel.duration,
@@ -257,7 +334,8 @@ class ProfileEditFragment : Fragment() {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(requireActivity(), LandingActivity::class.java)
-                startActivity(intent)}, 2000)
+                startActivity(intent)
+            }, 2000)
 
         })
 
@@ -393,21 +471,21 @@ class ProfileEditFragment : Fragment() {
             else {
 
                 var mProfileRequestModel = ProfileEditRequestModel(
-                    MemberID=mSessionManager.getUserDetailLoginModel()?.memberID,
-                    firstName="",
-                    lastName="",
-                    middleName="",
+                    MemberID = mSessionManager.getUserDetailLoginModel()?.memberID,
+                    firstName = "",
+                    lastName = "",
+                    middleName = "",
                     phoneNo = mPhoneLayoutBinding.tvUserPhone.text.toString(),
                     email = mEmailLayoutBinding.tvUserEmail.text.toString(),
                     dateOfBirth = mCommonUtils.date_dd_MM_yyyy(
                         mDOBLayoutBinding.tvUserDob.text.toString()
                     ),
                     address = mAddressLayoutBinding.tvUserAdress.text.toString(),
-                    Occupation="",
-                    SpouseName="",
-                    TypeofMembership="",
-                    AliasID="",
-                    FavoriteCocktail=""
+                    Occupation = "",
+                    SpouseName = "",
+                    TypeofMembership = "",
+                    AliasID = "",
+                    FavoriteCocktail = ""
                 )
                 mSessionManager.getAuthorization()?.let { it1 ->
                     mProfileEditViewModel.editProfile(
@@ -440,7 +518,7 @@ class ProfileEditFragment : Fragment() {
 }
 
 
-class ManagePermissions(val activity: Activity,val list: List<String>,val code:Int) {
+class ManagePermissions(val activity: Activity, val list: List<String>, val code: Int) {
     var isPermissionGrant=false
     // Check permissions at runtime
     fun checkPermissions() : Boolean{
@@ -504,8 +582,10 @@ class ManagePermissions(val activity: Activity,val list: List<String>,val code:I
 
 
     // Process permissions result
-    fun processPermissionsResult(requestCode: Int, permissions: Array<String>,
-                                 grantResults: IntArray): Boolean {
+    fun processPermissionsResult(
+        requestCode: Int, permissions: Array<String>,
+        grantResults: IntArray
+    ): Boolean {
         var result = 0
         if (grantResults.isNotEmpty()) {
             for (item in grantResults) {

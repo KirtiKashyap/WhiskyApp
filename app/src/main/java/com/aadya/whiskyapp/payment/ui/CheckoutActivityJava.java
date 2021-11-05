@@ -69,7 +69,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
     Button payButton;
     EditText addressET;
     Spinner stateSp;
-    EditText countryEditText,cityEditText,postEditText,cardHolderNameEditText;
+    EditText cityEditText,postEditText,cardHolderNameEditText;
     private PaymentUpdateViewModel paymentUpdateViewModel;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
@@ -83,10 +83,13 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_checkout_java);
         cardHolderNameEditText=findViewById(R.id.name_edit_text);
         addressET=findViewById(R.id.tv_address_line);
-        countryEditText=findViewById(R.id.country_spinner);
         stateSp=findViewById(R.id.state_spinner);
         cityEditText=findViewById(R.id.city_spinner);
         postEditText=findViewById(R.id.postcode_spinner);
+
+        paymentUpdateViewModel = new ViewModelProvider(this, new PaymentFactory(getApplication())).get(
+                PaymentUpdateViewModel.class
+        );
 
         stateList = new ArrayList<String>();
         stateList.add("Select State");
@@ -97,6 +100,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         stateList.add("Manchester");
 
         stateSp.setOnItemSelectedListener(this);
+        stateSp.setSelection(1);
         //Creating the ArrayAdapter instance having the country list
         ArrayAdapter aa = new ArrayAdapter(this,R.layout.row_spinner,stateList);
         aa.setDropDownViewResource(R.layout.row_spinner_dialog);
@@ -131,7 +135,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         nextButton.setVisibility(View.VISIBLE);
         preButton.setVisibility(View.GONE);
 
-       // handleObserver();
+       handleObserver();
 
         preButton.setOnClickListener((View view) -> {
             nextButton.setVisibility(View.VISIBLE);
@@ -147,9 +151,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 Toast.makeText(getApplicationContext(), "Please Enter AddressLine", Toast.LENGTH_LONG).show();
             }
 
-            else if((countryEditText.getText().toString()==null)||countryEditText.getText().toString().trim().equals("")){
-                Toast.makeText(getApplicationContext(), "Please Enter Country", Toast.LENGTH_LONG).show();
-            }else if((cityEditText.getText().toString()==null)||cityEditText.getText().toString().trim().equals("")){
+           else if((cityEditText.getText().toString()==null)||cityEditText.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(), "Please Enter City", Toast.LENGTH_LONG).show();
             }else if((postEditText.getText().toString()==null)||postEditText.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(), "Please Enter Post code", Toast.LENGTH_LONG).show();
@@ -173,11 +175,15 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
     }
 
     private void handleObserver() {
-        paymentUpdateViewModel = new ViewModelProvider(this, new PaymentFactory(getApplication())).get(
-                PaymentUpdateViewModel.class
-        );
 
-        paymentUpdateViewModel.getPaymentObserverState().observe(this, new Observer<PaymentResponse>() {
+        paymentUpdateViewModel.getPaymentUpdateObserver().observe(CheckoutActivityJava.this, new Observer<PaymentResponse>() {
+            @Override
+            public void onChanged(PaymentResponse paymentResponse) {
+                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+                finish();
+            }
+        });
+      /*  paymentUpdateViewModel.getPaymentObserverState().observe(this, new Observer<PaymentResponse>() {
             @Override
             public void onChanged(PaymentResponse paymentResponse) {
                 startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
@@ -186,11 +192,11 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         });
 
 
-        paymentUpdateViewModel.getAlertViewState().observe(this, new Observer<AlertModel>() {
+       paymentUpdateViewModel.getAlertViewState().observe(this, new Observer<AlertModel>() {
                     @Override
                     public void onChanged(AlertModel alertModel) {
                         if (alertModel == null) return;
-                               /* mCommonUtils.showAlert(
+                               *//* mCommonUtils.showAlert(
                                         alertModel.duration,
                                         alertModel.title,
                                         alertModel.message,
@@ -198,7 +204,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                                         alertModel.color,
                                         requireActivity()
 
-                                );*/
+                                );*//*
                     }
                 });
 
@@ -206,12 +212,12 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             @Override
             public void onChanged(Integer progressState) {
                 if (progressState == null) return;
-               /* if (progressState == CommonUtils.ProgressDialog.showDialog)
+               *//* if (progressState == CommonUtils.ProgressDialog.showDialog)
                     mCommonUtils.showProgress(
                             resources.getString(R.string.pleasewait), requireContext()
                     );
                 else if (progressState == CommonUtils.ProgressDialog.dismissDialog)
-                    mCommonUtils.dismissProgress();*/
+                    mCommonUtils.dismissProgress();*//*
             }
         });
         paymentUpdateViewModel.getPaymentUnAuthorized().observe(this, new Observer<Boolean>() {
@@ -219,7 +225,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             public void onChanged(Boolean aBoolean) {
 
             }
-        });
+        });*/
 
     }
 
@@ -234,7 +240,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         payMap.put("Description","Test Payment Mobile");
         payMap.put("Line",addressET.getText().toString());
         payMap.put("City",cityEditText.getText().toString());
-        payMap.put("Country",countryEditText.getText().toString());
+        payMap.put("Country","US");
         payMap.put("PostalCode",postEditText.getText().toString());
         payMap.put("State",state);
 
@@ -358,11 +364,11 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 date = dateFormat.format(calendar.getTime());
 
-//                paymentUpdateViewModel.getPaymentUpdate(
-//                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
+                paymentUpdateViewModel.getPaymentUpdate(
+                      authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,"Success","140"));
 
-                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
-                finish();
+//                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+//                finish();
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(

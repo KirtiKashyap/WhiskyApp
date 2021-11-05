@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
+import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.utils.AlertModel
 
@@ -17,6 +18,9 @@ class PaymentUpdateViewModel(paymentRepository: PaymentRepository): ViewModel() 
         paymentRepository.paymentUpdate(authorization,paymentUpdate)
     }
 
+    fun getPaymentUpdateObserver() : LiveData<PaymentResponse>{
+        return  paymentRepository.getProfileEditState()
+    }
 
     fun getPaymentObserverState() : MutableLiveData<PaymentResponse?>{
         return  paymentRepository.getPaymentState()
