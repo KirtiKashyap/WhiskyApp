@@ -289,7 +289,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
                     layout_root.snackbar(it.MemberID)
                     progress_bar.progress = 100
                     progress_bar.visibility=View.GONE
-                    mBinding.imgTop?.setImageURI(imageUri)
+                    mBinding.profileImage?.setImageURI(imageUri)
                 }
             }
         })
