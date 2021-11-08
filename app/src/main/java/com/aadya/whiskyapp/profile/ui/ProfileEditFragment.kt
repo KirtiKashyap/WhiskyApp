@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -28,6 +29,9 @@ import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
+import com.aadya.whiskyapp.profile.model.UploadRequestBody
+import com.aadya.whiskyapp.profile.model.UploadResponse
+import com.aadya.whiskyapp.profile.upload.*
 import com.aadya.whiskyapp.profile.viewmodel.ProfileEditFactory
 import com.aadya.whiskyapp.profile.viewmodel.ProfileEditViewModel
 import com.aadya.whiskyapp.profile.viewmodel.ProfileFactory
@@ -37,20 +41,16 @@ import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
-import okhttp3.RequestBody
+import okhttp3.MultipartBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 
-//Camera permission and capture image
-//https://android--code.blogspot.com/2018/03/android-kotlin-request-permissions-at.html
-//Multipart Image
-//https://snowmaze.medium.com/new-way-to-upload-images-using-retrofit-in-android-64cf71d5e678
-//https://github.com/delaroy/UploadMedia
-//https://www.youtube.com/watch?v=ZVeMb9UnVb4
-//https://askandroidquestions.com/2021/02/09/how-to-replace-user-photo-profile-in-kotlin-with-retrofit-coroutines/
-//Resize bitmap with same aspect ratio
-//https://handyopinion.com/resize-bitmap-by-keeping-the-same-aspect-ratio-in-kotlin-android/
-
-class ProfileEditFragment : Fragment(){
+class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
 
     private lateinit var mBinding: FragmentProfileEditBinding
     private lateinit var mCommonUtils: CommonUtils
@@ -231,13 +231,13 @@ class ProfileEditFragment : Fragment(){
 
             if(requestCode == REQUEST_CODE){
                 imageUri = data?.data
-                mBinding.imgTop?.setImageURI(imageUri)
+
                 // if want to bitmap
                // var bitmap = (mBinding.imgTop.drawable as BitmapDrawable).bitmap
-                //uploadImage(data?.data)
+                uploadImage(imageUri)
             }else{
                 // Set image captured to image view
-                mBinding.imgTop?.setImageURI(imageUri)
+//                mBinding.imgTop?.setImageURI(imageUri)
                 uploadImage(imageUri)
 
             }
@@ -250,6 +250,49 @@ class ProfileEditFragment : Fragment(){
     }
 
     private fun uploadImage(imageUri: Uri?) {
+
+        if (imageUri == null) {
+            layout_root.snackbar("Select an Image First")
+            return
+        }
+        progress_bar.visibility=View.VISIBLE
+        val parcelFileDescriptor =
+            requireActivity().contentResolver.openFileDescriptor(imageUri!!, "r", null) ?: return
+
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val file = File(requireActivity().cacheDir, requireActivity().contentResolver.getFileName(imageUri!!))
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
+        progress_bar.progress = 0
+        val body = UploadRequestBody(file, "File", this)
+
+        MyAPI().uploadImage(
+            mSessionManager.getAuthorization()!!,
+            MultipartBody.Part.createFormData(
+                "File",
+                file.name,
+                body
+            ),mSessionManager.getUserDetailLoginModel()?.memberID!!
+        ).enqueue(object : Callback<UploadResponse> {
+            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                layout_root.snackbar(t.message!!)
+                progress_bar.progress = 0
+                progress_bar.visibility=View.GONE
+            }
+
+            override fun onResponse(
+                call: Call<UploadResponse>,
+                response: Response<UploadResponse>
+            ) {
+                response.body()?.let {
+                    layout_root.snackbar(it.MemberID)
+                    progress_bar.progress = 100
+                    progress_bar.visibility=View.GONE
+                    mBinding.imgTop?.setImageURI(imageUri)
+                }
+            }
+        })
 
     }
 
@@ -307,12 +350,7 @@ class ProfileEditFragment : Fragment(){
                 alertModel.color,
                 requireActivity()
             )
-
             setUIValues()
-            /*mProfileViewModel.getProfile(
-                mSessionManager.getAuthorization(),
-                it?.memberID
-            )*/
         })
 
         mProfileViewModel.getProfileObserver().observe(viewLifecycleOwner, Observer {
@@ -463,6 +501,10 @@ class ProfileEditFragment : Fragment(){
             ProfileEditFragment().apply {
 
             }
+    }
+
+    override fun onProgressUpdate(percentage: Int) {
+        progress_bar.progress = percentage
     }
 }
 
