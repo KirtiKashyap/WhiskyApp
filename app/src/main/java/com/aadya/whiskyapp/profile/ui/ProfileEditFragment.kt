@@ -48,6 +48,7 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.lang.Exception
 
 
 class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
@@ -504,7 +505,11 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
     }
 
     override fun onProgressUpdate(percentage: Int) {
-        progress_bar.progress = percentage
+        try {
+            progress_bar.progress = percentage
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 }
 
