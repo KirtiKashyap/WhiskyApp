@@ -191,13 +191,12 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         mBinding.edDate.setOnClickListener {
             mCommonUtils.hideKeyboard(requireContext())
-            val mDateTimePickerDialogue: DatePickerDialog
-            mDateTimePickerDialogue =
-            DatePickerDialog(
+            val mDateTimePickerDialogue: DatePickerDialog = DatePickerDialog(
                 requireContext(), R.style.TimePickerTheme, date, calendar
                     .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
+            mDateTimePickerDialogue.datePicker.minDate=System.currentTimeMillis() - 1000
             mDateTimePickerDialogue.show()
 
             mDateTimePickerDialogue.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(

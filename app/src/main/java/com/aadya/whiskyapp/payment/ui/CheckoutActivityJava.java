@@ -25,7 +25,6 @@ import com.aadya.whiskyapp.payment.model.PaymentUpdate;
 import com.aadya.whiskyapp.payment.viewmodel.PaymentFactory;
 import com.aadya.whiskyapp.payment.viewmodel.PaymentUpdateViewModel;
 import com.aadya.whiskyapp.utils.AlertModel;
-import com.aadya.whiskyapp.utils.CommonUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -36,7 +35,6 @@ import com.stripe.android.model.ConfirmPaymentIntentParams;
 import com.stripe.android.model.PaymentIntent;
 import com.stripe.android.model.PaymentMethodCreateParams;
 import com.stripe.android.view.CardMultilineWidget;
-
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
@@ -54,7 +52,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.google.gson.reflect.TypeToken.get;
 
 public class CheckoutActivityJava extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -144,19 +141,18 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             paymentLayout.setVisibility(View.GONE);
         });
         nextButton.setOnClickListener((View view) -> {
-            if((nameEditText.getText().toString()==null)||nameEditText.getText().toString().trim().equals("")){
+            if((nameEditText.getText().toString().trim()==null)||nameEditText.getText().toString().trim().isEmpty()){
                 Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
             }
-            else if ((addressET.getText().toString()==null)||addressET.getText().toString().trim().equals("")){
+            else if ((addressET.getText().toString()==null)||addressET.getText().toString().trim().isEmpty()){
                 Toast.makeText(getApplicationContext(), "Please Enter AddressLine", Toast.LENGTH_LONG).show();
             }
 
-           else if((cityEditText.getText().toString()==null)||cityEditText.getText().toString().trim().equals("")){
+           else if((cityEditText.getText().toString()==null)||cityEditText.getText().toString().trim().isEmpty()){
                 Toast.makeText(getApplicationContext(), "Please Enter City", Toast.LENGTH_LONG).show();
-            }else if((postEditText.getText().toString()==null)||postEditText.getText().toString().trim().equals("")){
+            }else if((postEditText.getText().toString()==null)||postEditText.getText().toString().trim().isEmpty()){
                 Toast.makeText(getApplicationContext(), "Please Enter Post code", Toast.LENGTH_LONG).show();
             }else if(state.equalsIgnoreCase("Select State")){
-
                 Toast.makeText(getApplicationContext(), "Please select State", Toast.LENGTH_LONG).show();
             }else {
                 startCheckout();
@@ -171,7 +167,6 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         cancelButton.setOnClickListener((View view) -> {
             finish();
         });
-//        startCheckout();
     }
 
     private void handleObserver() {
@@ -252,7 +247,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
         payButton.setOnClickListener((View view) -> {
 
-            if(cardHolderNameEditText.getText().toString()==null || cardHolderNameEditText.getText().toString().isEmpty()){
+            if(cardHolderNameEditText.getText().toString().trim()==null || cardHolderNameEditText.getText().toString().trim().isEmpty()){
                 Toast.makeText(CheckoutActivityJava.this,"Enter Card Holder Name",Toast.LENGTH_SHORT).show();
             }else {
                 payButton.setClickable(false);
