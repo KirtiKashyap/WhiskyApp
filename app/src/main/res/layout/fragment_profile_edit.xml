@@ -52,7 +52,15 @@
             app:layout_constraintBottom_toBottomOf="@id/imgtop_bottomguide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-
+        <ImageView
+            android:id="@+id/imageView_camera"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgtop_bottomguide"
+            app:layout_constraintBottom_toBottomOf="@id/imgtop_bottomguide"
+            android:src="@android:drawable/ic_menu_camera"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/imgtop_bottomguide"

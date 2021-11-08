@@ -62,7 +62,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
     private fun updateLabel() {
-        val myFormat = "MM/dd/yy"
+        val myFormat = "MM/dd/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         mBinding.edDate.setText(sdf.format(calendar.getTime()))
     }

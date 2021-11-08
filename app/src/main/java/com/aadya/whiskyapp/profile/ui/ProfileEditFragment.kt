@@ -28,7 +28,6 @@ import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
-import com.aadya.whiskyapp.profile.upload.*
 import com.aadya.whiskyapp.profile.viewmodel.ProfileEditFactory
 import com.aadya.whiskyapp.profile.viewmodel.ProfileEditViewModel
 import com.aadya.whiskyapp.profile.viewmodel.ProfileFactory
@@ -38,15 +37,7 @@ import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import okhttp3.RequestBody
 
 
 //Camera permission and capture image
@@ -59,7 +50,7 @@ import java.io.FileOutputStream
 //Resize bitmap with same aspect ratio
 //https://handyopinion.com/resize-bitmap-by-keeping-the-same-aspect-ratio-in-kotlin-android/
 
-class ProfileEditFragment : Fragment() ,UploadRequestBody.UploadCallback {
+class ProfileEditFragment : Fragment(){
 
     private lateinit var mBinding: FragmentProfileEditBinding
     private lateinit var mCommonUtils: CommonUtils
@@ -150,7 +141,7 @@ class ProfileEditFragment : Fragment() ,UploadRequestBody.UploadCallback {
         // Initialize a new instance of ManagePermissions class
         managePermissions = ManagePermissions(requireActivity(), list, PermissionsRequestCode)
 
-        mBinding.imgTop.setOnClickListener {
+        mBinding.imageViewCamera.setOnClickListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
@@ -247,7 +238,7 @@ class ProfileEditFragment : Fragment() ,UploadRequestBody.UploadCallback {
             }else{
                 // Set image captured to image view
                 mBinding.imgTop?.setImageURI(imageUri)
-                //uploadImage(imageUri)
+                uploadImage(imageUri)
 
             }
 
@@ -259,51 +250,9 @@ class ProfileEditFragment : Fragment() ,UploadRequestBody.UploadCallback {
     }
 
     private fun uploadImage(imageUri: Uri?) {
-        if (imageUri == null) {
-            layout_root.snackbar("Select an Image First")
-            return
-        }
-
-        val parcelFileDescriptor =
-            requireActivity().contentResolver.openFileDescriptor(imageUri!!, "r", null) ?: return
-
-        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        val file = File(requireActivity().cacheDir, requireActivity().contentResolver.getFileName(imageUri!!))
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-
-        progress_bar.progress = 0
-        val body = UploadRequestBody(file, "image", this)
-        MyAPI().uploadImage(mSessionManager.getAuthorization()!!,
-            MultipartBody.Part.createFormData(
-                "image",
-                file.name,
-                body
-            ),
-            //RequestBody.create(MediaType.parse("multipart/form-data"), "json")
-            "json".toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        ).enqueue(object : Callback<UploadResponse> {
-            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                layout_root.snackbar(t.message!!)
-                progress_bar.progress = 0
-            }
-
-            override fun onResponse(
-                call: Call<UploadResponse>,
-                response: Response<UploadResponse>
-            ) {
-                response.body()?.let {
-                    layout_root.snackbar(it.MemberID)
-                    progress_bar.progress = 100
-                }
-            }
-        })
 
     }
 
-    override fun onProgressUpdate(percentage: Int) {
-        progress_bar.progress = percentage
-    }
 
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(activity as Context)
