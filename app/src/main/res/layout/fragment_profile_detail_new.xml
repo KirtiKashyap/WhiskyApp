@@ -40,7 +40,15 @@
             app:layout_constraintBottom_toBottomOf="@id/imgtop_bottomguide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_Image"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            android:src="@drawable/default_profile_image"
+            app:layout_constraintBottom_toBottomOf="@id/imgtop_bottomguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/imgtop_bottomguide"
@@ -54,17 +62,16 @@
             android:id="@+id/tv_agentid"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="@id/tv_agentid_startguide"
-            app:layout_constraintEnd_toStartOf="@id/tv_agentid__endguide"
-            app:layout_constraintTop_toTopOf="@id/tv_agentid_top_guide"
-            app:layout_constraintBottom_toBottomOf="@id/tv_agentid_bottom_guide"
-            android:text="Special Agent 0013"
             android:fontFamily="@font/archivonarrow_regular"
-            android:textColor="@color/orangetextcolor"
             android:gravity="center"
-            android:textStyle="bold"
+            android:text="Special Agent 0013"
+            android:textColor="@color/orangetextcolor"
             android:textSize="@dimen/_18sdp"
-            />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_agentid_bottom_guide"
+            app:layout_constraintEnd_toStartOf="@id/tv_agentid__endguide"
+            app:layout_constraintStart_toStartOf="@id/tv_agentid_startguide"
+            app:layout_constraintTop_toTopOf="@id/tv_agentid_top_guide" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_agentid_top_guide"

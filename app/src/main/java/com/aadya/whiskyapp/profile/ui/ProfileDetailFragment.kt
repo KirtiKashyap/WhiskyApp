@@ -1,6 +1,9 @@
 package com.aadya.whiskyapp.profile.ui
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +19,7 @@ import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
+import com.bumptech.glide.Glide
 
 class ProfileDetailFragment : Fragment() {
 
@@ -55,12 +59,34 @@ class ProfileDetailFragment : Fragment() {
 
     private fun setUIValues() {
         mDOBLayoutBinding = mBinding.doblayout
+        if(!mProfileModel?.photograph.isNullOrEmpty()){
+            context?.let {
+                Glide.with(it)
+                    .load(CommonUtils.APIURL.Profile_IMAGE_URL+mProfileModel?.photograph)
+                    .into(mBinding.profileImage)
+            }
+
+        }
         if(mProfileModel?.dateOfBirth != null)
         mDOBLayoutBinding.tvUserDob.text = mCommonUtils.date_dd_MMM_yyyy(mProfileModel?.dateOfBirth)
         mPhoneLayoutBinding = mBinding.phonelayout
         mPhoneLayoutBinding.tvUserPhone.text = mProfileModel?.phoneNumber
         mEmailLayoutBinding = mBinding.emaillayout
         mEmailLayoutBinding.tvUserEmail.text = mProfileModel?.email
+        val paint = mBinding.tvAgentid.paint
+        val width = paint.measureText(mBinding.tvAgentid.text.toString())
+        val textShader: Shader = LinearGradient(0f, 0f, width, mBinding.tvAgentid.textSize, intArrayOf(
+            Color.parseColor("#F97C3C"),
+            Color.parseColor("#0A8967"),
+            Color.parseColor("#FDB54E")
+            /*Color.parseColor("#64B678"),
+            Color.parseColor("#478AEA"),*/
+
+        ), null, Shader.TileMode.REPEAT)
+
+        mBinding.tvAgentid.paint.shader = textShader
+
+        mBinding.tvAgentid.text="Special Agent "+mProfileModel?.agentID
         mAddressLayoutBinding = mBinding.addresslayout
         mAddressLayoutBinding.tvUserAdress.text = mProfileModel?.address
         mDOBLayoutBinding.imgProfileedit.setOnClickListener {

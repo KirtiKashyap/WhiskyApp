@@ -6,6 +6,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.net.Uri
 import android.opengl.Visibility
 import android.os.Build
@@ -40,6 +43,7 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -337,7 +341,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
             mProfileModel = mSessionManager.getProfileModel()
-            Log.d("TAG", "UserId:" + it)
+            Log.d("TAG", "UserId:$it")
             val alertModel = AlertModel(
                 2000, resources.getString(R.string.profile_update), resources.getString(
                     R.string.profile_update_successfully
@@ -493,6 +497,26 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
         mPhoneLayoutBinding.tvUserPhone.setText(mProfileModel?.phoneNumber)
         mEmailLayoutBinding.tvUserEmail.setText(mProfileModel?.email)
         mAddressLayoutBinding.tvUserAdress.setText(mProfileModel?.address)
+        val paint = mBinding.tvAgentid.paint
+        val width = paint.measureText(mBinding.tvAgentid.text.toString())
+        val textShader: Shader = LinearGradient(0f, 0f, width, mBinding.tvAgentid.textSize, intArrayOf(
+            Color.parseColor("#F97C3C"),
+            Color.parseColor("#0A8967"),
+            Color.parseColor("#FDB54E")
+        ), null, Shader.TileMode.REPEAT)
+
+        mBinding.tvAgentid.paint.shader = textShader
+
+        mBinding.tvAgentid.text="Special Agent "+mProfileModel?.agentID
+
+        if(!mProfileModel?.photograph.isNullOrEmpty()){
+            context?.let {
+                Glide.with(it)
+                    .load(CommonUtils.APIURL.Profile_IMAGE_URL+mProfileModel?.photograph)
+                    .into(mBinding.profileImage)
+            }
+
+        }
     }
 
 
@@ -556,7 +580,7 @@ class ManagePermissions(val activity: Activity, val list: List<String>, val code
         val builder = AlertDialog.Builder(activity)
         builder.setTitle("Need permission(s)")
         builder.setMessage("Some permissions are required to do the task.")
-        builder.setPositiveButton("OK", { dialog, which -> requestPermissions() })
+        builder.setPositiveButton("OK") { dialog, which -> requestPermissions() }
         builder.setNeutralButton("Cancel", null)
         val dialog = builder.create()
         dialog.show()

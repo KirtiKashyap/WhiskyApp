@@ -48,6 +48,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var  reserveViewModel: ReserveViewModel
     private lateinit var  mCommonUtils : CommonUtils
     private lateinit var mSessionManager: SessionManager
+    private  var mTime=""
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mDrawerInterface = context as DrawerInterface
@@ -181,7 +182,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 requireContext(),
                 mBinding.edWhatUEat.text.toString(),
                 mBinding.edDate.text.toString(),
-                mBinding.edTime.text.toString(),
+                mTime,
                 selected_no_of_people,
                 mSessionManager.getUserDetailLoginModel()?.memberID,
                 mSessionManager?.getAuthorization()
@@ -239,7 +240,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 val formattedTime = fmtOut.format(date)
                 val converted24Hrs = convert12hrformat_24hrformat(formattedTime)
                 val toTypedArray = converted24Hrs.split(":").toTypedArray()
-                mBinding.edTime.setText(toTypedArray[0]+toTypedArray[1])
+                mTime = toTypedArray[0] + toTypedArray[1]
+                mBinding.edTime.setText(converted24Hrs)
             }, hour, minute, false
         )
         mTimePicker.setTitle("Select Time")

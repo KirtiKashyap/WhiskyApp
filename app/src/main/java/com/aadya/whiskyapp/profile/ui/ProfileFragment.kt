@@ -2,6 +2,9 @@ package com.aadya.whiskyapp.profile.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -24,8 +27,6 @@ import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.aadya.whiskyapp.utils.onPageSwipeUpListner
-import kotlinx.android.synthetic.main.fragment_profile_new.*
-import java.util.*
 
 class ProfileFragment : Fragment() {
 
@@ -56,6 +57,18 @@ class ProfileFragment : Fragment() {
 
         mBinding.tvUserLastseen.text=mSessionManager.getProfileModel()?.lastSeen
         mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
+
+        val paint = mBinding.tvAgentid.paint
+        val width = paint.measureText(mBinding.tvAgentid.text.toString())
+        val textShader: Shader = LinearGradient(0f, 0f, width, mBinding.tvAgentid.textSize, intArrayOf(
+            Color.parseColor("#F97C3C"),
+            Color.parseColor("#0A8967"),
+            Color.parseColor("#FDB54E")
+        ), null, Shader.TileMode.REPEAT)
+
+        mBinding.tvAgentid.paint.shader = textShader
+
+        mBinding.tvAgentid.text="Special Agent "+mSessionManager.getProfileModel()?.agentID
 
         if(mSessionManager.getProfileModel()?.bookingStatus==true){
             mBinding.tvUserReservationstatus.background = resources.getDrawable(
