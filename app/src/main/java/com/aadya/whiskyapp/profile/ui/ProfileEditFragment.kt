@@ -72,6 +72,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
     private val IMAGE_CAPTURE_CODE = 1001
     private val REQUEST_CODE=1002
     private var imageUri: Uri? = null
+    private var imageName=""
     private val PermissionsRequestCode = 123
     private lateinit var managePermissions: ManagePermissions
 
@@ -266,6 +267,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
 
         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
         val file = File(requireActivity().cacheDir, requireActivity().contentResolver.getFileName(imageUri!!))
+        imageName=file.name
         val outputStream = FileOutputStream(file)
         inputStream.copyTo(outputStream)
 
@@ -294,6 +296,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
                     layout_root.snackbar(it.MemberID)
                     progress_bar.progress = 100
                     progress_bar.visibility=View.GONE
+                    mProfileModel?.photograph=imageName
                     mBinding.profileImage?.setImageURI(imageUri)
                 }
             }

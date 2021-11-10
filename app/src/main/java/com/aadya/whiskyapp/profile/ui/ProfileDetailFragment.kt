@@ -67,28 +67,38 @@ class ProfileDetailFragment : Fragment() {
             }
 
         }
+        val textPaint = mDOBLayoutBinding.tvUserDob.paint
+        val width = textPaint.measureText(mBinding.tvAgentid.text.toString())
+        val textShader: Shader = LinearGradient(0f, 0f, width, mBinding.tvAgentid.textSize, intArrayOf(
+            Color.parseColor("#F77F00"),
+            Color.parseColor("#9D0208")
+        ), null, Shader.TileMode.REPEAT)
+
         if(mProfileModel?.dateOfBirth != null)
+
         mDOBLayoutBinding.tvUserDob.text = mCommonUtils.date_dd_MMM_yyyy(mProfileModel?.dateOfBirth)
         mPhoneLayoutBinding = mBinding.phonelayout
         mPhoneLayoutBinding.tvUserPhone.text = mProfileModel?.phoneNumber
         mEmailLayoutBinding = mBinding.emaillayout
         mEmailLayoutBinding.tvUserEmail.text = mProfileModel?.email
-        val paint = mBinding.tvAgentid.paint
-        val width = paint.measureText(mBinding.tvAgentid.text.toString())
-        val textShader: Shader = LinearGradient(0f, 0f, width, mBinding.tvAgentid.textSize, intArrayOf(
+        mAddressLayoutBinding = mBinding.addresslayout
+        mAddressLayoutBinding.tvUserAdress.text = mProfileModel?.address
+        val agentPaint = mBinding.tvAgentid.paint
+        val agentWidth = agentPaint.measureText(mBinding.tvAgentid.text.toString())
+        val agentTextShader: Shader = LinearGradient(0f, 0f, agentWidth, mBinding.tvAgentid.textSize, intArrayOf(
             Color.parseColor("#F97C3C"),
             Color.parseColor("#0A8967"),
             Color.parseColor("#FDB54E")
-            /*Color.parseColor("#64B678"),
-            Color.parseColor("#478AEA"),*/
 
         ), null, Shader.TileMode.REPEAT)
 
-        mBinding.tvAgentid.paint.shader = textShader
+        mBinding.tvAgentid.paint.shader = agentTextShader
 
         mBinding.tvAgentid.text="Special Agent "+mProfileModel?.agentID
-        mAddressLayoutBinding = mBinding.addresslayout
-        mAddressLayoutBinding.tvUserAdress.text = mProfileModel?.address
+        mDOBLayoutBinding.tvUserDob.paint.shader = textShader
+        mPhoneLayoutBinding.tvUserPhone.paint.shader=textShader
+        mEmailLayoutBinding.tvUserEmail.paint.shader=textShader
+        mAddressLayoutBinding.tvUserAdress.paint.shader=textShader
         mDOBLayoutBinding.imgProfileedit.setOnClickListener {
             launchFragment(ProfileEditFragment.newInstance(), "ProfileEditFragment")
         }

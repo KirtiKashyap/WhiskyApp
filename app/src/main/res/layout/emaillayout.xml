@@ -111,7 +111,6 @@
             app:layout_constraintBottom_toTopOf="@id/tv_useremail_bottomguide"
             app:layout_constraintEnd_toStartOf="@+id/offernotification_end_guide"
             app:layout_constraintHorizontal_bias="0.935"
-
             app:layout_constraintStart_toStartOf="@id/offernotification_start_guide"
             app:layout_constraintTop_toBottomOf="@id/eventnotificationlayout"
             app:layout_constraintVertical_bias="0.893" />

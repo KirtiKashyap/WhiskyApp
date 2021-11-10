@@ -34,7 +34,7 @@
             android:id="@+id/img_top"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/profiledetail_top"
+            android:src="@drawable/profile_top"
             android:scaleType="fitXY"
             app:layout_constraintTop_toBottomOf="@id/main_header"
             app:layout_constraintBottom_toBottomOf="@id/imgtop_bottomguide"
