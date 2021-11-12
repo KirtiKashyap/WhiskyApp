@@ -60,8 +60,6 @@ class EventAttendingRepository(application: Application) {
                             e.printStackTrace()
                         }
 
-
-
                     }
 
                     override fun onFailure() {

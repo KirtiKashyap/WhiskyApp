@@ -1,6 +1,7 @@
 package com.aadya.whiskyapp.events.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,10 +21,12 @@ import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
+import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
 import com.aadya.whiskyapp.utils.CommonUtils.APIURL.Companion.Event_IMAGE_URL
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_event_new.*
 
 
 private const val ARG_EVENTMODEL = "eventModel"
@@ -81,11 +84,29 @@ class EventsFragment() : Fragment() {
 
         })
         setUi()
+
+
+        mBinding.tvBuy.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, CheckoutActivityJava::class.java)
+                intent.putExtra("amount",eventModel.price)
+                intent.putExtra("itemType","E")
+                intent.putExtra("itemId",eventModel.eventID!!)
+                intent.putExtra("memberId",mSessionManager.getUserDetailLoginModel()?.memberID)
+                intent.putExtra("authorization",mSessionManager.getAuthorization())
+                it.startActivity(intent)
+            }
+        }
         return mBinding.root
     }
 
     private fun setUi() {
         if(eventModel!=null){
+            if(eventModel.eventTypeName.equals("Purchase")){
+                mBinding.tvBuy.visibility=View.VISIBLE
+            }else{
+                mBinding.tvBuy.visibility=View.GONE
+            }
 
             val list: List<String>? = eventModel.eventTitle?.trim()?.split("\\s+".toRegex())
             if(list?.size!! >= 3 )
@@ -111,6 +132,7 @@ class EventsFragment() : Fragment() {
                 }
 
             }
+
             mDateTimeIncludedLayout.tvDay.text = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
             mDateTimeIncludedLayout.tvMonth.text = mCommonUtils.getMonth_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
 

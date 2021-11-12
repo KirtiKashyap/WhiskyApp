@@ -20,6 +20,7 @@ import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
 import com.aadya.whiskyapp.profile.ui.ProfileEditFragment
 import com.aadya.whiskyapp.profile.ui.SecretCodeFragment
+import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
 import com.aadya.whiskyapp.utils.BottomNavigationInterface
@@ -97,6 +98,10 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
             mBinding.drawerLayout.closeDrawers()
             callFragment(4)
         }
+        mBinding.rlPurchaseHistory.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(5)
+        }
     }
 
 
@@ -172,6 +177,12 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
                 launchFragment(
                     LocationFragment.newInstance(),
                     "LocationFragment"
+                )
+            }
+            5 -> {
+                launchFragment(
+                    PurchaseHistoryFragment.newInstance(),
+                    "PurchaseHistoryFragment"
                 )
             }
         }

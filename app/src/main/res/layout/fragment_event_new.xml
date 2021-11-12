@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55"/>
+            app:layout_constraintGuide_percent="0.50"/>
 
         <include
             android:id="@+id/event_header"
@@ -86,14 +86,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55"/>
+            app:layout_constraintGuide_percent="0.50"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_eventname1_bottom_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.60"/>
+            app:layout_constraintGuide_percent="0.55"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_eventname1_startguide"
@@ -119,7 +119,7 @@
             android:text="WHISKY"
             android:textColor="@color/orangetextcolor"
             android:textStyle="bold"
-            android:textSize="@dimen/_70sdp"
+            android:textSize="@dimen/_60sdp"
             app:layout_constraintBottom_toBottomOf="@id/tv_eventname2_bottom_guide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55" />
+            app:layout_constraintGuide_percent="0.45" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_eventname2_bottom_guide"
@@ -144,7 +144,7 @@
         <TextView
             android:id="@+id/tv_eventname3"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="FESTIVAL"
             android:textColor="@color/white"
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.70" />
+            app:layout_constraintGuide_percent="0.60" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_eventname3_bottom_guide"
@@ -197,7 +197,6 @@
             layout="@layout/event_rsvp"
             app:layout_constraintBottom_toTopOf="@id/event_date_time_bottomguide"
             app:layout_constraintTop_toBottomOf="@id/event_date_time_topguide"
-
              />
 
         <androidx.constraintlayout.widget.Guideline
@@ -229,6 +228,8 @@
             android:textStyle="bold"
             android:textSize="@dimen/_18sdp"
             />
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/rsvp_topguide"
@@ -262,7 +263,20 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.73"/>
 
-
+        <TextView
+            android:id="@+id/tv_buy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Click to buy"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/orangetextcolor"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rsvp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

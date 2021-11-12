@@ -21,7 +21,11 @@ data class EventsResponseModel(
     @SerializedName("createdBy") val createdBy: Int,
     @SerializedName("imageName") val imageName: String?,
     @SerializedName("imagePath") val imagePath: String?,
-    @SerializedName("eventType") val eventType: Int
+    @SerializedName("eventType") val eventType: Int,
+    @SerializedName("eventTypeName") val eventTypeName: String?,
+    @SerializedName("price") val price: String?,
+    @SerializedName("userCount") val userCount: Int,
+    @SerializedName("eventExpire") val eventExpire: Boolean
         ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -40,7 +44,12 @@ data class EventsResponseModel(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt(),
+        parcel.readBoolean()
+
     ) {
     }
 
@@ -62,6 +71,10 @@ data class EventsResponseModel(
         parcel.writeString(imageName)
         parcel.writeString(imagePath)
         parcel.writeInt(eventType)
+        parcel.writeString(eventTypeName)
+        parcel.writeString(price)
+        parcel.writeInt(userCount)
+        parcel.writeBoolean(eventExpire)
     }
 
     override fun describeContents(): Int {
