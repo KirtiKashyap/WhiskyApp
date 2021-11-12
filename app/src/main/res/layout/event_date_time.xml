@@ -11,7 +11,7 @@
         <TextView
             android:id="@+id/tv_day"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/archivonarrow_regular"
             android:text="SATURDAY"
             android:textColor="@color/orangetextcolor"
@@ -27,14 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_percent="0.70" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_day_bottom_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.79"/>
+            app:layout_constraintGuide_percent="0.75"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_day_start_guide"
@@ -46,9 +46,10 @@
         <TextView
             android:id="@+id/tv_month"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/archivonarrow_regular"
             android:text="APRIL"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/orangetextcolor"
             android:textSize="@dimen/_18sdp"
             android:textStyle="bold"
@@ -63,14 +64,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.79" />
+            app:layout_constraintGuide_percent="0.70" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_month_bottom_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.83"/>
+            app:layout_constraintGuide_percent="0.80"/>
 
 
 
@@ -93,7 +94,7 @@
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/archivonarrow_regular"
             android:text="22ND"
             android:textColor="@color/orangetextcolor"
@@ -123,7 +124,7 @@
         <TextView
             android:id="@+id/tv_starttime"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/archivonarrow_regular"
             android:text="11:30AM"
             android:textColor="@color/orangetextcolor"
@@ -138,7 +139,7 @@
         <TextView
             android:id="@+id/tv_endtime"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/archivonarrow_regular"
             android:text="05:30PM"
             android:textColor="@color/orangetextcolor"

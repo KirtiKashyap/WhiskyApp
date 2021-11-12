@@ -23,30 +23,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.28"/>
-
-
+        app:layout_constraintGuide_percent="0.30"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/img_rsvp__endguide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.38"/>
+        app:layout_constraintGuide_percent="0.41" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/event_rsvp_topguide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_percent="0.78" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/event_rsvp_bottomguide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.87" />
+        app:layout_constraintGuide_percent="0.83" />
 
     <ImageView
         android:id="@+id/img_rsvp"
@@ -58,10 +56,6 @@
         app:layout_constraintEnd_toStartOf="@+id/img_rsvpwritten__endguide"
         app:layout_constraintStart_toEndOf="@+id/img_rsvp_intersted"
         app:layout_constraintTop_toTopOf="@+id/event_rsvp_topguide" />
-
-
-
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/img_rsvpwritten__endguide"
@@ -79,7 +73,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/event_rsvp_bottomguide"
         app:layout_constraintEnd_toStartOf="@+id/img_rsvp__not_intersted_endguide"
         app:layout_constraintStart_toEndOf="@+id/img_rsvp"
-        app:layout_constraintTop_toTopOf="@+id/event_rsvp_topguide" />
+        app:layout_constraintTop_toTopOf="@id/event_rsvp_topguide" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/img_rsvp__not_intersted_endguide"
@@ -87,7 +81,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.70"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
