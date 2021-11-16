@@ -1,4 +1,4 @@
-package com.aadya.whiskyapp.events.ui
+package com.aadya.whiskyapp.events.eventdailoge
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,8 @@ import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentLauncheventsBinding
 import com.aadya.whiskyapp.events.adapter.EventsAdapter
 import com.aadya.whiskyapp.events.model.EventsResponseModel
+import com.aadya.whiskyapp.events.ui.deletePageViewPager
+import com.aadya.whiskyapp.events.ui.updateEventsViewPager
 import com.aadya.whiskyapp.events.viewmodel.EventsFactory
 import com.aadya.whiskyapp.events.viewmodel.EventsViewModel
 import com.aadya.whiskyapp.landing.ui.LandingActivity
@@ -25,7 +28,7 @@ import com.aadya.whiskyapp.utils.*
 import kotlin.collections.ArrayList
 
 
-class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewPager{
+class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updateEventsViewPager {
 
     private lateinit var mBinding: FragmentLauncheventsBinding
     private lateinit var eventsAdapter: EventsAdapter
@@ -34,7 +37,16 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
     private lateinit var  mCommonUtils : CommonUtils
     private  var mSessionManager: SessionManager? = null
     private var mBottomNavigationInterface: BottomNavigationInterface? = null
+    companion object {
 
+        const val TAG = "EventsLaunchDialogFragment"
+
+        fun newInstance(): EventsLaunchDialogFragment {
+
+            return EventsLaunchDialogFragment()
+        }
+
+    }
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mBottomNavigationInterface = context as BottomNavigationInterface
@@ -164,8 +176,7 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
         eventsList = ArrayList<EventsResponseModel>()
 
         eventsAdapter = EventsAdapter(
-            childFragmentManager, this, eventsList, this, false
-        )
+            childFragmentManager,this,eventsList,this,true)
         mBinding.eventsViewpager.adapter = eventsAdapter
 
         mEventsViewModel = ViewModelProvider(this, EventsFactory(activity?.application)).get(
@@ -175,16 +186,6 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
         mEventsViewModel.getEvents(mSessionManager?.getAuthorization())
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            EventsLaunchFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
-    }
 
 
     override fun updateView(position: Int) {

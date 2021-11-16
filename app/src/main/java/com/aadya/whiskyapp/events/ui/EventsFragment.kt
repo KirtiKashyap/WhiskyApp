@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_event_new.*
 
 private const val ARG_EVENTMODEL = "eventModel"
 private const val ARG_POSITION = "position"
-
+private const val FROM_DIALOG = "FROM_DIALOG"
 
 class EventsFragment() : Fragment() {
 
@@ -41,6 +41,7 @@ class EventsFragment() : Fragment() {
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var eventModel: EventsResponseModel
     private var pos : Int = 0
+    private var isFromDialog=false
     var onEventsPageSwipeUpListner: onEventsPageSwipeUpListner? = null
     private var mdeletePageViewPager : deletePageViewPager? = null
     private lateinit var mIncludedRSVPBinding: EventRsvpBinding
@@ -62,6 +63,8 @@ class EventsFragment() : Fragment() {
         arguments?.let {
             eventModel = it.getParcelable(ARG_EVENTMODEL)!!
             pos = it.getInt(ARG_POSITION)
+            isFromDialog=it.getBoolean(FROM_DIALOG)
+
         }
 
         handleObserver()
@@ -238,6 +241,11 @@ class EventsFragment() : Fragment() {
         mIncludedLayoutBinding.imgClose.setOnClickListener {
             mdeletePageViewPager?.updateView(pos)
         }
+        if(isFromDialog){
+            mIncludedLayoutBinding.root.visibility=View.GONE
+        }else{
+            mIncludedLayoutBinding.root.visibility=View.VISIBLE
+        }
         mIncludedLayoutBinding.imgLogo.setOnClickListener {
             launchFragment(ProfileFragment.newInstance(), "ProfileFragment")
         }
@@ -287,13 +295,15 @@ class EventsFragment() : Fragment() {
         fun newInstance(
             eventsModel: EventsResponseModel,
             position: Int,
-            deletePageViewPager: deletePageViewPager?
+            deletePageViewPager: deletePageViewPager?,
+            isFromDialog: Boolean
         ) =
 
         EventsFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(ARG_EVENTMODEL, eventsModel)
                 putInt(ARG_POSITION, position)
+                putBoolean(FROM_DIALOG,isFromDialog)
             }
             this.mdeletePageViewPager = deletePageViewPager
         }

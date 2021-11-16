@@ -1,6 +1,5 @@
 package com.aadya.whiskyapp.events.adapter
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -13,12 +12,16 @@ import com.aadya.whiskyapp.events.ui.updateEventsViewPager
 class EventsAdapter(
     fragmentManager: FragmentManager,
     mdeletePageViewPager: deletePageViewPager,
-    eventsList: ArrayList<EventsResponseModel>, mUpdateEventsViewPager: updateEventsViewPager
+    eventsList: ArrayList<EventsResponseModel>,
+    mUpdateEventsViewPager: updateEventsViewPager,
+    isFromDialog: Boolean
 ) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private val eventList = ArrayList<EventsResponseModel>()
     private var mdeletePageViewPager: deletePageViewPager? = null
     private var mUpdateEventsViewPager: updateEventsViewPager? = null
+    private val isFromDialog=isFromDialog
+
 
     init {
         this.mdeletePageViewPager = mdeletePageViewPager
@@ -53,7 +56,7 @@ class EventsAdapter(
     }
 
     override fun getItem(position: Int): Fragment {
-        return EventsFragment.newInstance(eventList[position], position, mdeletePageViewPager)
+        return EventsFragment.newInstance(eventList[position], position, mdeletePageViewPager,isFromDialog)
     }
 
     override fun getItemPosition(`object`: Any): Int {

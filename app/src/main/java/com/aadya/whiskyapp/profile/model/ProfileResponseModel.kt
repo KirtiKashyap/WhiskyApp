@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class ProfileResponseModel (
-
     @SerializedName("memberID") var memberID : Int,
     @SerializedName("memberTypeName") var memberTypeName : String,
     @SerializedName("memberName") var memberName : String,
@@ -33,6 +32,7 @@ data class ProfileResponseModel (
     @SerializedName("userLoginTime") var userLoginTime : String,
     @SerializedName("expirationDate") var expirationDate : String,
     @SerializedName("lastSeen") var lastSeen : String,
-    @SerializedName("agentStatus") var agentStatus : Boolean
-
+    @SerializedName("agentStatus") var agentStatus : Boolean,
+    @SerializedName("isSpecial")var  isSpecial: Boolean,
+    @SerializedName("isEvent")var  isEvent: Boolean
 )

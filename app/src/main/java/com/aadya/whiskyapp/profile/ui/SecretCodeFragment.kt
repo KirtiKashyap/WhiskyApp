@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.clublocation.ui.LocationFragment
 import com.aadya.whiskyapp.databinding.*
+import com.aadya.whiskyapp.events.eventdailoge.EventsLaunchDialogFragment
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.viewmodel.ProfileFactory
 import com.aadya.whiskyapp.profile.viewmodel.ProfileViewModel
@@ -75,6 +76,13 @@ class SecretCodeFragment : Fragment() {
                 Glide.with(it)
                     .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
                     .into(img_secretcode)
+            }
+
+           if(it.isEvent){
+               EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
+           }
+            if(it.isSpecial){
+
             }
 
         })
