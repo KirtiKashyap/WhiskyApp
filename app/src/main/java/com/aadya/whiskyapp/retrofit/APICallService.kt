@@ -34,6 +34,19 @@ interface APICallService {
         @Body mProfileRequestModel: ProfileRequestModel
     ): Call<ProfileResponseModel?>?
 
+
+    @POST(CommonUtils.APIURL.EventNotification)
+    fun EvenetNotification(
+        @Header("Authorization") authHeader: String?,
+        @Body mProfileRequestModel: ProfileRequestModel
+    ): Call<Any>?
+
+    @POST(CommonUtils.APIURL.OfferNotification)
+    fun OfferNotification(
+        @Header("Authorization") authHeader: String?,
+        @Body mProfileRequestModel: ProfileRequestModel
+    ): Call<Any?>?
+
     @GET(CommonUtils.APIURL.EventAttending)
     fun getEventAttendingList(@Header("Authorization") authHeader: String?): Call<List<EventsResponseModel?>?>
 

@@ -251,7 +251,6 @@ class EventsFragment() : Fragment() {
         }
         mIncludedRSVPBinding = mBinding.eventRsvp
 
-
         mIncludedRSVPBinding.imgRsvpIntersted.setOnClickListener{
             mIncludedRSVPBinding.imgRsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
             mIncludedRSVPBinding.imgRsvpIntersted.isClickable=false

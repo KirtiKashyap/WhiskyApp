@@ -69,7 +69,8 @@ object CommonUtils {
             const val Reserve: String  = "Reservation/UpdateReservation"
             const val UploadProfileImage: String="Mobile/UpdateAppMemberPhoto"
             const val PaymentUpdate: String="Payment/UpdatePayment"
-
+            const val EventNotification: String="Mobile/ChangeMemberEventNotification"
+            const val OfferNotification: String="Mobile/ChangeMemberSpecialNotification"
         }
     }
 

@@ -17,6 +17,8 @@ class ProfileRepository(application: Application) {
     private var application : Application = application
 
     private val profileLiveData = MutableLiveData<ProfileResponseModel?>()
+    private val eventNotification=MutableLiveData<Any?>()
+    private val specialOfferNotification=MutableLiveData<Any?>()
     private val alertLiveData: MutableLiveData<AlertModel> = MutableLiveData<AlertModel>()
     private val progressLiveData = MutableLiveData<Int>()
     private var profileUnAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -35,6 +37,12 @@ class ProfileRepository(application: Application) {
 
     fun getProfileState() : MutableLiveData<ProfileResponseModel?> {
         return  profileLiveData
+    }
+    fun getEventNotificationState(): MutableLiveData<Any?>{
+        return eventNotification
+    }
+    fun getSpecialOfferNotificationState(): MutableLiveData<Any?>{
+        return specialOfferNotification
     }
 
     fun getProfile(authorization: String?, userId: Int?) {
@@ -86,6 +94,119 @@ class ProfileRepository(application: Application) {
             false
         )
     }
+
+
+    fun getEventNotification(authorization: String?, userId: Int?) {
+
+        if (Connection.instance?.isNetworkAvailable(application) == true) {
+            progressLiveData.value = CommonUtils.ProgressDialog.showDialog
+            val mProfileRequestModel = ProfileRequestModel(userId)
+            RetrofitService().getEventNotification(authorization,mProfileRequestModel,
+                object : APIResponseListener {
+                    override fun onSuccess(response: Response<Any>) {
+
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                        Log.d("TAG","In ProgressLive Data")
+
+                        val model: Any? = response.body() as Any?
+                        try {
+                            if(response.code() == 401)
+                                eventNotification.value = true
+
+                            else if(response.code() == 200)
+                                eventNotification.value = model
+
+                            else if(response.code() == 500)
+                                setAlert(
+                                    application.getString(R.string.app_error),
+                                    application.getString(R.string.Error_from_Server),
+                                    false
+                                )
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+
+                    }
+
+                    override fun onFailure() {
+                        Log.d("TAG","In ProgressLive Data onFaiure")
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                        setAlert(
+                            application.getString(R.string.app_error),
+                            application.getString(R.string.Slow_Network_connection),
+                            false
+                        )
+                    }
+                })
+        } else setAlert(
+            application.getString(R.string.no_internet_connection),
+            application.getString(R.string.not_connected_to_internet),
+            false
+        )
+    }
+
+
+
+    fun getSpecialOfferNotification(authorization: String?, userId: Int?) {
+
+        if (Connection.instance?.isNetworkAvailable(application) == true) {
+            progressLiveData.value = CommonUtils.ProgressDialog.showDialog
+            val mProfileRequestModel = ProfileRequestModel(userId)
+            RetrofitService().getSpecialOfferNotification(authorization,mProfileRequestModel,
+                object : APIResponseListener {
+                    override fun onSuccess(response: Response<Any>) {
+
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                        Log.d("TAG","In ProgressLive Data")
+
+                        val model: Any? = response.body() as Any?
+                        try {
+                            if(response.code() == 401)
+                                specialOfferNotification.value = true
+
+                            else if(response.code() == 200)
+                                specialOfferNotification.value = model
+
+                            else if(response.code() == 500)
+                                setAlert(
+                                    application.getString(R.string.app_error),
+                                    application.getString(R.string.Error_from_Server),
+                                    false
+                                )
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+
+                    }
+
+                    override fun onFailure() {
+                        Log.d("TAG","In ProgressLive Data onFaiure")
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                        setAlert(
+                            application.getString(R.string.app_error),
+                            application.getString(R.string.Slow_Network_connection),
+                            false
+                        )
+                    }
+                })
+        } else setAlert(
+            application.getString(R.string.no_internet_connection),
+            application.getString(R.string.not_connected_to_internet),
+            false
+        )
+    }
+
+
+
+
+
+
+
+
+
+
     private fun setAlert(title: String, message: String, isSuccess: Boolean) {
         val drawable: Int = if (isSuccess) R.drawable.correct_icon else R.drawable.wrong_icon
         val color: Int = if (isSuccess) R.color.notiSuccessColor else R.color.notiFailColor

@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.aadya.whiskyapp.profile.viewmodel.ProfileRepository;
-import com.aadya.whiskyapp.profile.viewmodel.ProfileViewModel;
 
 public class EventsFactory implements ViewModelProvider.Factory {
 

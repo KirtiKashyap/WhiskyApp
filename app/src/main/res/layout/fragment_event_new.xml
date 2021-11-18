@@ -50,6 +50,7 @@
             app:layout_constraintBottom_toTopOf="@id/header_bottomguide"
 
             />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/header_topguide"
             android:layout_width="wrap_content"

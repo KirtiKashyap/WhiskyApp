@@ -1,25 +1,36 @@
 package com.aadya.whiskyapp.profile.ui
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.*
+import com.aadya.whiskyapp.events.eventdailoge.EventsLaunchDialogFragment
 import com.aadya.whiskyapp.events.ui.EventAttendingFragment
+import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
+import com.aadya.whiskyapp.profile.viewmodel.ProfileFactory
+import com.aadya.whiskyapp.profile.viewmodel.ProfileViewModel
 import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
+import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.secretcode_new_layout.*
 
 class ProfileDetailFragment : Fragment() {
 
@@ -33,7 +44,10 @@ class ProfileDetailFragment : Fragment() {
     private lateinit var mPhoneLayoutBinding: PhonelayoutBinding
     private lateinit var mEmailLayoutBinding: EmaillayoutBinding
     private lateinit var mAddressLayoutBinding: AddresslayoutBinding
+    private lateinit var mEventNotificationLayoutBinding: EventNotificationLayoutBinding
+    private lateinit var mOfferNotificationLayoutBinding: OfferNotificationLayoutBinding
     private var mDrawerInterface: DrawerInterface? = null
+    private lateinit var mProfileViewModel : ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +68,20 @@ class ProfileDetailFragment : Fragment() {
         setUIValues()
 
 
+        mEventNotificationLayoutBinding.eventNotificationSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            mProfileViewModel.getEventNotification(
+                mSessionManager.getAuthorization(),
+                mSessionManager.getUserDetailLoginModel()?.memberID
+            )
+
+        }
+        mOfferNotificationLayoutBinding.offernotificationSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            mProfileViewModel.getSpecialOfferNotification(
+                mSessionManager.getAuthorization(),
+                mSessionManager.getUserDetailLoginModel()?.memberID
+            )
+        }
+
         return mBinding.root
     }
 
@@ -73,7 +101,10 @@ class ProfileDetailFragment : Fragment() {
             Color.parseColor("#F77F00"),
             Color.parseColor("#9D0208")
         ), null, Shader.TileMode.REPEAT)
-
+        mEventNotificationLayoutBinding=mBinding.emaillayout.eventnotificationlayout
+        mEventNotificationLayoutBinding.eventNotificationSwitch.isChecked=mProfileModel?.isEvent!!
+        mOfferNotificationLayoutBinding=mBinding.emaillayout.offernotificationlayout
+        mOfferNotificationLayoutBinding.offernotificationSwitch.isChecked=mProfileModel?.isSpecial!!
         if(mProfileModel?.dateOfBirth != null)
 
         mDOBLayoutBinding.tvUserDob.text = mCommonUtils.date_dd_MMM_yyyy(mProfileModel?.dateOfBirth)
@@ -83,6 +114,8 @@ class ProfileDetailFragment : Fragment() {
         mEmailLayoutBinding.tvUserEmail.text = mProfileModel?.email
         mAddressLayoutBinding = mBinding.addresslayout
         mAddressLayoutBinding.tvUserAdress.text = mProfileModel?.address
+
+
         val agentPaint = mBinding.tvAgentid.paint
         val agentWidth = agentPaint.measureText(mBinding.tvAgentid.text.toString())
         val agentTextShader: Shader = LinearGradient(0f, 0f, agentWidth, mBinding.tvAgentid.textSize, intArrayOf(
@@ -126,9 +159,87 @@ class ProfileDetailFragment : Fragment() {
         mSessionManager = SessionManager.getInstance(requireContext())!!
         mProfileModel = mSessionManager.getProfileModel()
 
-
+        mProfileViewModel = ViewModelProvider(this, ProfileFactory(activity?.application)).get(
+            ProfileViewModel::class.java
+        )
+        handleObserver()
     }
 
+    private fun handleObserver() {
+
+
+          mProfileViewModel.getEventNotificationObserver().observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+
+            context?.let {
+
+            }
+
+        })
+        mProfileViewModel.getSpecialOfferNotificationObserver().observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+
+            context?.let {
+
+            }
+
+        })
+
+        mProfileViewModel.getprofileUnAuthorized().observe(viewLifecycleOwner, Observer {
+            val alertModel = AlertModel(
+                2000,
+                resources.getString(R.string.login_error),
+                resources.getString(R.string.please_login),
+                R.drawable.wrong_icon,
+                R.color.notiFailColor
+            )
+            mCommonUtils.showAlert(
+                alertModel.duration,
+                alertModel.title,
+                alertModel.message,
+                alertModel.drawable,
+                alertModel.color,
+                requireActivity()
+
+            )
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(requireActivity(), LandingActivity::class.java)
+                startActivity(intent)
+            }, 2000)
+
+        })
+        mProfileViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
+            object : Observer<AlertModel?> {
+                override fun onChanged(alertModel: AlertModel?) {
+                    if (alertModel == null) return
+                    mCommonUtils.showAlert(
+                        alertModel.duration,
+                        alertModel.title,
+                        alertModel.message,
+                        alertModel.drawable,
+                        alertModel.color,
+                        requireActivity()
+
+                    )
+                }
+            })
+
+
+        mProfileViewModel.getProgressState()?.observe(viewLifecycleOwner,
+            object : Observer<Int?> {
+                override fun onChanged(progressState: Int?) {
+                    if (progressState == null) return
+                    if (progressState === CommonUtils.ProgressDialog.showDialog)
+                        mCommonUtils.showProgress(
+                            resources.getString(R.string.pleasewait), requireContext()
+                        )
+                    else if (progressState === CommonUtils.ProgressDialog.dismissDialog)
+                        mCommonUtils.dismissProgress()
+                }
+            })
+
+    }
 
 
     private fun setIncludedLayout() {

@@ -28,4 +28,19 @@ class ProfileViewModel(profileRepository: ProfileRepository) : ViewModel() {
         return  profileRepository.getprofileUnAuthorized()
     }
 
+    fun getEventNotification(authorization: String?, userId: Int?) {
+        profileRepository.getEventNotification(authorization,userId)
+    }
+    fun getEventNotificationObserver():LiveData<Any?>{
+        return profileRepository.getEventNotificationState()
+    }
+
+
+    fun getSpecialOfferNotification(authorization: String?, userId: Int?) {
+        profileRepository.getSpecialOfferNotification(authorization,userId)
+    }
+    fun getSpecialOfferNotificationObserver():LiveData<Any?>{
+        return profileRepository.getSpecialOfferNotificationState()
+    }
+
 }

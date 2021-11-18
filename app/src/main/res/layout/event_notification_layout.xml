@@ -57,7 +57,6 @@
             app:track="@drawable/custom_track"
             android:thumb="@drawable/custom_thumb"
             android:layout_height="0dp"
-
             app:layout_constraintBottom_toTopOf="@id/event_notification_bottomguide"
             app:layout_constraintEnd_toStartOf="@id/toggle_event_notification__endguide"
             app:layout_constraintStart_toEndOf="@id/tv_event"

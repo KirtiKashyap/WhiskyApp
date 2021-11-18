@@ -64,6 +64,55 @@ class RetrofitService {
         })
     }
 
+
+
+
+    fun getEventNotification(
+        authorization: String?,
+        profilerequestModel: ProfileRequestModel,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<Any>? = service.EvenetNotification(authorization,profilerequestModel)
+        call?.enqueue(object : Callback<Any?> {
+            override fun onResponse(
+                call: Call<Any?>,
+                response: Response<Any?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<Any?>, t: Throwable) {
+
+                apiResponseListener.onFailure()
+            }
+        })
+    }
+
+    fun getSpecialOfferNotification(
+        authorization: String?,
+        profilerequestModel: ProfileRequestModel,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<Any?>? = service.OfferNotification(authorization,profilerequestModel)
+        call?.enqueue(object : Callback<Any?> {
+            override fun onResponse(
+                call: Call<Any?>,
+                response: Response<Any?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<Any?>, t: Throwable) {
+
+                apiResponseListener.onFailure()
+            }
+        })
+    }
+
+
+
     fun getRSVP(
         authorization: String?,
         rsvprequestModel: RSVPRequestModel,

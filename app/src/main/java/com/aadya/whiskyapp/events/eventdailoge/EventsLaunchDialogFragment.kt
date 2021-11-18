@@ -172,7 +172,11 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
             false
         )
 
-
+        mBinding.imgClose.visibility=View.VISIBLE
+        mBinding.imgClose.bringToFront()
+        mBinding.imgClose.setOnClickListener {
+            dismiss()
+        }
         eventsList = ArrayList<EventsResponseModel>()
 
         eventsAdapter = EventsAdapter(
