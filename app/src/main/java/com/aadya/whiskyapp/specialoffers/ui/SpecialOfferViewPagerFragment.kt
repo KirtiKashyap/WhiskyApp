@@ -99,7 +99,7 @@ class SpecialOfferViewPagerFragment : Fragment() {
 
             else {
                 specialOfferAdapter = SpecialOfferAdapter(
-                    childFragmentManager, it
+                    childFragmentManager, it,false
                 )
                 mBinding.specialofferViewpager.adapter = specialOfferAdapter
             }

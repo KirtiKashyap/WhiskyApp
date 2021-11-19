@@ -21,12 +21,14 @@ import com.aadya.whiskyapp.utils.*
 import kotlinx.android.synthetic.main.fragment_specialoffer.*
 
 private const val ARG_PARAM1 = "param1"
+private const val FROM_DIALOG = "FROM_DIALOG"
 class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
     private lateinit var mBinding: FragmentSpecialofferBinding
     private lateinit var mIncludedLayoutBinding: MainHeaderNewBinding
     private var mDrawerInterface: DrawerInterface? = null
     private var itemId=0
     private var itemType="S"
+    private var isFromDialog=false
     private lateinit var mCommonUtils: CommonUtils
     private lateinit var mSessionManager: SessionManager
     var onButtonSwipeDownListener: onButtonSwipeDownListner? = null
@@ -44,6 +46,7 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
 
         arguments?.let {
             param1 = it.getParcelable(ARG_PARAM1)
+            isFromDialog=it.getBoolean(FROM_DIALOG)
         }
     }
 
@@ -129,6 +132,12 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
 
     private fun setIncludedLayout() {
         mIncludedLayoutBinding = mBinding.mainheader
+
+        if(isFromDialog){
+            mIncludedLayoutBinding.root.visibility=View.GONE
+        }else{
+            mIncludedLayoutBinding.root.visibility=View.VISIBLE
+        }
         mIncludedLayoutBinding.imgDrawer.setOnClickListener {
             mDrawerInterface?.setOnDrwawerClickResult()
         }
@@ -148,10 +157,11 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
     companion object {
 
         @JvmStatic
-        fun newInstance(specialOfferModel: SpecialOfferResponseModel?) =
+        fun newInstance(specialOfferModel: SpecialOfferResponseModel?, isFromDialog: Boolean) =
             SpecialOfferFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(ARG_PARAM1, specialOfferModel)
+                    putBoolean(FROM_DIALOG,isFromDialog)
                 }
             }
     }

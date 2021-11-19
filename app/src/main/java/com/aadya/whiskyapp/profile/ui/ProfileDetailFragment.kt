@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.*
-import com.aadya.whiskyapp.events.eventdailoge.EventsLaunchDialogFragment
 import com.aadya.whiskyapp.events.ui.EventAttendingFragment
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel

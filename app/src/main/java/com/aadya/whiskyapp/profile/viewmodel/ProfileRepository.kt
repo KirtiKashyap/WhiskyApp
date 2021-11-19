@@ -198,20 +198,10 @@ class ProfileRepository(application: Application) {
         )
     }
 
-
-
-
-
-
-
-
-
-
     private fun setAlert(title: String, message: String, isSuccess: Boolean) {
         val drawable: Int = if (isSuccess) R.drawable.correct_icon else R.drawable.wrong_icon
         val color: Int = if (isSuccess) R.color.notiSuccessColor else R.color.notiFailColor
         alertLiveData.value = AlertModel(2000, title, message, drawable, color)
     }
-
 
 }

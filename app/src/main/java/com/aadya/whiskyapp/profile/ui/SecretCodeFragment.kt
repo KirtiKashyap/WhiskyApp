@@ -18,6 +18,7 @@ import com.aadya.whiskyapp.events.eventdailoge.EventsLaunchDialogFragment
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.viewmodel.ProfileFactory
 import com.aadya.whiskyapp.profile.viewmodel.ProfileViewModel
+import com.aadya.whiskyapp.specialoffers.specialofferdialog.SpecialOfferDialogFragment
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
@@ -77,13 +78,14 @@ class SecretCodeFragment : Fragment() {
                     .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
                     .into(img_secretcode)
             }
-
-           if(it.isEvent){
-               EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
-           }
+            /*if(it.isEvent){
+                EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
+            }*/
             if(it.isSpecial){
-
+                SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
             }
+
+
 
         })
 
