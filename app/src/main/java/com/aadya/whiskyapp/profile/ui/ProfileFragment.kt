@@ -54,8 +54,8 @@ class ProfileFragment : Fragment() {
         }else{
             mBinding.tvUserstatus.background = resources.getDrawable(R.drawable.inactive, null)
         }
-
-        mBinding.tvUserLastseen.text=mSessionManager.getProfileModel()?.lastSeen
+        //val weekDay = mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
+        mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
         mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
 
         val paint = mBinding.tvAgentid.paint

@@ -26,6 +26,7 @@ import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
 import com.aadya.whiskyapp.utils.CommonUtils.APIURL.Companion.Event_IMAGE_URL
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.events_header.view.*
 import kotlinx.android.synthetic.main.fragment_event_new.*
 
 
@@ -242,10 +243,11 @@ class EventsFragment() : Fragment() {
             mdeletePageViewPager?.updateView(pos)
         }
         if(isFromDialog){
-            mIncludedLayoutBinding.root.visibility=View.GONE
+            mIncludedLayoutBinding.root.img_logo.visibility=View.GONE
         }else{
-            mIncludedLayoutBinding.root.visibility=View.VISIBLE
+            mIncludedLayoutBinding.root.img_logo.visibility=View.VISIBLE
         }
+        mIncludedLayoutBinding.root.visibility=View.VISIBLE
         mIncludedLayoutBinding.imgLogo.setOnClickListener {
             launchFragment(ProfileFragment.newInstance(), "ProfileFragment")
         }

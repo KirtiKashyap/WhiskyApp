@@ -2,9 +2,11 @@ package com.aadya.whiskyapp.utils
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.aadya.whiskyapp.R
@@ -89,6 +91,19 @@ object CommonUtils {
         val date: Date = inputFormat.parse(inputDateString)
         val outputDateStr: String = outputFormat.format(date)
         return  outputDateStr
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getWeekDay(lastSeen: String?): String{
+        val toTypedArray = lastSeen?.split(" ")!!.toTypedArray()
+       // mTime = toTypedArray[0] + toTypedArray[1]
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+//        val date = sdf.parse("13/06/2021")
+        val date = sdf.parse(toTypedArray[0])
+        sdf.applyPattern("EEEE")
+        val str = sdf.format(date)
+        println(str)
+
+        return SimpleDateFormat("EEEE", Locale.ENGLISH).format(date)
     }
 
     fun showAlert(

@@ -38,7 +38,7 @@
             android:textSize="@dimen/_20sdp"
             android:id="@+id/msg"
             android:textColor="@color/orangetextcolor"
-            android:text="Your payment was successful"
+            android:text="Your payment was successful."
             android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

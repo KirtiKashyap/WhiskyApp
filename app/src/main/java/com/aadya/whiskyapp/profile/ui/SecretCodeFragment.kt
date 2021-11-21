@@ -71,19 +71,19 @@ class SecretCodeFragment : Fragment() {
         mProfileViewModel.getProfileObserver().observe(this, Observer {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
-            lastseen.text=it.lastSeen
+            lastseen.text=it.userLoginTime
             val qrCode = it.qrCode
             context?.let {
                 Glide.with(it)
                     .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
                     .into(img_secretcode)
             }
-            /*if(it.isEvent){
+            if(it.isEvent){
                 EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
-            }*/
-            if(it.isSpecial){
-                SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
             }
+            /*if(it.isSpecial){
+                SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
+            }*/
 
 
 

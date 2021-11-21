@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.aadya.whiskyapp.R
-import com.aadya.whiskyapp.databinding.FragmentLauncheventsBinding
+import com.aadya.whiskyapp.databinding.FragmentEventDialogBinding
 import com.aadya.whiskyapp.events.adapter.EventsAdapter
 import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.ui.deletePageViewPager
@@ -30,7 +30,7 @@ import kotlin.collections.ArrayList
 
 class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updateEventsViewPager {
 
-    private lateinit var mBinding: FragmentLauncheventsBinding
+    private lateinit var mBinding: FragmentEventDialogBinding
     private lateinit var eventsAdapter: EventsAdapter
     private lateinit var mEventsViewModel : EventsViewModel
     private var eventsList = ArrayList<EventsResponseModel>()
@@ -167,7 +167,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
         mSessionManager = SessionManager.getInstance(requireContext())
         mBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_launchevents,
+            R.layout.fragment_event_dialog,
             container,
             false
         )
