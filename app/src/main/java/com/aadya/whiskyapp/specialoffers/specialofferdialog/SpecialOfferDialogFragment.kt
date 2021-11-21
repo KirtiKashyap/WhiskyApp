@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentSpecialOfferDialogBinding
 import com.aadya.whiskyapp.landing.ui.LandingActivity
@@ -59,6 +60,7 @@ class SpecialOfferDialogFragment : DialogFragment() {
         )
         mBinding.imgClose.bringToFront()
         mBinding.imgClose.setOnClickListener {
+            MyApplication.isSpecialEventDialogOpen=false
             dismiss()
         }
         mSessionManager = SessionManager.getInstance(requireContext())

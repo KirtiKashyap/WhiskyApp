@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentEventDialogBinding
 import com.aadya.whiskyapp.events.adapter.EventsAdapter
@@ -175,6 +176,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
         mBinding.imgClose.visibility=View.VISIBLE
         mBinding.imgClose.bringToFront()
         mBinding.imgClose.setOnClickListener {
+            MyApplication.isEventDialogOpen=false
             dismiss()
         }
         eventsList = ArrayList<EventsResponseModel>()

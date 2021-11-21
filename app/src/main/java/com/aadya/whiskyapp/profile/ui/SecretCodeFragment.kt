@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.clublocation.ui.LocationFragment
 import com.aadya.whiskyapp.databinding.*
@@ -78,10 +79,10 @@ class SecretCodeFragment : Fragment() {
                     .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
                     .into(img_secretcode)
             }
-            if(it.isEvent){
+            if(it.isEvent && MyApplication.isEventDialogOpen){
                 EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
             }
-            /*if(it.isSpecial){
+            /*if(it.isSpecial && MyApplication.isSpecialEventDialogOpen){
                 SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
             }*/
 
