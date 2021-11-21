@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -140,6 +141,10 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
     private fun intializeMembers() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_dash_board)
         mIncludedLayoutBinding = mBinding.appContentLayout1
+        val versionName: String = packageManager
+            .getPackageInfo(packageName, 0).versionName
+        mBinding.versionTextView.text=versionName
+
     }
 
 

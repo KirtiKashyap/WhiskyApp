@@ -95,15 +95,13 @@ object CommonUtils {
     @RequiresApi(Build.VERSION_CODES.O)
     fun getWeekDay(lastSeen: String?): String{
         val toTypedArray = lastSeen?.split(" ")!!.toTypedArray()
-       // mTime = toTypedArray[0] + toTypedArray[1]
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-//        val date = sdf.parse("13/06/2021")
         val date = sdf.parse(toTypedArray[0])
         sdf.applyPattern("EEEE")
         val str = sdf.format(date)
         println(str)
 
-        return SimpleDateFormat("EEEE", Locale.ENGLISH).format(date)
+        return SimpleDateFormat("EEEE", Locale.ENGLISH).format(date) +" at "+ toTypedArray[1]
     }
 
     fun showAlert(
