@@ -6,8 +6,7 @@
         android:id="@+id/rl_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/event_top_image"
-        >
+        android:background="@drawable/event_top_image">
         <TextView
             android:text="close"
             android:id="@+id/img_close"
@@ -20,7 +19,6 @@
             android:layout_alignParentTop="true"
             android:textSize="@dimen/_15sdp"
             android:textColor="@color/white"/>
-
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/events_viewpager"

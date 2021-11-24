@@ -250,12 +250,12 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
             if(cardHolderNameEditText.getText().toString().trim()==null || cardHolderNameEditText.getText().toString().trim().isEmpty()){
                 Toast.makeText(CheckoutActivityJava.this,"Enter Card Holder Name",Toast.LENGTH_SHORT).show();
             }else {
-                payButton.setClickable(false);
                 CardMultilineWidget cardInputWidget = findViewById(R.id.cardInputWidget);
                 PaymentMethodCreateParams params =
                         cardInputWidget.getPaymentMethodCreateParams();
 
                 if (params != null) {
+                    payButton.setClickable(false);
                     ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
                             .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
                     stripe.confirmPayment(this, confirmParams);

@@ -79,7 +79,7 @@ class ReserveRepository(application: Application) {
             mContext.getString(R.string.please_select_no_of_people),
             false
         )else{
-            val reserveRequestModel : ReserveRequestModel = ReserveRequestModel()
+            val reserveRequestModel = ReserveRequestModel()
             reserveRequestModel.Favorite = what_u_want_to_eat
             reserveRequestModel.BookingDate = date
             reserveRequestModel.BookingTime =time
@@ -87,6 +87,7 @@ class ReserveRepository(application: Application) {
             reserveRequestModel.BookingInfoID = 0
             reserveRequestModel.Title = "null"
             reserveRequestModel.Description = "null"
+            reserveRequestModel.UserID=userId
           checkReserveValidation(reserveRequestModel,mContext,authorization)
 
         }

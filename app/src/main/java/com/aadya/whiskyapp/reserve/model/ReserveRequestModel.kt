@@ -8,7 +8,7 @@ class ReserveRequestModel {
 
 
     @SerializedName("UserID")
-    var UserID: String? = null
+    var UserID: Int? = null
 
     @SerializedName("NumberofPeople")
     var NumberofPeople: String? = null

@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -29,7 +30,6 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -236,12 +236,30 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 } catch (e: ParseException) {
                     e.printStackTrace()
                 }
-                val fmtOut = SimpleDateFormat("hh:mm aa")
-                val formattedTime = fmtOut.format(date)
-                val converted24Hrs = convert12hrformat_24hrformat(formattedTime)
-                val toTypedArray = converted24Hrs.split(":").toTypedArray()
-                mTime = toTypedArray[0] + toTypedArray[1]
-                mBinding.edTime.setText(converted24Hrs)
+
+
+                val datetime = Calendar.getInstance()
+                val c = Calendar.getInstance()
+                datetime[Calendar.HOUR_OF_DAY] = selectedHour
+                datetime[Calendar.MINUTE] = selectedMinute
+                if (datetime.timeInMillis >= c.timeInMillis) {
+
+                    val fmtOut = SimpleDateFormat("hh:mm aa")
+                    val formattedTime = fmtOut.format(date)
+                    val converted24Hrs = convert12hrformat_24hrformat(formattedTime)
+                    val toTypedArray = converted24Hrs.split(":").toTypedArray()
+                    mTime = toTypedArray[0] + toTypedArray[1]
+                    mBinding.edTime.setText(converted24Hrs)
+
+                } else {
+                    mTime=""
+                    mBinding.edTime.setText("")
+                    mBinding.edTime.setHint(R.string.time)
+                   Toast.makeText(context,"Invalid Time",Toast.LENGTH_SHORT).show()
+
+                }
+
+
             }, hour, minute, false
         )
         mTimePicker.setTitle("Select Time")
