@@ -6,8 +6,4 @@ class ReserveResponseModel {
 
     @SerializedName("BookingInfoID")
     var BookingInfoID: String? = null
-
-
-
-
 }

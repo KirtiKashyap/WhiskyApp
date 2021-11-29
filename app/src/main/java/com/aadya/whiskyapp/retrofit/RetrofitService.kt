@@ -1,6 +1,5 @@
 package com.aadya.whiskyapp.retrofit
 
-import com.aadya.gist.login.model.ReserveRequestModel
 import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
@@ -12,6 +11,7 @@ import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
+import com.aadya.whiskyapp.reserve.model.ReserveRequestModel
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import retrofit2.Call

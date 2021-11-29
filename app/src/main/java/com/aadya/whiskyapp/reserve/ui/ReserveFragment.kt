@@ -248,7 +248,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     val formattedTime = fmtOut.format(date)
                     val converted24Hrs = convert12hrformat_24hrformat(formattedTime)
                     val toTypedArray = converted24Hrs.split(":").toTypedArray()
-                    mTime = toTypedArray[0] + toTypedArray[1]
+                    //mTime = toTypedArray[0] + toTypedArray[1]
+                    mTime=converted24Hrs
                     mBinding.edTime.setText(converted24Hrs)
 
                 } else {

@@ -1,6 +1,4 @@
-package com.aadya.gist.login.model
-
-import com.google.gson.annotations.Expose
+package com.aadya.whiskyapp.reserve.model
 import com.google.gson.annotations.SerializedName
 
 class ReserveRequestModel {
@@ -19,16 +17,16 @@ class ReserveRequestModel {
     @SerializedName("BookingDate")
     var BookingDate: String? = null
 
-    @SerializedName("BookingTime ")
+    @SerializedName("BookingTime")
     var BookingTime : String? = null
 
-    @SerializedName("BookingInfoID ")
+    @SerializedName("BookingInfoID")
     var BookingInfoID : Int? = 0
 
-    @SerializedName("Title ")
+    @SerializedName("Title")
     var Title : String? = null
 
-    @SerializedName("Description ")
+    @SerializedName("Description")
     var Description : String? = null
 
 

@@ -3,8 +3,8 @@ package com.aadya.whiskyapp.reserve.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import com.aadya.gist.login.model.ReserveRequestModel
 import com.aadya.whiskyapp.R
+import com.aadya.whiskyapp.reserve.model.ReserveRequestModel
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
