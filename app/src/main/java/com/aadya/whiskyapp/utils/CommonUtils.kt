@@ -92,7 +92,6 @@ object CommonUtils {
         val outputDateStr: String = outputFormat.format(date)
         return  outputDateStr
     }
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getWeekDay(lastSeen: String?): String{
         val toTypedArray = lastSeen?.split(" ")!!.toTypedArray()
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)

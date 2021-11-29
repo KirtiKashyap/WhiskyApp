@@ -2,11 +2,13 @@ package com.aadya.whiskyapp.profile.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -72,7 +74,7 @@ class SecretCodeFragment : Fragment() {
         mProfileViewModel.getProfileObserver().observe(this, Observer {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
-            lastseen.text=it.userLoginTime
+            lastseen.text="Last "+mCommonUtils.getWeekDay(it.userLoginTime)
             val qrCode = it.qrCode
             context?.let {
                 Glide.with(it)
