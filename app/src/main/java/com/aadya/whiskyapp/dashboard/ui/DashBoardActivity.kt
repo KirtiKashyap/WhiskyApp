@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.clublocation.ui.LocationFragment
 import com.aadya.whiskyapp.databinding.ActivityDashBoardBinding
@@ -36,9 +37,7 @@ import com.aadya.whiskyapp.utils.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.stripe.android.view.CardMultilineWidget
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.view.*
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -116,35 +115,12 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         }
         mBinding.rlLogout.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
-            //callLogOutApi()
-        }
-    }
-
-     fun callLogOutApi() {
-    CoroutineScope(Dispatchers.IO)
-    val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
-    val call: Call<String> = service.getLogout(mSessionManager.getAuthorization())
-    call?.enqueue(object : Callback<String?> {
-        override fun onResponse(
-            call: Call<String?>,
-            response: Response<String?>
-        ) {
-            if (response.isSuccessful) {
-                val intent = Intent(this@DashBoardActivity, LandingActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Log.d("", response.errorBody().toString())
+            lifecycleScope.launch{
+                LoginHelper.logout().join()
             }
-
         }
-
-        override fun onFailure(call: Call<String?>, t: Throwable) {
-            t.message?.let { Log.d("", it) }
-        }
-    })
-
     }
+
 
 
     private fun setBottomNavigation() {
@@ -326,6 +302,39 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mIncludedLayoutBinding.bottomNavigationMenu.menu.setGroupCheckable(0, true, true)
         mIncludedLayoutBinding.bottomNavigationMenu.selectedItemId = R.id.navigation_menu
     }
+    object LoginHelper {
+        private val scope = CoroutineScope(SupervisorJob() + CoroutineName("LoginHelper"))
 
+        fun logout(): Job = scope.launch {
+            Log.d("","logout")
+            deleteSession()
+        }
+
+        private suspend fun deleteSession() {
+
+            val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+            //val mSessionManager= SessionManager.getInstance(context1 = )!!
+            val call: Call<String> = service.getLogout("bearer YWivtJuxX8ds/ZBFzmCBgnFr7SKanlKaP593O5uPIfKRK6FHRaE7eUWADOZea6CEN0UPmwdrVA8FZ/afjGahdFj2vLGQJ6P7aJOQzS5f3WQpHCx+cHOQXMVuMl9GKLc0MgPWaAEmBniCdEt28qjceG0WxaTWTQSeytUA/R8GU3xUH7ROEgC+YxUpJW7ezCSt5Ba8S1DfmyZLzuqpDX1vQuSLvBHEqcLhY3KfPXvAknY=")
+            call?.enqueue(object : Callback<String?> {
+                override fun onResponse(
+                    call: Call<String?>,
+                    response: Response<String?>
+                ) {
+                    if (response.isSuccessful) {
+                        /*val intent = Intent(this@DashBoardActivity, LandingActivity::class.java)
+                        startActivity(intent)
+                        finish()*/
+                    } else {
+                        Log.d("", response.errorBody().toString())
+                    }
+
+                }
+
+                override fun onFailure(call: Call<String?>, t: Throwable) {
+                    t.message?.let { Log.d("", it) }
+                }
+            })
+        }
+    }
 
 }
