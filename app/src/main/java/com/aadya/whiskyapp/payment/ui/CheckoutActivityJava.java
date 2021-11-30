@@ -107,8 +107,16 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         payButton = findViewById(R.id.payButton);
         ImageView imgDrawer= findViewById(R.id.img_drawer);
         ImageView profileIcon= findViewById(R.id.img_logo);
+        ImageView backIcon= findViewById(R.id.img_back);
+        backIcon.setVisibility(View.VISIBLE);
         profileIcon.setVisibility(View.GONE);
         imgDrawer.setVisibility(View.GONE);
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         amountTextView = findViewById(R.id.amountTextView);
         Intent intent = getIntent();
         amount = intent.getStringExtra("amount");
