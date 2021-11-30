@@ -13,10 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
 import com.aadya.whiskyapp.R
-import com.aadya.whiskyapp.databinding.EventDateTimeBinding
-import com.aadya.whiskyapp.databinding.EventRsvpBinding
-import com.aadya.whiskyapp.databinding.EventsHeaderBinding
-import com.aadya.whiskyapp.databinding.FragmentEventNewBinding
+import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
@@ -36,16 +33,14 @@ private const val FROM_DIALOG = "FROM_DIALOG"
 
 class EventsFragment() : Fragment() {
 
-    private lateinit var mBinding: FragmentEventNewBinding
+    private lateinit var mBinding: FragmentEventNewDailogBinding
     private lateinit var mIncludedLayoutBinding: EventsHeaderBinding
-    private  lateinit var mDateTimeIncludedLayout : EventDateTimeBinding
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var eventModel: EventsResponseModel
     private var pos : Int = 0
     private var isFromDialog=false
     var onEventsPageSwipeUpListner: onEventsPageSwipeUpListner? = null
     private var mdeletePageViewPager : deletePageViewPager? = null
-    private lateinit var mIncludedRSVPBinding: EventRsvpBinding
     private lateinit var mSessionManager: SessionManager
     private lateinit var mRSVPViewModel : RSVPViewModel
     private lateinit var mCommonUtils : CommonUtils
@@ -137,14 +132,14 @@ class EventsFragment() : Fragment() {
 
             }
 
-            mDateTimeIncludedLayout.tvDay.text = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
-            mDateTimeIncludedLayout.tvMonth.text = mCommonUtils.getMonth_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
+            mBinding.tvDay.text = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
+            mBinding.tvMonth.text = mCommonUtils.getMonth_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
 
-            if(eventModel.eventStartTime?.isNotEmpty() == true)
-            mDateTimeIncludedLayout.tvStarttime.text = eventModel.eventStartTime
-            if(eventModel.eventEndTime?.isNotEmpty() == true)
-            mDateTimeIncludedLayout.tvEndtime.text = eventModel.eventEndTime
-            mDateTimeIncludedLayout.tvDate.text = mCommonUtils.getDay_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
+            if(eventModel.eventStartTime?.isNotEmpty() == true){}
+            mBinding.tvStarttime.text = eventModel.eventStartTime
+            if(eventModel.eventEndTime?.isNotEmpty() == true){}
+            mBinding.tvEndtime.text = eventModel.eventEndTime
+            mBinding.tvDate.text = mCommonUtils.getDay_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
 
         }
     }
@@ -152,7 +147,7 @@ class EventsFragment() : Fragment() {
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
         mBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_event_new,
+            R.layout.fragment_event_new_dailog,
             container,
             false
         )
@@ -251,37 +246,35 @@ class EventsFragment() : Fragment() {
         mIncludedLayoutBinding.imgLogo.setOnClickListener {
             launchFragment(ProfileFragment.newInstance(), "ProfileFragment")
         }
-        mIncludedRSVPBinding = mBinding.eventRsvp
 
-        mIncludedRSVPBinding.imgRsvpIntersted.setOnClickListener{
-            mIncludedRSVPBinding.imgRsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
-            mIncludedRSVPBinding.imgRsvpIntersted.isClickable=false
+        mBinding.imgRsvpIntersted.setOnClickListener{
+            mBinding.imgRsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mBinding.imgRsvpIntersted.isClickable=false
 
             Handler(Looper.getMainLooper()).postDelayed({
                 var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 1
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
-                mIncludedRSVPBinding.imgRsvpIntersted.isClickable=true
-                mIncludedRSVPBinding.imgRsvpIntersted.clearAnimation()
+                mBinding.imgRsvpIntersted.isClickable=true
+                mBinding.imgRsvpIntersted.clearAnimation()
 
             }, 2000)
         }
 
-        mIncludedRSVPBinding.imgRsvpNotintersted.setOnClickListener{
-            mIncludedRSVPBinding.imgRsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
-            mIncludedRSVPBinding.imgRsvpNotintersted.isClickable=false
+        mBinding.imgRsvpNotintersted.setOnClickListener{
+            mBinding.imgRsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mBinding.imgRsvpNotintersted.isClickable=false
             Handler(Looper.getMainLooper()).postDelayed({
             var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
             mRSVPRequestModel.EventID = eventModel.eventID
             mRSVPRequestModel.EventFeedbackID = 2
             mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
-                mIncludedRSVPBinding.imgRsvpNotintersted.isClickable=true
-                mIncludedRSVPBinding.imgRsvpNotintersted.clearAnimation()
+                mBinding.imgRsvpNotintersted.isClickable=true
+                mBinding.imgRsvpNotintersted.clearAnimation()
             }, 2000)
         }
 
-        mDateTimeIncludedLayout = mBinding.eventDateTime
     }
 
     private fun launchFragment(fragment: Fragment, tag: String) {

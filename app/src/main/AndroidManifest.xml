@@ -8,8 +8,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="false" />
+
     <permission
         android:name="com.aadya.whiskyapp.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
@@ -27,7 +30,7 @@
         android:roundIcon="@mipmap/classifiedroundlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".payment.ui.PaymentSuccessActivity"></activity>
+        <activity android:name=".payment.ui.PaymentSuccessActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

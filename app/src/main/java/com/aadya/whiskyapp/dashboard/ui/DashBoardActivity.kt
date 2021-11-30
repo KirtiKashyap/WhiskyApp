@@ -36,6 +36,9 @@ import com.aadya.whiskyapp.utils.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.stripe.android.view.CardMultilineWidget
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.view.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -117,8 +120,8 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         }
     }
 
-    private fun callLogOutApi() {
-
+     fun callLogOutApi() {
+    CoroutineScope(Dispatchers.IO)
     val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
     val call: Call<String> = service.getLogout(mSessionManager.getAuthorization())
     call?.enqueue(object : Callback<String?> {
