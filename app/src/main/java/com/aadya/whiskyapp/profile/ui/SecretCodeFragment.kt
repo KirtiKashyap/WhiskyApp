@@ -88,8 +88,6 @@ class SecretCodeFragment : Fragment() {
                 SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
             }*/
 
-
-
         })
 
 

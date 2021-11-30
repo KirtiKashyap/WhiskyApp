@@ -72,6 +72,9 @@ interface APICallService {
     @GET(CommonUtils.APIURL.Events)
     fun getEventsList (@Header("Authorization") authHeader: String?): Call<List<EventsResponseModel?>?>
 
+    @POST(CommonUtils.APIURL.Logout)
+    fun getLogout(@Header("Authorization") authHeader: String?): Call<String>
+
     @POST(CommonUtils.APIURL.ProfileEdit)
     fun ProfileEdit(
         @Header("Authorization") authHeader: String,

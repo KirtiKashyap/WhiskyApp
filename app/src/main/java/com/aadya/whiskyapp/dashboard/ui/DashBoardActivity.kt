@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.dashboard.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,12 +18,16 @@ import com.aadya.whiskyapp.clublocation.ui.LocationFragment
 import com.aadya.whiskyapp.databinding.ActivityDashBoardBinding
 import com.aadya.whiskyapp.databinding.AppContentBinding
 import com.aadya.whiskyapp.events.ui.EventsLaunchFragment
+import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
 import com.aadya.whiskyapp.profile.ui.ProfileEditFragment
 import com.aadya.whiskyapp.profile.ui.SecretCodeFragment
 import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
+import com.aadya.whiskyapp.retrofit.APICallService
+import com.aadya.whiskyapp.retrofit.APIClient
+import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
 import com.aadya.whiskyapp.utils.BottomNavigationInterface
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -31,6 +36,9 @@ import com.aadya.whiskyapp.utils.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.stripe.android.view.CardMultilineWidget
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
@@ -103,6 +111,36 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
             mBinding.drawerLayout.closeDrawers()
             callFragment(5)
         }
+        mBinding.rlLogout.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            //callLogOutApi()
+        }
+    }
+
+    private fun callLogOutApi() {
+
+    val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+    val call: Call<String> = service.getLogout(mSessionManager.getAuthorization())
+    call?.enqueue(object : Callback<String?> {
+        override fun onResponse(
+            call: Call<String?>,
+            response: Response<String?>
+        ) {
+            if (response.isSuccessful) {
+                val intent = Intent(this@DashBoardActivity, LandingActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Log.d("", response.errorBody().toString())
+            }
+
+        }
+
+        override fun onFailure(call: Call<String?>, t: Throwable) {
+            t.message?.let { Log.d("", it) }
+        }
+    })
+
     }
 
 

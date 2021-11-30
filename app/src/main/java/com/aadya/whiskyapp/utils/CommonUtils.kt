@@ -15,8 +15,11 @@ import com.tapadoo.alerter.Alerter
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.regex.Pattern
+
 
 
 object CommonUtils {
@@ -73,6 +76,7 @@ object CommonUtils {
             const val PaymentUpdate: String="Payment/UpdatePayment"
             const val EventNotification: String="Mobile/ChangeMemberEventNotification"
             const val OfferNotification: String="Mobile/ChangeMemberSpecialNotification"
+            const val Logout: String="Login/LogOut"
         }
     }
 
@@ -92,6 +96,7 @@ object CommonUtils {
         val outputDateStr: String = outputFormat.format(date)
         return  outputDateStr
     }
+    //@RequiresApi(Build.VERSION_CODES.O)
     fun getWeekDay(lastSeen: String?): String{
         val toTypedArray = lastSeen?.split(" ")!!.toTypedArray()
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
@@ -99,7 +104,27 @@ object CommonUtils {
         sdf.applyPattern("EEEE")
         val str = sdf.format(date)
         println(str)
+        try {
+            val localTime: LocalTime =
+                LocalTime.parse(
+                    toTypedArray[1],
+                    DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH)
+                )
 
+            // Output 12 hrs
+
+            // Output 12 hrs
+            println(
+                localTime.format(
+                    DateTimeFormatter.ofPattern(
+                        "hh:mm a",
+                        Locale.ENGLISH
+                    )
+                )
+            )
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
         return SimpleDateFormat("EEEE", Locale.ENGLISH).format(date) +" at "+ toTypedArray[1]
     }
 

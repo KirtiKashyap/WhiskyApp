@@ -240,6 +240,44 @@
                             />
                     </RelativeLayout>
 
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_logout"
+                        android:layout_below="@+id/rl_purchase_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_logout"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/location"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/logout"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_logout"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

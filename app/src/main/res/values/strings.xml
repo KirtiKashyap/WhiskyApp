@@ -110,6 +110,7 @@
     <string name="favorite_drink">MY FAVOURITE MIXOLOGY</string>
     <string name="where_is_this_place">Where is this place</string>
     <string name="purchase_history">Purchase History</string>
+    <string name="logout">Logout</string>
     <string name="submit">Submit</string>
     <string name="profile_update">Profile Updated</string>
     <string name="profile_update_successfully">Profile has been updated successfully</string>
