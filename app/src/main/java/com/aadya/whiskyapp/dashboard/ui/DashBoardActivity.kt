@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -28,7 +27,6 @@ import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
 import com.aadya.whiskyapp.retrofit.APICallService
 import com.aadya.whiskyapp.retrofit.APIClient
-import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
 import com.aadya.whiskyapp.utils.BottomNavigationInterface
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -36,7 +34,6 @@ import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.stripe.android.view.CardMultilineWidget
-import kotlinx.android.synthetic.main.bottom_sheet_dialog.view.*
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -116,7 +113,10 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mBinding.rlLogout.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
             lifecycleScope.launch{
-                LoginHelper.logout().join()
+                LoginHelper.logout(mSessionManager).join()
+                val intent = Intent(this@DashBoardActivity, LandingActivity::class.java)
+                        startActivity(intent)
+                        finish()
             }
         }
     }
@@ -305,25 +305,22 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
     object LoginHelper {
         private val scope = CoroutineScope(SupervisorJob() + CoroutineName("LoginHelper"))
 
-        fun logout(): Job = scope.launch {
+        fun logout(mSessionManager: SessionManager): Job = scope.launch {
             Log.d("","logout")
-            deleteSession()
+            deleteSession(mSessionManager.getAuthorization())
         }
 
-        private suspend fun deleteSession() {
+        private suspend fun deleteSession(authorization: String?) {
 
             val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
-            //val mSessionManager= SessionManager.getInstance(context1 = )!!
-            val call: Call<String> = service.getLogout("bearer YWivtJuxX8ds/ZBFzmCBgnFr7SKanlKaP593O5uPIfKRK6FHRaE7eUWADOZea6CEN0UPmwdrVA8FZ/afjGahdFj2vLGQJ6P7aJOQzS5f3WQpHCx+cHOQXMVuMl9GKLc0MgPWaAEmBniCdEt28qjceG0WxaTWTQSeytUA/R8GU3xUH7ROEgC+YxUpJW7ezCSt5Ba8S1DfmyZLzuqpDX1vQuSLvBHEqcLhY3KfPXvAknY=")
+            val call: Call<String> = service.getLogout(authorization)
             call?.enqueue(object : Callback<String?> {
                 override fun onResponse(
                     call: Call<String?>,
                     response: Response<String?>
                 ) {
                     if (response.isSuccessful) {
-                        /*val intent = Intent(this@DashBoardActivity, LandingActivity::class.java)
-                        startActivity(intent)
-                        finish()*/
+
                     } else {
                         Log.d("", response.errorBody().toString())
                     }

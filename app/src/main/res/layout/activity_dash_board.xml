@@ -39,7 +39,7 @@
                     <RelativeLayout
                         android:id="@+id/rl_menu"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:background="@color/mainheaderbg"
 
@@ -61,8 +61,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/menu"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_menu_icon"
                             android:textColor="@color/orangetextcolor"
@@ -73,7 +73,7 @@
                         android:id="@+id/rl_id"
                         android:layout_below="@+id/rl_menu"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
                         android:background="@color/mainheaderbg"
@@ -95,8 +95,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ID"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_id_icon"
                             android:textColor="@color/orangetextcolor"
@@ -108,7 +108,7 @@
 
                         android:layout_below="@+id/rl_id"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
                         android:background="@color/mainheaderbg"
@@ -129,8 +129,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/events"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_events_icon"
                             android:textColor="@color/orangetextcolor"
@@ -141,7 +141,7 @@
                         android:id="@+id/rl_vip"
                         android:layout_below="@+id/rl_events"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
                         android:background="@color/mainheaderbg"
@@ -163,8 +163,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/vip"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_vip_icon"
                             android:textColor="@color/orangetextcolor"
@@ -197,8 +197,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/where_is_this_place"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_whereistdisplace_icon"
                             android:textColor="@color/orangetextcolor"
@@ -209,12 +209,10 @@
                         android:id="@+id/rl_purchase_history"
                         android:layout_below="@+id/rl_where_is_dis_place"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
-                        android:background="@color/mainheaderbg"
-
-                        >
+                        android:background="@color/mainheaderbg">
 
                         <ImageView
                             android:id="@+id/img_purchase_history_icon"
@@ -231,8 +229,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/purchase_history"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_purchase_history_icon"
                             android:textColor="@color/orangetextcolor"
@@ -240,14 +238,11 @@
                             />
                     </RelativeLayout>
 
-
-
-
                     <RelativeLayout
                         android:id="@+id/rl_logout"
                         android:layout_below="@+id/rl_purchase_history"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
                         android:background="@color/mainheaderbg"
@@ -269,8 +264,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/logout"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
                             android:textSize="@dimen/_16sdp"
                             android:layout_toEndOf="@+id/img_logout"
                             android:textColor="@color/orangetextcolor"
