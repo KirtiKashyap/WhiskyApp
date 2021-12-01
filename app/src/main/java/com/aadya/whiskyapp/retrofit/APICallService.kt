@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.retrofit
 
+import com.aadya.whiskyapp.dashboard.model.LogoutRequest
 import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
@@ -73,7 +74,7 @@ interface APICallService {
     fun getEventsList (@Header("Authorization") authHeader: String?): Call<List<EventsResponseModel?>?>
 
     @POST(CommonUtils.APIURL.Logout)
-    fun getLogout(@Header("Authorization") authHeader: String?): Call<String>
+    fun getLogout(@Header("Authorization") authHeader: String?, @Body accessToken: LogoutRequest): Call<Any>
 
     @POST(CommonUtils.APIURL.ProfileEdit)
     fun ProfileEdit(

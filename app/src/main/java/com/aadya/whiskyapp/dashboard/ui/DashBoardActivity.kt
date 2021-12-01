@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.clublocation.ui.LocationFragment
+import com.aadya.whiskyapp.dashboard.model.LogoutRequest
 import com.aadya.whiskyapp.databinding.ActivityDashBoardBinding
 import com.aadya.whiskyapp.databinding.AppContentBinding
 import com.aadya.whiskyapp.events.ui.EventsLaunchFragment
@@ -307,17 +308,20 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
 
         fun logout(mSessionManager: SessionManager): Job = scope.launch {
             Log.d("","logout")
-            deleteSession(mSessionManager.getAuthorization())
+            val toTypedArray = mSessionManager.getAuthorization()?.split(" ")!!.toTypedArray()
+            val logoutRequest = LogoutRequest()
+            logoutRequest.AccessToken=toTypedArray[1]
+            deleteSession(mSessionManager.getAuthorization(),logoutRequest)
         }
 
-        private suspend fun deleteSession(authorization: String?) {
+        private suspend fun deleteSession(authorization: String?, logoutRequest: LogoutRequest,) {
 
             val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
-            val call: Call<String> = service.getLogout(authorization)
-            call?.enqueue(object : Callback<String?> {
+            val call: Call<Any> = service.getLogout(authorization,logoutRequest)
+            call?.enqueue(object : Callback<Any?> {
                 override fun onResponse(
-                    call: Call<String?>,
-                    response: Response<String?>
+                    call: Call<Any?>,
+                    response: Response<Any?>
                 ) {
                     if (response.isSuccessful) {
 
@@ -327,10 +331,11 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
 
                 }
 
-                override fun onFailure(call: Call<String?>, t: Throwable) {
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
                     t.message?.let { Log.d("", it) }
                 }
             })
+
         }
     }
 

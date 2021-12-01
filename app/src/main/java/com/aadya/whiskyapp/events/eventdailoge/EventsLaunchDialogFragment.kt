@@ -26,6 +26,7 @@ import com.aadya.whiskyapp.events.viewmodel.EventsViewModel
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.utils.*
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 
@@ -195,11 +196,14 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
 
 
     override fun updateView(position: Int) {
-        eventsAdapter.notifyData(position)
+
+            eventsAdapter.notifyData(position)
+
     }
 
     override fun updateEventsViewPager() {
         mBottomNavigationInterface?.setOnBottomNavigationResult()
+        dismiss()
         launchFragment(
             MenuFragment.newInstance(),
             "MenuFragment"

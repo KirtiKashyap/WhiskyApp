@@ -130,6 +130,8 @@ class EventsFragment() : Fragment() {
                         .into(mBinding.imgEventtop)
                 }
 
+            }else{
+
             }
 
             mBinding.tvDay.text = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))

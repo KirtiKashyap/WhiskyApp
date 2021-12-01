@@ -188,7 +188,7 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
 
 
     override fun updateView(position: Int) {
-        eventsAdapter.notifyData(position)
+            eventsAdapter.notifyData(position)
     }
 
     override fun updateEventsViewPager() {
