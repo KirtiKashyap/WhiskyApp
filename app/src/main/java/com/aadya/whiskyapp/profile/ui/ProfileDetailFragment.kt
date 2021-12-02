@@ -32,8 +32,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.secretcode_new_layout.*
 
 class ProfileDetailFragment : Fragment() {
-
-
     private lateinit var mBinding: FragmentProfileDetailNewBinding
     private lateinit var mCommonUtils: CommonUtils
     private lateinit var mSessionManager: SessionManager
@@ -131,6 +129,14 @@ class ProfileDetailFragment : Fragment() {
         mPhoneLayoutBinding.tvUserPhone.paint.shader=textShader
         mEmailLayoutBinding.tvUserEmail.paint.shader=textShader
         mAddressLayoutBinding.tvUserAdress.paint.shader=textShader
+
+
+        mDOBLayoutBinding.tvDob.paint.shader=textShader
+        mPhoneLayoutBinding.tvPhone.paint.shader=textShader
+        mEmailLayoutBinding.tvEmail.paint.shader=textShader
+        mAddressLayoutBinding.tvAddress.paint.shader=textShader
+
+
         mDOBLayoutBinding.imgProfileedit.setOnClickListener {
             launchFragment(ProfileEditFragment.newInstance(), "ProfileEditFragment")
         }
@@ -165,21 +171,15 @@ class ProfileDetailFragment : Fragment() {
     }
 
     private fun handleObserver() {
-
-
           mProfileViewModel.getEventNotificationObserver().observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-
             context?.let {
-
             }
 
         })
         mProfileViewModel.getSpecialOfferNotificationObserver().observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-
             context?.let {
-
             }
 
         })
