@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.clublocation.ui.LocationFragment
+import com.aadya.whiskyapp.dashboard.ui.DashBoardActivity
 import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.events.eventdailoge.EventsLaunchDialogFragment
 import com.aadya.whiskyapp.landing.ui.LandingActivity
@@ -28,6 +32,9 @@ import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.secretcode_new_layout.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 
 class SecretCodeFragment : Fragment() {
@@ -81,16 +88,19 @@ class SecretCodeFragment : Fragment() {
                     .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
                     .into(img_secretcode)
             }
-            if(it.isEvent && MyApplication.isEventDialogOpen){
+            if((it.isEvent && MyApplication.isEventDialogOpen) && (it.isSpecial && MyApplication.isSpecialEventDialogOpen)){
+                SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG) }, 500)
+
+            }else if(it.isEvent && MyApplication.isEventDialogOpen){
                 EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
             }
-            /*if(it.isSpecial && MyApplication.isSpecialEventDialogOpen){
+            else if(it.isSpecial && MyApplication.isSpecialEventDialogOpen){
                 SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
-            }*/
+            }
 
         })
-
-
 
         mProfileViewModel.getprofileUnAuthorized().observe(this, Observer {
             val alertModel = AlertModel(
@@ -108,7 +118,7 @@ class SecretCodeFragment : Fragment() {
 
             )
 
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(requireActivity(), LandingActivity::class.java)
                 startActivity(intent)}, 2000)
 

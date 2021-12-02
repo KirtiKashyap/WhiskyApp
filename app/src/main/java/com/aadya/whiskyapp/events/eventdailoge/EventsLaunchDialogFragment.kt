@@ -155,7 +155,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
 
             )
 
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(requireActivity(), LandingActivity::class.java)
                 startActivity(intent)}, 2000)
 
