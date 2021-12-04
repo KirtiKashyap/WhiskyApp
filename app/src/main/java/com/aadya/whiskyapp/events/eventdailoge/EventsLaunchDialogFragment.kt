@@ -26,8 +26,6 @@ import com.aadya.whiskyapp.events.viewmodel.EventsViewModel
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.utils.*
-import java.lang.Exception
-import kotlin.collections.ArrayList
 
 
 class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updateEventsViewPager {
@@ -54,6 +52,10 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
         mBottomNavigationInterface = context as BottomNavigationInterface
     }
 
+    override fun getTheme(): Int {
+        return R.style.FullScreenDialog
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,31 +76,31 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
 
     private fun handleObserver() {
         mEventsViewModel.getEventsObserver().observe(viewLifecycleOwner, Observer {
-            Log.d("TAG","In Observer event")
-            if(it.isNullOrEmpty())
-                {
-                    val alertModel = AlertModel(
-                        2000, resources.getString(R.string.event_error),
-                            resources.getString(R.string.sorry_empty_events)
-                        , R.drawable.wrong_icon, R.color.notiFailColor
-                    )
-                    mCommonUtils.showAlert(
-                        alertModel.duration,
-                        alertModel.title,
-                        alertModel.message,
-                        alertModel.drawable,
-                        alertModel.color,
-                        requireActivity()
+            Log.d("TAG", "In Observer event")
+            if (it.isNullOrEmpty()) {
+                val alertModel = AlertModel(
+                    2000,
+                    resources.getString(R.string.event_error),
+                    resources.getString(R.string.sorry_empty_events),
+                    R.drawable.wrong_icon,
+                    R.color.notiFailColor
+                )
+                mCommonUtils.showAlert(
+                    alertModel.duration,
+                    alertModel.title,
+                    alertModel.message,
+                    alertModel.drawable,
+                    alertModel.color,
+                    requireActivity()
 
-                    )
+                )
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        mBottomNavigationInterface?.setOnBottomNavigationResult()
-                        launchFragment(MenuFragment.newInstance(), "MenuFragment")}, 1500)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    mBottomNavigationInterface?.setOnBottomNavigationResult()
+                    launchFragment(MenuFragment.newInstance(), "MenuFragment")
+                }, 1500)
 
-                }
-
-            else {
+            } else {
                 eventsList.clear()
                 eventsList.addAll(it)
                 eventsAdapter.setItems(it)
@@ -110,7 +112,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
             object : Observer<AlertModel?> {
                 override fun onChanged(alertModel: AlertModel?) {
 
-                    Log.d("TAG","In Observer alert")
+                    Log.d("TAG", "In Observer alert")
                     if (alertModel == null) return
                     mCommonUtils.showAlert(
                         alertModel.duration,
@@ -129,7 +131,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
             object : Observer<Int?> {
                 override fun onChanged(progressState: Int?) {
                     if (progressState == null) return
-                    Log.d("TAG","In Observer progress")
+                    Log.d("TAG", "In Observer progress")
                     if (progressState === CommonUtils.ProgressDialog.showDialog)
                         mCommonUtils.showProgress(
                             resources.getString(R.string.pleasewait), requireContext()
@@ -141,9 +143,11 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
 
         mEventsViewModel.getprofileUnAuthorized().observe(viewLifecycleOwner, Observer {
             val alertModel = AlertModel(
-                2000, resources.getString(R.string.login_error),
-                resources.getString(R.string.please_login)
-                , R.drawable.wrong_icon, R.color.notiFailColor
+                2000,
+                resources.getString(R.string.login_error),
+                resources.getString(R.string.please_login),
+                R.drawable.wrong_icon,
+                R.color.notiFailColor
             )
             mCommonUtils.showAlert(
                 alertModel.duration,
@@ -157,7 +161,8 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
 
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(requireActivity(), LandingActivity::class.java)
-                startActivity(intent)}, 2000)
+                startActivity(intent)
+            }, 2000)
 
         })
 
@@ -183,7 +188,8 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
         eventsList = ArrayList<EventsResponseModel>()
 
         eventsAdapter = EventsAdapter(
-            childFragmentManager,this,eventsList,this,true)
+            childFragmentManager, this, eventsList, this, true
+        )
         mBinding.eventsViewpager.adapter = eventsAdapter
 
         mEventsViewModel = ViewModelProvider(this, EventsFactory(activity?.application)).get(

@@ -252,7 +252,7 @@ class EventsFragment() : Fragment() {
             mBinding.imgRsvpIntersted.isClickable=false
 
             Handler(Looper.getMainLooper()).postDelayed({
-                var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
+                var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 1
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
@@ -266,7 +266,7 @@ class EventsFragment() : Fragment() {
             mBinding.imgRsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
             mBinding.imgRsvpNotintersted.isClickable=false
             Handler(Looper.getMainLooper()).postDelayed({
-            var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
+            var mRSVPRequestModel = RSVPRequestModel()
             mRSVPRequestModel.EventID = eventModel.eventID
             mRSVPRequestModel.EventFeedbackID = 2
             mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)

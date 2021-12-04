@@ -41,7 +41,9 @@ class SpecialOfferDialogFragment : DialogFragment() {
         super.onAttach(context)
         mBottomNavigationInterface = context as BottomNavigationInterface
     }
-
+    override fun getTheme(): Int {
+        return R.style.FullScreenDialog
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
