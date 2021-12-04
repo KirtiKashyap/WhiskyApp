@@ -111,13 +111,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.05"/>
+                    app:layout_constraintGuide_percent="0.08"/>
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/tv_month_end_guide"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.32"/>
+                    app:layout_constraintGuide_percent="0.30"/>
                 <TextView
                     android:id="@+id/tv_month"
                     android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                     android:text="11:30AM"
                     android:textColor="@color/orangetextcolor"
                     android:textSize="@dimen/_15sdp"
-                    app:layout_constraintStart_toEndOf="@id/emptyview2"
+                    app:layout_constraintStart_toEndOf="@id/tv_dateend_guide"
                     app:layout_constraintEnd_toEndOf="@+id/tv_endtime_start_guide"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center"
@@ -188,7 +188,7 @@
                     android:textColor="@color/orangetextcolor"
                     android:textSize="@dimen/_15sdp"
                     app:layout_constraintTop_toBottomOf="@id/tv_starttime"
-                    app:layout_constraintStart_toEndOf="@id/emptyview2"
+                    app:layout_constraintStart_toEndOf="@id/tv_dateend_guide"
                     app:layout_constraintEnd_toEndOf="@+id/tv_endtime_start_guide"
                     android:gravity="center"
                     />
@@ -203,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.70" />
+                    app:layout_constraintGuide_percent="0.68" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -219,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.30"/>
+                    app:layout_constraintGuide_percent="0.15"/>
                 <ImageView
                     android:id="@+id/img_rsvp_intersted"
                     android:layout_width="40dp"
@@ -243,6 +243,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:adjustViewBounds="true"/>
                 <ImageView
+
                     android:layout_marginStart="@dimen/_20sdp"
                     android:id="@+id/img_rsvp_notintersted"
                     android:layout_width="40dp"
@@ -259,7 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.70"/>
+                    app:layout_constraintGuide_percent="0.85"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
                 android:layout_marginTop="@dimen/_5sdp"
