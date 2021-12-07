@@ -34,7 +34,7 @@ object CommonUtils {
          );
     }
     fun LogMessage(message: String?){
-        Log.d("TAG", "Message :" + message)
+        Log.d("TAG", "Message :$message")
     }
 
     fun isValidEmail(email: String?): Boolean {
@@ -58,16 +58,15 @@ object CommonUtils {
     interface APIURL {
 
         companion object {
-            const val Profile_IMAGE_URL="http://92.204.128.4:5300/UploadFiles/MembershipImage/"
+            const val Profile_IMAGE_URL="https://ultimiz.com/UploadFiles/MembershipImage/"
             //const val Event_IMAGE_URL="https://ultimiz.com"
-            const val Event_IMAGE_URL="http://92.204.128.4:5300/UploadFiles/EventImage/"
-            const val QRCode_IMAGE_URL="http://92.204.128.4:5300/UploadFiles/QRCode/"
-            //const val BASE_URL: String = "https://api.ultimiz.com"
-            const val BASE_URL: String = "http://92.204.128.4:5002/api/"
+            const val Event_IMAGE_URL="https://ultimiz.com/UploadFiles/EventImage/"
+            const val QRCode_IMAGE_URL="https://ultimiz.com/UploadFiles/QRCode/"
+            const val BASE_URL: String = "https://api.ultimiz.com/api/"
             const val Profile: String = "Mobile/GetAppUserByID"
             const val SpecialOffer: String = "Mobile/GetSpecialofferListForApp"
             const val LOGIN_USER: String  = "Login/AppUserAuthenticate"
-            const val FORGOT_PASSWORD: String  = "http://92.204.128.4:5300/Login/ForgotPassword"
+            const val FORGOT_PASSWORD: String  = "https://ultimiz.com/Login/ForgotPassword"
             const val Events : String = "Mobile/GetEventListForApp"
             const val ProfileEdit : String = "Mobile/UpdateAppUser"
             const val RSVP :  String = "Mobile/UpdateEventResponseForApp"
@@ -112,8 +111,6 @@ object CommonUtils {
                     toTypedArray[1],
                     DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH)
                 )
-
-            // Output 12 hrs
 
             // Output 12 hrs
             println(
