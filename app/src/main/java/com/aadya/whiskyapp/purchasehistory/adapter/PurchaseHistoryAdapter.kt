@@ -42,9 +42,10 @@ class PurchaseHistoryAdapter(
         val purchaseHistory: PurchaseHistory = purchaseHistoryList[i]
         with(viewHolder) {
             binding.tvPurchaseTitle.text="Status: "+purchaseHistory.paymentStatus
-            binding.tvAmt.text="Amount: "+purchaseHistory.amount
+            binding.tvAmt.text="Amount: $"+purchaseHistory.amount+".00"
             binding.tvDate.text="Date: "+purchaseHistory.paymentDate
             binding.tvOrderid.text="Ticket Id: "+purchaseHistory.ticketID
+            binding.purchaseHistoryMainLayout.setBackgroundResource(R.drawable.eventattendingselected_bg )
             
         }
 

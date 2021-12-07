@@ -59,8 +59,10 @@ object CommonUtils {
 
         companion object {
             const val Profile_IMAGE_URL="http://92.204.128.4:5300/UploadFiles/MembershipImage/"
+            //const val Event_IMAGE_URL="https://ultimiz.com"
             const val Event_IMAGE_URL="http://92.204.128.4:5300/UploadFiles/EventImage/"
             const val QRCode_IMAGE_URL="http://92.204.128.4:5300/UploadFiles/QRCode/"
+            //const val BASE_URL: String = "https://api.ultimiz.com"
             const val BASE_URL: String = "http://92.204.128.4:5002/api/"
             const val Profile: String = "Mobile/GetAppUserByID"
             const val SpecialOffer: String = "Mobile/GetSpecialofferListForApp"
