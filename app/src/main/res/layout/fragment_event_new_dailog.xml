@@ -36,12 +36,16 @@
             android:background="@drawable/loginbg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_eventbg_guide"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@id/img_eventbg_guide">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/constraint_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10"/>
         <TextView
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraint_guide"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tv_eventname2"
@@ -216,7 +220,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.30"/>
+                app:layout_constraintGuide_percent="0.32"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,10 +237,11 @@
                     app:layout_constraintGuide_percent="0.15"/>
                 <ImageView
                     android:id="@+id/img_rsvp_intersted"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:adjustViewBounds="true"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/event_intersted"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/img_rsvp_startguide"
@@ -257,11 +262,12 @@
 
                     android:layout_marginStart="@dimen/_20sdp"
                     android:id="@+id/img_rsvp_notintersted"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/event_notintersted"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/img_rsvp__not_intersted_endguide"
                     app:layout_constraintStart_toEndOf="@+id/img_rsvp" />
