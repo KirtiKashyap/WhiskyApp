@@ -29,6 +29,7 @@ import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
+import com.bumptech.glide.Glide
 
 
 private const val ARG_EVENT = "events"
@@ -81,6 +82,15 @@ class EventDetailFragment : Fragment() {
 
             mBinding.tvWhere.text = eventModel?.eventLocation
             mBinding.tvWhatIsSpecial.text = eventModel?.description
+
+            if(eventModel?.imageName?.isNullOrEmpty()==false){
+                context?.let {
+                    Glide.with(it)
+                        .load(CommonUtils.APIURL.Event_IMAGE_URL +eventModel?.imageName)
+                        .into(mBinding.imgEventtop)
+                }
+
+            }
 
         }
     }

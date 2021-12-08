@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:fitsSystemWindows="true"
         android:id="@+id/constraint_events"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -43,12 +44,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.10"/>
+                app:layout_constraintGuide_percent="0.02"/>
         <TextView
             app:layout_constraintTop_toBottomOf="@id/constraint_guide"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_eventname2"
             android:id="@+id/tv_eventname1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +60,12 @@
             android:singleLine="true"
             android:textSize="@dimen/_20sdp"
             />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tv_eventname2_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10"/>
             <TextView
                 android:id="@+id/tv_eventname2"
                 android:layout_width="0dp"
@@ -69,12 +75,17 @@
                 android:textColor="@color/orangetextcolor"
                 android:textStyle="bold"
                 android:textSize="@dimen/_45sdp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_eventname1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_eventname2_guide"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/tv_eventname3"
                 android:includeFontPadding="false"
                 />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tv_eventname3_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.28"/>
             <TextView
                 android:id="@+id/tv_eventname3"
                 android:layout_width="0dp"
@@ -87,21 +98,23 @@
                 android:fontFamily="@font/archivonarrow_regular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_eventname2"
-                app:layout_constraintBottom_toTopOf="@+id/dateLayout"
+                app:layout_constraintTop_toBottomOf="@+id/tv_eventname3_guide"
                 android:includeFontPadding="false"
                 />
-
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/dateLayout"
+                app:layout_constraintBottom_toTopOf="@+id/event_intrested_bottomguide"
                 app:layout_constraintTop_toBottomOf="@+id/tv_eventname3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/intrestedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/dateupper_guidline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.40"/>
                 <TextView
                     android:id="@+id/tv_day"
                     android:layout_width="wrap_content"
@@ -151,29 +164,30 @@
                     android:textColor="@color/orangetextcolor"
                     android:textSize="@dimen/_30sdp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/img_rsvp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     />
                 <View
                     android:id="@+id/emptyview1"
                     android:layout_width="1dp"
                     android:layout_height="50dp"
                     android:background="@color/orangetextcolor"
+                    app:layout_constraintBottom_toTopOf="@+id/img_rsvp"
                     app:layout_constraintEnd_toStartOf="@+id/tv_date"
                     app:layout_constraintStart_toEndOf="@+id/tv_month_end_guide"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <View
                     android:id="@+id/emptyview2"
                     android:layout_width="1dp"
                     android:layout_height="50dp"
                     android:background="@color/orangetextcolor"
+                    app:layout_constraintBottom_toTopOf="@+id/img_rsvp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_date"
                     app:layout_constraintEnd_toEndOf="@+id/tv_dateend_guide"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    />
                 <TextView
                     android:id="@+id/tv_starttime"
                     android:layout_width="0dp"
@@ -212,88 +226,83 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.68" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/event_date_time_bottomguide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.32"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/event_date_time_bottomguide"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/intrestedLayout">
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/img_rsvp_startguide"
+                    android:id="@+id/tv_dislike_guide"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.15"/>
+                    app:layout_constraintGuide_percent="0.62" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/tv_like_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.20" />
                 <ImageView
                     android:id="@+id/img_rsvp_intersted"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:adjustViewBounds="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:src="@drawable/event_intersted"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/img_rsvp_startguide"
-                    app:layout_constraintEnd_toStartOf="@+id/img_rsvp"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/img_rsvp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/event_rsvp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:adjustViewBounds="true"/>
+                    app:layout_constraintStart_toEndOf="@+id/tv_like_guide"
+                    app:layout_constraintTop_toBottomOf="@+id/dateupper_guidline" />
                 <ImageView
-
+                    android:id="@+id/img_rsvp"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/event_rsvp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dateupper_guidline"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/tv_rsvp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_rsvp"
+                    android:text="RSVP"
+                    android:fontFamily="@font/archivonarrow_regular"
+                    android:textColor="@color/orangetextcolor"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <ImageView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:id="@+id/img_rsvp_notintersted"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:adjustViewBounds="true"
                     android:src="@drawable/event_notintersted"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img_rsvp__not_intersted_endguide"
-                    app:layout_constraintStart_toEndOf="@+id/img_rsvp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/img_rsvp__not_intersted_endguide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.85"/>
-                <TextView
-                    android:id="@+id/tv_buy"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Click to buy"
-                    android:fontFamily="@font/archivonarrow_regular"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    android:textSize="@dimen/_16sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_rsvp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/dateupper_guidline"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_dislike_guide"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/event_intrested_bottomguide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.75"/>
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Click to buy"
+                android:fontFamily="@font/archivonarrow_regular"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintTop_toBottomOf="@+id/event_intrested_bottomguide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
