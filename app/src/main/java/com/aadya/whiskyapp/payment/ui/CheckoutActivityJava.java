@@ -25,6 +25,7 @@ import com.aadya.whiskyapp.payment.model.PaymentUpdate;
 import com.aadya.whiskyapp.payment.viewmodel.PaymentFactory;
 import com.aadya.whiskyapp.payment.viewmodel.PaymentUpdateViewModel;
 import com.aadya.whiskyapp.utils.AlertModel;
+import com.aadya.whiskyapp.utils.CommonUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -54,8 +55,6 @@ import okhttp3.Response;
 
 
 public class CheckoutActivityJava extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    private static final String BACKEND_URL = "http://92.204.128.4:5002/api/Payment/CreatePaymentIntent";
 
     private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
@@ -246,7 +245,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
         RequestBody body = RequestBody.create(json, mediaType);
         Request request = new Request.Builder()
-                .url(BACKEND_URL)
+                .url(CommonUtils.APIURL.PaymentUrl)
                 .post(body)
                 .build();
         httpClient.newCall(request)

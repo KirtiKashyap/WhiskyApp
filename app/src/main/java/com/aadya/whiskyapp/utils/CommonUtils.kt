@@ -59,6 +59,7 @@ object CommonUtils {
 
         companion object {
             const val Profile_IMAGE_URL="https://ultimiz.com/UploadFiles/MembershipImage/"
+            const val PaymentUrl: String = "https://api.ultimiz.com/api/Payment/CreatePaymentIntent"
             //const val Event_IMAGE_URL="https://ultimiz.com"
             const val Event_IMAGE_URL="https://ultimiz.com/UploadFiles/EventImage/"
             const val QRCode_IMAGE_URL="https://ultimiz.com/UploadFiles/QRCode/"

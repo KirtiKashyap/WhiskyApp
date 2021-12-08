@@ -17,7 +17,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/forgotheader_rel"
         android:layout_width="match_parent"
-
         android:layout_height="?attr/actionBarSize">
 
         <ImageView
