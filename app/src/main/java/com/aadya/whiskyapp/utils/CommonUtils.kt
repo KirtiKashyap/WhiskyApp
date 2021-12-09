@@ -79,6 +79,8 @@ object CommonUtils {
             const val EventNotification: String="Mobile/ChangeMemberEventNotification"
             const val OfferNotification: String="Mobile/ChangeMemberSpecialNotification"
             const val Logout: String="Login/LogOut"
+            const val ReservationInfo : String="Reservation/GetBookingInfoByMemberID"
+            const val CancelReservation : String="Reservation/UpdateReservationBookingStatus"
         }
     }
 

@@ -11,8 +11,7 @@ import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
-import com.aadya.whiskyapp.reserve.model.ReserveRequestModel
-import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
+import com.aadya.whiskyapp.reserve.model.*
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -226,6 +225,50 @@ class RetrofitService {
             }
 
             override fun onFailure(call: Call<ReserveResponseModel?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+        })
+    }
+
+
+
+    fun getReserveInfo(
+        authorization: String?,
+        reserveRequestModel: ReserveInfoRequest?,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<ReserveInfoResponse>? = service.reserveInfo(authorization,reserveRequestModel)
+        call?.enqueue(object : Callback<ReserveInfoResponse?> {
+            override fun onResponse(
+                call: Call<ReserveInfoResponse?>,
+                response: Response<ReserveInfoResponse?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<ReserveInfoResponse?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+        })
+    }
+
+    fun getCancelReservation(
+        authorization: String?,
+        cancelReservationRequest: CancelReservationRequest?,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<Int>? = service.cancelReservation(authorization,cancelReservationRequest)
+        call?.enqueue(object : Callback<Int?> {
+            override fun onResponse(
+                call: Call<Int?>,
+                response: Response<Int?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<Int?>, t: Throwable) {
                 apiResponseListener.onFailure()
             }
         })

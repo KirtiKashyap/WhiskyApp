@@ -12,8 +12,7 @@ import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
-import com.aadya.whiskyapp.reserve.model.ReserveRequestModel
-import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
+import com.aadya.whiskyapp.reserve.model.*
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import okhttp3.MultipartBody
@@ -66,6 +65,12 @@ interface APICallService {
 
     @POST(CommonUtils.APIURL.Reserve)
     fun reserve(@Header("Authorization") authHeader: String?,@Body reserveRequestModel: ReserveRequestModel?): Call<ReserveResponseModel>?
+
+    @POST(CommonUtils.APIURL.ReservationInfo)
+    fun reserveInfo(@Header("Authorization") authHeader: String?,@Body reserveRequestModel: ReserveInfoRequest?): Call<ReserveInfoResponse>?
+
+    @POST(CommonUtils.APIURL.CancelReservation)
+    fun cancelReservation(@Header("Authorization") authHeader: String?,@Body cancelReservation: CancelReservationRequest?): Call<Int>?
 
     @POST(CommonUtils.APIURL.FORGOT_PASSWORD)
     fun forgotPassword(@Body loginRequestModel: LoginRequestModel?): Call<Int?>?

@@ -24,6 +24,9 @@ import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
 import com.aadya.whiskyapp.events.ui.RSVPAcknowledgeFragment
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
+import com.aadya.whiskyapp.reserve.model.CancelReservationRequest
+import com.aadya.whiskyapp.reserve.model.ReserveInfoRequest
+import com.aadya.whiskyapp.reserve.model.ReserveInfoResponse
 import com.aadya.whiskyapp.reserve.viewmodel.ReserveFactory
 import com.aadya.whiskyapp.reserve.viewmodel.ReserveViewModel
 import com.aadya.whiskyapp.utils.AlertModel
@@ -49,6 +52,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var  mCommonUtils : CommonUtils
     private lateinit var mSessionManager: SessionManager
     private  var mTime=""
+    private var isReservation=false
+    private var bookingInfoId=0
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mDrawerInterface = context as DrawerInterface
@@ -70,6 +75,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         handleObserver()
     }
     override fun onCreateView(
@@ -78,7 +84,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
         intializeMembers(inflater, container)
         handleClickListner()
-
+        var reserveInfoRequest = ReserveInfoRequest(mSessionManager.getUserDetailLoginModel()?.memberID!!)
+        reserveViewModel.getReserveInfo(requireContext(),reserveInfoRequest,mSessionManager?.getAuthorization())
         return mBinding.root
     }
 
@@ -100,6 +107,24 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     RSVPAcknowledgeFragment.newInstance(msg, ""),
                     "RSVPAcknowledgeFragment"
                 )
+            })
+
+
+        reserveViewModel.getReserveInfoViewState()?.observe(
+            this,
+            androidx.lifecycle.Observer {
+                if (it == null)
+                    return@Observer
+                setData(it)
+            })
+
+        reserveViewModel.getCancelReservationViewState()?.observe(
+            this,
+            androidx.lifecycle.Observer {
+                if (it == null)
+                    return@Observer
+                mBinding.reserveButton.text="Reserve"
+                resetUI()
             })
 
         reserveViewModel.getreserveUnAuthorized()?.observe(
@@ -165,6 +190,27 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
+    private fun setData(reserveInfoResponse: ReserveInfoResponse) {
+        isReservation=reserveInfoResponse.bookingInfo!!
+        bookingInfoId=reserveInfoResponse.BookingInfoID!!
+         if(reserveInfoResponse.bookingInfo!!){
+             mBinding.reserveButton.text="Cancel Reservation"
+        }else{
+             mBinding.reserveButton.text="Reserve"
+        }
+        mBinding.edWhatUEat.setText(reserveInfoResponse.favorite)
+        mBinding.edDate.setText(reserveInfoResponse.bookingDate)
+        mBinding.edTime.setText(reserveInfoResponse.bookingTime)
+
+
+        for(noOfPeople in noOfPeopleList.indices ){
+            if(noOfPeopleList[noOfPeople] == reserveInfoResponse.numberofPeople.toString())
+                mBinding.spinnerNoOfPeople.setSelection(noOfPeople)
+            break
+        }
+
+    }
+
     private fun resetUI() {
         mBinding.edWhatUEat.text = null
         mBinding.edDate.text = null
@@ -177,16 +223,23 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun handleClickListner() {
         mBinding.reserveButton.setOnClickListener{
 
-
-            reserveViewModel.checkReserveValidation(
-                requireContext(),
-                mBinding.edWhatUEat.text.toString(),
-                mBinding.edDate.text.toString(),
-                mTime,
-                selected_no_of_people,
-                mSessionManager.getUserDetailLoginModel()?.memberID,
-                mSessionManager?.getAuthorization()
-            )
+            if(!isReservation) {
+                reserveViewModel.checkReserveValidation(
+                    requireContext(),
+                    mBinding.edWhatUEat.text.toString(),
+                    mBinding.edDate.text.toString(),
+                    mTime,
+                    selected_no_of_people,
+                    mSessionManager.getUserDetailLoginModel()?.memberID,
+                    mSessionManager?.getAuthorization()
+                )
+            }else{
+               val cancelReservationRequest= CancelReservationRequest(bookingInfoId,"Cancel","N/A")
+                reserveViewModel.getCancelReservation(
+                    requireContext(),cancelReservationRequest,
+                    mSessionManager?.getAuthorization()
+                )
+            }
 
         }
 

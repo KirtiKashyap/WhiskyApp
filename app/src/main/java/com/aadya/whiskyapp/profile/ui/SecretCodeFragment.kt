@@ -89,12 +89,14 @@ class SecretCodeFragment : Fragment() {
                     .into(img_secretcode)
             }
             if((it.isEvent && MyApplication.isEventDialogOpen) && (it.isSpecial && MyApplication.isSpecialEventDialogOpen)){
-                EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
-                /*Handler(Looper.getMainLooper()).postDelayed({
-                     }, 200)*/
 
                 Handler(Looper.getMainLooper()).postDelayed({
-                    SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG) }, 1000)
+                    EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
+                     }, 1000)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
+                     }, 100)
             }else if(it.isEvent && MyApplication.isEventDialogOpen){
                 EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
             }
