@@ -1,6 +1,7 @@
 package com.aadya.whiskyapp.events.ui
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
@@ -24,6 +25,7 @@ import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
+import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -72,6 +74,15 @@ class EventDetailFragment : Fragment() {
         if(eventModel != null){
             mBinding.tvEventname.text = eventModel?.eventTitle
 
+            if(eventModel!!.eventTypeName.equals("Purchase")){
+                mBinding.priceTextView.text=eventModel!!.price
+                mBinding.buyLayout.visibility=View.VISIBLE
+                mIncludedRSVPDetailBinding.rsvpLayout.visibility=View.GONE
+
+            }else{
+                mBinding.buyLayout.visibility=View.GONE
+                mIncludedRSVPDetailBinding.rsvpLayout.visibility=View.VISIBLE
+            }
 
             var when_str : String = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel?.eventDate.toString())) + "," +
                     mCommonUtils.convertString_To_Date_dd_MMM_yyyy_format(eventModel?.eventDate.toString())
@@ -139,7 +150,6 @@ class EventDetailFragment : Fragment() {
 
     private fun setIncludedLayout() {
         mIncludedLayoutBinding = mBinding.mainHeader
-
         mIncludedLayoutBinding.imgLogo.setOnClickListener {
             launchFragment(ProfileFragment.newInstance(), "ProfileFragment")
         }
@@ -183,6 +193,19 @@ class EventDetailFragment : Fragment() {
                 launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
 
             }, 2000)
+
+        }
+        mBinding.buyTextView.setOnClickListener {
+
+            activity?.let {
+                val intent = Intent(it, CheckoutActivityJava::class.java)
+                intent.putExtra("amount", eventModel!!.price)
+                intent.putExtra("itemType", "E")
+                intent.putExtra("itemId", eventModel!!.eventID!!)
+                intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                intent.putExtra("authorization", mSessionManager.getAuthorization())
+                it.startActivity(intent)
+            }
 
         }
     }

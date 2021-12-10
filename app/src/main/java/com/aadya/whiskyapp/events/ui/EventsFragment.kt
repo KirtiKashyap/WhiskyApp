@@ -2,6 +2,8 @@ package com.aadya.whiskyapp.events.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -103,8 +105,21 @@ class EventsFragment() : Fragment() {
         if(eventModel!=null){
             if(eventModel.eventTypeName.equals("Purchase")){
                 mBinding.tvBuy.visibility=View.VISIBLE
+                mBinding.priceTextView.visibility=View.VISIBLE
+                mBinding.priceTextView.text=eventModel.price
+                mBinding.tvRsvp.visibility=View.GONE
+                mBinding.imgRsvpNotintersted.visibility=View.GONE
+                mBinding.imgRsvpIntersted.visibility=View.GONE
+                mBinding.imgRsvp.visibility=View.GONE
+
             }else{
+                mBinding.imgRsvpNotintersted.visibility=View.VISIBLE
+                mBinding.imgRsvpIntersted.visibility=View.VISIBLE
+                mBinding.tvRsvp.visibility=View.VISIBLE
+                mBinding.imgRsvp.visibility=View.VISIBLE
                 mBinding.tvBuy.visibility=View.GONE
+                mBinding.priceTextView.visibility=View.GONE
+
             }
 
             val list: List<String>? = eventModel.eventTitle?.trim()?.split("\\s+".toRegex())

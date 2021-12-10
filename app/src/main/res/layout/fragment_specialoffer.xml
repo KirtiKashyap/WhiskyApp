@@ -165,7 +165,7 @@
             app:layout_constraintEnd_toStartOf="@id/offeramt_endguide"
             app:layout_constraintTop_toTopOf="@id/offeramt_topguide"
             app:layout_constraintBottom_toBottomOf="@id/offeramt_bottomguide"
-            android:text="$145"
+            android:text="145"
             android:fontFamily="@font/archivonarrow_regular"
             android:textColor="@color/white"
             android:gravity="center"

@@ -257,6 +257,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dateupper_guidline"
                     android:adjustViewBounds="true"/>
+
+                <TextView
+                    android:visibility="gone"
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/white"
+                    android:id="@+id/priceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dateupper_guidline"
+                    />
                 <TextView
                     android:id="@+id/tv_rsvp"
                     android:layout_width="0dp"
@@ -271,6 +283,23 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/_16sdp"
                     />
+                <TextView
+                    android:id="@+id/tv_buy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Click to buy"
+                    android:fontFamily="@font/archivonarrow_regular"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_20sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/priceTextView"
+                    />
+
                 <ImageView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:id="@+id/img_rsvp_notintersted"
@@ -287,22 +316,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.75"/>
-            <TextView
-                android:id="@+id/tv_buy"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Click to buy"
-                android:fontFamily="@font/archivonarrow_regular"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:visibility="visible"
-                android:textSize="@dimen/_16sdp"
-                app:layout_constraintTop_toBottomOf="@+id/event_intrested_bottomguide"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintGuide_percent="0.80"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

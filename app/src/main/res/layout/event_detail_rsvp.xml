@@ -4,6 +4,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rsvpLayout"
     >
 
     <ImageView
@@ -84,11 +85,11 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:src="@drawable/event_intersted"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/rsvp_intersted_bottomguide"
         app:layout_constraintEnd_toStartOf="@+id/img_rsvp_intersted__endguide"
         app:layout_constraintStart_toStartOf="@+id/tv_event_detail_rsvp__endguide"
-        app:layout_constraintTop_toTopOf="@+id/rsvp_intersted_topguide" />
+        app:layout_constraintTop_toTopOf="@+id/rsvp_intersted_topguide"
+        app:tint="@color/white" />
 
 
 
@@ -142,12 +143,11 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:src="@drawable/event_notintersted"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/rsvp_notintersted_bottomguide"
         app:layout_constraintEnd_toStartOf="@+id/img_rsvp_intersted__endguide"
         app:layout_constraintStart_toStartOf="@+id/tv_event_detail_rsvp__endguide"
         app:layout_constraintTop_toTopOf="@+id/rsvp_notintersted_topguide"
-        />
+        app:tint="@color/white" />
 
 
 

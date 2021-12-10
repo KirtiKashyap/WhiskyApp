@@ -113,9 +113,13 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         reserveViewModel.getReserveInfoViewState()?.observe(
             this,
             androidx.lifecycle.Observer {
-                if (it == null)
+                if (it == null) {
                     return@Observer
-                setData(it)
+                }else if(it.bookingInfo!!) {
+                    setData(it)
+                }else{
+                    resetUI()
+                }
             })
 
         reserveViewModel.getCancelReservationViewState()?.observe(
@@ -197,16 +201,19 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
              mBinding.reserveButton.text="Cancel Reservation"
         }else{
              mBinding.reserveButton.text="Reserve"
+             resetUI()
         }
         mBinding.edWhatUEat.setText(reserveInfoResponse.favorite)
         mBinding.edDate.setText(reserveInfoResponse.bookingDate)
         mBinding.edTime.setText(reserveInfoResponse.bookingTime)
 
-
-        for(noOfPeople in noOfPeopleList.indices ){
-            if(noOfPeopleList[noOfPeople] == reserveInfoResponse.numberofPeople.toString())
-                mBinding.spinnerNoOfPeople.setSelection(noOfPeople)
+        for (i in noOfPeopleList.indices) {
+            print(noOfPeopleList[i])
+            if(noOfPeopleList[i]==reserveInfoResponse.numberofPeople.toString()){
+                mBinding.spinnerNoOfPeople.setSelection(i)
+            }
             break
+
         }
 
     }
@@ -217,6 +224,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mBinding.edTime.text = null
         mBinding.spinnerNoOfPeople.setSelection(0)
         selected_no_of_people = "0"
+
 
     }
 
