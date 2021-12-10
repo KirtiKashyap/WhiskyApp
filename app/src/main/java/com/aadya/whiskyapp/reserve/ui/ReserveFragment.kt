@@ -116,8 +116,12 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (it == null) {
                     return@Observer
                 }else if(it.bookingInfo!!) {
+                    isReservation=it.bookingInfo!!
+                    bookingInfoId=it.BookingInfoID!!
                     setData(it)
                 }else{
+                    bookingInfoId=it.BookingInfoID!!
+                    isReservation=it.bookingInfo!!
                     resetUI()
                 }
             })
@@ -125,10 +129,14 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         reserveViewModel.getCancelReservationViewState()?.observe(
             this,
             androidx.lifecycle.Observer {
-                if (it == null)
+                if (it == null) {
                     return@Observer
-                mBinding.reserveButton.text="Reserve"
-                resetUI()
+                }
+                else {
+                    isReservation=false
+                    mBinding.reserveButton.text = "Reserve"
+                    resetUI()
+                }
             })
 
         reserveViewModel.getreserveUnAuthorized()?.observe(
@@ -195,8 +203,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun setData(reserveInfoResponse: ReserveInfoResponse) {
-        isReservation=reserveInfoResponse.bookingInfo!!
-        bookingInfoId=reserveInfoResponse.BookingInfoID!!
+
          if(reserveInfoResponse.bookingInfo!!){
              mBinding.reserveButton.text="Cancel Reservation"
         }else{
@@ -212,8 +219,6 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
             if(noOfPeopleList[i]==reserveInfoResponse.numberofPeople.toString()){
                 mBinding.spinnerNoOfPeople.setSelection(i)
             }
-            break
-
         }
 
     }
