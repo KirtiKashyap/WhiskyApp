@@ -94,9 +94,9 @@ class SecretCodeFragment : Fragment() {
                     EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
                      }, 1000)
 
-                Handler(Looper.getMainLooper()).postDelayed({
+                /*Handler(Looper.getMainLooper()).postDelayed({
                     SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
-                     }, 100)
+                     }, 100)*/
             }else if(it.isEvent && MyApplication.isEventDialogOpen){
                 EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
             }

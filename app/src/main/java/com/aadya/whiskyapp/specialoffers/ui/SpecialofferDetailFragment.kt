@@ -64,7 +64,7 @@ class SpecialofferDetailFragment : Fragment() {
     private fun setUI() {
         if(param1!=null){
             mBinding.tvSpecialofferName.text = param1?.title
-            mBinding.tvSpecialofferAmt.text = "$"+param1?.price.toString()
+            mBinding.tvSpecialofferAmt.text = param1?.price.toString()
             mBinding.tvSpecialofferCode.text = param1?.yo.toString() + "YO"
             mBinding.tvSpecialofferDetail.text = param1?.description
         }
