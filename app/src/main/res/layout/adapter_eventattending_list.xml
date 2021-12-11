@@ -24,18 +24,6 @@
             android:layout_height="match_parent"
            >
 
-        <TextView
-            android:id="@+id/tv_date_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:gravity="top"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="5dp"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_11sdp"
-            android:text="04/02/2021 10:40 AM"
-            android:layout_alignParentLeft="true"/>
             <TextView
                 android:id="@+id/tv_event_status"
                 android:layout_width="wrap_content"
@@ -57,12 +45,27 @@
                 android:fontFamily="sans-serif"
                 android:paddingLeft="5dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp"
-                android:text="The Classified Whisky Club Members Night"
+                android:textSize="@dimen/_13sdp"
+                android:text="The Classified Whisky"
                 android:textStyle="bold"
-                android:layout_below="@+id/tv_event_status"/>
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/tv_event_status" />
+             <TextView
+            android:id="@+id/tv_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11sdp"
+            android:text="04/02/2021 10:40 AM"
+            android:layout_below="@+id/tv_event_title"
+            android:layout_alignParentLeft="true"/>
 
             <TextView
+                android:layout_marginTop="4dp"
                 android:id="@+id/tv_event_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +74,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
                 android:text="2345, McGranius Ferry Rd Alphanta GA 342008-1765"
-                android:layout_below="@+id/tv_event_title"/>
+                android:layout_below="@+id/tv_date_time"/>
 
         </RelativeLayout>
     </LinearLayout>

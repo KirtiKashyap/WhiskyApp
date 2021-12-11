@@ -44,14 +44,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.36"/>
+        app:layout_constraintGuide_percent="0.42"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/tv_when_bottom_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.40"/>
+        app:layout_constraintGuide_percent="0.46"/>
 
     <TextView
         android:layout_width="0dp"

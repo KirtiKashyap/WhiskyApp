@@ -30,8 +30,17 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_15sdp"
                 android:text="Samantha curtis-Rock Oyster"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:text="Status"
                 android:textStyle="bold"/>
 
         <TextView
@@ -57,15 +66,7 @@
                 android:textColor="@color/orangetextcolor"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/_11sdp" />
-            <TextView
-                android:id="@+id/tv_orderid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:layout_marginTop="4dp"
-                android:textSize="@dimen/_11sdp"
-                android:textColor="@color/white"
-                android:text="Order Id-23456789" />
+
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
@@ -75,6 +76,15 @@
                 android:textSize="@dimen/_11sdp"
                 android:text="01/12/2021"
                 android:paddingLeft="5dp" />
+            <TextView
+                android:id="@+id/tv_expected_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/white"
+                android:text="" />
 
         </LinearLayout>
     </LinearLayout>

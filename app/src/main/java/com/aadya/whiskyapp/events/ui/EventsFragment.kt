@@ -1,9 +1,8 @@
 package com.aadya.whiskyapp.events.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -89,18 +88,19 @@ class EventsFragment() : Fragment() {
 
         mBinding.tvBuy.setOnClickListener {
             activity?.let{
-                val intent = Intent (it, CheckoutActivityJava::class.java)
-                intent.putExtra("amount",eventModel.price)
-                intent.putExtra("itemType","E")
-                intent.putExtra("itemId",eventModel.eventID!!)
-                intent.putExtra("memberId",mSessionManager.getUserDetailLoginModel()?.memberID)
-                intent.putExtra("authorization",mSessionManager.getAuthorization())
+                val intent = Intent(it, CheckoutActivityJava::class.java)
+                intent.putExtra("amount", eventModel.price)
+                intent.putExtra("itemType", "E")
+                intent.putExtra("itemId", eventModel.eventID!!)
+                intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                intent.putExtra("authorization", mSessionManager.getAuthorization())
                 it.startActivity(intent)
             }
         }
         return mBinding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUi() {
         if(eventModel!=null){
             if(eventModel.eventTypeName.equals("Purchase")){
@@ -127,7 +127,11 @@ class EventsFragment() : Fragment() {
             {
                 mBinding.tvEventname1.text = list[0]
                 mBinding.tvEventname2.text = list[1]
-                mBinding.tvEventname3.text = list[2]
+
+                for (i in list.subList(2,list.size)) {
+                    print(i)
+                    mBinding.tvEventname3.append("$i ")
+                }
 
             }
             else if(list?.size == 2){
@@ -141,20 +145,32 @@ class EventsFragment() : Fragment() {
             if(eventModel.imageName?.isNullOrEmpty()==false){
                 context?.let {
                     Glide.with(it)
-                        .load(Event_IMAGE_URL+eventModel.imageName)
+                        .load(Event_IMAGE_URL + eventModel.imageName)
                         .into(mBinding.imgEventtop)
                 }
 
             }
 
-            mBinding.tvDay.text = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
-            mBinding.tvMonth.text = mCommonUtils.getMonth_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
+            mBinding.tvDay.text = mCommonUtils.getWeek_Day(
+                mCommonUtils.convertString_To_Date(
+                    eventModel.eventDate.toString()
+                )
+            )
+            mBinding.tvMonth.text = mCommonUtils.getMonth_From_Date(
+                mCommonUtils.convertString_To_Date(
+                    eventModel.eventDate.toString()
+                )
+            )
 
             if(eventModel.eventStartTime?.isNotEmpty() == true){}
             mBinding.tvStarttime.text = eventModel.eventStartTime
             if(eventModel.eventEndTime?.isNotEmpty() == true){}
             mBinding.tvEndtime.text = eventModel.eventEndTime
-            mBinding.tvDate.text = mCommonUtils.getDay_From_Date(mCommonUtils.convertString_To_Date(eventModel.eventDate.toString()))
+            mBinding.tvDate.text = mCommonUtils.getDay_From_Date(
+                mCommonUtils.convertString_To_Date(
+                    eventModel.eventDate.toString()
+                )
+            )
 
         }
     }
@@ -190,19 +206,18 @@ class EventsFragment() : Fragment() {
 
         mRSVPViewModel.getRSVPObserver().observe(this, Observer {
             if (it == null) return@Observer
-            var msg1 : String = ""
-            var msg2 : String = ""
-            if(it.EventFeedbackID.equals("1")) {
-                 msg1 = "Thanks for your RSVP for the Event<b> ${eventModel.eventTitle} </b>."
-                 msg2 = "\n" +
+            var msg1: String = ""
+            var msg2: String = ""
+            if (it.EventFeedbackID.equals("1")) {
+                msg1 = "Thanks for your RSVP for the Event<b> ${eventModel.eventTitle} </b>."
+                msg2 = "\n" +
                         " \n" +
                         "  We have marked you up for attending the <b> ${eventModel.eventTitle}</b>."
                 launchFragment(
                     RSVPAcknowledgeFragment.newInstance(msg1, msg2),
                     "RSVPAcknowledgeFragment"
                 )
-            }
-            else if(it.EventFeedbackID.equals("2")) {
+            } else if (it.EventFeedbackID.equals("2")) {
                 msg1 = "Thanks for your RSVP for the Event<b> ${eventModel.eventTitle} </b>."
                 msg2 = "\n" +
                         " \n" +
@@ -263,29 +278,39 @@ class EventsFragment() : Fragment() {
         }
 
         mBinding.imgRsvpIntersted.setOnClickListener{
-            mBinding.imgRsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mBinding.imgRsvpIntersted.startAnimation(
+                AnimationUtils.loadAnimation(
+                    context,
+                    R.anim.pulse
+                )
+            )
             mBinding.imgRsvpIntersted.isClickable=false
 
             Handler(Looper.getMainLooper()).postDelayed({
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 1
-                mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
-                mBinding.imgRsvpIntersted.isClickable=true
+                mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
+                mBinding.imgRsvpIntersted.isClickable = true
                 mBinding.imgRsvpIntersted.clearAnimation()
 
             }, 2000)
         }
 
         mBinding.imgRsvpNotintersted.setOnClickListener{
-            mBinding.imgRsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
+            mBinding.imgRsvpNotintersted.startAnimation(
+                AnimationUtils.loadAnimation(
+                    context,
+                    R.anim.pulse
+                )
+            )
             mBinding.imgRsvpNotintersted.isClickable=false
             Handler(Looper.getMainLooper()).postDelayed({
-            var mRSVPRequestModel = RSVPRequestModel()
-            mRSVPRequestModel.EventID = eventModel.eventID
-            mRSVPRequestModel.EventFeedbackID = 2
-            mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)
-                mBinding.imgRsvpNotintersted.isClickable=true
+                var mRSVPRequestModel = RSVPRequestModel()
+                mRSVPRequestModel.EventID = eventModel.eventID
+                mRSVPRequestModel.EventFeedbackID = 2
+                mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
+                mBinding.imgRsvpNotintersted.isClickable = true
                 mBinding.imgRsvpNotintersted.clearAnimation()
             }, 2000)
         }
@@ -312,7 +337,7 @@ class EventsFragment() : Fragment() {
             arguments = Bundle().apply {
                 putParcelable(ARG_EVENTMODEL, eventsModel)
                 putInt(ARG_POSITION, position)
-                putBoolean(FROM_DIALOG,isFromDialog)
+                putBoolean(FROM_DIALOG, isFromDialog)
             }
             this.mdeletePageViewPager = deletePageViewPager
         }

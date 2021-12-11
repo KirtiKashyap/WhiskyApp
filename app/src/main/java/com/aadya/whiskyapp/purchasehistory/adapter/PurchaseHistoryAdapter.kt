@@ -41,12 +41,12 @@ class PurchaseHistoryAdapter(
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
         val purchaseHistory: PurchaseHistory = purchaseHistoryList[i]
         with(viewHolder) {
-            binding.tvPurchaseTitle.text="Status: "+purchaseHistory.paymentStatus
+            binding.tvPurchaseTitle.text="Samantha curtis-Rock Oyster"
+            binding.tvStatus.text="Status: "+purchaseHistory.paymentStatus
             binding.tvAmt.text="Amount: $"+purchaseHistory.amount+".00"
-            binding.tvDate.text="Date: "+purchaseHistory.paymentDate
-            binding.tvOrderid.text="Ticket Id: "+purchaseHistory.ticketID
+            binding.tvDate.text="Purchased Date: "+purchaseHistory.paymentDate
+            binding.tvExpectedDate.text="Expected Date of Delivery: "+purchaseHistory.paymentDate
             binding.purchaseHistoryMainLayout.setBackgroundResource(R.drawable.eventattendingselected_bg )
-            
         }
 
     }
@@ -74,9 +74,6 @@ class PurchaseHistoryAdapter(
             mSessionManager = SessionManager.getInstance(context)!!
             mCommonUtils = CommonUtils
         }
-
-
-
 
     override fun getItemCount(): Int {
        return  purchaseHistoryList.size

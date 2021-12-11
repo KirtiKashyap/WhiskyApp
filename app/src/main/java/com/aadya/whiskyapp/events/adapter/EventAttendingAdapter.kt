@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.events.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,7 @@ class EventAttendingAdapter(
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
         val mEventAttendingModel: EventsResponseModel = eventAttendingList[i]
         with(viewHolder) {
@@ -46,9 +48,9 @@ class EventAttendingAdapter(
                 mCommonUtils.convertString_To_Date_ddMMMyyyyformat(mEventAttendingModel?.eventDate.toString())
             if (mEventAttendingModel.eventStartTime != null) {
                 eventdate_time.plus("  $mEventAttendingModel.eventStartTime")
-                binding.tvDateTime.text = eventdate_time
+                binding.tvDateTime.text = "Date: $eventdate_time"
             } else
-                binding.tvDateTime.text = eventdate_time
+                binding.tvDateTime.text = "Date: $eventdate_time"
 
             if (mEventAttendingModel.isActive) {
                 binding.tvEventStatus.text = "Completed"
@@ -60,7 +62,7 @@ class EventAttendingAdapter(
             }
 
             binding.tvEventTitle.text = mEventAttendingModel.eventTitle
-            binding.tvEventAddress.text = mEventAttendingModel.eventLocation
+            binding.tvEventAddress.text = "Address: "+mEventAttendingModel.eventLocation
 
             binding.eventAttendingMainLayout.setOnClickListener {
                /*  selectedPosition=i

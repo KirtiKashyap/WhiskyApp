@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/eventdetail_top"
+        >
+
+
+        <ImageView
+            android:id="@+id/img_eventtop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/eventdetail_top"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/img_eventbg_topguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/img_eventbottom_gradient"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/loginbg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_eventbg_topguide"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_eventbg_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35"/>
+
+
+
+        <include
+            android:id="@+id/main_header"
+            layout="@layout/main_header_new"
+            app:layout_constraintTop_toBottomOf="@id/header_topguide"
+            app:layout_constraintBottom_toTopOf="@id/header_bottomguide"
+
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"/>
+
+
+        <TextView
+            android:id="@+id/tv_eventname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/img_eventbg_topguide"
+            app:layout_constraintStart_toStartOf="@id/tv_eventname_startguide"
+            app:layout_constraintEnd_toStartOf="@id/tv_eventname_endguide"
+            android:text="Victoria Whisky Festival"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/_24sdp"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_eventname_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_eventname_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_linear_when_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.42"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_linear_when_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_linear_when_endguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.28"/>
+
+        <include
+            android:id="@+id/when_layout"
+            layout="@layout/whenlayout"
+            app:layout_constraintStart_toStartOf="@id/tv_eventname_startguide"
+            app:layout_constraintTop_toTopOf="@+id/tv_linear_when_top_guide"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_linear_when_bottom_guide"
+            app:layout_constraintEnd_toEndOf="@+id/tv_linear_when_endguide"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_when"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_linear_when_endguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_linear_when_top_guide"
+            app:layout_constraintBottom_toBottomOf="@id/tv_linear_when_bottom_guide"
+            android:text="Friday,24 Aug 2020 11:00 AM"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:gravity="start|top"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/_12sdp"
+            />
+
+
+                <include
+                    android:id="@+id/where_layout"
+                    layout="@layout/wherelayout"
+                    app:layout_constraintStart_toStartOf="@id/tv_eventname_startguide"
+                    app:layout_constraintEnd_toEndOf="@+id/linear_where_endguide"
+
+                    />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_linear_where_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.48"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_linear_where_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.53"/>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/linear_where_endguide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.34"/>
+
+        <TextView
+            android:id="@+id/tv_where"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@+id/linear_where_endguide"
+            app:layout_constraintEnd_toEndOf="@+id/tv_eventname_endguide"
+            app:layout_constraintTop_toTopOf="@id/tv_linear_where_top_guide"
+            app:layout_constraintBottom_toBottomOf="@id/tv_linear_where_bottom_guide"
+            android:text="2345, McGinnis Ferry Rd Alphattas,GA 342008-1756"
+            android:fontFamily="@font/archivonarrow_regular"
+            android:textColor="@color/white"
+            android:gravity="start|top"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginStart="5dp"
+            android:maxLines="2"
+            android:lines="2"
+            android:singleLine="false"
+            />
+
+        <include
+            android:id="@+id/what_is_special"
+            layout="@layout/whatisspecial"
+            app:layout_constraintStart_toStartOf="@id/tv_eventname_startguide"
+            app:layout_constraintTop_toTopOf="@id/tv_linear_what_is_special_top_guide"
+            app:layout_constraintBottom_toBottomOf="@id/linear_what_is_special_bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@id/tv_eventname_endguide"
+
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_linear_what_is_special_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.54"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/linear_what_is_special_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.58"/>
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/tv_eventname_startguide"
+            app:layout_constraintEnd_toEndOf="@+id/tv_eventname_endguide"
+            app:layout_constraintTop_toTopOf="@id/linear_what_is_special_bottom_guideline"
+            app:layout_constraintBottom_toBottomOf="@id/tv_what_is_special_bottom_guideline">
+
+            <TextView
+                android:id="@+id/tv_what_is_special"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="In True exploratiory spirit  we'll be tasting our across the globe sampling eight dramsfrom some of the worlds finest whisky producers, travellingireland,Scotland,Japan,Tawain,India America, China. "
+                android:fontFamily="@font/archivonarrow_regular"
+                android:textColor="@color/white"
+                android:gravity="start|top"
+                android:layout_marginStart="5dp"
+                android:textSize="@dimen/_14sdp"
+                />
+        </ScrollView>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_what_is_special_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.72"/>
+       <include
+            android:id="@+id/event_detail_rsvp"
+            layout="@layout/event_detail_rsvp"
+            app:layout_constraintTop_toBottomOf="@id/event_detail_topguide"
+            app:layout_constraintBottom_toTopOf="@id/event_detail_bottomguide"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/event_detail_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.74"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/event_detail_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.83"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/buyLayout"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/event_detail_topguide"
+            app:layout_constraintBottom_toTopOf="@id/event_detail_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+             <TextView app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="@dimen/_20sdp"
+                 android:textColor="@color/white"
+                 android:id="@+id/priceTextView"
+                 android:text="Price"
+                 />
+             <TextView
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/priceTextView"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:id="@+id/buyTextView"
+                 android:text="Click to Buy"
+                 android:layout_gravity="center_horizontal"
+                 android:background="#09241c"
+                 android:padding="5dp"
+                 android:fontFamily="@font/archivonarrow_regular"
+                 android:textColor="@color/white"
+                 android:textSize="@dimen/_22sdp"
+                 android:textStyle="bold"
+                 android:textAllCaps="false"
+                 />
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+                 <ImageView
+                     android:layout_width="0dp"
+                     android:layout_height="0dp"
+                     android:scaleType="fitXY"
+                     android:src="@drawable/its_classified"
+                     app:layout_constraintBottom_toTopOf="@+id/img_itsclassified_bottomguide"
+                     app:layout_constraintEnd_toEndOf="@+id/tv_eventname_endguide"
+                     app:layout_constraintStart_toStartOf="@+id/img_itsclassified_startguide"
+                     app:layout_constraintTop_toBottomOf="@id/img_itsclassified_topguide"
+                     />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_itsclassified_startguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.60"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_itsclassified_topguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.86"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_itsclassified_bottomguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.90"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

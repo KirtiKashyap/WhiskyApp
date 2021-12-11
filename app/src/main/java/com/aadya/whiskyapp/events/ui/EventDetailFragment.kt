@@ -37,7 +37,7 @@ import com.bumptech.glide.Glide
 private const val ARG_EVENT = "events"
 class EventDetailFragment : Fragment() {
     private var eventModel: EventsResponseModel? = null
-    private lateinit var mBinding: EventDetailNewBinding
+    private lateinit var mBinding: EventDetailBinding
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var mIncludedLayoutBinding: MainHeaderNewBinding
     private lateinit var mIncludedRSVPDetailBinding: EventDetailRsvpBinding
@@ -84,7 +84,7 @@ class EventDetailFragment : Fragment() {
                 mIncludedRSVPDetailBinding.rsvpLayout.visibility=View.VISIBLE
             }
 
-            var when_str : String = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel?.eventDate.toString())) + "," +
+            var when_str : String = mCommonUtils.getWeek_Day(mCommonUtils.convertString_To_Date(eventModel?.eventDate.toString())) + ",  " +
                     mCommonUtils.convertString_To_Date_dd_MMM_yyyy_format(eventModel?.eventDate.toString())
             if(eventModel?.eventStartTime != null)
                  when_str.plus(eventModel?.eventStartTime)
@@ -216,7 +216,7 @@ class EventDetailFragment : Fragment() {
 
         mBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.event_detail_new,
+            R.layout.event_detail,
             container,
             false
         )
