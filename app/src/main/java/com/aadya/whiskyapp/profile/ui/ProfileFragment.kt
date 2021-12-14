@@ -38,7 +38,6 @@ class ProfileFragment : Fragment() {
     var onPageSwipeUpListener: onPageSwipeUpListner? = null
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
@@ -70,12 +69,27 @@ class ProfileFragment : Fragment() {
 
         mBinding.tvAgentid.text="Special Agent "+mSessionManager.getProfileModel()?.agentID
 
-        if(mSessionManager.getProfileModel()?.bookingStatus==true){
+        if(mSessionManager.getProfileModel()?.bookingStatus!! == "Cancel"){
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(
+                R.drawable.cancel,
+                null
+            )
+        }else if(mSessionManager.getProfileModel()?.bookingStatus!! == "Reject"){
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(
+                R.drawable.reject,
+                null
+            )
+        }else if(mSessionManager.getProfileModel()?.bookingStatus!! == "Approve"){
             mBinding.tvUserReservationstatus.background = resources.getDrawable(
                 R.drawable.confirmed,
                 null
             )
-        }else{
+        }else if(mSessionManager.getProfileModel()?.bookingStatus!! == "Pending"){
+            mBinding.tvUserReservationstatus.background = resources.getDrawable(
+                R.drawable.pending,
+                null
+            )
+        }else if(mSessionManager.getProfileModel()?.bookingStatus!! == ""){
             mBinding.tvUserReservationstatus.background = resources.getDrawable(
                 R.drawable.pending,
                 null
@@ -201,10 +215,7 @@ class ProfileFragment : Fragment() {
            mIncludedLayoutBinding.imgDrawer.setOnClickListener {
                mDrawerInterface?.setOnDrwawerClickResult()
            }
-
         mIncludedLayoutBinding.imgLogo.visibility = View.GONE
-
-
     }
     companion object {
         @JvmStatic
@@ -212,8 +223,6 @@ class ProfileFragment : Fragment() {
             ProfileFragment().apply {
 
             }
-
-
     }
 
 

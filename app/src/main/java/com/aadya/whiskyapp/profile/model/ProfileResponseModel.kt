@@ -26,7 +26,7 @@ data class ProfileResponseModel (
     @SerializedName("favoritecocktail") var favoritecocktail : String,
     @SerializedName("description") var description : String,
     @SerializedName("status") var status : Boolean,
-    @SerializedName("bookingStatus") var bookingStatus : Boolean,
+    @SerializedName("bookingStatus") var bookingStatus : String,
     @SerializedName("favorite") var favorite : String,
     @SerializedName("passwordSalt") var passwordSalt : String,
     @SerializedName("userLoginTime") var userLoginTime : String,

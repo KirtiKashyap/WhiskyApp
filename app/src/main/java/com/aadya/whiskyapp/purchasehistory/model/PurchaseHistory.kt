@@ -12,6 +12,8 @@ data class PurchaseHistory (
     @SerializedName("memberID") var memberID : Int,
     @SerializedName("paymentDate") var paymentDate : String,
     @SerializedName("paymentStatus") var paymentStatus : String,
-    @SerializedName("amount") var amount : String
+    @SerializedName("amount") var amount : String,
+    @SerializedName("title") var title : String,
+    @SerializedName("deliveryDate") var deliveryDate : String
 
     )
