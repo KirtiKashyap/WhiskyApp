@@ -6,6 +6,7 @@ import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
+import com.aadya.whiskyapp.menu.model.MenuResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
@@ -77,6 +78,10 @@ interface APICallService {
 
     @GET(CommonUtils.APIURL.Events)
     fun getEventsList (@Header("Authorization") authHeader: String?): Call<List<EventsResponseModel?>?>
+
+    @GET(CommonUtils.APIURL.MenuData)
+    fun getMenuData (@Header("Authorization") authHeader: String?): Call<MenuResponse?>
+
 
     @POST(CommonUtils.APIURL.Logout)
     fun getLogout(@Header("Authorization") authHeader: String?, @Body accessToken: LogoutRequest): Call<Any>

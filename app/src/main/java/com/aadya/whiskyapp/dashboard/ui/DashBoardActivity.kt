@@ -49,7 +49,6 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
     private lateinit var mCardMultilineWidget : CardMultilineWidget
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // showBottomSheetDialog()
         intializeMembers()
         setupDrawerLayout()
         setBottomNavigation()
@@ -60,20 +59,6 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mSessionManager= SessionManager.getInstance(this)!!
 
     }
-
-//    private fun showBottomSheetDialog() {
-//        val bottomSheetDialog = BottomSheetDialog(this)
-//        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog)
-//        val payButton = bottomSheetDialog.findViewById<Button>(R.id.payButton)
-//
-//        payButton!!.setOnClickListener {
-//            mCardMultilineWidget= CardMultilineWidget(this,null,0,false)
-//            val cardParams: CardParams? = mCardMultilineWidget.cardParams
-//            mSessionManager.setCardDetail("","","")
-//            //bottomSheetDialog.dismiss()
-//        }
-//        bottomSheetDialog.show()
-//    }
 
     private fun handleClickListner() {
         mBinding.closeNavImageView.setOnClickListener{

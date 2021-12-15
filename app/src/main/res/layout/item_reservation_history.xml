@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:id="@+id/purchase_history_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/img_purchasehistory"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/specialofferbottle_mdpi" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/tv_purchase_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp"
+                android:text="Samantha curtis-Rock Oyster"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:text="Status"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_amt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11sdp"
+                android:text="$500"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/tv_yo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingLeft="5dp"
+                android:layout_marginEnd="15dp"
+                android:text="18YO"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/orangetextcolor"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11sdp"
+                android:text="01/12/2021"
+                android:paddingLeft="5dp" />
+            <TextView
+                android:id="@+id/tv_expected_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/white"
+                android:text="" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

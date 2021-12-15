@@ -46,6 +46,7 @@ class SecretCodeFragment : Fragment() {
     private lateinit var mSessionManager: SessionManager
     private lateinit var mProfileViewModel : ProfileViewModel
     private lateinit var mCommonUtils : CommonUtils
+    private var counter=0
 
 
     override fun onAttach(context: Context) {
@@ -81,6 +82,7 @@ class SecretCodeFragment : Fragment() {
         mProfileViewModel.getProfileObserver().observe(this, Observer {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
+            counter=counter++
             lastseen.text="Last "+mCommonUtils.getWeekDay(it.userLoginTime)
             val qrCode = it.qrCode
             context?.let {
@@ -88,23 +90,27 @@ class SecretCodeFragment : Fragment() {
                     .load(CommonUtils.APIURL.QRCode_IMAGE_URL +qrCode)
                     .into(img_secretcode)
             }
-            if((it.isEvent && MyApplication.isEventDialogOpen) && (it.isSpecial && MyApplication.isSpecialEventDialogOpen)){
+                if ((it.isEvent && MyApplication.isEventDialogOpen) && (it.isSpecial && MyApplication.isSpecialEventDialogOpen)) {
 
-                Handler(Looper.getMainLooper()).postDelayed({
-                    EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
-                     }, 1000)
-
-                /*Handler(Looper.getMainLooper()).postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        EventsLaunchDialogFragment.newInstance().show(
+                            activity?.supportFragmentManager!!,
+                            EventsLaunchDialogFragment.TAG
+                        )
+                    }, 1000)
+                    Handler(Looper.getMainLooper()).postDelayed({
                     SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
-                     }, 100)*/
-            }else if(it.isEvent && MyApplication.isEventDialogOpen){
-                EventsLaunchDialogFragment.newInstance().show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
-            }
-            else if(it.isSpecial && MyApplication.isSpecialEventDialogOpen){
-                SpecialOfferDialogFragment.newInstance().show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
-            }
+                     }, 100)
+                } else if (it.isEvent && MyApplication.isEventDialogOpen) {
+                    EventsLaunchDialogFragment.newInstance()
+                        .show(activity?.supportFragmentManager!!, EventsLaunchDialogFragment.TAG)
+                } else if (it.isSpecial && MyApplication.isSpecialEventDialogOpen) {
+                    SpecialOfferDialogFragment.newInstance()
+                        .show(activity?.supportFragmentManager!!, SpecialOfferDialogFragment.TAG)
+                }
 
         })
+
 
         mProfileViewModel.getprofileUnAuthorized().observe(this, Observer {
             val alertModel = AlertModel(

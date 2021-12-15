@@ -6,6 +6,7 @@ import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
+import com.aadya.whiskyapp.menu.model.MenuResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
@@ -204,6 +205,23 @@ class RetrofitService {
             }
 
             override fun onFailure(call: Call<List<EventsResponseModel?>?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+        })
+    }
+
+    fun getMenuData(authorization: String?,apiResponseListener: APIResponseListener) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<MenuResponse?> = service.getMenuData(authorization)
+        call?.enqueue(object :Callback<MenuResponse?>{
+            override fun onResponse(
+                call: Call<MenuResponse?>,
+                response: Response<MenuResponse?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<MenuResponse?>, t: Throwable) {
                 apiResponseListener.onFailure()
             }
         })
