@@ -179,7 +179,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
             false
         )
 
-        mBinding.imgClose.visibility=View.VISIBLE
+        mBinding.imgClose.visibility=View.GONE
         mBinding.imgClose.bringToFront()
         mBinding.imgClose.setOnClickListener {
             MyApplication.isEventDialogOpen=false

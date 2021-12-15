@@ -42,7 +42,7 @@ class EventsAdapter(
         if (this.eventList.size == 1) {
             this.eventList.removeAt(position)
             notifyDataSetChanged()
-            mUpdateEventsViewPager?.updateEventsViewPager()
+           // mUpdateEventsViewPager?.updateEventsViewPager()
 
         } else {
             this.eventList.removeAt(position)
