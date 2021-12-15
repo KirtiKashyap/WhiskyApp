@@ -208,11 +208,11 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
     }
 
     override fun updateEventsViewPager() {
-        mBottomNavigationInterface?.setOnBottomNavigationResult()
+       // mBottomNavigationInterface?.setOnBottomNavigationResult()
         dismiss()
-        launchFragment(
+        /*launchFragment(
             MenuFragment.newInstance(),
             "MenuFragment"
-        )
+        )*/
     }
 }
