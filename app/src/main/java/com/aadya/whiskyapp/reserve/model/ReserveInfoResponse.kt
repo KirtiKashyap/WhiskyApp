@@ -78,5 +78,9 @@ class ReserveInfoResponse {
 
     @SerializedName("bookingInfo")
     var bookingInfo: Boolean?=null
+    @SerializedName("isArrived")
+    var isArrived: Boolean?=null
+    @SerializedName("notes")
+    var notes: String?=null
 
  }

@@ -127,6 +127,7 @@
     <string name="special_error">Special Offer Error</string>
     <string name="no_special_offers">No Upcoming Special Offers.</string>
     <string name="no_purchase_history">You have not Purchased any offers.</string>
+    <string name="no_scan_log">You have not Scan Log.</string>
     <string name="reserve_Error">Reserve Error</string>
     <string name="please_enter_what_u_want_to_eat">Please enter what you want to eat</string>
     <string name="please_select_date">Please select date</string>

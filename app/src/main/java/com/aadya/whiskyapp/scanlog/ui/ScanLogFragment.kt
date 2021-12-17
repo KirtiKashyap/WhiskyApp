@@ -1,4 +1,4 @@
-package com.aadya.whiskyapp.reserve.ui
+package com.aadya.whiskyapp.scanlog.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -13,24 +13,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aadya.whiskyapp.R
-import com.aadya.whiskyapp.databinding.FragmentReservationHistoryBinding
+import com.aadya.whiskyapp.databinding.FragmentScanLogBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
-import com.aadya.whiskyapp.reserve.model.ReserveInfoRequest
-import com.aadya.whiskyapp.reserve.viewmodel.ReserveFactory
-import com.aadya.whiskyapp.reserve.viewmodel.ReserveViewModel
-import com.aadya.whiskyapp.scanlog.ui.ScanLogFragment
+import com.aadya.whiskyapp.scanlog.model.ScanLogRequest
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 
-class ReservationHistoryFragment : Fragment() {
-    private lateinit  var mReservationHistoryAdapter: ReservationHistoryAdapter
+
+class ScanLogFragment : Fragment() {
+    private lateinit  var mScanLogAdapter: ScanLogAdapter
     private lateinit var mSessionManager: SessionManager
-    private lateinit var mReserveViewModel : ReserveViewModel
+    private lateinit var mScanLogViewModel : ScanLogViewModel
     private lateinit var mCommonUtils : CommonUtils
-    private lateinit var mBinding: FragmentReservationHistoryBinding
+    private lateinit var mBinding: FragmentScanLogBinding
     private lateinit var mIncludedLayoutBinding: MainHeaderNewBinding
     private var mDrawerInterface: DrawerInterface? = null
 
@@ -39,33 +37,41 @@ class ReservationHistoryFragment : Fragment() {
         mDrawerInterface = context as DrawerInterface
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         initializeMembers(inflater, container)
-        setUpRecyclerView(mBinding.reserveHistoryLogRecyclerView)
+        setUpRecyclerView(mBinding.scanLogRecyclerView)
         handleObserver()
         return mBinding.root
     }
-
+    private fun setUpRecyclerView(recyclerView: RecyclerView) {
+        val linearLayoutManager = LinearLayoutManager(activity?.applicationContext)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = linearLayoutManager
+        mScanLogAdapter = ScanLogAdapter(
+            requireContext()
+        )
+        recyclerView.adapter = mScanLogAdapter
+    }
     private fun handleObserver() {
-        mReserveViewModel.getReserveHistoryLogObserver().observe(viewLifecycleOwner, Observer {
+        mScanLogViewModel.getScanLogObserver().observe(viewLifecycleOwner, Observer {
             Log.d("TAG", "In Observer event")
             if (it?.isEmpty() == true) {
                 mBinding.emptyTv.visibility = View.VISIBLE
-                mBinding.reserveHistoryLogRecyclerView.visibility = View.GONE
+                mBinding.scanLogRecyclerView.visibility = View.GONE
             } else {
                 mBinding.emptyTv.visibility = View.GONE
-                mBinding.reserveHistoryLogRecyclerView.visibility = View.VISIBLE
+                mBinding.scanLogRecyclerView.visibility = View.VISIBLE
                 if (it != null) {
-                    mReservationHistoryAdapter.notifyData(it)
+                    mScanLogAdapter.notifyData(it)
                 }
             }
         })
 
-        mReserveViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
+        mScanLogViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
             object : Observer<AlertModel?> {
                 override fun onChanged(alertModel: AlertModel?) {
 
@@ -84,7 +90,7 @@ class ReservationHistoryFragment : Fragment() {
             })
 
 
-        mReserveViewModel.getProgressState()?.observe(viewLifecycleOwner,
+        mScanLogViewModel.getProgressState()?.observe(viewLifecycleOwner,
             object : Observer<Int?> {
                 override fun onChanged(progressState: Int?) {
                     if (progressState == null) return
@@ -99,35 +105,23 @@ class ReservationHistoryFragment : Fragment() {
             })
     }
 
-
-    private fun setUpRecyclerView(recyclerView: RecyclerView) {
-        val linearLayoutManager = LinearLayoutManager(activity?.applicationContext)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = linearLayoutManager
-        mReservationHistoryAdapter = ReservationHistoryAdapter(
-            requireContext()
-        )
-        recyclerView.adapter = mReservationHistoryAdapter
-    }
-
     private fun initializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
         mCommonUtils = CommonUtils
         mSessionManager = SessionManager.getInstance(requireContext())!!
         mBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_reservation_history,
+            R.layout.fragment_scan_log,
             container,
             false
         )
         setIncludedLayout()
 
-        mReserveViewModel = ViewModelProvider(this, ReserveFactory(activity?.application)).get(
-            ReserveViewModel::class.java
+        mScanLogViewModel = ViewModelProvider(this, ScanLogFactory(activity?.application)).get(
+            ScanLogViewModel::class.java
         )
-        var reserveLogRequest= ReserveInfoRequest()
-        reserveLogRequest.memberID=mSessionManager.getProfileModel()!!.memberID
-        mReserveViewModel.getReserveHistoryLog(mSessionManager?.getAuthorization(),reserveLogRequest)
+        var scanLogRequest=ScanLogRequest()
+        scanLogRequest.MemberID=mSessionManager.getProfileModel()!!.memberID
+        mScanLogViewModel.getScanLog(mSessionManager?.getAuthorization(),scanLogRequest)
     }
 
     private fun setIncludedLayout() {
@@ -151,7 +145,7 @@ class ReservationHistoryFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            ReservationHistoryFragment().apply {
+            ScanLogFragment().apply {
             }
     }
 

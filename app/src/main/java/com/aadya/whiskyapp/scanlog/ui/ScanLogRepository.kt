@@ -1,20 +1,21 @@
-package com.aadya.whiskyapp.menu.viewmodel
+package com.aadya.whiskyapp.scanlog.ui
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.aadya.whiskyapp.R
-import com.aadya.whiskyapp.menu.model.MenuResponse
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
+import com.aadya.whiskyapp.scanlog.model.ScanLogRequest
+import com.aadya.whiskyapp.scanlog.model.ScanLogResponse
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.Connection
 import retrofit2.Response
 
-class MenuRepository (application: Application) {
-    private var application : Application = application
+class ScanLogRepository (application: Application) {
+    private var application: Application = application
 
-    private val menuLiveData = MutableLiveData<MenuResponse?>()
+    private val scanLogLiveData = MutableLiveData<List<ScanLogResponse>?>()
     private val alertLiveData: MutableLiveData<AlertModel> = MutableLiveData<AlertModel>()
     private val progressLiveData = MutableLiveData<Int>()
     private var profileUnAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -31,31 +32,34 @@ class MenuRepository (application: Application) {
         return alertLiveData
     }
 
-    fun getMenuState() : MutableLiveData<MenuResponse?> {
-        return  menuLiveData
+    fun getScanLogState(): MutableLiveData<List<ScanLogResponse>?> {
+        return scanLogLiveData
     }
 
-    fun getMenuData(authorization: String?) {
+    fun getScanLog(authorization: String?, scanLogRequest: ScanLogRequest) {
 
         if (Connection.instance?.isNetworkAvailable(application) == true) {
             progressLiveData.value = CommonUtils.ProgressDialog.showDialog
-            RetrofitService().getMenuData(authorization,
+            RetrofitService().getScanLog(authorization!!,scanLogRequest,
                 object : APIResponseListener {
-                    override fun onSuccess(response: Response<Any?>) {
+                    override fun onSuccess(response: Response<Any>) {
 
                         progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
 
-                        val modelList: MenuResponse? = response.body() as MenuResponse?
+                        val modelList: List<ScanLogResponse>? = response.body() as ArrayList<ScanLogResponse>?
                         try {
+
+
                             if(response.code() == 401)
                                 profileUnAuthorizedLiveData.value = true
 
                             else if(response.code() == 200)
-                                menuLiveData.value = modelList
+                                scanLogLiveData.value = modelList
 
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
+
                     }
 
                     override fun onFailure() {
@@ -68,10 +72,10 @@ class MenuRepository (application: Application) {
             false
         )
     }
+
     private fun setAlert(title: String, message: String, isSuccess: Boolean) {
         val drawable: Int = if (isSuccess) R.drawable.correct_icon else R.drawable.wrong_icon
         val color: Int = if (isSuccess) R.color.notiSuccessColor else R.color.notiFailColor
         alertLiveData.value = AlertModel(2000, title, message, drawable, color)
     }
-
 }

@@ -27,7 +27,4 @@ class ReserveRequestModel {
     @SerializedName("Description")
     var Description : String? = null
 
-
-
-
 }

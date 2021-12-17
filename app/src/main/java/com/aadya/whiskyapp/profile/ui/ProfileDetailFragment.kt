@@ -85,10 +85,17 @@ class ProfileDetailFragment : Fragment() {
     private fun setUIValues() {
         mDOBLayoutBinding = mBinding.doblayout
         if(!mProfileModel?.photograph.isNullOrEmpty()){
+            mBinding.profileImage.visibility=View.GONE
             context?.let {
                 Glide.with(it)
                     .load(CommonUtils.APIURL.Profile_IMAGE_URL+mProfileModel?.photograph)
                     .into(mBinding.profileImage)
+            }
+
+            context?.let {
+                Glide.with(it)
+                    .load(CommonUtils.APIURL.Profile_IMAGE_URL+mProfileModel?.photograph)
+                    .into(mBinding.imgTop)
             }
 
         }

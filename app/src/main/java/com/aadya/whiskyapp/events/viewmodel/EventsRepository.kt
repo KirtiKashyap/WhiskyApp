@@ -55,15 +55,6 @@ class EventsRepository(application: Application) {
 
                             else if(response.code() == 200)
                                 eventsLiveData.value = modelList
-                           /* if (modelList?.isEmpty() == true) {
-                                setAlert(
-                                    application.getString(R.string.app_error),
-                                    application.getString(R.string.sorry_empty_data),
-                                    false
-                                )
-
-                            } else { eventsLiveData.value = modelList
-                            }*/
 
                         } catch (e: Exception) {
                             e.printStackTrace()

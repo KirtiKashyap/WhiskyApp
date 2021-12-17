@@ -2,28 +2,21 @@ package com.aadya.whiskyapp.menu
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentMenuBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
-import com.aadya.whiskyapp.databinding.SecretcodeNewLayoutBinding
-import com.aadya.whiskyapp.events.viewmodel.EventsFactory
-import com.aadya.whiskyapp.events.viewmodel.EventsViewModel
 import com.aadya.whiskyapp.menu.viewmodel.MenuFactory
 import com.aadya.whiskyapp.menu.viewmodel.MenuViewModel
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
-import com.aadya.whiskyapp.profile.viewmodel.ProfileViewModel
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
@@ -31,9 +24,7 @@ import com.aadya.whiskyapp.utils.SessionManager
 
 
 class MenuFragment : Fragment() {
-
-
-
+    val googleDocs = "https://docs.google.com/viewer?url="
     private lateinit var mBinding: FragmentMenuBinding
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var mIncludedLayoutBinding: MainHeaderNewBinding
@@ -58,7 +49,8 @@ class MenuFragment : Fragment() {
             mBinding.pdfView.settings.setSupportZoom(true)
             mBinding.pdfView.settings.javaScriptEnabled = true
             val url = it.imageName
-            mBinding.pdfView.loadUrl(CommonUtils.APIURL.Event_IMAGE_URL+url)
+           // webView.loadUrl(googleDocs + pdf_url);
+            mBinding.pdfView.loadUrl(googleDocs+CommonUtils.APIURL.MenuPdfUrl + url)
         })
 
         mMenuViewModel.getAlertViewState()?.observe(viewLifecycleOwner,

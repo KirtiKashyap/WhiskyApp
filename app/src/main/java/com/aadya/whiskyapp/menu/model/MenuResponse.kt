@@ -3,21 +3,21 @@ package com.aadya.whiskyapp.menu.model
 import com.google.gson.annotations.SerializedName
 
 data class MenuResponse(@SerializedName("menuID")
-                        var menuID: Int,
+                        var menuID: Int ,
                         @SerializedName("userID")
-                        var userID: Int,
+                        var userID: Int ,
                         @SerializedName("title")
-                        var title: String,
+                        var title: String?,
                         @SerializedName("description")
-                        var description: String,
+                        var description: String?,
                         @SerializedName("isActive")
-                        var isActive: Boolean,
+                        var isActive: Boolean ,
                         @SerializedName("createdDate")
-                        var createdDate: String,
+                        var createdDate: String ,
                         @SerializedName("createdBy")
-                        var createdBy: Int,
+                        var createdBy: Int ,
                         @SerializedName("imageName")
-                        var imageName: String,
+                        var imageName: String ,
                         @SerializedName("urlofImage")
                         var urlofImage: String
 )

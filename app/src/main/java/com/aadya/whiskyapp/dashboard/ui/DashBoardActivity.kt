@@ -25,9 +25,11 @@ import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
 import com.aadya.whiskyapp.profile.ui.ProfileEditFragment
 import com.aadya.whiskyapp.profile.ui.SecretCodeFragment
 import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
+import com.aadya.whiskyapp.reserve.ui.ReservationHistoryFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
 import com.aadya.whiskyapp.retrofit.APICallService
 import com.aadya.whiskyapp.retrofit.APIClient
+import com.aadya.whiskyapp.scanlog.ui.ScanLogFragment
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
 import com.aadya.whiskyapp.utils.BottomNavigationInterface
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -95,6 +97,14 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mBinding.rlPurchaseHistory.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
             callFragment(5)
+        }
+        mBinding.rlScanLog.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(6)
+        }
+        mBinding.rlReservationHistory.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(7)
         }
         mBinding.rlLogout.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
@@ -191,6 +201,18 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
                 launchFragment(
                     PurchaseHistoryFragment.newInstance(),
                     "PurchaseHistoryFragment"
+                )
+            }
+            6 -> {
+                launchFragment(
+                    ScanLogFragment.newInstance(),
+                    "ScanLogFragment"
+                )
+            }
+            7 -> {
+                launchFragment(
+                    ReservationHistoryFragment.newInstance(),
+                    "ReservationHistoryFragment"
                 )
             }
         }

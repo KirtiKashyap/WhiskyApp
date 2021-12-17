@@ -14,7 +14,7 @@
             android:id="@+id/tv_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reservation History"
+            android:text="ScanLog"
             android:fontFamily="@font/archivonarrow_regular"
             android:textColor="@color/white"
             android:gravity="center"
@@ -25,7 +25,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_below="@+id/tv_header"
-            android:id="@+id/reserveHistoryLogRecyclerView"
+            android:id="@+id/scanLogRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="70dp"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="@string/no_purchase_history"
+            android:text="@string/no_scan_log"
             android:textSize="@dimen/_14sdp"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"

@@ -28,8 +28,6 @@ import com.aadya.whiskyapp.utils.SessionManager
 
 class SpecialOfferDialogFragment : DialogFragment() {
 
-
-
     private lateinit var mBinding: FragmentSpecialOfferDialogBinding
     private lateinit var specialOfferAdapter: SpecialOfferAdapter
     private lateinit var mViewModel: SpecialOfferViewModel

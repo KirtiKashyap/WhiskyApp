@@ -297,7 +297,10 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
                     progress_bar.progress = 100
                     progress_bar.visibility=View.GONE
                     mProfileModel?.photograph=imageName
+                    mBinding.profileImage.visibility=View.GONE
                     mBinding.profileImage?.setImageURI(imageUri)
+                    mBinding.imgTop.setImageURI(imageUri)
+
                 }
             }
         })
@@ -513,10 +516,19 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
         mBinding.tvAgentid.text="Special Agent "+mProfileModel?.agentID
 
         if(!mProfileModel?.photograph.isNullOrEmpty()){
+            mBinding.profileImage.visibility=View.GONE
             context?.let {
                 Glide.with(it)
                     .load(CommonUtils.APIURL.Profile_IMAGE_URL+mProfileModel?.photograph)
                     .into(mBinding.profileImage)
+            }
+
+
+
+            context?.let {
+                Glide.with(it)
+                    .load(CommonUtils.APIURL.Profile_IMAGE_URL+mProfileModel?.photograph)
+                    .into(mBinding.imgTop)
             }
 
         }

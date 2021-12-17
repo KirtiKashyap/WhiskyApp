@@ -14,6 +14,8 @@ import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.*
+import com.aadya.whiskyapp.scanlog.model.ScanLogRequest
+import com.aadya.whiskyapp.scanlog.model.ScanLogResponse
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import okhttp3.MultipartBody
@@ -81,6 +83,12 @@ interface APICallService {
 
     @GET(CommonUtils.APIURL.MenuData)
     fun getMenuData (@Header("Authorization") authHeader: String?): Call<MenuResponse?>
+
+    @POST(CommonUtils.APIURL.ScanLog)
+    fun getScanLog(@Header("Authorization") authHeader: String?, @Body accessToken: ScanLogRequest): Call<List<ScanLogResponse?>?>
+
+    @POST(CommonUtils.APIURL.ReservationHistoryLog)
+    fun getReserveHistoryLog(@Header("Authorization") authHeader: String?, @Body accessToken: ReserveInfoRequest): Call<List<ReserveInfoResponse?>?>
 
 
     @POST(CommonUtils.APIURL.Logout)
