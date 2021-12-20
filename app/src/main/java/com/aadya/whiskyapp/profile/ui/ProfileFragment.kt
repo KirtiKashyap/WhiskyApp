@@ -27,6 +27,7 @@ import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import com.aadya.whiskyapp.utils.onPageSwipeUpListner
+import com.bumptech.glide.Glide
 
 class ProfileFragment : Fragment() {
 
@@ -53,8 +54,13 @@ class ProfileFragment : Fragment() {
         }else{
             mBinding.tvUserstatus.background = resources.getDrawable(R.drawable.inactive, null)
         }
+        context?.let {
+            Glide.with(it)
+                .load(CommonUtils.APIURL.Profile_IMAGE_URL+mSessionManager.getProfileModel()?.photograph)
+                .into(mBinding.imgProfiletop)
+        }
         //val weekDay = mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
-        mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
+        mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastScan)
         mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
 
         val paint = mBinding.tvAgentid.paint

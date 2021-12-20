@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:id="@+id/mainLayout"
+    android:layout_height="80dp">
+<TextView
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:id="@+id/sNoTextView"
+    android:text="1"
+    android:textSize="@dimen/_14sdp"
+    android:textStyle="bold"
+    android:layout_marginStart="10dp"
+    android:textColor="@color/orangetextcolor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/orangetextcolor"
+        app:layout_constraintStart_toEndOf="@+id/sNoTextView"
+        app:layout_constraintEnd_toStartOf="@+id/timeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/dateTextViewTextView"
+        android:text="15/12/2021"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/orangetextcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/timeTextView"
+        android:text="11:30"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

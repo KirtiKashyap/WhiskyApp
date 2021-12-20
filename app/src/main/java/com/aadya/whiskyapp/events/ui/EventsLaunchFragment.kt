@@ -192,10 +192,6 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
     }
 
     override fun updateEventsViewPager() {
-        mBottomNavigationInterface?.setOnBottomNavigationResult()
-        launchFragment(
-            MenuFragment.newInstance(),
-            "MenuFragment"
-        )
+
     }
 }

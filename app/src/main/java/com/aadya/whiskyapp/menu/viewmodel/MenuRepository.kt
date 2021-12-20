@@ -1,21 +1,20 @@
-package com.aadya.whiskyapp.events.viewmodel
+package com.aadya.whiskyapp.menu.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.aadya.whiskyapp.R
-import com.aadya.whiskyapp.events.model.EventsResponseModel
+import com.aadya.whiskyapp.menu.model.MenuResponse
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
-import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.Connection
 import retrofit2.Response
 
-class EventsRepository(application: Application) {
+class MenuRepository (application: Application) {
     private var application : Application = application
 
-    private val eventsLiveData = MutableLiveData<List<EventsResponseModel>?>()
+    private val menuLiveData = MutableLiveData<MenuResponse?>()
     private val alertLiveData: MutableLiveData<AlertModel> = MutableLiveData<AlertModel>()
     private val progressLiveData = MutableLiveData<Int>()
     private var profileUnAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -32,36 +31,31 @@ class EventsRepository(application: Application) {
         return alertLiveData
     }
 
-    fun getEventsState() : MutableLiveData<List<EventsResponseModel>?> {
-        return  eventsLiveData
+    fun getMenuState() : MutableLiveData<MenuResponse?> {
+        return  menuLiveData
     }
 
-    fun getEvents(authorization: String?) {
+    fun getMenuData(authorization: String?) {
 
         if (Connection.instance?.isNetworkAvailable(application) == true) {
             progressLiveData.value = CommonUtils.ProgressDialog.showDialog
-            RetrofitService().getEvents(authorization,
+            RetrofitService().getMenuData(authorization,
                 object : APIResponseListener {
-                    override fun onSuccess(response: Response<Any>) {
+                    override fun onSuccess(response: Response<Any?>) {
 
                         progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
 
-                        val modelList: List<EventsResponseModel>? = response.body() as ArrayList<EventsResponseModel>?
+                        val modelList: MenuResponse? = response.body() as MenuResponse?
                         try {
-
-
                             if(response.code() == 401)
                                 profileUnAuthorizedLiveData.value = true
 
                             else if(response.code() == 200)
-                                eventsLiveData.value = modelList
+                                menuLiveData.value = modelList
 
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
-
-
-
                     }
 
                     override fun onFailure() {
@@ -79,6 +73,5 @@ class EventsRepository(application: Application) {
         val color: Int = if (isSuccess) R.color.notiSuccessColor else R.color.notiFailColor
         alertLiveData.value = AlertModel(2000, title, message, drawable, color)
     }
-
 
 }

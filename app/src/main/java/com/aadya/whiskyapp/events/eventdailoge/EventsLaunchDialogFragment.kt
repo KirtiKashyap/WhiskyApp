@@ -179,7 +179,6 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
             false
         )
 
-        mBinding.imgClose.visibility=View.VISIBLE
         mBinding.imgClose.bringToFront()
         mBinding.imgClose.setOnClickListener {
             MyApplication.isEventDialogOpen=false
@@ -199,8 +198,6 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
         mEventsViewModel.getEvents(mSessionManager?.getAuthorization())
     }
 
-
-
     override fun updateView(position: Int) {
 
             eventsAdapter.notifyData(position)
@@ -208,11 +205,6 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
     }
 
     override fun updateEventsViewPager() {
-        mBottomNavigationInterface?.setOnBottomNavigationResult()
         dismiss()
-        launchFragment(
-            MenuFragment.newInstance(),
-            "MenuFragment"
-        )
     }
 }

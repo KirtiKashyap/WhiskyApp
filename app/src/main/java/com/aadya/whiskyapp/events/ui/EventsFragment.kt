@@ -264,6 +264,7 @@ class EventsFragment() : Fragment() {
 
     private fun setIncludedLayout() {
         mIncludedLayoutBinding = mBinding.eventHeader
+        mIncludedLayoutBinding.imgClose.visibility=View.GONE
         mIncludedLayoutBinding.imgClose.setOnClickListener {
             mdeletePageViewPager?.updateView(pos)
         }

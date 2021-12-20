@@ -17,10 +17,10 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:src="@drawable/ic_baseline_close_24"
             app:tint="#e46803" />

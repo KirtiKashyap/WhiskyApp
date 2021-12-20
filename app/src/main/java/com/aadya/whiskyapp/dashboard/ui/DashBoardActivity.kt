@@ -25,9 +25,11 @@ import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
 import com.aadya.whiskyapp.profile.ui.ProfileEditFragment
 import com.aadya.whiskyapp.profile.ui.SecretCodeFragment
 import com.aadya.whiskyapp.purchasehistory.ui.PurchaseHistoryFragment
+import com.aadya.whiskyapp.reserve.ui.ReservationHistoryFragment
 import com.aadya.whiskyapp.reserve.ui.ReserveFragment
 import com.aadya.whiskyapp.retrofit.APICallService
 import com.aadya.whiskyapp.retrofit.APIClient
+import com.aadya.whiskyapp.scanlog.ui.ScanLogFragment
 import com.aadya.whiskyapp.specialoffers.ui.SpecialOfferViewPagerFragment
 import com.aadya.whiskyapp.utils.BottomNavigationInterface
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -49,7 +51,6 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
     private lateinit var mCardMultilineWidget : CardMultilineWidget
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // showBottomSheetDialog()
         intializeMembers()
         setupDrawerLayout()
         setBottomNavigation()
@@ -60,20 +61,6 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mSessionManager= SessionManager.getInstance(this)!!
 
     }
-
-//    private fun showBottomSheetDialog() {
-//        val bottomSheetDialog = BottomSheetDialog(this)
-//        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog)
-//        val payButton = bottomSheetDialog.findViewById<Button>(R.id.payButton)
-//
-//        payButton!!.setOnClickListener {
-//            mCardMultilineWidget= CardMultilineWidget(this,null,0,false)
-//            val cardParams: CardParams? = mCardMultilineWidget.cardParams
-//            mSessionManager.setCardDetail("","","")
-//            //bottomSheetDialog.dismiss()
-//        }
-//        bottomSheetDialog.show()
-//    }
 
     private fun handleClickListner() {
         mBinding.closeNavImageView.setOnClickListener{
@@ -110,6 +97,14 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mBinding.rlPurchaseHistory.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
             callFragment(5)
+        }
+        mBinding.rlScanLog.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(6)
+        }
+        mBinding.rlReservationHistory.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(7)
         }
         mBinding.rlLogout.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
@@ -206,6 +201,18 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
                 launchFragment(
                     PurchaseHistoryFragment.newInstance(),
                     "PurchaseHistoryFragment"
+                )
+            }
+            6 -> {
+                launchFragment(
+                    ScanLogFragment.newInstance(),
+                    "ScanLogFragment"
+                )
+            }
+            7 -> {
+                launchFragment(
+                    ReservationHistoryFragment.newInstance(),
+                    "ReservationHistoryFragment"
                 )
             }
         }

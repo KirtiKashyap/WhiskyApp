@@ -6,12 +6,15 @@ import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
+import com.aadya.whiskyapp.menu.model.MenuResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.*
+import com.aadya.whiskyapp.scanlog.model.ScanLogRequest
+import com.aadya.whiskyapp.scanlog.model.ScanLogResponse
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -208,6 +211,69 @@ class RetrofitService {
             }
         })
     }
+
+    fun getMenuData(authorization: String?,apiResponseListener: APIResponseListener) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<MenuResponse?> = service.getMenuData(authorization)
+        call?.enqueue(object :Callback<MenuResponse?>{
+            override fun onResponse(
+                call: Call<MenuResponse?>,
+                response: Response<MenuResponse?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<MenuResponse?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+        })
+    }
+
+    fun getScanLog(
+        authorization: String,
+        scanLogRequest: ScanLogRequest,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<List<ScanLogResponse?>?>  = service.getScanLog(authorization,scanLogRequest)
+        call?.enqueue(object :Callback<List<ScanLogResponse?>?>{
+            override fun onResponse(
+                call: Call<List<ScanLogResponse?>?>,
+                response: Response<List<ScanLogResponse?>?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<List<ScanLogResponse?>?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+        })
+
+    }
+
+
+    fun getReserveHistoryLog(
+        authorization: String,
+        reserveInfoRequest: ReserveInfoRequest,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<List<ReserveInfoResponse?>?>  = service.getReserveHistoryLog(authorization,reserveInfoRequest)
+        call?.enqueue(object :Callback<List<ReserveInfoResponse?>?>{
+            override fun onResponse(
+                call: Call<List<ReserveInfoResponse?>?>,
+                response: Response<List<ReserveInfoResponse?>?>
+            ) {
+                apiResponseListener.onSuccess(response)
+            }
+
+            override fun onFailure(call: Call<List<ReserveInfoResponse?>?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+        })
+
+    }
+
 
     fun checkReserveValidation(
         authorization: String?,

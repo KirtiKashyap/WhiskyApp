@@ -7,6 +7,7 @@ import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.reserve.model.*
 import com.aadya.whiskyapp.retrofit.APIResponseListener
 import com.aadya.whiskyapp.retrofit.RetrofitService
+import com.aadya.whiskyapp.scanlog.model.ScanLogResponse
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.Connection
@@ -15,6 +16,7 @@ import retrofit2.Response
 class ReserveRepository(application: Application) {
     private var application : Application = application
     private var mCommonUtils : CommonUtils = CommonUtils
+    private val reserveHistoryLogLiveData = MutableLiveData<List<ReserveInfoResponse>?>()
     private val reserveliveData: MutableLiveData<ReserveResponseModel?> = MutableLiveData<ReserveResponseModel?>()
     private val reserveInfoLiveData: MutableLiveData<ReserveInfoResponse?> = MutableLiveData<ReserveInfoResponse?>()
     private val cancelReservation: MutableLiveData<Int?> = MutableLiveData<Int?>()
@@ -44,7 +46,9 @@ class ReserveRepository(application: Application) {
     fun getAlertViewState(): MutableLiveData<AlertModel>? {
         return alertLiveData
     }
-
+    fun getReserveHistoryLogState(): MutableLiveData<List<ReserveInfoResponse>?> {
+        return reserveHistoryLogLiveData
+    }
     fun checkReserveValidation(
         mContext: Context,
         what_u_want_to_eat: String?,
@@ -246,6 +250,41 @@ class ReserveRepository(application: Application) {
             false
         )
     }
+    fun getReserveHistoryLog(authorization: String?, scanLogRequest: ReserveInfoRequest) {
 
+        if (Connection.instance?.isNetworkAvailable(application) == true) {
+            progressLiveData.value = CommonUtils.ProgressDialog.showDialog
+            RetrofitService().getReserveHistoryLog(authorization!!,scanLogRequest,
+                object : APIResponseListener {
+                    override fun onSuccess(response: Response<Any>) {
+
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+
+                        val modelList: List<ReserveInfoResponse>? = response.body() as ArrayList<ReserveInfoResponse>?
+                        try {
+
+
+                            if(response.code() == 401)
+                                reserveUnAuthorizedLiveData.value = true
+
+                            else if(response.code() == 200)
+                                reserveHistoryLogLiveData.value = modelList
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+
+                    }
+
+                    override fun onFailure() {
+                        progressLiveData.value = CommonUtils.ProgressDialog.dismissDialog
+                    }
+                })
+        } else setAlert(
+            application.getString(R.string.no_internet_connection),
+            application.getString(R.string.not_connected_to_internet),
+            false
+        )
+    }
 
 }

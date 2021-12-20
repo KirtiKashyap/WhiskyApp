@@ -2,11 +2,9 @@ package com.aadya.whiskyapp.utils
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.aadya.whiskyapp.R
@@ -58,12 +56,14 @@ object CommonUtils {
     interface APIURL {
 
         companion object {
-            const val Profile_IMAGE_URL="https://ultimiz.com/UploadFiles/MembershipImage/"
-            const val PaymentUrl: String = "https://api.ultimiz.com/api/Payment/CreatePaymentIntent"
+            const val BASE_URL: String = "http://api.ultimiz.com/api/"
+            const val Profile_IMAGE_URL="http://ultimiz.com/UploadFiles/MembershipImage/"
+            const val PaymentUrl: String = "http://api.ultimiz.com/api/Payment/CreatePaymentIntent"
+            const val MenuPdfUrl: String = "http://ultimiz.com/UploadFiles/MenuImages/"
             //const val Event_IMAGE_URL="https://ultimiz.com"
-            const val Event_IMAGE_URL="https://ultimiz.com/UploadFiles/EventImage/"
-            const val QRCode_IMAGE_URL="https://ultimiz.com/UploadFiles/QRCode/"
-            const val BASE_URL: String = "https://api.ultimiz.com/api/"
+            const val Event_IMAGE_URL="http://ultimiz.com/UploadFiles/EventImage/"
+            const val QRCode_IMAGE_URL="http://ultimiz.com/UploadFiles/QRCode/"
+
             const val Profile: String = "Mobile/GetAppUserByID"
             const val SpecialOffer: String = "Mobile/GetSpecialofferListForApp"
             const val LOGIN_USER: String  = "Login/AppUserAuthenticate"
@@ -81,6 +81,9 @@ object CommonUtils {
             const val Logout: String="Login/LogOut"
             const val ReservationInfo : String="Reservation/GetBookingInfoByMemberID"
             const val CancelReservation : String="Reservation/UpdateReservationBookingStatus"
+            const val MenuData : String="Menu/GetMenuData"
+            const val ScanLog : String="Membership/GetScanLogForApp"
+            const val ReservationHistoryLog : String="Reservation/GetReservationByMember"
         }
     }
 
@@ -150,8 +153,6 @@ object CommonUtils {
 
     fun showProgress(message: String?, context: Context) {
         mCommonUtils = CommonUtils
-
-
             kProgressHUD = KProgressHUD.create(context)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel(message)
@@ -166,8 +167,6 @@ object CommonUtils {
     fun dismissProgress() {
         if (kProgressHUD.isShowing) kProgressHUD.dismiss()
     }
-
-
 
     fun getWeek_Day(inputDate: Date?): String {
         val formatter: DateFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)

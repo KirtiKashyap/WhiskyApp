@@ -23,4 +23,5 @@
     <color name="off_track_color">#e2171a</color>
     <color name="on_track_color">#48b45a</color>
     <color name="blanktextviewcolor">#9d1b1f</color>
+    <color name="yellow">#FAD643</color>
 </resources>

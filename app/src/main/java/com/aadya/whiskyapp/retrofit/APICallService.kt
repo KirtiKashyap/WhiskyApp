@@ -6,6 +6,7 @@ import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
+import com.aadya.whiskyapp.menu.model.MenuResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
@@ -13,6 +14,8 @@ import com.aadya.whiskyapp.profile.model.ProfileRequestModel
 import com.aadya.whiskyapp.profile.model.ProfileResponseModel
 import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.*
+import com.aadya.whiskyapp.scanlog.model.ScanLogRequest
+import com.aadya.whiskyapp.scanlog.model.ScanLogResponse
 import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import okhttp3.MultipartBody
@@ -77,6 +80,16 @@ interface APICallService {
 
     @GET(CommonUtils.APIURL.Events)
     fun getEventsList (@Header("Authorization") authHeader: String?): Call<List<EventsResponseModel?>?>
+
+    @GET(CommonUtils.APIURL.MenuData)
+    fun getMenuData (@Header("Authorization") authHeader: String?): Call<MenuResponse?>
+
+    @POST(CommonUtils.APIURL.ScanLog)
+    fun getScanLog(@Header("Authorization") authHeader: String?, @Body accessToken: ScanLogRequest): Call<List<ScanLogResponse?>?>
+
+    @POST(CommonUtils.APIURL.ReservationHistoryLog)
+    fun getReserveHistoryLog(@Header("Authorization") authHeader: String?, @Body accessToken: ReserveInfoRequest): Call<List<ReserveInfoResponse?>?>
+
 
     @POST(CommonUtils.APIURL.Logout)
     fun getLogout(@Header("Authorization") authHeader: String?, @Body accessToken: LogoutRequest): Call<Any>

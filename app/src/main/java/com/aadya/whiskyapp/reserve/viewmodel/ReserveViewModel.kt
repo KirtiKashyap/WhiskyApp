@@ -8,6 +8,7 @@ import com.aadya.whiskyapp.reserve.model.CancelReservationRequest
 import com.aadya.whiskyapp.reserve.model.ReserveInfoRequest
 import com.aadya.whiskyapp.reserve.model.ReserveInfoResponse
 import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
+import com.aadya.whiskyapp.scanlog.model.ScanLogResponse
 import com.aadya.whiskyapp.utils.AlertModel
 
 
@@ -35,6 +36,16 @@ class ReserveViewModel(reserveRepository: ReserveRepository) : ViewModel() {
     fun getAlertViewState(): LiveData<AlertModel?>? {
         return reserveRepository.getAlertViewState()
     }
+
+
+    fun getReserveHistoryLog(authorization: String?, reserveInfoRequest: ReserveInfoRequest) {
+        reserveRepository.getReserveHistoryLog(authorization, reserveInfoRequest)
+    }
+
+    fun getReserveHistoryLogObserver(): MutableLiveData<List<ReserveInfoResponse>?> {
+        return reserveRepository.getReserveHistoryLogState()
+    }
+
 
     fun getReserveInfo(
         mcontext: Context,

@@ -1,6 +1,7 @@
 package com.aadya.whiskyapp.profile.upload
 
 import com.aadya.whiskyapp.profile.model.UploadResponse
+import com.aadya.whiskyapp.utils.CommonUtils
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -23,7 +24,7 @@ interface MyAPI {
     companion object {
         operator fun invoke(): MyAPI {
             return Retrofit.Builder()
-                .baseUrl("http://92.204.128.4:5002/api/")
+                .baseUrl(CommonUtils.APIURL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyAPI::class.java)

@@ -34,5 +34,7 @@ data class ProfileResponseModel (
     @SerializedName("lastSeen") var lastSeen : String,
     @SerializedName("agentStatus") var agentStatus : Boolean,
     @SerializedName("isSpecial")var  isSpecial: Boolean,
-    @SerializedName("isEvent")var  isEvent: Boolean
+    @SerializedName("isEvent")var  isEvent: Boolean,
+    @SerializedName("lastScan")var  lastScan: String
+
 )
