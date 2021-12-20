@@ -7,11 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.ItemReservationLogBinding
-import com.aadya.whiskyapp.purchasehistory.model.PurchaseHistory
 import com.aadya.whiskyapp.reserve.model.ReserveInfoResponse
-import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
-import com.aadya.whiskyapp.utils.CommonUtils
-import com.aadya.whiskyapp.utils.SessionManager
 
 class ReservationHistoryAdapter (
     context: Context
@@ -37,12 +33,19 @@ class ReservationHistoryAdapter (
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
         val reservationHistoryLog: ReserveInfoResponse = reserveHistoryLog[i]
         with(viewHolder) {
+
             binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_y)
-            if(reservationHistoryLog.isActive!!){
+            if(reservationHistoryLog.bookingStatus.equals("Cancelled")){
+                binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_r)
+                binding.statusTextView.text= "Activated: No"
+            }else if(reservationHistoryLog.bookingStatus.equals("Approved")){
                 binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_g)
                 binding.statusTextView.text="Activated: Yes"
-            }else{
-                binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_r)
+            }else if(reservationHistoryLog.bookingStatus.equals("Declined")){
+                binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_o)
+                binding.statusTextView.text= "Activated: No"
+            }else if(reservationHistoryLog.bookingStatus.equals("Pending")){
+                binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_y)
                 binding.statusTextView.text= "Activated: No"
             }
             binding.noTextView.text="Number of people: "+reservationHistoryLog.numberofPeople

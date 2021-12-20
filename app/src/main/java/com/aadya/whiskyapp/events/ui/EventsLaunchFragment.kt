@@ -166,6 +166,7 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
         eventsAdapter = EventsAdapter(
             childFragmentManager, this, eventsList, this, false
         )
+        mBinding.eventsViewpager.bringToFront()
         mBinding.eventsViewpager.adapter = eventsAdapter
 
         mEventsViewModel = ViewModelProvider(this, EventsFactory(activity?.application)).get(
