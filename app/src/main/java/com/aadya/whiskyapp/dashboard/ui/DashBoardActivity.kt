@@ -123,7 +123,9 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mIncludedLayoutBinding.bottomNavigationMenu.setOnNavigationItemSelectedListener(this)
         mIncludedLayoutBinding.bottomNavigationMenu.menu.getItem(1).isChecked = true
     }
-
+    fun setIdSelection(){
+        mIncludedLayoutBinding.bottomNavigationMenu.menu.getItem(1).isChecked = true
+    }
     private fun setupDrawerLayout() {
         val toggle = ActionBarDrawerToggle(
             this,

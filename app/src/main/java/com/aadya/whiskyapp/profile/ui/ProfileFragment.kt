@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.transition.TransitionInflater
 import com.aadya.whiskyapp.R
+import com.aadya.whiskyapp.dashboard.ui.DashBoardActivity
 import com.aadya.whiskyapp.databinding.FragmentProfileNewBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -134,7 +135,7 @@ class ProfileFragment : Fragment() {
             ft?.commit()
 
         })
-
+        (activity as DashBoardActivity)!!.setIdSelection()
         return mBinding.root
     }
 
