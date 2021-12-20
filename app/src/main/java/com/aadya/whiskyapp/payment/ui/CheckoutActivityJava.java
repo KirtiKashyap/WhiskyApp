@@ -227,11 +227,15 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
     private void startCheckout() {
         // Create a PaymentIntent by calling the server's endpoint.
+        String amountTemp = amount.replace("$", "");
+        String amount = amountTemp.split("\\.")[0];
+
+
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         Map<String,Object> payMap=new HashMap<>();
         payMap.put("CardHolderName",nameEditText.getText().toString());
         payMap.put("Currency","USD");
-        payMap.put("Amount",amount.replace("$",""));
+        payMap.put("Amount",amount);
         payMap.put("PaymentMethodType","card");
         payMap.put("Description","Test Payment Mobile");
         payMap.put("Line",addressET.getText().toString());
