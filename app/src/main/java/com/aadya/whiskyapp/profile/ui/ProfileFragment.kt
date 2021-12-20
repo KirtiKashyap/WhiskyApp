@@ -60,8 +60,8 @@ class ProfileFragment : Fragment() {
                 .into(mBinding.imgProfiletop)
         }
         //val weekDay = mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
-        mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastScan)
-        mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favorite
+        mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
+        mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favoritecocktail
 
         val paint = mBinding.tvAgentid.paint
         val width = paint.measureText(mBinding.tvAgentid.text.toString())
@@ -172,7 +172,7 @@ class ProfileFragment : Fragment() {
         rowTextView.text = "O"
         mBinding.tvAgentname.addView(rowTextView)
         rowTextView.background = resources.getDrawable(R.drawable.profiletextview_bg, null)
-        rowTextView.setTextColor(resources.getColor(R.color.blanktextviewcolor))
+        //rowTextView.setTextColor(resources.getColor(R.color.blanktextviewcolor))
         val lparams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT

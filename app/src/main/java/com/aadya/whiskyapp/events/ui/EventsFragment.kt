@@ -264,13 +264,14 @@ class EventsFragment() : Fragment() {
 
     private fun setIncludedLayout() {
         mIncludedLayoutBinding = mBinding.eventHeader
-        mIncludedLayoutBinding.imgClose.visibility=View.GONE
-        mIncludedLayoutBinding.imgClose.setOnClickListener {
-            mdeletePageViewPager?.updateView(pos)
+        mIncludedLayoutBinding.imgDrawer.setOnClickListener {
+            mDrawerInterface?.setOnDrwawerClickResult()
         }
         if(isFromDialog){
+            mIncludedLayoutBinding.imgDrawer.visibility=View.GONE
             mIncludedLayoutBinding.root.img_logo.visibility=View.GONE
         }else{
+            mIncludedLayoutBinding.imgDrawer.visibility=View.VISIBLE
             mIncludedLayoutBinding.root.img_logo.visibility=View.VISIBLE
         }
         mIncludedLayoutBinding.root.visibility=View.VISIBLE
