@@ -75,6 +75,8 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
     private var imageName=""
     private val PermissionsRequestCode = 123
     private lateinit var managePermissions: ManagePermissions
+    var isProfileUpdate=false
+    var isProfileImageUpdate=false
 
 
     override fun onCreateView(
@@ -283,7 +285,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
             ),mSessionManager.getUserDetailLoginModel()?.memberID!!
         ).enqueue(object : Callback<UploadResponse> {
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                layout_root.snackbar(t.message!!)
+                //layout_root.snackbar(t.message!!)
                 progress_bar.progress = 0
                 progress_bar.visibility=View.GONE
             }
@@ -293,13 +295,20 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
                 response: Response<UploadResponse>
             ) {
                 response.body()?.let {
-                    layout_root.snackbar(it.MemberID)
+                    //layout_root.snackbar(it.MemberID)
                     progress_bar.progress = 100
                     progress_bar.visibility=View.GONE
                     mProfileModel?.photograph=imageName
                     mBinding.profileImage.visibility=View.GONE
                     mBinding.profileImage?.setImageURI(imageUri)
                     mBinding.imgTop.setImageURI(imageUri)
+                    isProfileUpdate=false
+                    isProfileImageUpdate=true
+
+                   /* mProfileViewModel.getProfile(
+                        mSessionManager.getAuthorization(),
+                        mSessionManager.getUserDetailLoginModel()?.memberID
+                    )*/
 
                 }
             }
@@ -348,19 +357,36 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
             mSessionManager.setProfileModel(it)
             mProfileModel = mSessionManager.getProfileModel()
             Log.d("TAG", "UserId:$it")
-            val alertModel = AlertModel(
-                2000, resources.getString(R.string.profile_update), resources.getString(
-                    R.string.profile_update_successfully
-                ), R.drawable.correct_icon, R.color.notiSuccessColor
-            )
-            mCommonUtils.showAlert(
-                alertModel.duration,
-                alertModel.title,
-                alertModel.message,
-                alertModel.drawable,
-                alertModel.color,
-                requireActivity()
-            )
+            if(isProfileUpdate) {
+                val alertModel = AlertModel(
+                    2000, resources.getString(R.string.profile_update), resources.getString(
+                        R.string.profile_update_successfully
+                    ), R.drawable.correct_icon, R.color.notiSuccessColor
+                )
+                mCommonUtils.showAlert(
+                    alertModel.duration,
+                    alertModel.title,
+                    alertModel.message,
+                    alertModel.drawable,
+                    alertModel.color,
+                    requireActivity()
+                )
+            }else if(isProfileImageUpdate){
+                val alertModel = AlertModel(
+                    2000, resources.getString(R.string.profile_image_update), resources.getString(
+                        R.string.profile_image_update_successfully
+                    ), R.drawable.correct_icon, R.color.notiSuccessColor
+                )
+                mCommonUtils.showAlert(
+                    alertModel.duration,
+                    alertModel.title,
+                    alertModel.message,
+                    alertModel.drawable,
+                    alertModel.color,
+                    requireActivity()
+                )
+            }
+
             setUIValues()
         })
 
@@ -467,23 +493,25 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
                 )
             }
             else {
-
+                isProfileUpdate=true
+                isProfileImageUpdate=false
                 var mProfileRequestModel = ProfileEditRequestModel(
                     MemberID = mSessionManager.getUserDetailLoginModel()?.memberID,
-                    firstName = "",
-                    lastName = "",
-                    middleName = "",
+                    firstName = mProfileModel!!.firstName,
+                    lastName = mProfileModel!!.lastName,
+                    middleName = mProfileModel!!.middleName,
                     phoneNo = mPhoneLayoutBinding.tvUserPhone.text.toString(),
                     email = mEmailLayoutBinding.tvUserEmail.text.toString(),
                     dateOfBirth = mCommonUtils.date_dd_MM_yyyy(
                         mDOBLayoutBinding.tvUserDob.text.toString()
                     ),
                     address = mAddressLayoutBinding.tvUserAdress.text.toString(),
-                    Occupation = "",
-                    SpouseName = "",
-                    TypeofMembership = "",
-                    AliasID = "",
-                    FavoriteCocktail = ""
+                    Occupation = mProfileModel!!.occupation,
+                    SpouseName = mProfileModel!!.spouseName,
+                    TypeofMembership = mProfileModel!!.memberTypeName,
+                    AliasID = mProfileModel!!.aliasID,
+                    FavoriteCocktail = mProfileModel!!.favoritecocktail,
+                    AgentID = mProfileModel!!.agentID
                 )
                 mSessionManager.getAuthorization()?.let { it1 ->
                     mProfileEditViewModel.editProfile(

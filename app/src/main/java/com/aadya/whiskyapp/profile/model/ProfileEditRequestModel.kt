@@ -18,6 +18,7 @@ data class ProfileEditRequestModel (
     @SerializedName("TypeofMembership") var TypeofMembership : String,
     @SerializedName("AliasID") var AliasID : String,
     @SerializedName("FavoriteCocktail") var FavoriteCocktail : String,
+    @SerializedName("AgentID") var AgentID : String
 
 
 )

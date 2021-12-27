@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WhiskyApp</string>
+    <string name="app_name">Classified</string>
     <string name="hint_username">UserName</string>
     <string name="login">Login</string>
     <string name="signup">SignUp</string>
@@ -113,7 +113,9 @@
     <string name="logout">Logout</string>
     <string name="submit">Submit</string>
     <string name="profile_update">Profile Updated</string>
+    <string name="profile_image_update">Profile Image Updated</string>
     <string name="profile_update_successfully">Profile has been updated successfully</string>
+    <string name="profile_image_update_successfully">Profile Image has been updated successfully</string>
     <string name="swipe_down_to_buy">Click to Buy</string>
     <string name="swipe_to_confirm">Swipe to Confirm</string>
     <string name="reserve_your_experience">Reserve Your Experience</string>

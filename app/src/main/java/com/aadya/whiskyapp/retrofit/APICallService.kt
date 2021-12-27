@@ -87,8 +87,8 @@ interface APICallService {
     @POST(CommonUtils.APIURL.ScanLog)
     fun getScanLog(@Header("Authorization") authHeader: String?, @Body accessToken: ScanLogRequest): Call<List<ScanLogResponse?>?>
 
-    @POST(CommonUtils.APIURL.ReservationHistoryLog)
-    fun getReserveHistoryLog(@Header("Authorization") authHeader: String?, @Body accessToken: ReserveInfoRequest): Call<List<ReserveInfoResponse?>?>
+    @GET(CommonUtils.APIURL.ReservationHistoryLog)
+    fun getReserveHistoryLog(@Header("Authorization") authHeader: String?): Call<List<ReserveInfoResponse?>?>
 
 
     @POST(CommonUtils.APIURL.Logout)

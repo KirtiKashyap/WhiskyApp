@@ -17,6 +17,7 @@
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="4dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/specialofferbottle_mdpi" />
         <LinearLayout
             android:orientation="vertical"
@@ -29,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp"
                 android:text="Samantha curtis-Rock Oyster"
@@ -84,6 +86,7 @@
                 android:layout_marginTop="4dp"
                 android:textSize="@dimen/_11sdp"
                 android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:text="" />
 
         </LinearLayout>

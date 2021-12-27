@@ -1,6 +1,7 @@
 package com.aadya.whiskyapp.reserve.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class ReserveInfoResponse {
 
@@ -82,5 +83,9 @@ class ReserveInfoResponse {
     var isArrived: Boolean?=null
     @SerializedName("notes")
     var notes: String?=null
+
+    @SerializedName("visitedDatetime")
+    var visitedDatetime: String?=null
+
 
  }

@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.reserve.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.ItemReservationLogBinding
 import com.aadya.whiskyapp.reserve.model.ReserveInfoResponse
+import kotlin.collections.ArrayList
 
-class ReservationHistoryAdapter (
+class ReservationHistoryAdapter(
     context: Context
 ) : RecyclerView.Adapter<ReservationHistoryAdapter.MyViewHolder>() {
-
     private val reserveHistoryLog: ArrayList<ReserveInfoResponse> =
         ArrayList()
     private val context: Context
@@ -30,23 +31,29 @@ class ReservationHistoryAdapter (
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: MyViewHolder, i: Int) {
         val reservationHistoryLog: ReserveInfoResponse = reserveHistoryLog[i]
-        with(viewHolder) {
 
+        with(viewHolder) {
             binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_y)
             if(reservationHistoryLog.bookingStatus.equals("Cancelled")){
                 binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_r)
-                binding.statusTextView.text= "Activated: No"
             }else if(reservationHistoryLog.bookingStatus.equals("Approved")){
                 binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_g)
-                binding.statusTextView.text="Activated: Yes"
             }else if(reservationHistoryLog.bookingStatus.equals("Declined")){
                 binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_o)
-                binding.statusTextView.text= "Activated: No"
             }else if(reservationHistoryLog.bookingStatus.equals("Pending")){
                 binding.mainLayout.setBackgroundResource(R.drawable.reserve_bg_y)
-                binding.statusTextView.text= "Activated: No"
+
+            }
+            try {
+                val splitString = reservationHistoryLog.visitedDatetime!!
+                    .split(" ").toTypedArray()
+                binding.statusTextView.text = "Activated: " + splitString[0]
+                binding.statusTimeTextView.text = splitString[1]
+            }catch (e: Exception){
+                e.printStackTrace()
             }
             binding.noTextView.text="Number of people: "+reservationHistoryLog.numberofPeople
             binding.timeTextView.text=reservationHistoryLog.bookingTime
