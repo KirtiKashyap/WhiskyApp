@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@drawable/eventdetail_top"
-        >
+        android:background="@drawable/eventdetail_top">
 
 
         <ImageView
@@ -70,7 +69,7 @@
 
         <TextView
             android:id="@+id/tv_eventname"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/img_eventbg_topguide"
             app:layout_constraintStart_toStartOf="@id/tv_eventname_startguide"
@@ -79,7 +78,7 @@
             android:fontFamily="@font/archivonarrow_regular"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="@dimen/_24sdp"
+            android:textSize="@dimen/_22sdp"
             />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/tv_eventname_endguide"
