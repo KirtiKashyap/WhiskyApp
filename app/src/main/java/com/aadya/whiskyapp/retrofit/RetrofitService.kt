@@ -258,7 +258,7 @@ class RetrofitService {
         apiResponseListener: APIResponseListener
     ) {
         val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
-        val call: Call<List<ReserveInfoResponse?>?>  = service.getReserveHistoryLog(authorization,reserveInfoRequest)
+        val call: Call<List<ReserveInfoResponse?>?>  = service.getReserveHistoryLog(authorization)
         call?.enqueue(object :Callback<List<ReserveInfoResponse?>?>{
             override fun onResponse(
                 call: Call<List<ReserveInfoResponse?>?>,

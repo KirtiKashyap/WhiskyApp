@@ -56,13 +56,13 @@ object CommonUtils {
     interface APIURL {
 
         companion object {
-            const val BASE_URL: String = "http://api.ultimiz.com/api/"
-            const val Profile_IMAGE_URL="http://ultimiz.com/UploadFiles/MembershipImage/"
-            const val PaymentUrl: String = "http://api.ultimiz.com/api/Payment/CreatePaymentIntent"
-            const val MenuPdfUrl: String = "http://ultimiz.com/UploadFiles/MenuImages/"
+            const val BASE_URL: String = "https://api.ultimiz.com/api/"
+            const val Profile_IMAGE_URL="https://ultimiz.com/UploadFiles/MembershipImage/"
+            const val PaymentUrl: String = "https://api.ultimiz.com/api/Payment/CreatePaymentIntent"
+            const val MenuPdfUrl: String = "https://ultimiz.com/UploadFiles/MenuImages/"
             //const val Event_IMAGE_URL="https://ultimiz.com"
-            const val Event_IMAGE_URL="http://ultimiz.com/UploadFiles/EventImage/"
-            const val QRCode_IMAGE_URL="http://ultimiz.com/UploadFiles/QRCode/"
+            const val Event_IMAGE_URL="https://ultimiz.com/UploadFiles/EventImage/"
+            const val QRCode_IMAGE_URL="https://ultimiz.com/UploadFiles/QRCode/"
 
             const val Profile: String = "Mobile/GetAppUserByID"
             const val SpecialOffer: String = "Mobile/GetSpecialofferListForApp"

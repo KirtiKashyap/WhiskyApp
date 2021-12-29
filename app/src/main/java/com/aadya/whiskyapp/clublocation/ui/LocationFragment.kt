@@ -66,8 +66,8 @@ class LocationFragment : Fragment() ,OnMapReadyCallback {
         mMap = googleMap
         //Adding markers to map
 
-        val latLng=LatLng(28.6139, 77.2090)
-        val markerOptions:MarkerOptions=MarkerOptions().position(latLng).title("New Delhi")
+        val latLng=LatLng(34.1014748, -84.5199119)
+        val markerOptions:MarkerOptions=MarkerOptions().position(latLng).title("8558 Main Street, Woodstock, GA, USA")
 
         // moving camera and zoom map
 

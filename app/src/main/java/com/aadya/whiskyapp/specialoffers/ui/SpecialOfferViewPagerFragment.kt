@@ -4,24 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentSpecialOfferViewPagerBinding
 import com.aadya.whiskyapp.landing.ui.LandingActivity
-import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.specialoffers.adapter.SpecialOfferAdapter
 import com.aadya.whiskyapp.specialoffers.viewmodel.SpecialOfferFactory
 import com.aadya.whiskyapp.specialoffers.viewmodel.SpecialOfferViewModel
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.BottomNavigationInterface
 import com.aadya.whiskyapp.utils.CommonUtils
-import com.aadya.whiskyapp.utils.CommonUtils.specialoffer_adapter_position
 import com.aadya.whiskyapp.utils.SessionManager
 
 
@@ -91,9 +87,9 @@ class SpecialOfferViewPagerFragment : Fragment() {
 
                 )
 
-                Handler().postDelayed({
+              /*  Handler().postDelayed({
                     mBottomNavigationInterface?.setOnBottomNavigationResult()
-                    launchFragment(MenuFragment.newInstance(), "MenuFragment")}, 2000)
+                    launchFragment(MenuFragment.newInstance(), "MenuFragment")}, 2000)*/
 
             }
 

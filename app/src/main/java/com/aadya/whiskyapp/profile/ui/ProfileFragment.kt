@@ -60,7 +60,6 @@ class ProfileFragment : Fragment() {
                 .load(CommonUtils.APIURL.Profile_IMAGE_URL+mSessionManager.getProfileModel()?.photograph)
                 .into(mBinding.imgProfiletop)
         }
-        //val weekDay = mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
         mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
         mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favoritecocktail
 
@@ -78,12 +77,12 @@ class ProfileFragment : Fragment() {
 
         if(mSessionManager.getProfileModel()?.bookingStatus!! == "Cancel"){
             mBinding.tvUserReservationstatus.background = resources.getDrawable(
-                R.drawable.cancel,
+                R.drawable.cancelled,
                 null
             )
         }else if(mSessionManager.getProfileModel()?.bookingStatus!! == "Reject"){
             mBinding.tvUserReservationstatus.background = resources.getDrawable(
-                R.drawable.reject,
+                R.drawable.declined,
                 null
             )
         }else if(mSessionManager.getProfileModel()?.bookingStatus!! == "Approve"){
@@ -98,7 +97,7 @@ class ProfileFragment : Fragment() {
             )
         }else if(mSessionManager.getProfileModel()?.bookingStatus!! == ""){
             mBinding.tvUserReservationstatus.background = resources.getDrawable(
-                R.drawable.pending,
+                R.drawable.norequest,
                 null
             )
         }
@@ -170,7 +169,7 @@ class ProfileFragment : Fragment() {
        createDynamicallyTextView(agent_name1)
         val rowTextView = TextView(requireContext())
         // set some properties of rowTextView or something
-        rowTextView.text = "O"
+        rowTextView.text = " "
         mBinding.tvAgentname.addView(rowTextView)
         rowTextView.background = resources.getDrawable(R.drawable.profiletextview_bg, null)
         //rowTextView.setTextColor(resources.getColor(R.color.blanktextviewcolor))
