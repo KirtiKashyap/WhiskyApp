@@ -101,8 +101,19 @@
                    android:orientation="vertical"
                    app:layout_constraintGuide_percent="0.40"/>
 
+               <Spinner
 
+                   android:id="@+id/timeSpinner"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintEnd_toStartOf="@id/tv_header__endguide"
+                   app:layout_constraintTop_toBottomOf="@+id/ed_what_u_eat"
+                   app:layout_constraintStart_toStartOf="@+id/edtime_startguide"
+                   android:layout_marginTop="15dp"
+                   android:spinnerMode="dialog"
+                   android:background="@drawable/spinnerbackground"/>
                <EditText
+                   android:visibility="gone"
                    android:id="@+id/ed_time"
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
@@ -128,8 +139,9 @@
                    android:orientation="vertical"
                    app:layout_constraintGuide_percent="0.60"/>
 
-             <!--  <TextView
-                   android:id="@+id/tv_no_of_people"
+               <!--<TextView
+                   android:visibility="gone"
+                   android:id="@+id/tvNoReservation"
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    app:layout_constraintEnd_toStartOf="@id/tv_no_of_person_endguide"
