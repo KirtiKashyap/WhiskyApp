@@ -80,9 +80,10 @@
     <string name="email">Email:</string>
     <string name="personal_details">PERSONAL DETAILS</string>
     <string name="no_of_persons">No of People at your table</string>
+    <string name="select_time">Select Time</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
-    <string name="what_do_u_want_to_drink">Request you to offer special food and drinks on arrival.</string>
+    <string name="what_do_u_want_to_drink">Enter any special request here.</string>
     <string name="specialofferdummy">Premium Blended Malt from Classified Distllers.\nCo-founders of classified John Dhay has been recrating his grandfather\'s whiskyrcipes since 1995.lastly marked
     the 110 year anniversary of the final page entry in the collar book.\nLimited edition , Volume : 80 cl/Ac.\nEnjoy the complemntry whisky glass.
    Premium Blended Malt from Classified Distllers.\nCo-founders of classified John Dhay has been recrating his grandfather\'s whiskyrcipes since 1995.lastly marked
@@ -143,5 +144,12 @@
     <string name="take_picture">Take Picture</string>
     <string name="take_picture_description">Camera picture for sample app</string>
     <string name="ok_button_title">OK</string>
+    <string name="reservation_time"><br>User can do reservation on the following day with specific time\n\n
+      </br><br>5:00 PM - 11:00 PM (Fri and Sat)\n
+      </br><br>5:00 PM-9:00 PM Sunday\n
+      </br><br>5:00 PM-10 PM Thursday\n
+      </br><br>Nothing on Monday to Wednesday
+      </br>
+   </string>
 
 </resources>

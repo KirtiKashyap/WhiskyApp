@@ -2,6 +2,8 @@ package com.aadya.whiskyapp.retrofit;
 
 
 import com.aadya.whiskyapp.utils.CommonUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +17,10 @@ public class APIClient {
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofitInstance() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -26,8 +32,7 @@ public class APIClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(CommonUtils.APIURL.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-//                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();
         }

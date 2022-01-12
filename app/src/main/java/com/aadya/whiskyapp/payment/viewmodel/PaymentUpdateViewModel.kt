@@ -1,18 +1,21 @@
 package com.aadya.whiskyapp.payment.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aadya.whiskyapp.events.model.RSVPResponseModel
+import com.aadya.whiskyapp.payment.model.PaymentByEmail
+import com.aadya.whiskyapp.payment.model.PaymentByEmailResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
-import com.aadya.whiskyapp.profile.model.ProfileResponseModel
-import com.aadya.whiskyapp.reserve.model.ReserveResponseModel
 import com.aadya.whiskyapp.utils.AlertModel
 
 class PaymentUpdateViewModel(paymentRepository: PaymentRepository): ViewModel() {
 
     private var paymentRepository: PaymentRepository = paymentRepository
+
+    fun paymentByEmail(authorization: String, paymentByEmail: PaymentByEmail) {
+        paymentRepository.paymentByEmail(authorization,paymentByEmail)
+    }
+
 
     fun getPaymentUpdate(authorization: String,paymentUpdate: PaymentUpdate) {
         paymentRepository.paymentUpdate(authorization,paymentUpdate)
@@ -20,6 +23,11 @@ class PaymentUpdateViewModel(paymentRepository: PaymentRepository): ViewModel() 
 
     fun getPaymentUpdateObserver() : LiveData<PaymentResponse>{
         return  paymentRepository.getPaymentUpdateState()
+    }
+
+
+    fun getPaymentByEmailObserver() : LiveData<PaymentByEmailResponse?>{
+        return  paymentRepository.getPaymentByEmailState()
     }
 
     fun getProgressState(): LiveData<Int?>? {
@@ -32,4 +40,5 @@ class PaymentUpdateViewModel(paymentRepository: PaymentRepository): ViewModel() 
     fun getPaymentUnAuthorized() : LiveData<Boolean>{
         return  paymentRepository.getPaymentUnAuthorized()
     }
+
 }

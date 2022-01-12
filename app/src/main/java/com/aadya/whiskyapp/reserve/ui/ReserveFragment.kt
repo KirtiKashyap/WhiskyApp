@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.reserve.ui
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -35,6 +37,8 @@ import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -46,7 +50,9 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var mDrawerInterface: DrawerInterface? = null
     val calendar = Calendar.getInstance()
     private lateinit var noofpeopleAdapter: ArrayAdapter<String>
+    private lateinit var timeAdapter: ArrayAdapter<String>
     private lateinit var noOfPeopleList: ArrayList<String>
+    private lateinit var timeArrayList: ArrayList<String>
     private var selected_no_of_people : String = ""
     private lateinit var  reserveViewModel: ReserveViewModel
     private lateinit var  mCommonUtils : CommonUtils
@@ -68,14 +74,80 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
     private fun updateLabel() {
-        val myFormat = "MM/dd/yyyy"
+        val myFormat = "MM-dd-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        mBinding.edDate.setText(sdf.format(calendar.getTime()))
+        mBinding.edDate.setText(sdf.format(calendar.time))
+        if(getWeekDayName(mBinding.edDate.text.toString()).equals("Thursday")){
+             // 5:00 PM-10 PM Thursday
+            timeArrayList.clear()
+            timeArrayList.add(resources.getString(R.string.select_time))
+            timeArrayList.add("5:00 PM")
+            timeArrayList.add("6:00 PM")
+            timeArrayList.add("7:00 PM")
+            timeArrayList.add("8:00 PM")
+            timeArrayList.add("9:00 PM")
+            timeArrayList.add("10:00 PM")
+            timeAdapter = ArrayAdapter<String>(
+                requireContext(),
+                R.layout.row_spinner,
+                timeArrayList
+            )
+
+        }else if(getWeekDayName(mBinding.edDate.text.toString()).equals("Friday")|| getWeekDayName(mBinding.edDate.text.toString()).equals("Saturday")){
+            // 5:00 PM - 11:00 PM (Fri and Sat)
+            timeArrayList.clear()
+            timeArrayList.add(resources.getString(R.string.select_time))
+            timeArrayList.add("5:00 PM")
+            timeArrayList.add("6:00 PM")
+            timeArrayList.add("7:00 PM")
+            timeArrayList.add("8:00 PM")
+            timeArrayList.add("9:00 PM")
+            timeArrayList.add("10:00 PM")
+            timeArrayList.add("11:00 PM")
+            timeAdapter = ArrayAdapter<String>(
+                requireContext(),
+                R.layout.row_spinner,
+                timeArrayList
+            )
+
+        }else if(getWeekDayName(mBinding.edDate.text.toString()).equals("Sunday")){
+            // 5:00 PM-9:00 PM Sunday
+            timeArrayList.clear()
+            timeArrayList.add(resources.getString(R.string.select_time))
+            timeArrayList.add("5:00 PM")
+            timeArrayList.add("6:00 PM")
+            timeArrayList.add("7:00 PM")
+            timeArrayList.add("8:00 PM")
+            timeArrayList.add("9:00 PM")
+            timeAdapter = ArrayAdapter<String>(
+                requireContext(),
+                R.layout.row_spinner,
+                timeArrayList
+            )
+        }else{
+            timeArrayList.clear()
+            timeArrayList.add(resources.getString(R.string.select_time))
+            val builder = AlertDialog.Builder(requireActivity(),R.style.CustomAlertDialog)
+                .create()
+            val view = layoutInflater.inflate(R.layout.customview_layout,null)
+            val  button = view.findViewById<Button>(R.id.dialogDismiss_button)
+            builder.setView(view)
+            button.setOnClickListener {
+                builder.dismiss()
+            }
+            builder.setCanceledOnTouchOutside(false)
+            builder.show()
+        }
+
+    }
+    private fun getWeekDayName(s: String?): String? {
+        val dtfInput: DateTimeFormatter = DateTimeFormatter.ofPattern("M-d-u", Locale.ENGLISH)
+        val dtfOutput: DateTimeFormatter = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
+        return LocalDate.parse(s, dtfInput).format(dtfOutput)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         handleObserver()
     }
     override fun onCreateView(
@@ -85,7 +157,11 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         intializeMembers(inflater, container)
         handleClickListner()
         var reserveInfoRequest = ReserveInfoRequest(mSessionManager.getUserDetailLoginModel()?.memberID!!)
-        reserveViewModel.getReserveInfo(requireContext(),reserveInfoRequest,mSessionManager?.getAuthorization())
+        reserveViewModel.getReserveInfo(
+            requireContext(),
+            reserveInfoRequest,
+            mSessionManager?.getAuthorization()
+        )
         return mBinding.root
     }
 
@@ -115,13 +191,13 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
             androidx.lifecycle.Observer {
                 if (it == null) {
                     return@Observer
-                }else if(it.bookingInfo!!) {
-                    isReservation=it.bookingInfo!!
-                    bookingInfoId=it.BookingInfoID!!
+                } else if (it.bookingInfo!!) {
+                    isReservation = it.bookingInfo!!
+                    bookingInfoId = it.BookingInfoID!!
                     setData(it)
-                }else{
-                    bookingInfoId=it.BookingInfoID!!
-                    isReservation=it.bookingInfo!!
+                } else {
+                    bookingInfoId = it.BookingInfoID!!
+                    isReservation = it.bookingInfo!!
                     resetUI()
                 }
             })
@@ -131,9 +207,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
             androidx.lifecycle.Observer {
                 if (it == null) {
                     return@Observer
-                }
-                else {
-                    isReservation=false
+                } else {
+                    isReservation = false
                     mBinding.reserveButton.text = "Reserve"
                     resetUI()
                 }
@@ -247,9 +322,13 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mSessionManager?.getAuthorization()
                 )
             }else{
-               val cancelReservationRequest= CancelReservationRequest(bookingInfoId,"Cancel","N/A")
+               val cancelReservationRequest= CancelReservationRequest(
+                   bookingInfoId,
+                   "Cancel",
+                   "N/A"
+               )
                 reserveViewModel.getCancelReservation(
-                    requireContext(),cancelReservationRequest,
+                    requireContext(), cancelReservationRequest,
                     mSessionManager?.getAuthorization()
                 )
             }
@@ -258,11 +337,17 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         mBinding.edDate.setOnClickListener {
             mCommonUtils.hideKeyboard(requireContext())
-            val mDateTimePickerDialogue: DatePickerDialog = DatePickerDialog(
+            val mDateTimePickerDialogue = DatePickerDialog(
                 requireContext(), R.style.TimePickerTheme, date, calendar
                     .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
+
+
+
+
+
+
             mDateTimePickerDialogue.datePicker.minDate=System.currentTimeMillis() - 1000
             mDateTimePickerDialogue.show()
 
@@ -315,14 +400,14 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     val converted24Hrs = convert12hrformat_24hrformat(formattedTime)
                     val toTypedArray = converted24Hrs.split(":").toTypedArray()
                     //mTime = toTypedArray[0] + toTypedArray[1]
-                    mTime=converted24Hrs
+                    mTime = converted24Hrs
                     mBinding.edTime.setText(converted24Hrs)
 
                 } else {
-                    mTime=""
+                    mTime = ""
                     mBinding.edTime.setText("")
                     mBinding.edTime.setHint(R.string.time)
-                   Toast.makeText(context,"Invalid Time",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Invalid Time", Toast.LENGTH_SHORT).show()
 
                 }
 
@@ -363,6 +448,18 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
             container,
             false
         )
+        timeArrayList = ArrayList<String>()
+        timeArrayList.add(resources.getString(R.string.select_time))
+
+        timeAdapter = ArrayAdapter<String>(
+            requireContext(),
+            R.layout.row_spinner,
+            timeArrayList
+        )
+        timeAdapter.setDropDownViewResource(R.layout.row_spinner_dialog)
+        mBinding.timeSpinner.adapter = timeAdapter
+        mBinding.timeSpinner.onItemSelectedListener = this
+
 
         noOfPeopleList = ArrayList<String>()
         noOfPeopleList.add(resources.getString(R.string.no_of_persons))
@@ -370,19 +467,31 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         noOfPeopleList.add("2")
         noOfPeopleList.add("3")
         noOfPeopleList.add("4")
-        noOfPeopleList.add("5")
-        noOfPeopleList.add("6")
-        noOfPeopleList.add("7")
-        noOfPeopleList.add("8")
-        noOfPeopleList.add("9")
-        noOfPeopleList.add("10")
+
 
         noofpeopleAdapter = ArrayAdapter<String>(
             requireContext(),
             R.layout.row_spinner,
             noOfPeopleList
         )
+        // spinner on item selected listener
+        mBinding.timeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                if(position>0) {
+                    mTime=parent.getItemAtPosition(position).toString().split("\\s".toRegex())[0]
+                    //Toast.makeText(requireContext(),mTime,Toast.LENGTH_SHORT).show()
+                }
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // another interface callback
+            }
+        }
         noofpeopleAdapter.setDropDownViewResource(R.layout.row_spinner_dialog)
 
         mBinding.spinnerNoOfPeople.adapter = noofpeopleAdapter

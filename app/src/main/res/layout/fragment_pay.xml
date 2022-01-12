@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/loginbg">
+        <include
+            android:id="@+id/main_header"
+            layout="@layout/main_header"
+            app:layout_constraintTop_toBottomOf="@id/header_verticalguide1"
+            app:layout_constraintBottom_toTopOf="@id/header_verticalguide2"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_verticalguide1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/header_verticalguide2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"/>
+        <ImageView
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_header"
+            android:layout_width="@dimen/_120sdp"
+            android:src="@drawable/buy"
+            android:id="@+id/butImage"
+            android:layout_height="@dimen/_120sdp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/layout"
+        android:layout_marginTop="@dimen/_50sdp"
+        app:layout_constraintTop_toBottomOf="@+id/butImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <EditText
+            android:background="@drawable/loginedittext_bg"
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Email"
+            android:text="kashyap.kirti11@gmail.com"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/orangetextcolor"
+            android:textColor="@color/orangetextcolor"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/archivonarrow_regular" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:background="@drawable/loginedittext_bg"
+            android:id="@+id/amountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:text="200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/archivonarrow_regular"
+            app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+
+        <Button
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:backgroundTint="@color/orangetextcolor"
+            android:id="@+id/checkOutButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAllCaps="true"
+            android:text="CheckOut"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/amountTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkOutButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:background="@drawable/loginedittext_bg"
+            android:text="Cancel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
