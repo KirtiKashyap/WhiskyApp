@@ -7,6 +7,8 @@ import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.menu.model.MenuResponse
+import com.aadya.whiskyapp.payment.model.PaymentByEmail
+import com.aadya.whiskyapp.payment.model.PaymentByEmailResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileRequestModel
@@ -398,6 +400,28 @@ class RetrofitService {
 
             override fun onFailure(call: Call<PaymentResponse?>, t: Throwable) {
                 apiResponseListener.onFailure()
+            }
+        })
+    }
+
+    fun paymentByEmail(
+        authorization: String?,
+        paymentByEmail: PaymentByEmail,
+        apiResponseListener: APIResponseListener
+    ) {
+        val service = APIClient.getRetrofitInstance().create(APICallService::class.java)
+        val call: Call<PaymentByEmailResponse?>? = service.paymentByEmail(authorization,paymentByEmail)
+        call?.enqueue(object : Callback<PaymentByEmailResponse?> {
+
+            override fun onFailure(call: Call<PaymentByEmailResponse?>, t: Throwable) {
+                apiResponseListener.onFailure()
+            }
+
+            override fun onResponse(
+                call: Call<PaymentByEmailResponse?>,
+                response: Response<PaymentByEmailResponse?>
+            ) {
+                apiResponseListener.onSuccess(response)
             }
         })
     }

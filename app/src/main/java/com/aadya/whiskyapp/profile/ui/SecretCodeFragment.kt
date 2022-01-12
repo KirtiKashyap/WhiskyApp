@@ -38,7 +38,6 @@ class SecretCodeFragment : Fragment() {
     private lateinit var mSessionManager: SessionManager
     private lateinit var mProfileViewModel : ProfileViewModel
     private lateinit var mCommonUtils : CommonUtils
-    private var counter=0
 
 
     override fun onAttach(context: Context) {
@@ -74,7 +73,6 @@ class SecretCodeFragment : Fragment() {
         mProfileViewModel.getProfileObserver().observe(this, Observer {
             if (it == null) return@Observer
             mSessionManager.setProfileModel(it)
-            counter=counter++
             lastseen.text="Last "+mCommonUtils.getWeekDay(it.userLoginTime)
             val qrCode = it.qrCode
             context?.let {

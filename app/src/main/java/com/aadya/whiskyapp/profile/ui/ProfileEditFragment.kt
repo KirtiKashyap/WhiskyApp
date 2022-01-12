@@ -411,7 +411,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
             setUIValues()
         })
 
-        mProfileViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
+        /*mProfileViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
             object : Observer<AlertModel?> {
                 override fun onChanged(alertModel: AlertModel?) {
                     if (alertModel == null) return
@@ -425,10 +425,10 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
 
                     )
                 }
-            })
+            })*/
 
 
-        mProfileViewModel.getProgressState()?.observe(viewLifecycleOwner,
+       /* mProfileViewModel.getProgressState()?.observe(viewLifecycleOwner,
             object : Observer<Int?> {
                 override fun onChanged(progressState: Int?) {
                     if (progressState == null) return
@@ -439,7 +439,7 @@ class ProfileEditFragment : Fragment(), UploadRequestBody.UploadCallback {
                     else if (progressState === CommonUtils.ProgressDialog.dismissDialog)
                         mCommonUtils.dismissProgress()
                 }
-            })
+            })*/
 
         mProfileEditViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
             object : Observer<AlertModel?> {

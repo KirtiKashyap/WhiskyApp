@@ -7,6 +7,8 @@ import com.aadya.whiskyapp.events.model.RSVPResponseModel
 import com.aadya.whiskyapp.landing.model.LoginRequestModel
 import com.aadya.whiskyapp.landing.model.LoginResponseModel
 import com.aadya.whiskyapp.menu.model.MenuResponse
+import com.aadya.whiskyapp.payment.model.PaymentByEmail
+import com.aadya.whiskyapp.payment.model.PaymentByEmailResponse
 import com.aadya.whiskyapp.payment.model.PaymentResponse
 import com.aadya.whiskyapp.payment.model.PaymentUpdate
 import com.aadya.whiskyapp.profile.model.ProfileEditRequestModel
@@ -58,6 +60,9 @@ interface APICallService {
 
     @POST(CommonUtils.APIURL.PaymentUpdate)
     fun paymentUpdate(@Header("Authorization") authHeader: String?, @Body mPaymentUpdateRequest: PaymentUpdate): Call<PaymentResponse?>
+
+    @POST(CommonUtils.APIURL.PaymentByEmail)
+    fun paymentByEmail(@Header("Authorization") authHeader: String?,@Body mPaymentByEmail: PaymentByEmail): Call<PaymentByEmailResponse?>
 
 
     @GET(CommonUtils.APIURL.SpecialOffer)

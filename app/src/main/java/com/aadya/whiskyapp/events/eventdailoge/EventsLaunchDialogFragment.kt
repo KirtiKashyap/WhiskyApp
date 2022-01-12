@@ -67,12 +67,6 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
         return mBinding.root
     }
 
-    private fun launchFragment(fragment: Fragment, tag: String) {
-        val ft = activity?.supportFragmentManager?.beginTransaction()
-        ft?.replace(R.id.app_container, fragment, tag)
-        ft?.addToBackStack(null)
-        ft?.commit()
-    }
 
     private fun handleObserver() {
         mEventsViewModel.getEventsObserver().observe(viewLifecycleOwner, Observer {
@@ -94,11 +88,7 @@ class EventsLaunchDialogFragment : DialogFragment() , deletePageViewPager, updat
                     requireActivity()
 
                 )
-
-                Handler(Looper.getMainLooper()).postDelayed({
-                    mBottomNavigationInterface?.setOnBottomNavigationResult()
-                    launchFragment(MenuFragment.newInstance(), "MenuFragment")
-                }, 1500)
+                dismiss()
 
             } else {
                 eventsList.clear()

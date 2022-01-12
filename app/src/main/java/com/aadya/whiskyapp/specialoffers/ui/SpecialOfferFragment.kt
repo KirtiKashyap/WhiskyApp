@@ -2,7 +2,6 @@ package com.aadya.whiskyapp.specialoffers.ui
 
 import android.animation.Animator
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,7 @@ import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentSpecialofferBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
-import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
+import com.aadya.whiskyapp.payment.ui.PayFragment
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
 import kotlinx.android.synthetic.main.fragment_specialoffer.*
@@ -66,7 +65,7 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
         super.onViewCreated(view, savedInstanceState)
         buy_button.setOnClickListener {
 
-            activity?.let{
+          /*  activity?.let{
                 val intent = Intent (it, CheckoutActivityJava::class.java)
                 intent.putExtra("amount",mBinding.tvSpecialofferAmt.text )
                 intent.putExtra("itemType",itemType)
@@ -74,7 +73,16 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
                 intent.putExtra("memberId",mSessionManager.getUserDetailLoginModel()?.memberID)
                 intent.putExtra("authorization",mSessionManager.getAuthorization())
                 it.startActivity(intent)
-            }
+            }*/
+
+            val ft = activity?.supportFragmentManager?.beginTransaction()
+            ft?.replace(
+                R.id.app_container,
+                PayFragment.newInstance(mBinding.tvSpecialofferAmt.text.toString(),itemType,param1?.specialOfferID!!,mSessionManager.getUserDetailLoginModel()?.memberID),
+                "PayFragment"
+            )
+            ft?.addToBackStack(null)
+            ft?.commit()
         }
     }
 
