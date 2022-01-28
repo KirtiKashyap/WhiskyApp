@@ -29,24 +29,24 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.07"/>
         <ImageView
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_header"
             android:layout_width="@dimen/_120sdp"
             android:src="@drawable/buy"
-            android:id="@+id/butImage"
+            android:id="@+id/itemImage"
             android:layout_height="@dimen/_120sdp" />
     <androidx.constraintlayout.widget.ConstraintLayout
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/layout"
-        android:layout_marginTop="@dimen/_50sdp"
-        app:layout_constraintTop_toBottomOf="@+id/butImage"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/itemImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <EditText
+       <!-- <EditText
             android:background="@drawable/loginedittext_bg"
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
@@ -63,8 +63,35 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:fontFamily="@font/archivonarrow_regular" />
-        <androidx.appcompat.widget.AppCompatButton
+            android:fontFamily="@font/archivonarrow_regular" />-->
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/orangetextcolor"
+            android:id="@+id/idTextView"
+            android:textSize="@dimen/_15sdp"
+            android:text="kashyap.kirti11@gmail.com"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+ <TextView
+     android:layout_marginLeft="20dp"
+     android:layout_marginRight="20dp"
+     android:textColor="@color/orangetextcolor"
+     android:id="@+id/messageTextView"
+     android:textSize="@dimen/_15sdp"
+     app:layout_constraintTop_toBottomOf="@+id/idTextView"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"/>
+
+
+
+        <!--<androidx.appcompat.widget.AppCompatButton
             android:background="@drawable/loginedittext_bg"
             android:id="@+id/amountTextView"
             android:layout_width="match_parent"
@@ -80,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/archivonarrow_regular"
-            app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+            app:layout_constraintTop_toBottomOf="@id/messageTextView" />-->
 
         <Button
             android:layout_marginRight="20dp"
@@ -93,7 +120,7 @@
             android:text="CheckOut"
             android:layout_marginTop="10dp"
             android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/amountTextView"
+            app:layout_constraintTop_toBottomOf="@+id/messageTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
