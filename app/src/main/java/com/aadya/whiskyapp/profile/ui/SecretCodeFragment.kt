@@ -50,7 +50,6 @@ class SecretCodeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         intializeMembers(inflater, container)
-
         return mBinding.root
     }
 

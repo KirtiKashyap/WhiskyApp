@@ -3,13 +3,9 @@ package com.aadya.whiskyapp.payment.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -40,7 +36,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,55 +49,35 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class CheckoutActivityJava extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CheckoutActivityJava extends AppCompatActivity{
 
     private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
     private Stripe stripe;
-    String amount,authorization,itemType;
+    String amount,authorization,itemType,email,address,description,name,auth;
     int memberId,itemId;
     private TextView amountTextView;
     Button payButton;
-    EditText addressET;
-    Spinner stateSp;
-    EditText cityEditText,postEditText,cardHolderNameEditText,nameEditText;
+    EditText cardHolderNameEditText;
+    int mRemainingGuestPasses=0;
     private PaymentUpdateViewModel paymentUpdateViewModel;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
-    private String date,state;
-    private ArrayAdapter<String> stateAdapter;
-    private ArrayList<String> stateList;
+    private String date;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_java);
-        nameEditText=findViewById(R.id.name_edit_text);
-        addressET=findViewById(R.id.tv_address_line);
-        stateSp=findViewById(R.id.state_spinner);
-        cityEditText=findViewById(R.id.city_spinner);
-        postEditText=findViewById(R.id.postcode_spinner);
         cardHolderNameEditText=findViewById(R.id.tv_cardholdername);
         paymentUpdateViewModel = new ViewModelProvider(this, new PaymentFactory(getApplication())).get(
                 PaymentUpdateViewModel.class
         );
 
-        stateList = new ArrayList<String>();
-        stateList.add("Select State");
-        stateList.add("London");
-        stateList.add("Leeds");
-        stateList.add("Scotland");
-        stateList.add("Andover");
-        stateList.add("Manchester");
-
-        stateSp.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this,R.layout.row_spinner,stateList);
-        aa.setDropDownViewResource(R.layout.row_spinner_dialog);
-        //Setting the ArrayAdapter data on the Spinner
-        stateSp.setAdapter(aa);
-        stateSp.setSelection(1);
+
         payButton = findViewById(R.id.payButton);
         ImageView imgDrawer= findViewById(R.id.img_drawer);
         ImageView profileIcon= findViewById(R.id.img_logo);
@@ -118,58 +93,34 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         });
         amountTextView = findViewById(R.id.amountTextView);
         Intent intent = getIntent();
+        auth=intent.getStringExtra("auth");
         amount = intent.getStringExtra("amount");
         authorization = intent.getStringExtra("authorization");
+        email = intent.getStringExtra("email");
         itemType = intent.getStringExtra("itemType");
         itemId = intent.getIntExtra("itemId",0);
         memberId = intent.getIntExtra("memberId",0);
+
+        description=intent.getStringExtra("description");
+        address= intent.getStringExtra("address");
+        name=intent.getStringExtra("name");
+
         amountTextView = findViewById(R.id.amountTextView);
         amountTextView.setText("Total "+amount);
         amountTextView.setVisibility(View.GONE);
-        LinearLayout addressLayout=findViewById(R.id.address_layout);
-        LinearLayout paymentLayout=findViewById(R.id.payment_layout);
         payButton.setText("Total "+amount +" CONFIRM ORDER" );
         // Configure the SDK with your Stripe publishable key so it can make requests to Stripe
         stripe = new Stripe(
                 getApplicationContext(),
-                Objects.requireNonNull("pk_test_51Jlt4ySAToMq1oS5dtA0kVj5d5nmZV7pzAaiucGkO2CFPqHuYz22tmHoNKPQaFtbLNDwYZh7lKc9JQRAAv7gHuJT00NRFz273R")
+                Objects.requireNonNull("pk_test_51JgvGWHg3vu6Xtwj7pamp4M0EWab892xZ5oFuXem3Wz7iMpthh1W22FxdJ2vVuOHkjH4yz0kje34k0yJBQk38aOL00pOB49p3n")
         );
-        Button preButton=findViewById(R.id.prevButton);
-        Button nextButton=findViewById(R.id.nexButton);
-        nextButton.setVisibility(View.VISIBLE);
-        preButton.setVisibility(View.GONE);
+        /*stripe = new Stripe(
+                getApplicationContext(),
+                Objects.requireNonNull("pk_test_51KEGY3Iz42LzNrtBrJtPmVxE7arQgmb10nSgcS436hsGk26KQqxdWxhtP0PbbrYrwvX4oa2HCpV3haeznKNpAjRf00CZKECNix")
+        );*/
+        startCheckout();
+        handleObserver();
 
-       handleObserver();
-
-        preButton.setOnClickListener((View view) -> {
-            nextButton.setVisibility(View.VISIBLE);
-            preButton.setVisibility(View.GONE);
-            addressLayout.setVisibility(View.VISIBLE);
-            paymentLayout.setVisibility(View.GONE);
-        });
-        nextButton.setOnClickListener((View view) -> {
-            if((nameEditText.getText().toString().trim()==null)||nameEditText.getText().toString().trim().isEmpty()){
-                Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
-            }
-            else if ((addressET.getText().toString()==null)||addressET.getText().toString().trim().isEmpty()){
-                Toast.makeText(getApplicationContext(), "Please Enter AddressLine", Toast.LENGTH_LONG).show();
-            }
-
-           else if((cityEditText.getText().toString()==null)||cityEditText.getText().toString().trim().isEmpty()){
-                Toast.makeText(getApplicationContext(), "Please Enter City", Toast.LENGTH_LONG).show();
-            }else if((postEditText.getText().toString()==null)||postEditText.getText().toString().trim().isEmpty()){
-                Toast.makeText(getApplicationContext(), "Please Enter Post code", Toast.LENGTH_LONG).show();
-            }else if(state.equalsIgnoreCase("Select State")){
-                Toast.makeText(getApplicationContext(), "Please select State", Toast.LENGTH_LONG).show();
-            }else {
-                startCheckout();
-                nextButton.setVisibility(View.GONE);
-                preButton.setVisibility(View.VISIBLE);
-                addressLayout.setVisibility(View.GONE);
-                paymentLayout.setVisibility(View.VISIBLE);
-            }
-
-        });
         Button cancelButton=findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener((View view) -> {
             finish();
@@ -181,7 +132,10 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         paymentUpdateViewModel.getPaymentUpdateObserver().observe(CheckoutActivityJava.this, new Observer<PaymentResponse>() {
             @Override
             public void onChanged(PaymentResponse paymentResponse) {
-                startActivity(new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class));
+
+                Intent intent=new Intent(CheckoutActivityJava.this,PaymentSuccessActivity.class);
+                intent.putExtra("activityCheck","CheckOut");
+                startActivity(intent);
                 finish();
             }
         });
@@ -226,23 +180,38 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
     }
 
     private void startCheckout() {
+
+
+
+
+
         // Create a PaymentIntent by calling the server's endpoint.
         String amountTemp = amount.replace("$", "");
         String amount = amountTemp.split("\\.")[0];
 
+        String[] addressTemp = address.split(",");
 
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         Map<String,Object> payMap=new HashMap<>();
-        payMap.put("CardHolderName",nameEditText.getText().toString());
-        payMap.put("Currency","USD");
-        payMap.put("Amount",amount);
-        payMap.put("PaymentMethodType","card");
-        payMap.put("Description","Test Payment Mobile");
-        payMap.put("Line",addressET.getText().toString());
-        payMap.put("City",cityEditText.getText().toString());
-        payMap.put("Country","US");
-        payMap.put("PostalCode",postEditText.getText().toString());
-        payMap.put("State",state);
+//        payMap.put("CardHolderName",name);
+//        payMap.put("email",email);
+//        payMap.put("Currency","usd");
+//        payMap.put("PaymentMethodType","card");
+        payMap.put("amount",amount);
+//        payMap.put("Description",description);
+//        payMap.put("Country","US");
+        /*try {
+            payMap.put("Line", addressTemp[0]);
+            payMap.put("City", addressTemp[1]);
+            payMap.put("State", addressTemp[2]);
+            payMap.put("PostalCode", addressTemp[3]);
+        }catch (ArrayIndexOutOfBoundsException e){
+            Log.e("Address","Address is not complete");
+            payMap.put("Line", "Address Line");
+            payMap.put("City", "City");
+            payMap.put("State", "state");
+            payMap.put("PostalCode", "123we3");
+        }*/
 
 
         String json = new Gson().toJson(payMap);
@@ -251,6 +220,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
         Request request = new Request.Builder()
                 .url(CommonUtils.APIURL.PaymentUrl)
                 .post(body)
+                .addHeader("Authorization",auth)
                 .build();
         httpClient.newCall(request)
                 .enqueue(new PayCallback(this));
@@ -271,6 +241,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                             .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
                     stripe.confirmPayment(this, confirmParams);
                 }
+
             }
         });
     }
@@ -299,17 +270,6 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
 
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       // Toast.makeText(getApplicationContext(), stateList.get(position), Toast.LENGTH_LONG).show();
-        state=stateList.get(position);
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     private static final class PayCallback implements Callback {
         @NonNull private final WeakReference<CheckoutActivityJava> activityRef;
@@ -381,7 +341,7 @@ public class CheckoutActivityJava extends AppCompatActivity implements AdapterVi
                 
             }
             paymentUpdateViewModel.getPaymentUpdate(
-                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$","")));
+                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$",""),mRemainingGuestPasses));
 
 
 

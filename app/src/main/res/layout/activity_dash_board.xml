@@ -303,10 +303,78 @@
                             />
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/rl_EventA"
+                        android:layout_below="@+id/rl_scan_log"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_eventA"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/location"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/event_a"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_eventA"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_pass"
+                        android:layout_below="@+id/rl_EventA"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/mainheaderbg"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_pass"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/location"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="10dp"
+                            app:tint="@color/orangetextcolor" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="My Guest Pass"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_toEndOf="@+id/img_pass"
+                            android:textColor="@color/orangetextcolor"
+                            android:fontFamily="@font/archivonarrow_regular"
+                            />
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/rl_logout"
-                        android:layout_below="@+id/rl_scan_log"
+                        android:layout_below="@+id/rl_pass"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:orientation="horizontal"
@@ -342,7 +410,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/purchase_history"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="50dp"
                         android:layout_marginStart="10dp"

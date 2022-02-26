@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Classified</string>
+    <string name="app_name">ClassifiedBar</string>
     <string name="hint_username">UserName</string>
     <string name="login">Login</string>
     <string name="signup">SignUp</string>
@@ -112,6 +112,7 @@
     <string name="where_is_this_place">Where is this place</string>
     <string name="purchase_history">Purchase History</string>
     <string name="logout">Logout</string>
+    <string name="event_a">Event Attending</string>
     <string name="submit">Submit</string>
     <string name="profile_update">Profile Updated</string>
     <string name="profile_image_update">Profile Image Updated</string>
@@ -122,6 +123,7 @@
     <string name="reserve_your_experience">Reserve Your Experience</string>
     <string name="event_error">Events</string>
     <string name="login_error">Login Error</string>
+    <string name="registration_error">Registration Error</string>
     <string name="please_login">Your Session is expired. Please Login Again.</string>
     <string name="sorry_empty_events">No UpComing Events.</string>
     <string name="event_attending">Event Attending</string>
@@ -142,8 +144,10 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="take_picture">Take Picture</string>
+    <string name="not_register">It seems that you are not registered on the Stripe payment gateway so Either you register with the Stripe Payment Gateway or contact Classified Administrator.</string>
     <string name="take_picture_description">Camera picture for sample app</string>
     <string name="ok_button_title">OK</string>
+    <string name="reserve_title">Reservation Time</string>
     <string name="reservation_time"><br>User can do reservation on the following day with specific time\n\n
       </br><br>5:00 PM - 11:00 PM (Fri and Sat)\n
       </br><br>5:00 PM-9:00 PM Sunday\n

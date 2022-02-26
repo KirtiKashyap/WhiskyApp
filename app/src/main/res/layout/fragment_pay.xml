@@ -10,11 +10,10 @@
         android:fitsSystemWindows="true"
         android:background="@drawable/loginbg">
         <include
-            android:id="@+id/main_header"
+            android:id="@+id/signupheader_layout"
             layout="@layout/main_header"
             app:layout_constraintTop_toBottomOf="@id/header_verticalguide1"
-            app:layout_constraintBottom_toTopOf="@id/header_verticalguide2"
-            />
+            app:layout_constraintBottom_toTopOf="@id/header_verticalguide2" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/header_verticalguide1"
             android:layout_width="wrap_content"
@@ -32,7 +31,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_header"
+            app:layout_constraintTop_toBottomOf="@id/signupheader_layout"
             android:layout_width="@dimen/_120sdp"
             android:src="@drawable/buy"
             android:id="@+id/itemImage"
@@ -70,8 +69,7 @@
             android:layout_marginRight="20dp"
             android:textColor="@color/orangetextcolor"
             android:id="@+id/idTextView"
-            android:textSize="@dimen/_15sdp"
-            android:text="kashyap.kirti11@gmail.com"
+            android:textSize="@dimen/_14sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +80,7 @@
      android:layout_marginRight="20dp"
      android:textColor="@color/orangetextcolor"
      android:id="@+id/messageTextView"
-     android:textSize="@dimen/_15sdp"
+     android:textSize="@dimen/_12sdp"
      app:layout_constraintTop_toBottomOf="@+id/idTextView"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"

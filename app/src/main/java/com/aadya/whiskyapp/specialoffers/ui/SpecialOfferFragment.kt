@@ -2,6 +2,7 @@ package com.aadya.whiskyapp.specialoffers.ui
 
 import android.animation.Animator
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,11 @@ import com.aadya.whiskyapp.specialoffers.model.SpecialOfferResponseModel
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentSpecialofferBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
-import com.aadya.whiskyapp.payment.ui.PayFragment
+import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
+import com.aadya.whiskyapp.payment.ui.PayActivity
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_specialoffer.*
 
 private const val ARG_PARAM1 = "param1"
@@ -25,7 +28,6 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
     private lateinit var mBinding: FragmentSpecialofferBinding
     private lateinit var mIncludedLayoutBinding: MainHeaderNewBinding
     private var mDrawerInterface: DrawerInterface? = null
-    private var itemId=0
     private var itemType="S"
     private var isFromDialog=false
     private lateinit var mCommonUtils: CommonUtils
@@ -65,24 +67,39 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
         super.onViewCreated(view, savedInstanceState)
         buy_button.setOnClickListener {
 
-          /*  activity?.let{
-                val intent = Intent (it, CheckoutActivityJava::class.java)
-                intent.putExtra("amount",mBinding.tvSpecialofferAmt.text )
-                intent.putExtra("itemType",itemType)
-                intent.putExtra("itemId",param1?.specialOfferID!!)
-                intent.putExtra("memberId",mSessionManager.getUserDetailLoginModel()?.memberID)
-                intent.putExtra("authorization",mSessionManager.getAuthorization())
-                it.startActivity(intent)
-            }*/
+            activity?.let{
 
-            val ft = activity?.supportFragmentManager?.beginTransaction()
-            ft?.replace(
-                R.id.app_container,
-                PayFragment.newInstance(mBinding.tvSpecialofferAmt.text.toString(),itemType,param1?.specialOfferID!!,mSessionManager.getUserDetailLoginModel()?.memberID),
-                "PayFragment"
-            )
-            ft?.addToBackStack(null)
-            ft?.commit()
+                if(mSessionManager.getProfileModel()!!.paymentMethodID) {
+
+                    val intent = Intent(it, PayActivity::class.java)
+                    intent.putExtra("amount", mBinding.tvSpecialofferAmt.text )
+                    intent.putExtra("itemType", itemType)
+                    intent.putExtra("itemId", param1?.specialOfferID!!)
+                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                    intent.putExtra("authorization", mSessionManager.getAuthorization())
+                    intent.putExtra("imageName", param1!!.imageName)
+                    intent.putExtra("eventTitle", param1!!.title)
+                    it.startActivity(intent)
+
+
+                }else{
+                    val intent = Intent(it, CheckoutActivityJava::class.java)
+                    intent.putExtra("amount", mBinding.tvSpecialofferAmt.text )
+                    intent.putExtra("itemType", "E")
+                    intent.putExtra("itemId", param1?.specialOfferID!!)
+                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                    intent.putExtra("authorization", mSessionManager.getAuthorization())
+                    intent.putExtra("email", mSessionManager.getProfileModel()!!.email)
+                    intent.putExtra("description",mSessionManager.getProfileModel()!!.description)
+                    intent.putExtra("address",mSessionManager.getProfileModel()!!.address)
+                    intent.putExtra("name",mSessionManager.getProfileModel()!!.firstName)
+                    intent.putExtra("auth",mSessionManager.getAuthorization())
+                    it.startActivity(intent)
+                }
+
+
+            }
+
         }
     }
 
@@ -91,6 +108,14 @@ class SpecialOfferFragment : Fragment(), Animator.AnimatorListener {
             mBinding.tvSpecialofferName.text = param1?.title
             mBinding.tvSpecialofferAmt.text = param1?.price.toString()
             mBinding.tvSpecialofferCode.text = param1?.yo.toString() + "YO"
+            if(param1!!.imageName?.isNullOrEmpty()==false){
+                context?.let {
+                    Glide.with(it)
+                        .load(CommonUtils.APIURL.Special_Offer_Image_Url + param1!!.imageName)
+                        .into(mBinding.imgSpecialoffer)
+                }
+
+            }
         }
 
     }

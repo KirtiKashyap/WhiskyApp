@@ -24,6 +24,9 @@ data class ProfileResponseModel (
     @SerializedName("photograph") var photograph : String,
     @SerializedName("qrCode") var qrCode : String,
     @SerializedName("favoritecocktail") var favoritecocktail : String,
+    @SerializedName("whiskeyBourbon") var whiskeyBourbon : String,
+    @SerializedName("nonWhiskey") var nonWhiskey : String,
+    @SerializedName("afterDinner") var afterDinner : String,
     @SerializedName("description") var description : String,
     @SerializedName("status") var status : Boolean,
     @SerializedName("bookingStatus") var bookingStatus : String,
@@ -35,6 +38,10 @@ data class ProfileResponseModel (
     @SerializedName("agentStatus") var agentStatus : Boolean,
     @SerializedName("isSpecial")var  isSpecial: Boolean,
     @SerializedName("isEvent")var  isEvent: Boolean,
-    @SerializedName("lastScan")var  lastScan: String
+    @SerializedName("lastScan")var  lastScan: String,
+    @SerializedName("paymentMethodID") var paymentMethodID : Boolean,
+    @SerializedName("plusOne")var  plusOne: String,
+    @SerializedName("numberOfGuestPasses")var numberOfGuestPasses: Int,
+    @SerializedName("remainingGuestPasses")var remainingGuestPasses: Int
 
 )

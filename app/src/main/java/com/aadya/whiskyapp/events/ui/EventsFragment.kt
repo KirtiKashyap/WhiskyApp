@@ -2,6 +2,7 @@ package com.aadya.whiskyapp.events.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,7 +19,8 @@ import com.aadya.whiskyapp.events.model.EventsResponseModel
 import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
-import com.aadya.whiskyapp.payment.ui.PayFragment
+import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
+import com.aadya.whiskyapp.payment.ui.PayActivity
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.*
 import com.aadya.whiskyapp.utils.CommonUtils.APIURL.Companion.Event_IMAGE_URL
@@ -39,6 +41,8 @@ class EventsFragment() : Fragment() {
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var eventModel: EventsResponseModel
     private var pos : Int = 0
+    /* set from spinner */
+    var mRemainingGuestPasses:Int=0
     private var isFromDialog=false
     var onEventsPageSwipeUpListner: onEventsPageSwipeUpListner? = null
     private var mdeletePageViewPager : deletePageViewPager? = null
@@ -88,27 +92,37 @@ class EventsFragment() : Fragment() {
 
         mBinding.tvBuy.setOnClickListener {
             activity?.let{
-                /*val intent = Intent(it, CheckoutActivityJava::class.java)
-                intent.putExtra("amount", eventModel.price)
-                intent.putExtra("itemType", "E")
-                intent.putExtra("itemId", eventModel.eventID!!)
-                intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
-                intent.putExtra("authorization", mSessionManager.getAuthorization())
-                it.startActivity(intent)*/
 
-                val ft = activity?.supportFragmentManager?.beginTransaction()
-                ft?.replace(
-                    R.id.app_container,
-                    PayFragment.newInstance(
-                        eventModel.price!!,
-                        "E",
-                        eventModel.eventID!!,
-                        mSessionManager.getUserDetailLoginModel()?.memberID
-                    ),
-                    "PayFragment"
-                )
-                ft?.addToBackStack(null)
-                ft?.commit()
+
+
+                if(mSessionManager.getProfileModel()!!.paymentMethodID) {
+
+                    val intent = Intent(it, PayActivity::class.java)
+                    intent.putExtra("amount", eventModel.price)
+                    intent.putExtra("itemType", "E")
+                    intent.putExtra("itemId", eventModel.eventID!!)
+                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                    intent.putExtra("authorization", mSessionManager.getAuthorization())
+                    intent.putExtra("imageName", eventModel.imageName!!)
+                    intent.putExtra("eventTitle", eventModel.eventTitle!!)
+                    it.startActivity(intent)
+
+
+                }else{
+                    val intent = Intent(it, CheckoutActivityJava::class.java)
+                    intent.putExtra("amount", eventModel.price)
+                    intent.putExtra("itemType", "E")
+                    intent.putExtra("itemId", eventModel.eventID!!)
+                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                    intent.putExtra("authorization", mSessionManager.getAuthorization())
+                    intent.putExtra("email", mSessionManager.getProfileModel()!!.email)
+                    intent.putExtra("description",mSessionManager.getProfileModel()!!.description)
+                    intent.putExtra("address",mSessionManager.getProfileModel()!!.address)
+                    intent.putExtra("name",mSessionManager.getProfileModel()!!.firstName)
+                    intent.putExtra("auth",mSessionManager.getAuthorization())
+                    it.startActivity(intent)
+                }
+
 
                 if(isFromDialog){
                     //TODO dismiss event dailogue
@@ -310,6 +324,7 @@ class EventsFragment() : Fragment() {
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 1
+                mRSVPRequestModel.remainingGuestPasses=mRemainingGuestPasses
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
                 mBinding.imgRsvpIntersted.isClickable = true
                 mBinding.imgRsvpIntersted.clearAnimation()
@@ -329,6 +344,7 @@ class EventsFragment() : Fragment() {
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 2
+                mRSVPRequestModel.remainingGuestPasses=mRemainingGuestPasses
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
                 mBinding.imgRsvpNotintersted.isClickable = true
                 mBinding.imgRsvpNotintersted.clearAnimation()
