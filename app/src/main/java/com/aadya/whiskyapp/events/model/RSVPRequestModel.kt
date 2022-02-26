@@ -1,7 +1,5 @@
 package com.aadya.whiskyapp.events.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 class RSVPRequestModel() {
@@ -14,7 +12,8 @@ class RSVPRequestModel() {
     @SerializedName("EventFeedbackID")
     var EventFeedbackID: Int? = null
 
-
+    @SerializedName("RemainingGuestPasses")
+    var remainingGuestPasses: Int? = null
 
 
 }

@@ -56,18 +56,36 @@ object CommonUtils {
     interface APIURL {
 
         companion object {
+            //Test
             const val BASE_URL: String = "https://api.ultimiz.com/api/"
             const val Profile_IMAGE_URL="https://ultimiz.com/UploadFiles/MembershipImage/"
+
             const val PaymentUrl: String = "https://api.ultimiz.com/api/Payment/CreatePaymentIntent"
             const val MenuPdfUrl: String = "https://ultimiz.com/UploadFiles/MenuImages/"
-            //const val Event_IMAGE_URL="https://ultimiz.com"
+
             const val Event_IMAGE_URL="https://ultimiz.com/UploadFiles/EventImage/"
+            const val Special_Offer_Image_Url="https://ultimiz.com/UploadFiles/EventImage/"
             const val QRCode_IMAGE_URL="https://ultimiz.com/UploadFiles/QRCode/"
+            const val FORGOT_PASSWORD: String  = "https://api.ultimiz.com/Login/ForgotPassword"
+
+
+
+            //Live
+//            const val BASE_URL: String = "https://api.classified.bar/api/"
+//            const val Profile_IMAGE_URL="https://classified.bar/UploadFiles/MembershipImage/"
+//
+//            const val PaymentUrl: String = "https://api.classified.bar/api/Payment/CreatePaymentIntent"
+//            const val MenuPdfUrl: String = "https://classified.bar/UploadFiles/MenuImages/"
+
+//            const val Event_IMAGE_URL="https://classified.bar/UploadFiles/EventImage/"
+//            const val Special_Offer_Image_Url="https://classified.bar/UploadFiles/EventImage/"
+//            const val QRCode_IMAGE_URL="https://classified.bar/UploadFiles/QRCode/"
+//            const val FORGOT_PASSWORD: String  = "https://api.classified.bar/Login/ForgotPassword"
+
 
             const val Profile: String = "Mobile/GetAppUserByID"
             const val SpecialOffer: String = "Mobile/GetSpecialofferListForApp"
             const val LOGIN_USER: String  = "Login/AppUserAuthenticate"
-            const val FORGOT_PASSWORD: String  = "https://ultimiz.com/Login/ForgotPassword"
             const val Events : String = "Mobile/GetEventListForApp"
             const val ProfileEdit : String = "Mobile/UpdateAppUser"
             const val RSVP :  String = "Mobile/UpdateEventResponseForApp"

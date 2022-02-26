@@ -35,6 +35,10 @@ data class ProfileResponseModel (
     @SerializedName("agentStatus") var agentStatus : Boolean,
     @SerializedName("isSpecial")var  isSpecial: Boolean,
     @SerializedName("isEvent")var  isEvent: Boolean,
-    @SerializedName("lastScan")var  lastScan: String
+    @SerializedName("lastScan")var  lastScan: String,
+    @SerializedName("paymentMethodID") var paymentMethodID : Boolean,
+    @SerializedName("plusOne")var  plusOne: String,
+    @SerializedName("numberOfGuestPasses")var numberOfGuestPasses: Int,
+    @SerializedName("remainingGuestPasses")var remainingGuestPasses: Int
 
 )

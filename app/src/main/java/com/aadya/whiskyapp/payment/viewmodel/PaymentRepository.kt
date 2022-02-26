@@ -108,7 +108,6 @@ class PaymentRepository (application: Application){
                              else if(response.code() == 200)
                                  paymentByEmailLiveData.value = response.body() as PaymentByEmailResponse
 
-
                              else if(response.code() == 500)
                                  setAlert(
                                      application.getString(R.string.app_error),

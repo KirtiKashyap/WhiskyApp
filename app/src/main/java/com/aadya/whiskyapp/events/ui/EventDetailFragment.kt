@@ -26,6 +26,7 @@ import com.aadya.whiskyapp.events.model.RSVPRequestModel
 import com.aadya.whiskyapp.events.viewmodel.RSVPFactory
 import com.aadya.whiskyapp.events.viewmodel.RSVPViewModel
 import com.aadya.whiskyapp.payment.ui.CheckoutActivityJava
+import com.aadya.whiskyapp.payment.ui.PayActivity
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
@@ -36,6 +37,7 @@ import com.bumptech.glide.Glide
 
 private const val ARG_EVENT = "events"
 class EventDetailFragment : Fragment() {
+    var mRemainingGuestPasses:Int=0
     private var eventModel: EventsResponseModel? = null
     private lateinit var mBinding: EventDetailBinding
     private var mDrawerInterface: DrawerInterface? = null
@@ -107,13 +109,37 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun handleObserver() {
+
         mRSVPViewModel.getRSVPObserver().observe(viewLifecycleOwner, Observer {
-            if (it == null) return@Observer
+            /*if (it == null) return@Observer
             var msg1 ="Thanks for your RSVP for the Event<b> ${eventModel?.eventTitle} </b>."
             var msg2 = "\n" +
                     " \n" +
                     "  We have marked you up for attending the <b> ${eventModel?.eventTitle}</b>."
-            launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
+            launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")*/
+
+            if (it == null) return@Observer
+            var msg1: String = ""
+            var msg2: String = ""
+            if (it.EventFeedbackID.equals("1")) {
+                msg1 = "Thanks for your RSVP for the Event<b> ${eventModel?.eventTitle} </b>."
+                msg2 = "\n" +
+                        " \n" +
+                        "  We have marked you up for attending the <b> ${eventModel?.eventTitle}</b>."
+                launchFragment(
+                    RSVPAcknowledgeFragment.newInstance(msg1, msg2),
+                    "RSVPAcknowledgeFragment"
+                )
+            } else if (it.EventFeedbackID.equals("2")) {
+                msg1 = "Thanks for your RSVP for the Event<b> ${eventModel?.eventTitle} </b>."
+                msg2 = "\n" +
+                        " \n" +
+                        "  We have marked you down for attending the <b> ${eventModel?.eventTitle}</b>."
+                launchFragment(
+                    RSVPAcknowledgeFragment.newInstance(msg1, msg2),
+                    "RSVPAcknowledgeFragment"
+                )
+            }
         })
 
         mRSVPViewModel.getAlertViewState()?.observe(viewLifecycleOwner,
@@ -155,26 +181,21 @@ class EventDetailFragment : Fragment() {
         }
         mIncludedRSVPDetailBinding = mBinding.eventDetailRsvp
         mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.setOnClickListener{
+
             mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
             mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.isClickable=false
-            var msg1 ="Thanks for your RSVP for the Event<b> Victoria Whisky Festival </b>."
-            var msg2 = "\n" +
-                    " \n" +
-                    "  We have marked you up for attending the <b> Victoria Whisky Festival</b>."
 
             Handler(Looper.getMainLooper()).postDelayed({
-
-                mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.isClickable=true
+                var mRSVPRequestModel = RSVPRequestModel()
+                mRSVPRequestModel.EventID = eventModel!!.eventID
+                mRSVPRequestModel.EventFeedbackID = 1
+                mRSVPRequestModel.remainingGuestPasses=mRemainingGuestPasses
+                mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
+                mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.isClickable = true
                 mIncludedRSVPDetailBinding.imgDetailrsvpIntersted.clearAnimation()
-                launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
 
             }, 2000)
 
-
-            /* var mRSVPRequestModel : RSVPRequestModel= RSVPRequestModel()
-             mRSVPRequestModel.userid = mSessionManager.getUserDetailLoginModel()?.userID.toString()
-             mRSVPRequestModel.eventid = eventModel.eventid.toString()
-             mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(),mRSVPRequestModel)*/
         }
 
         mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.setOnClickListener{
@@ -182,29 +203,50 @@ class EventDetailFragment : Fragment() {
             mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pulse))
             mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.isClickable=false
 
-            var msg1 ="Thanks for your RSVP for the Event<b> Victoria Whisky Festival </b>."
-            var msg2 = "\n" +
-                    " \n" +
-                    "  We have marked you down for attending the <b> Victoria Whisky Festival</b>."
+
             Handler(Looper.getMainLooper()).postDelayed({
 
-                mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.isClickable=true
-                mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.clearAnimation()
-                launchFragment(RSVPAcknowledgeFragment.newInstance(msg1, msg2), "RSVPAcknowledgeFragment")
-
-            }, 2000)
+            var mRSVPRequestModel = RSVPRequestModel()
+            mRSVPRequestModel.EventID = eventModel!!.eventID
+            mRSVPRequestModel.EventFeedbackID = 2
+            mRSVPRequestModel.remainingGuestPasses=mRemainingGuestPasses
+            mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
+            mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.isClickable = true
+            mIncludedRSVPDetailBinding.imgDetailrsvpNotintersted.clearAnimation()
+        }, 2000)
 
         }
         mBinding.buyTextView.setOnClickListener {
 
             activity?.let {
-                val intent = Intent(it, CheckoutActivityJava::class.java)
-                intent.putExtra("amount", eventModel!!.price)
-                intent.putExtra("itemType", "E")
-                intent.putExtra("itemId", eventModel!!.eventID!!)
-                intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
-                intent.putExtra("authorization", mSessionManager.getAuthorization())
-                it.startActivity(intent)
+
+                if(mSessionManager.getProfileModel()!!.paymentMethodID) {
+
+                    val intent = Intent(it, PayActivity::class.java)
+                    intent.putExtra("amount",  eventModel!!.price)
+                    intent.putExtra("itemType", "E")
+                    intent.putExtra("itemId", eventModel!!.eventID!!)
+                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                    intent.putExtra("authorization", mSessionManager.getAuthorization())
+                    intent.putExtra("imageName", eventModel!!.imageName)
+                    intent.putExtra("eventTitle", eventModel!!.eventTitle)
+                    it.startActivity(intent)
+
+
+                }else{
+                    val intent = Intent(it, CheckoutActivityJava::class.java)
+                    intent.putExtra("amount", eventModel!!.price)
+                    intent.putExtra("itemType", "E")
+                    intent.putExtra("itemId", eventModel!!.eventID!!)
+                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
+                    intent.putExtra("authorization", mSessionManager.getAuthorization())
+                    intent.putExtra("email", mSessionManager.getProfileModel()!!.email)
+                    intent.putExtra("description",mSessionManager.getProfileModel()!!.description)
+                    intent.putExtra("address",mSessionManager.getProfileModel()!!.address)
+                    intent.putExtra("name",mSessionManager.getProfileModel()!!.firstName)
+                    intent.putExtra("auth",mSessionManager.getAuthorization())
+                    it.startActivity(intent)
+                }
             }
 
         }
@@ -212,7 +254,6 @@ class EventDetailFragment : Fragment() {
 
 
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
-
 
         mBinding = DataBindingUtil.inflate(
             inflater,

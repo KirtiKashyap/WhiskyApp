@@ -18,7 +18,9 @@ import com.aadya.whiskyapp.clublocation.ui.LocationFragment
 import com.aadya.whiskyapp.dashboard.model.LogoutRequest
 import com.aadya.whiskyapp.databinding.ActivityDashBoardBinding
 import com.aadya.whiskyapp.databinding.AppContentBinding
+import com.aadya.whiskyapp.events.ui.EventAttendingFragment
 import com.aadya.whiskyapp.events.ui.EventsLaunchFragment
+import com.aadya.whiskyapp.events.ui.RSVPAcknowledgeFragment
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.menu.MenuFragment
 import com.aadya.whiskyapp.profile.ui.ProfileDetailFragment
@@ -105,6 +107,16 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
         mBinding.rlReservationHistory.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
             callFragment(7)
+        }
+
+        mBinding.rlEventA.setOnClickListener {
+            mIncludedLayoutBinding.bottomNavigationMenu.menu.getItem(2).isChecked = true
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(8)
+        }
+        mBinding.rlPass.setOnClickListener {
+            mBinding.drawerLayout.closeDrawers()
+            callFragment(9)
         }
         mBinding.rlLogout.setOnClickListener {
             mBinding.drawerLayout.closeDrawers()
@@ -216,6 +228,12 @@ class DashBoardActivity : AppCompatActivity() ,DrawerInterface,
                     ReservationHistoryFragment.newInstance(),
                     "ReservationHistoryFragment"
                 )
+            }
+            8 -> {
+                launchFragment(EventAttendingFragment.newInstance(), "EventAttendingFragment")
+            }
+            9 -> {
+                launchFragment(PassFragment.newInstance(), "PassFragment")
             }
         }
 

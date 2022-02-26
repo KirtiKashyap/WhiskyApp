@@ -9,4 +9,6 @@ data class PaymentUpdate(@SerializedName("PaymentID") var paymentID : Int?,
                          @SerializedName("MemberID") var memberID : Int,
                          @SerializedName("PaymentDate") var paymentDate : String,
                          @SerializedName("PaymentStatus") var paymentStatus : String,
-                         @SerializedName("Amount") var amount : String)
+                         @SerializedName("Amount") var amount : String,
+                         @SerializedName("RemainingGuestPasses") var remainingGuestPasses : Int
+)

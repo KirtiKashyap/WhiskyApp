@@ -13,10 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -131,6 +128,10 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 .create()
             val view = layoutInflater.inflate(R.layout.customview_layout,null)
             val  button = view.findViewById<Button>(R.id.dialogDismiss_button)
+            val titleTextView=view.findViewById<TextView>(R.id.title)
+            val messageTextView=view.findViewById<TextView>(R.id.message)
+            titleTextView.text=resources.getString(R.string.reserve_title)
+            messageTextView.text=resources.getString(R.string.reservation_time)
             builder.setView(view)
             button.setOnClickListener {
                 builder.dismiss()
@@ -287,6 +288,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         mBinding.edWhatUEat.setText(reserveInfoResponse.favorite)
         mBinding.edDate.setText(reserveInfoResponse.bookingDate)
+        updateLabel()
         mBinding.edTime.setText(reserveInfoResponse.bookingTime)
 
         for (i in noOfPeopleList.indices) {
@@ -322,15 +324,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mSessionManager?.getAuthorization()
                 )
             }else{
-               val cancelReservationRequest= CancelReservationRequest(
-                   bookingInfoId,
-                   "Cancel",
-                   "N/A"
-               )
-                reserveViewModel.getCancelReservation(
-                    requireContext(), cancelReservationRequest,
-                    mSessionManager?.getAuthorization()
-                )
+                openCancelReservationAlert()
+
             }
 
         }
@@ -342,11 +337,6 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
-
-
-
-
-
 
             mDateTimePickerDialogue.datePicker.minDate=System.currentTimeMillis() - 1000
             mDateTimePickerDialogue.show()
@@ -536,4 +526,36 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(parent: AdapterView<*>?) {
         selected_no_of_people = "0"
     }
+   private fun  openCancelReservationAlert(){
+       val builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+           .create()
+       val view = layoutInflater.inflate(R.layout.reservation_cancel_alert, null)
+       val submitButton = view.findViewById<Button>(R.id.submit_button)
+       val cancelButton = view.findViewById<Button>(R.id.dialogDismiss_button)
+       val descriptionEditText = view.findViewById<TextView>(R.id.message)
+       builder.setView(view)
+       builder.setCanceledOnTouchOutside(false)
+       builder.show()
+       submitButton.setOnClickListener {
+           if (descriptionEditText.length() > 0) {
+               val cancelReservationRequest = CancelReservationRequest(
+                   bookingInfoId,
+                   "Cancel",
+                   descriptionEditText.text.toString()
+               )
+               reserveViewModel.getCancelReservation(
+                   requireContext(), cancelReservationRequest,
+                   mSessionManager?.getAuthorization()
+               )
+               builder.dismiss()
+           }else{
+               Toast.makeText(requireContext(),"Please enter description.",Toast.LENGTH_SHORT).show()
+           }
+       }
+
+
+       cancelButton.setOnClickListener {
+           builder.dismiss()
+       }
+   }
 }

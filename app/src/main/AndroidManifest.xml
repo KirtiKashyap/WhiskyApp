@@ -30,6 +30,7 @@
         android:roundIcon="@mipmap/classifiedroundlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".payment.ui.PayActivity"></activity>
         <activity android:name=".payment.ui.PaymentSuccessActivity" />
 
         <meta-data

@@ -70,7 +70,6 @@
             android:textColor="@color/orangetextcolor"
             android:id="@+id/idTextView"
             android:textSize="@dimen/_14sdp"
-            android:text="kashyap.kirti11@gmail.com"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
