@@ -10,14 +10,11 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentPassBinding
-import com.aadya.whiskyapp.databinding.FragmentProfileNewBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
-import com.aadya.whiskyapp.events.ui.EventAttendingFragment
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
 import com.aadya.whiskyapp.utils.SessionManager
-import kotlinx.android.synthetic.main.fragment_pass.*
 
 
 class PassFragment : Fragment() {
@@ -47,23 +44,19 @@ class PassFragment : Fragment() {
     }
     @RequiresApi(Build.VERSION_CODES.O)
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
-
-
         mBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_pass,
             container,
             false
         )
-
-
         setIncludedLayout()
         setData()
     }
 
     private fun setData() {
-        mBinding.nogustTextView.text="Number Of Gust Pass: "+mSessionManager.getProfileModel()?.numberOfGuestPasses.toString()
-        mBinding.regustTextView.text="Remaining Gust Pass: "+mSessionManager.getProfileModel()?.remainingGuestPasses.toString()
+        mBinding.nogustTextView.text=mSessionManager.getProfileModel()?.numberOfGuestPasses.toString()
+        mBinding.regustTextView.text=mSessionManager.getProfileModel()?.remainingGuestPasses.toString()
     }
 
     private fun setIncludedLayout() {
