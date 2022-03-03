@@ -4,6 +4,7 @@ import android.app.Application
 import com.stripe.android.PaymentConfiguration
 
 class MyApplication: Application() {
+
     override fun onCreate() {
         super.onCreate()
         PaymentConfiguration.init(
@@ -18,5 +19,6 @@ class MyApplication: Application() {
     companion object{
         var isEventDialogOpen=true
         var isSpecialEventDialogOpen=true
+        var mSelectedGuestPass:Int=0
     }
 }

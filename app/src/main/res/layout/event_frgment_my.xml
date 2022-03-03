@@ -198,6 +198,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_weight="1.2">
             <TextView
+                android:id="@+id/passtextView"
                 android:text="Avail Guest Pass:"
                 android:fontFamily="@font/archivonarrow_regular"
                 android:textColor="@color/white"

@@ -197,6 +197,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     bookingInfoId = it.BookingInfoID!!
                     setData(it)
                 } else {
+
                     bookingInfoId = it.BookingInfoID!!
                     isReservation = it.bookingInfo!!
                     resetUI()
@@ -281,15 +282,28 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setData(reserveInfoResponse: ReserveInfoResponse) {
 
          if(reserveInfoResponse.bookingInfo!!){
+             mBinding.edTime.bringToFront()
+             mBinding.edTime.visibility=View.VISIBLE
+             mBinding.timeSpinner.visibility=View.GONE
              mBinding.reserveButton.text="Cancel Reservation"
         }else{
+             mBinding.timeSpinner.visibility=View.VISIBLE
+             mBinding.edTime.visibility=View.GONE
              mBinding.reserveButton.text="Reserve"
              resetUI()
         }
         mBinding.edWhatUEat.setText(reserveInfoResponse.favorite)
         mBinding.edDate.setText(reserveInfoResponse.bookingDate)
-        updateLabel()
-        mBinding.edTime.setText(reserveInfoResponse.bookingTime)
+
+        if(reserveInfoResponse.bookingTime.isNullOrEmpty()){
+            mBinding.timeSpinner.visibility=View.VISIBLE
+            mBinding.edTime.visibility=View.GONE
+            updateLabel()
+        }else{
+            mBinding.timeSpinner.visibility=View.GONE
+            mBinding.edTime.visibility=View.VISIBLE
+            mBinding.edTime.setText(reserveInfoResponse.bookingTime)
+        }
 
         for (i in noOfPeopleList.indices) {
             print(noOfPeopleList[i])
@@ -301,6 +315,9 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun resetUI() {
+        mBinding.timeSpinner.bringToFront()
+        mBinding.timeSpinner.visibility=View.VISIBLE
+        mBinding.edTime.visibility=View.GONE
         mBinding.edWhatUEat.text = null
         mBinding.edDate.text = null
         mBinding.edTime.text = null

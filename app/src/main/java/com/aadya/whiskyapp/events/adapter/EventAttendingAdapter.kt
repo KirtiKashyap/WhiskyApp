@@ -63,7 +63,7 @@ class EventAttendingAdapter(
 
             binding.tvEventTitle.text = mEventAttendingModel.eventTitle
             binding.tvEventAddress.text = "Address: "+mEventAttendingModel.eventLocation
-
+            binding.tvAvailPass.text="Avail Pass: "+mEventAttendingModel.availGuestPasses
             binding.eventAttendingMainLayout.setOnClickListener {
                /*  selectedPosition=i
                 notifyDataSetChanged()*/

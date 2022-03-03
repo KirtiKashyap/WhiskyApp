@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.dashboard.ui
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -79,5 +80,9 @@ class PassFragment : Fragment() {
             PassFragment().apply {
             }
 
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mDrawerInterface = context as DrawerInterface
     }
 }

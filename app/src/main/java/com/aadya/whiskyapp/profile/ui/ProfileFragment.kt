@@ -61,7 +61,11 @@ class ProfileFragment : Fragment() {
                 .into(mBinding.imgProfiletop)
         }
         mBinding.tvUserLastseen.text=mCommonUtils.getWeekDay(mSessionManager.getProfileModel()?.lastSeen)
-        mBinding.tvUserFavourite.text=mSessionManager.getProfileModel()?.favoritecocktail
+
+
+        mBinding.tvUserFavourite.text="Cocktail: "+mSessionManager.getProfileModel()?.favoritecocktail+", Whiskey Bourbon: "+ mSessionManager.getProfileModel()?.whiskeyBourbon+ "\n" +"Non Whiskey: "+ mSessionManager.getProfileModel()?.nonWhiskey+",After Dinner:"+mSessionManager.getProfileModel()?.afterDinner
+
+
 
         val paint = mBinding.tvAgentid.paint
         val width = paint.measureText(mBinding.tvAgentid.text.toString())

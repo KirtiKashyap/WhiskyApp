@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.events.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -19,6 +20,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
+import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.events.model.EventsResponseModel
@@ -72,6 +74,7 @@ class EventDetailFragment : Fragment() {
         return mBinding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUI() {
         if(eventModel != null){
             mBinding.tvEventname.text = eventModel?.eventTitle
@@ -131,10 +134,11 @@ class EventDetailFragment : Fragment() {
                     "RSVPAcknowledgeFragment"
                 )
             } else if (it.EventFeedbackID.equals("2")) {
-                msg1 = "Thanks for your RSVP for the Event<b> ${eventModel?.eventTitle} </b>."
+                msg1 = "You have been opted out yourself for the RSVP for the event<b> ${eventModel?.eventTitle} </b>."
                 msg2 = "\n" +
                         " \n" +
-                        "  We have marked you down for attending the <b> ${eventModel?.eventTitle}</b>."
+                        "  We have unmarked you for the same."
+                /* <b> ${eventModel?.eventTitle}</b>.*/
                 launchFragment(
                     RSVPAcknowledgeFragment.newInstance(msg1, msg2),
                     "RSVPAcknowledgeFragment"
