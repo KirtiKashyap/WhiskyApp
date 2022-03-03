@@ -89,6 +89,17 @@
                 android:textSize="@dimen/_10sdp"
                 android:text="2345, McGranius Ferry Rd Alphanta GA 342008-1765"
                 android:layout_below="@+id/tv_date_time"/>
+            <TextView
+                android:layout_marginTop="4dp"
+                android:id="@+id/tv_plus_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:text="Plus One:"
+                android:layout_below="@+id/tv_event_address"/>
 
         </RelativeLayout>
     </LinearLayout>
