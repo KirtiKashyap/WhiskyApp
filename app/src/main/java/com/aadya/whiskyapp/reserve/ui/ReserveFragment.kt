@@ -179,7 +179,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     return@Observer
                 resetUI()
                 var msg =
-                    "Your request for reservation has been sent for approval, You would confirmed by the Admin soon."
+                    "Your request for reservation has been sent for approval, You will receive confirmation within 24 hours."
                 launchFragment(
                     RSVPAcknowledgeFragment.newInstance(msg, ""),
                     "RSVPAcknowledgeFragment"
@@ -370,10 +370,10 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
             )
         }
 
-        mBinding.edTime.setOnClickListener {
+        /*mBinding.edTime.setOnClickListener {
             openTimeFragment()
 
-        }
+        }*/
 
 
     }
@@ -490,7 +490,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 id: Long
             ) {
                 if(position>0) {
-                    mTime=parent.getItemAtPosition(position).toString().split("\\s".toRegex())[0]
+                    //mTime=parent.getItemAtPosition(position).toString().split("\\s".toRegex())[0]
+                    mTime=parent.getItemAtPosition(position).toString()
                     //Toast.makeText(requireContext(),mTime,Toast.LENGTH_SHORT).show()
                 }
             }

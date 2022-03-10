@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.landing.ui.LandingActivity
 import com.aadya.whiskyapp.payment.model.PaymentByEmail
@@ -129,7 +130,8 @@ class PayActivity : AppCompatActivity() {
                             date,
                             splitStatusAndSecret[0]!!,
                             amount!!,
-                            mRemainingGuestPasses
+                            MyApplication.mSelectedGuestPass,
+                            MyApplication.isPlusOne
                         )
                     )
                 }

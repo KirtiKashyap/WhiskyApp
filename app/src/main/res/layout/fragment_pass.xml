@@ -29,7 +29,7 @@
             android:id="@+id/nogustText"
             android:textSize="@dimen/_25sdp"
             android:layout_width="wrap_content"
-            android:text="Total Guest Pass:"
+            android:text="Monthly Guest Passes"
             android:layout_height="wrap_content"
             tools:ignore="RtlCompat" />
     <TextView
@@ -59,7 +59,7 @@
             android:layout_height="1dp"/>
     <TextView
         android:layout_marginTop="10dp"
-        android:text="Remaining Guest Pass:"
+        android:text="Remaining Guest Passes"
         android:textSize="@dimen/_25sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

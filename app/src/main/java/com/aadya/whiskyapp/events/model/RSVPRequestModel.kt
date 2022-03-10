@@ -15,5 +15,7 @@ class RSVPRequestModel() {
     @SerializedName("RemainingGuestPasses")
     var remainingGuestPasses: Int? = null
 
+    @SerializedName("PlusOne")
+    var PlusOne: Boolean? = null
 
 }

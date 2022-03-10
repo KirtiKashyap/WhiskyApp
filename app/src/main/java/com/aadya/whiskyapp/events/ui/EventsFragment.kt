@@ -10,6 +10,7 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -46,7 +47,6 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
     private lateinit var eventModel: EventsResponseModel
     private var pos : Int = 0
     /* set from spinner */
-    var selectedPass=0
     private var isFromDialog=false
     private var check=""
     var onEventsPageSwipeUpListner: onEventsPageSwipeUpListner? = null
@@ -96,7 +96,9 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
         })
         setUi()
 
-
+        mBinding.plusOne.setOnCheckedChangeListener { buttonView, isChecked ->
+            MyApplication.isPlusOne=isChecked
+        }
         mBinding.tvBuy.setOnClickListener {
             activity?.let{
 
@@ -162,6 +164,13 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
                 mBinding.priceTextView.visibility=View.GONE
 
             }
+            if(mSessionManager.getProfileModel()!!.plusOne==null){
+                mBinding.plusOne.visibility=View.GONE
+                mBinding.passtextView.visibility=View.GONE
+            }else{
+                mBinding.plusOne.visibility=View.VISIBLE
+                mBinding.passtextView.visibility=View.VISIBLE
+            }
 
             val list: List<String>? = eventModel.eventTitle?.trim()?.split("\\s+".toRegex())
             if(list?.size!! >= 3 )
@@ -225,12 +234,12 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
 
                 }else {
                     try {
-                        if ((eventModel.availGuestPasses - eventModel.remainingGuestPasses) > 0) {
+                        if (eventModel.availGuestPasses > 0) {
                             mBinding.spinnerGuestPass.visibility = View.VISIBLE
                             mBinding.passtextView.text = "Avail Guest Pass: "
                             noOfGuestPass = ArrayList<Int>()
                             val arrayName = Array(
-                                (eventModel.availGuestPasses - eventModel.remainingGuestPasses),
+                                (eventModel.availGuestPasses),
                                 { i -> i * 1 })
                             noOfGuestPass.add(0)
                             for (i in 0..arrayName.size - 1) {
@@ -270,6 +279,7 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
 
         setIncludedLayout()
         handleclickListner()
+
 
     }
 
@@ -376,7 +386,8 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 1
-                mRSVPRequestModel.remainingGuestPasses=   selectedPass
+                mRSVPRequestModel.remainingGuestPasses=   MyApplication.mSelectedGuestPass
+                mRSVPRequestModel.PlusOne=  MyApplication.isPlusOne
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
                 mBinding.imgRsvpIntersted.isClickable = true
                 mBinding.imgRsvpIntersted.clearAnimation()
@@ -396,7 +407,8 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 2
-                mRSVPRequestModel.remainingGuestPasses=  selectedPass
+                mRSVPRequestModel.remainingGuestPasses=  MyApplication.mSelectedGuestPass
+                mRSVPRequestModel.PlusOne=  MyApplication.isPlusOne
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
                 mBinding.imgRsvpNotintersted.isClickable = true
                 mBinding.imgRsvpNotintersted.clearAnimation()
@@ -441,11 +453,15 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if(position != 0)
-            selectedPass = noOfGuestPass[position]
+       // if(position != 0)
+            if(noOfGuestPass[position]<=eventModel.remainingGuestPasses) {
+                MyApplication.mSelectedGuestPass = noOfGuestPass[position]
+            }else{
+                Toast.makeText(requireContext(),"Not More Then Remaining guest pass",Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        selectedPass = 0
+        MyApplication.mSelectedGuestPass = 0
     }
 }

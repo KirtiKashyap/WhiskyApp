@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/img_eventattending"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginLeft="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
@@ -90,6 +90,7 @@
                 android:text="2345, McGranius Ferry Rd Alphanta GA 342008-1765"
                 android:layout_below="@+id/tv_date_time"/>
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="4dp"
                 android:id="@+id/tv_plus_one"
                 android:layout_width="wrap_content"
@@ -99,6 +100,22 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
                 android:text="Plus One:"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_below="@+id/tv_event_address"/>
+            <TextView
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:id="@+id/tv_event_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="5dp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:text="Event Type:"
+                android:layout_marginEnd="15dp"
                 android:layout_below="@+id/tv_event_address"/>
 
         </RelativeLayout>

@@ -108,7 +108,7 @@
     <string name="ForgotPassword_Success_Message">An Email has successfully sent</string>
     <string name="profile_events">Events:</string>
     <string name="profile_offers">Offers:</string>
-    <string name="favorite_drink">MY FAVOURITE MIXOLOGY</string>
+    <string name="favorite_drink">MY FAVORITE MIXOLOGY</string>
     <string name="where_is_this_place">Where is this place</string>
     <string name="purchase_history">Purchase History</string>
     <string name="logout">Logout</string>
@@ -133,7 +133,7 @@
     <string name="no_special_offers">No Upcoming Special Offers.</string>
     <string name="no_purchase_history">You have not Purchased any offers.</string>
     <string name="no_reservation_history">There is No Reservation History records exists.</string>
-    <string name="no_scan_log">There is No Scan Log records exists.</string>
+    <string name="no_scan_log">You have no scans logged.</string>
     <string name="reserve_Error">Reserve Error</string>
     <string name="please_enter_what_u_want_to_eat">Please enter what you want to eat</string>
     <string name="please_select_date">Please select date</string>

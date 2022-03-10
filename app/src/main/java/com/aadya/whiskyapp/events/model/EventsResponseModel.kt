@@ -27,7 +27,8 @@ data class EventsResponseModel(
     @SerializedName("userCount") val userCount: Int,
     @SerializedName("eventExpire") val eventExpire: Boolean,
     @SerializedName("availGuestPasses") val availGuestPasses: Int,
-    @SerializedName("remainingGuestPasses") val remainingGuestPasses: Int
+    @SerializedName("remainingGuestPasses") val remainingGuestPasses: Int,
+    @SerializedName("plusOne") val plusOne: Boolean
         ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -52,7 +53,8 @@ data class EventsResponseModel(
         parcel.readInt(),
         parcel.readByte() != 0.toByte(),
         parcel.readInt(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readByte() != 0.toByte()
     ) {
     }
 
@@ -80,6 +82,7 @@ data class EventsResponseModel(
         parcel.writeByte(if (eventExpire) 1 else 0)
         parcel.writeInt(availGuestPasses)
         parcel.writeInt(remainingGuestPasses)
+        parcel.writeByte(if (plusOne) 1 else 0)
     }
 
     override fun describeContents(): Int {

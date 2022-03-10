@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.aadya.whiskyapp.MyApplication;
 import com.aadya.whiskyapp.R;
 import com.aadya.whiskyapp.payment.model.PaymentResponse;
 import com.aadya.whiskyapp.payment.model.PaymentUpdate;
@@ -342,7 +343,7 @@ public class CheckoutActivityJava extends AppCompatActivity{
                 
             }
             paymentUpdateViewModel.getPaymentUpdate(
-                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$",""),mRemainingGuestPasses));
+                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$",""), MyApplication.getMSelectedGuestPass(),MyApplication.isPlusOne()));
 
 
 
