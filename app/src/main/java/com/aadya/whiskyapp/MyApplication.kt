@@ -2,8 +2,10 @@ package com.aadya.whiskyapp
 
 import android.app.Application
 import com.stripe.android.PaymentConfiguration
+import kotlin.properties.Delegates
 
 class MyApplication: Application() {
+
     override fun onCreate() {
         super.onCreate()
         PaymentConfiguration.init(
@@ -15,8 +17,15 @@ class MyApplication: Application() {
             "pk_test_51KEGY3Iz42LzNrtBrJtPmVxE7arQgmb10nSgcS436hsGk26KQqxdWxhtP0PbbrYrwvX4oa2HCpV3haeznKNpAjRf00CZKECNix"
         )*/
     }
+
     companion object{
+        @JvmStatic
         var isEventDialogOpen=true
+        @JvmStatic
         var isSpecialEventDialogOpen=true
+        @JvmStatic
+        var mSelectedGuestPass=0
+        @JvmStatic
+        var isPlusOne=false
     }
 }

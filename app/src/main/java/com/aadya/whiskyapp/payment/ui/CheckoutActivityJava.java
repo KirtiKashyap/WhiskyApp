@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.aadya.whiskyapp.MyApplication;
 import com.aadya.whiskyapp.R;
 import com.aadya.whiskyapp.payment.model.PaymentResponse;
 import com.aadya.whiskyapp.payment.model.PaymentUpdate;
@@ -114,7 +115,8 @@ public class CheckoutActivityJava extends AppCompatActivity{
                 getApplicationContext(),
                 Objects.requireNonNull("pk_test_51JgvGWHg3vu6Xtwj7pamp4M0EWab892xZ5oFuXem3Wz7iMpthh1W22FxdJ2vVuOHkjH4yz0kje34k0yJBQk38aOL00pOB49p3n")
         );
-        /*stripe = new Stripe(
+
+       /* stripe = new Stripe(
                 getApplicationContext(),
                 Objects.requireNonNull("pk_test_51KEGY3Iz42LzNrtBrJtPmVxE7arQgmb10nSgcS436hsGk26KQqxdWxhtP0PbbrYrwvX4oa2HCpV3haeznKNpAjRf00CZKECNix")
         );*/
@@ -341,7 +343,7 @@ public class CheckoutActivityJava extends AppCompatActivity{
                 
             }
             paymentUpdateViewModel.getPaymentUpdate(
-                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$",""),mRemainingGuestPasses));
+                    authorization,new PaymentUpdate(0,paymentIntentClientSecret,itemType,itemId,memberId,date,paymentStatus,amount.replace("$",""), MyApplication.getMSelectedGuestPass(),MyApplication.isPlusOne()));
 
 
 

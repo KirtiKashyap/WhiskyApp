@@ -60,10 +60,24 @@ class EventAttendingAdapter(
                 binding.tvEventStatus.text = "UpComing Event"
                 binding.eventAttendingMainLayout.setBackgroundResource(R.drawable.eventattendingselected_bg )
             }
-
+            if(mSessionManager.getProfileModel()!!.plusOne!=null){
+                binding.tvPlusOne.visibility=View.VISIBLE
+            if(mEventAttendingModel.plusOne){
+                binding.tvPlusOne.text="Plus One: ON"
+            }else{
+                binding.tvPlusOne.text="Plus One: OFF"
+            }
+            }else{
+                binding.tvPlusOne.visibility=View.GONE
+            }
+            if(mEventAttendingModel.eventType==1) {
+                binding.tvEventType.text = "Event Type: Paid ${mEventAttendingModel.price}"
+            }else{
+                binding.tvEventType.text = "Event Type: RSVP"
+            }
             binding.tvEventTitle.text = mEventAttendingModel.eventTitle
             binding.tvEventAddress.text = "Address: "+mEventAttendingModel.eventLocation
-
+            binding.tvAvailPass.text="Avail Pass: "+mEventAttendingModel.availGuestPasses
             binding.eventAttendingMainLayout.setOnClickListener {
                /*  selectedPosition=i
                 notifyDataSetChanged()*/

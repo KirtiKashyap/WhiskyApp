@@ -50,7 +50,7 @@ class ReservationHistoryAdapter(
             try {
                 val splitString = reservationHistoryLog.visitedDatetime!!
                     .split(" ").toTypedArray()
-                binding.statusTextView.text = "Activated: " + splitString[0]
+                binding.statusTextView.text = reservationHistoryLog.bookingStatus
                 binding.statusTimeTextView.text = splitString[1]
             }catch (e: Exception){
                 e.printStackTrace()
@@ -59,6 +59,7 @@ class ReservationHistoryAdapter(
             binding.timeTextView.text=reservationHistoryLog.bookingTime
             binding.dateTextView.text=reservationHistoryLog.bookingDate
             binding.orderTextView.text="Order: "+reservationHistoryLog.notes
+            binding.reasonTextView.text="Note: "+reservationHistoryLog.otherDescription
             binding.sNo.text=(i+1).toString()
         }
 

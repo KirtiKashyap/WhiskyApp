@@ -8,11 +8,15 @@ import android.os.Handler
 import android.os.Looper
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.TransitionInflater
+import com.aadya.whiskyapp.MyApplication
 import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.*
 import com.aadya.whiskyapp.events.model.EventsResponseModel
@@ -31,25 +35,27 @@ import kotlinx.android.synthetic.main.fragment_event_new.*
 
 
 private const val ARG_EVENTMODEL = "eventModel"
+private const val CHECK = "check"
 private const val ARG_POSITION = "position"
 private const val FROM_DIALOG = "FROM_DIALOG"
 
-class EventsFragment() : Fragment() {
-
-    private lateinit var mBinding: FragmentEventNewDailogBinding
+class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
+    private lateinit var mBinding: EventFrgmentMyBinding
+//    private lateinit var mBinding: FragmentEventNewDailogBinding
     private lateinit var mIncludedLayoutBinding: EventsHeaderBinding
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var eventModel: EventsResponseModel
     private var pos : Int = 0
     /* set from spinner */
-    var mRemainingGuestPasses:Int=0
     private var isFromDialog=false
+    private var check=""
     var onEventsPageSwipeUpListner: onEventsPageSwipeUpListner? = null
     private var mdeletePageViewPager : deletePageViewPager? = null
     private lateinit var mSessionManager: SessionManager
     private lateinit var mRSVPViewModel : RSVPViewModel
     private lateinit var mCommonUtils : CommonUtils
-
+    private lateinit var noOfGuestPass: ArrayList<Int>
+    private lateinit var noOfGuestAdapter: ArrayAdapter<Int>
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mDrawerInterface = context as DrawerInterface
@@ -65,6 +71,7 @@ class EventsFragment() : Fragment() {
             eventModel = it.getParcelable(ARG_EVENTMODEL)!!
             pos = it.getInt(ARG_POSITION)
             isFromDialog=it.getBoolean(FROM_DIALOG)
+            check= it.getString(CHECK).toString()
 
         }
 
@@ -89,7 +96,9 @@ class EventsFragment() : Fragment() {
         })
         setUi()
 
-
+        mBinding.plusOne.setOnCheckedChangeListener { buttonView, isChecked ->
+            MyApplication.isPlusOne=isChecked
+        }
         mBinding.tvBuy.setOnClickListener {
             activity?.let{
 
@@ -141,10 +150,12 @@ class EventsFragment() : Fragment() {
                 mBinding.priceTextView.text=eventModel.price
                 mBinding.tvRsvp.visibility=View.GONE
                 mBinding.imgRsvpNotintersted.visibility=View.GONE
+                mBinding.rsvpLayout.visibility=View.GONE
                 mBinding.imgRsvpIntersted.visibility=View.GONE
                 mBinding.imgRsvp.visibility=View.GONE
 
             }else{
+                mBinding.rsvpLayout.visibility=View.VISIBLE
                 mBinding.imgRsvpNotintersted.visibility=View.VISIBLE
                 mBinding.imgRsvpIntersted.visibility=View.VISIBLE
                 mBinding.tvRsvp.visibility=View.VISIBLE
@@ -152,6 +163,13 @@ class EventsFragment() : Fragment() {
                 mBinding.tvBuy.visibility=View.GONE
                 mBinding.priceTextView.visibility=View.GONE
 
+            }
+            if(mSessionManager.getProfileModel()!!.plusOne==null){
+                mBinding.plusOne.visibility=View.GONE
+                mBinding.passtextView.visibility=View.GONE
+            }else{
+                mBinding.plusOne.visibility=View.VISIBLE
+                mBinding.passtextView.visibility=View.VISIBLE
             }
 
             val list: List<String>? = eventModel.eventTitle?.trim()?.split("\\s+".toRegex())
@@ -204,13 +222,54 @@ class EventsFragment() : Fragment() {
                 )
             )
 
+
+                if(check == "FromAttendee"){
+                    mBinding.spinnerGuestPass.visibility=View.GONE
+                    if(eventModel.availGuestPasses>0){
+                        mBinding.passtextView.visibility=View.VISIBLE
+                        mBinding.passtextView.text="Guest Pass: "+eventModel.availGuestPasses
+                    }else{
+                        mBinding.passtextView.visibility=View.GONE
+                    }
+
+                }else {
+                    try {
+                        if (eventModel.availGuestPasses > 0) {
+                            mBinding.spinnerGuestPass.visibility = View.VISIBLE
+                            mBinding.passtextView.text = "Avail Guest Pass: "
+                            noOfGuestPass = ArrayList<Int>()
+                            val arrayName = Array(
+                                (eventModel.availGuestPasses),
+                                { i -> i * 1 })
+                            noOfGuestPass.add(0)
+                            for (i in 0..arrayName.size - 1) {
+                                println(arrayName[i])
+                                noOfGuestPass.add(i + 1)
+                            }
+
+                            noOfGuestAdapter = ArrayAdapter<Int>(
+                                requireContext(),
+                                R.layout.row_spinner,
+                                noOfGuestPass
+                            )
+                            noOfGuestAdapter.setDropDownViewResource(R.layout.row_spinner_dialog)
+                            mBinding.spinnerGuestPass.adapter = noOfGuestAdapter
+                            mBinding.spinnerGuestPass.onItemSelectedListener = this
+                        } else {
+                            mBinding.spinnerGuestPass.visibility = View.GONE
+                            mBinding.passtextView.visibility = View.GONE
+                        }
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                    }
+            }
         }
     }
 
     private fun intializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
         mBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_event_new_dailog,
+            R.layout.event_frgment_my,
             container,
             false
         )
@@ -220,6 +279,7 @@ class EventsFragment() : Fragment() {
 
         setIncludedLayout()
         handleclickListner()
+
 
     }
 
@@ -241,6 +301,7 @@ class EventsFragment() : Fragment() {
             var msg1: String = ""
             var msg2: String = ""
             if (it.EventFeedbackID.equals("1")) {
+
                 msg1 = "Thanks for your RSVP for the Event<b> ${eventModel.eventTitle} </b>."
                 msg2 = "\n" +
                         " \n" +
@@ -250,10 +311,11 @@ class EventsFragment() : Fragment() {
                     "RSVPAcknowledgeFragment"
                 )
             } else if (it.EventFeedbackID.equals("2")) {
-                msg1 = "Thanks for your RSVP for the Event<b> ${eventModel.eventTitle} </b>."
+                msg1 = "You have been opted out yourself for the RSVP for the event<b> ${eventModel.eventTitle} </b>."
                 msg2 = "\n" +
                         " \n" +
-                        "  We have marked you down for attending the <b> ${eventModel.eventTitle}</b>."
+                        "  We have unmarked you for the same."
+                /* <b> ${eventModel.eventTitle}</b>.*/
                 launchFragment(
                     RSVPAcknowledgeFragment.newInstance(msg1, msg2),
                     "RSVPAcknowledgeFragment"
@@ -324,7 +386,8 @@ class EventsFragment() : Fragment() {
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 1
-                mRSVPRequestModel.remainingGuestPasses=mRemainingGuestPasses
+                mRSVPRequestModel.remainingGuestPasses=   MyApplication.mSelectedGuestPass
+                mRSVPRequestModel.PlusOne=  MyApplication.isPlusOne
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
                 mBinding.imgRsvpIntersted.isClickable = true
                 mBinding.imgRsvpIntersted.clearAnimation()
@@ -344,7 +407,8 @@ class EventsFragment() : Fragment() {
                 var mRSVPRequestModel = RSVPRequestModel()
                 mRSVPRequestModel.EventID = eventModel.eventID
                 mRSVPRequestModel.EventFeedbackID = 2
-                mRSVPRequestModel.remainingGuestPasses=mRemainingGuestPasses
+                mRSVPRequestModel.remainingGuestPasses=  MyApplication.mSelectedGuestPass
+                mRSVPRequestModel.PlusOne=  MyApplication.isPlusOne
                 mRSVPViewModel.getRSVP(mSessionManager.getAuthorization(), mRSVPRequestModel)
                 mBinding.imgRsvpNotintersted.isClickable = true
                 mBinding.imgRsvpNotintersted.clearAnimation()
@@ -377,5 +441,27 @@ class EventsFragment() : Fragment() {
             }
             this.mdeletePageViewPager = deletePageViewPager
         }
+
+        fun newInstance1(event: EventsResponseModel?,check: String) =
+
+            EventsFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ARG_EVENTMODEL, event)
+                    putString(CHECK, check)
+                }
+            }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+       // if(position != 0)
+            if(noOfGuestPass[position]<=eventModel.remainingGuestPasses) {
+                MyApplication.mSelectedGuestPass = noOfGuestPass[position]
+            }else{
+                Toast.makeText(requireContext(),"Not More Then Remaining guest pass",Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        MyApplication.mSelectedGuestPass = 0
     }
 }

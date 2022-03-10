@@ -179,7 +179,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     return@Observer
                 resetUI()
                 var msg =
-                    "Your request for reservation has been sent for approval, You would confirmed by the Admin soon."
+                    "Your request for reservation has been sent for approval, You will receive confirmation within 24 hours."
                 launchFragment(
                     RSVPAcknowledgeFragment.newInstance(msg, ""),
                     "RSVPAcknowledgeFragment"
@@ -197,6 +197,7 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     bookingInfoId = it.BookingInfoID!!
                     setData(it)
                 } else {
+
                     bookingInfoId = it.BookingInfoID!!
                     isReservation = it.bookingInfo!!
                     resetUI()
@@ -281,15 +282,28 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setData(reserveInfoResponse: ReserveInfoResponse) {
 
          if(reserveInfoResponse.bookingInfo!!){
+             mBinding.edTime.bringToFront()
+             mBinding.edTime.visibility=View.VISIBLE
+             mBinding.timeSpinner.visibility=View.GONE
              mBinding.reserveButton.text="Cancel Reservation"
         }else{
+             mBinding.timeSpinner.visibility=View.VISIBLE
+             mBinding.edTime.visibility=View.GONE
              mBinding.reserveButton.text="Reserve"
              resetUI()
         }
         mBinding.edWhatUEat.setText(reserveInfoResponse.favorite)
         mBinding.edDate.setText(reserveInfoResponse.bookingDate)
-        updateLabel()
-        mBinding.edTime.setText(reserveInfoResponse.bookingTime)
+
+        if(reserveInfoResponse.bookingTime.isNullOrEmpty()){
+            mBinding.timeSpinner.visibility=View.VISIBLE
+            mBinding.edTime.visibility=View.GONE
+            updateLabel()
+        }else{
+            mBinding.timeSpinner.visibility=View.GONE
+            mBinding.edTime.visibility=View.VISIBLE
+            mBinding.edTime.setText(reserveInfoResponse.bookingTime)
+        }
 
         for (i in noOfPeopleList.indices) {
             print(noOfPeopleList[i])
@@ -301,6 +315,9 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun resetUI() {
+        mBinding.timeSpinner.bringToFront()
+        mBinding.timeSpinner.visibility=View.VISIBLE
+        mBinding.edTime.visibility=View.GONE
         mBinding.edWhatUEat.text = null
         mBinding.edDate.text = null
         mBinding.edTime.text = null
@@ -353,10 +370,10 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
             )
         }
 
-        mBinding.edTime.setOnClickListener {
+        /*mBinding.edTime.setOnClickListener {
             openTimeFragment()
 
-        }
+        }*/
 
 
     }
@@ -473,7 +490,8 @@ class ReserveFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 id: Long
             ) {
                 if(position>0) {
-                    mTime=parent.getItemAtPosition(position).toString().split("\\s".toRegex())[0]
+                    //mTime=parent.getItemAtPosition(position).toString().split("\\s".toRegex())[0]
+                    mTime=parent.getItemAtPosition(position).toString()
                     //Toast.makeText(requireContext(),mTime,Toast.LENGTH_SHORT).show()
                 }
             }

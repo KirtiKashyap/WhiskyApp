@@ -141,8 +141,8 @@ class EventAttendingFragment : Fragment() {
                     val ft = activity?.supportFragmentManager?.beginTransaction()
                     ft?.replace(
                         R.id.app_container,
-                        EventDetailFragment.newInstance(mEventResponseModel),
-                        "EventDetailFragment"
+                        EventsFragment.newInstance1(mEventResponseModel,"FromAttendee"),
+                        "EventsFragment"
                     )
                     ft?.addToBackStack(null)
                     ft?.commit()
