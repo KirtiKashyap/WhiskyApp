@@ -1,5 +1,6 @@
 package com.aadya.whiskyapp.reserve.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,10 +20,11 @@ import com.aadya.whiskyapp.R
 import com.aadya.whiskyapp.databinding.FragmentReservationHistoryBinding
 import com.aadya.whiskyapp.databinding.MainHeaderNewBinding
 import com.aadya.whiskyapp.profile.ui.ProfileFragment
+import com.aadya.whiskyapp.reserve.model.CancelReservationRequest
 import com.aadya.whiskyapp.reserve.model.ReserveInfoRequest
+import com.aadya.whiskyapp.reserve.model.ReserveInfoResponse
 import com.aadya.whiskyapp.reserve.viewmodel.ReserveFactory
 import com.aadya.whiskyapp.reserve.viewmodel.ReserveViewModel
-import com.aadya.whiskyapp.scanlog.ui.ScanLogFragment
 import com.aadya.whiskyapp.utils.AlertModel
 import com.aadya.whiskyapp.utils.CommonUtils
 import com.aadya.whiskyapp.utils.DrawerInterface
@@ -51,6 +56,20 @@ class ReservationHistoryFragment : Fragment() {
     }
 
     private fun handleObserver() {
+
+        mReserveViewModel.getCancelReservationViewState()?.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                if (it == null) {
+                    return@Observer
+                } else {
+                    var reserveLogRequest= ReserveInfoRequest()
+                    reserveLogRequest.memberID=mSessionManager.getProfileModel()!!.memberID
+                    mReserveViewModel.getReserveHistoryLog(mSessionManager?.getAuthorization(),reserveLogRequest)
+                }
+            })
+
+
         mReserveViewModel.getReserveHistoryLogObserver().observe(viewLifecycleOwner, Observer {
             Log.d("TAG", "In Observer event")
             if (it?.isEmpty() == true) {
@@ -106,11 +125,53 @@ class ReservationHistoryFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = linearLayoutManager
         mReservationHistoryAdapter = ReservationHistoryAdapter(
-            requireContext()
+            requireContext(),
+            object : ReservationHistoryAdapter.ReservationItemClick {
+                override fun onItemClick(
+                    mReserveInfoResponse: ReserveInfoResponse,
+
+                    ) {
+
+                    openCancelReservationAlert(mReserveInfoResponse)
+
+                }
+            }
         )
+
         recyclerView.adapter = mReservationHistoryAdapter
     }
+    private fun  openCancelReservationAlert(mReserveInfoResponse: ReserveInfoResponse) {
+        val builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .create()
+        val view = layoutInflater.inflate(R.layout.reservation_cancel_alert, null)
+        val submitButton = view.findViewById<Button>(R.id.submit_button)
+        val cancelButton = view.findViewById<Button>(R.id.dialogDismiss_button)
+        val descriptionEditText = view.findViewById<TextView>(R.id.message)
+        builder.setView(view)
+        builder.setCanceledOnTouchOutside(false)
+        builder.show()
+        submitButton.setOnClickListener {
+            if (descriptionEditText.length() > 0) {
+                val cancelReservationRequest = CancelReservationRequest(
+                    mReserveInfoResponse.BookingInfoID!!,
+                    "Cancel",
+                    descriptionEditText.text.toString()
+                )
+                mReserveViewModel.getCancelReservation(
+                    requireContext(), cancelReservationRequest,
+                    mSessionManager?.getAuthorization()
+                )
+                builder.dismiss()
+            }else{
+                Toast.makeText(requireContext(),"Please enter description.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
+
+        cancelButton.setOnClickListener {
+            builder.dismiss()
+        }
+    }
     private fun initializeMembers(inflater: LayoutInflater, container: ViewGroup?) {
         mCommonUtils = CommonUtils
         mSessionManager = SessionManager.getInstance(requireContext())!!

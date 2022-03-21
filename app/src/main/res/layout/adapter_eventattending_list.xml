@@ -100,6 +100,8 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
                 android:text="Plus One:"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/tv_event_type"
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:layout_below="@+id/tv_event_address"/>
             <TextView

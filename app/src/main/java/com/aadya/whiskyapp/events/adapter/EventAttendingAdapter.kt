@@ -71,7 +71,7 @@ class EventAttendingAdapter(
                 binding.tvPlusOne.visibility=View.GONE
             }
             if(mEventAttendingModel.eventType==1) {
-                binding.tvEventType.text = "Event Type: Paid ${mEventAttendingModel.price}"
+                binding.tvEventType.text = "Event Type: Paid ${"$"+mEventAttendingModel.price}"
             }else{
                 binding.tvEventType.text = "Event Type: RSVP"
             }
