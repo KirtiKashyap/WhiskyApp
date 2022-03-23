@@ -78,9 +78,9 @@ class EventsLaunchFragment : Fragment() , deletePageViewPager ,updateEventsViewP
 
                     )
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        mBottomNavigationInterface?.setOnBottomNavigationResult()
-                        launchFragment(MenuFragment.newInstance(), "MenuFragment")}, 1500)
+//                    Handler(Looper.getMainLooper()).postDelayed({
+//                        mBottomNavigationInterface?.setOnBottomNavigationResult()
+//                        launchFragment(MenuFragment.newInstance(), "MenuFragment")}, 1500)
 
                 }
 

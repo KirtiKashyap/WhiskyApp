@@ -1,6 +1,7 @@
 package com.aadya.whiskyapp.events.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -457,11 +456,28 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
             if(noOfGuestPass[position]<=eventModel.remainingGuestPasses) {
                 MyApplication.mSelectedGuestPass = noOfGuestPass[position]
             }else{
-                Toast.makeText(requireContext(),"Not More Then Remaining guest pass",Toast.LENGTH_SHORT).show()
+                openAlert()
             }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         MyApplication.mSelectedGuestPass = 0
+    }
+    private fun openAlert(){
+        val builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .create()
+        val view = layoutInflater.inflate(R.layout.guest_pass_alert, null)
+        val cancelButton = view.findViewById<Button>(R.id.dialogDismiss_button)
+        val messageText = view.findViewById<TextView>(R.id.message)
+        messageText.text="You don't have any guest passes remaining for this month. Please try next month."
+        builder.setView(view)
+        builder.setCanceledOnTouchOutside(false)
+        builder.show()
+
+
+        cancelButton.setOnClickListener {
+            builder.dismiss()
+        }
+
     }
 }
