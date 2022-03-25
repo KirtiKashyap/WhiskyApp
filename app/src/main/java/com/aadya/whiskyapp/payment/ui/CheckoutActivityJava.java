@@ -111,15 +111,15 @@ public class CheckoutActivityJava extends AppCompatActivity{
         amountTextView.setVisibility(View.GONE);
         payButton.setText("Total "+amount +" CONFIRM ORDER" );
         // Configure the SDK with your Stripe publishable key so it can make requests to Stripe
+       /* stripe = new Stripe(
+                getApplicationContext(),
+                Objects.requireNonNull("pk_live_51JgvGWHg3vu6Xtwj4qO7v4IyjdnNEY7NjwaPlKcZ8hwa438erHUm70f9WPOixvz3noPeMkQ1XUtCcKObUvbKFq8J00EBr9TiJX")
+        );*/
+
         stripe = new Stripe(
                 getApplicationContext(),
                 Objects.requireNonNull("pk_test_51JgvGWHg3vu6Xtwj7pamp4M0EWab892xZ5oFuXem3Wz7iMpthh1W22FxdJ2vVuOHkjH4yz0kje34k0yJBQk38aOL00pOB49p3n")
         );
-
-       /* stripe = new Stripe(
-                getApplicationContext(),
-                Objects.requireNonNull("pk_test_51KEGY3Iz42LzNrtBrJtPmVxE7arQgmb10nSgcS436hsGk26KQqxdWxhtP0PbbrYrwvX4oa2HCpV3haeznKNpAjRf00CZKECNix")
-        );*/
         startCheckout();
         handleObserver();
 

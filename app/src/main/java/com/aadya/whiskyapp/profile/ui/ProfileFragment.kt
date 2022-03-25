@@ -169,14 +169,13 @@ class ProfileFragment : Fragment() {
 
     private fun setAgentName() {
 
-        val agent_name1 = mSessionManager.getProfileModel()!!.firstName
+        val agent_name1 = mSessionManager.getProfileModel()!!.userName
        createDynamicallyTextView(agent_name1)
-        val rowTextView = TextView(requireContext())
+       /* val rowTextView = TextView(requireContext())
         // set some properties of rowTextView or something
         rowTextView.text = " "
         mBinding.tvAgentname.addView(rowTextView)
         rowTextView.background = resources.getDrawable(R.drawable.profiletextview_bg, null)
-        //rowTextView.setTextColor(resources.getColor(R.color.blanktextviewcolor))
         val lparams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -186,9 +185,9 @@ class ProfileFragment : Fragment() {
         rowTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
         rowTextView.setPadding(10, 10, 10, 10)
         rowTextView.setTypeface(rowTextView.typeface, Typeface.BOLD_ITALIC)
-
-        var agent_name2 = mSessionManager.getProfileModel()!!.lastName
-        createDynamicallyTextView(agent_name2)
+*/
+       /* var agent_name2 = mSessionManager.getProfileModel()!!.lastName
+        createDynamicallyTextView(agent_name2)*/
 
     }
 

@@ -44,4 +44,5 @@ data class ProfileResponseModel (
     @SerializedName("numberOfGuestPasses")var numberOfGuestPasses: Int,
     @SerializedName("remainingGuestPasses")var remainingGuestPasses: Int
 
+
 )

@@ -40,21 +40,21 @@ private const val FROM_DIALOG = "FROM_DIALOG"
 
 class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
     private lateinit var mBinding: EventFrgmentMyBinding
-//    private lateinit var mBinding: FragmentEventNewDailogBinding
     private lateinit var mIncludedLayoutBinding: EventsHeaderBinding
     private var mDrawerInterface: DrawerInterface? = null
     private lateinit var eventModel: EventsResponseModel
     private var pos : Int = 0
     /* set from spinner */
     private var isFromDialog=false
+    private var selectedPass=0
     private var check=""
     var onEventsPageSwipeUpListner: onEventsPageSwipeUpListner? = null
     private var mdeletePageViewPager : deletePageViewPager? = null
     private lateinit var mSessionManager: SessionManager
     private lateinit var mRSVPViewModel : RSVPViewModel
     private lateinit var mCommonUtils : CommonUtils
-    private lateinit var noOfGuestPass: ArrayList<Int>
-    private lateinit var noOfGuestAdapter: ArrayAdapter<Int>
+    private lateinit var noOfGuestPass: ArrayList<String>
+    private lateinit var noOfGuestAdapter: ArrayAdapter<String>
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mDrawerInterface = context as DrawerInterface
@@ -102,35 +102,47 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
             activity?.let{
 
 
-
-                if(mSessionManager.getProfileModel()!!.paymentMethodID) {
-
-                    val intent = Intent(it, PayActivity::class.java)
-                    intent.putExtra("amount", eventModel.price)
-                    intent.putExtra("itemType", "E")
-                    intent.putExtra("itemId", eventModel.eventID!!)
-                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
-                    intent.putExtra("authorization", mSessionManager.getAuthorization())
-                    intent.putExtra("imageName", eventModel.imageName!!)
-                    intent.putExtra("eventTitle", eventModel.eventTitle!!)
-                    it.startActivity(intent)
-
-
-                }else{
-                    val intent = Intent(it, CheckoutActivityJava::class.java)
-                    intent.putExtra("amount", eventModel.price)
-                    intent.putExtra("itemType", "E")
-                    intent.putExtra("itemId", eventModel.eventID!!)
-                    intent.putExtra("memberId", mSessionManager.getUserDetailLoginModel()?.memberID)
-                    intent.putExtra("authorization", mSessionManager.getAuthorization())
-                    intent.putExtra("email", mSessionManager.getProfileModel()!!.email)
-                    intent.putExtra("description",mSessionManager.getProfileModel()!!.description)
-                    intent.putExtra("address",mSessionManager.getProfileModel()!!.address)
-                    intent.putExtra("name",mSessionManager.getProfileModel()!!.firstName)
-                    intent.putExtra("auth",mSessionManager.getAuthorization())
-                    it.startActivity(intent)
+                if (selectedPass > mSessionManager.getProfileModel()?.remainingGuestPasses!!) {
+                    openAlert("You have only "+ mSessionManager.getProfileModel()?.remainingGuestPasses!! +" guest passes available. Please apply accordingly.")
                 }
+                else{
+                    if (mSessionManager.getProfileModel()!!.paymentMethodID) {
 
+                        val intent = Intent(it, PayActivity::class.java)
+                        intent.putExtra("amount", eventModel.price)
+                        intent.putExtra("itemType", "E")
+                        intent.putExtra("itemId", eventModel.eventID!!)
+                        intent.putExtra(
+                            "memberId",
+                            mSessionManager.getUserDetailLoginModel()?.memberID
+                        )
+                        intent.putExtra("authorization", mSessionManager.getAuthorization())
+                        intent.putExtra("imageName", eventModel.imageName!!)
+                        intent.putExtra("eventTitle", eventModel.eventTitle!!)
+                        it.startActivity(intent)
+
+
+                    } else {
+                        val intent = Intent(it, CheckoutActivityJava::class.java)
+                        intent.putExtra("amount", eventModel.price)
+                        intent.putExtra("itemType", "E")
+                        intent.putExtra("itemId", eventModel.eventID!!)
+                        intent.putExtra(
+                            "memberId",
+                            mSessionManager.getUserDetailLoginModel()?.memberID
+                        )
+                        intent.putExtra("authorization", mSessionManager.getAuthorization())
+                        intent.putExtra("email", mSessionManager.getProfileModel()!!.email)
+                        intent.putExtra(
+                            "description",
+                            mSessionManager.getProfileModel()!!.description
+                        )
+                        intent.putExtra("address", mSessionManager.getProfileModel()!!.address)
+                        intent.putExtra("name", mSessionManager.getProfileModel()!!.firstName)
+                        intent.putExtra("auth", mSessionManager.getAuthorization())
+                        it.startActivity(intent)
+                    }
+                }
 
                 if(isFromDialog){
                     //TODO dismiss event dailogue
@@ -236,17 +248,19 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
                         if (eventModel.availGuestPasses > 0) {
                             mBinding.spinnerGuestPass.visibility = View.VISIBLE
                             mBinding.passtextView.text = "Avail Guest Pass: "
-                            noOfGuestPass = ArrayList<Int>()
+                            noOfGuestPass = ArrayList<String>()
                             val arrayName = Array(
                                 (eventModel.availGuestPasses),
                                 { i -> i * 1 })
-                            noOfGuestPass.add(0)
+                            noOfGuestPass.add("")
+                            noOfGuestPass.add("0")
                             for (i in 0..arrayName.size - 1) {
                                 println(arrayName[i])
-                                noOfGuestPass.add(i + 1)
+                                var value=(i + 1).toString()
+                                noOfGuestPass.add(value)
                             }
 
-                            noOfGuestAdapter = ArrayAdapter<Int>(
+                            noOfGuestAdapter = ArrayAdapter<String>(
                                 requireContext(),
                                 R.layout.row_spinner,
                                 noOfGuestPass
@@ -452,24 +466,36 @@ class EventsFragment() : Fragment(),AdapterView.OnItemSelectedListener{
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-       // if(position != 0)
-            if(noOfGuestPass[position]<=eventModel.remainingGuestPasses) {
-                MyApplication.mSelectedGuestPass = noOfGuestPass[position]
-            }else{
-                openAlert()
+
+        if(position>0) {
+            selectedPass=noOfGuestPass[position].toInt()
+            if (noOfGuestPass[position].toInt() > mSessionManager.getProfileModel()?.remainingGuestPasses!!) {
+                openAlert("You have only " + mSessionManager.getProfileModel()?.remainingGuestPasses!! + " guest passes available. Please apply accordingly.")
+            } else if (mSessionManager.getProfileModel()?.remainingGuestPasses!! == 0) {
+                openAlert("You don't have any guest passes remaining for this month. Please try next month.")
+            } else {
+                MyApplication.mSelectedGuestPass = noOfGuestPass[position].toInt()
             }
+        }
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         MyApplication.mSelectedGuestPass = 0
     }
-    private fun openAlert(){
+    private fun openAlert(message: String) {
         val builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .create()
         val view = layoutInflater.inflate(R.layout.guest_pass_alert, null)
         val cancelButton = view.findViewById<Button>(R.id.dialogDismiss_button)
         val messageText = view.findViewById<TextView>(R.id.message)
-        messageText.text="You don't have any guest passes remaining for this month. Please try next month."
+        if(mSessionManager.getProfileModel()?.remainingGuestPasses==0) {
+            messageText.text =message
+
+        }else{
+            messageText.text =message
+
+        }
         builder.setView(view)
         builder.setCanceledOnTouchOutside(false)
         builder.show()
